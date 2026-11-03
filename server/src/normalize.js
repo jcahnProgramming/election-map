@@ -79,3 +79,38 @@ function isYesNo(choices) {
   const sides = choices.map(yesNoSide);
   return sides.includes('yes') && sides.includes('no');
 }
+
+// Party-prefixed candidate labels: "REP Darline Graham", "(DEM) Jane Doe", "Jane Doe (R)", "Libertarian - Joe Smith".
+// Only strips a prefix/suffix we recognise as a party label; anything else is returned untouched.
+const PARTY_TOKEN = /^(dem|rep|gop|lib|lbt|grn|green|ind|npa|np|con|cst|dfl|uni|uaf|wri|wi|oth|nom|soc|ust|d|r|l|g|i|democratic|democrat|republican|libertarian|independent|nonpartisan|constitution)$/i;
+
+/**
+ * Split a party-prefixed candidate name into a clean name and the raw party label.
+ * @returns {{ name:string, partyRaw:string|null }} partyRaw null when no party token was found
+ */
+export function splitPartyPrefix(label) {
+  const s = String(label ?? '').trim().replace(/\s+/g, ' ');
+  let m = s.match(/^\(([^)]{1,20})\)\s*(.+)$/); // "(DEM) Jane Doe"
+  if (m && PARTY_TOKEN.test(m[1].trim())) return { name: m[2].trim(), partyRaw: m[1].trim() };
+  m = s.match(/^(.+?)\s*\(([^)]{1,20})\)$/); // "Jane Doe (R)"
+  if (m && PARTY_TOKEN.test(m[2].trim())) return { name: m[1].trim(), partyRaw: m[2].trim() };
+  m = s.match(/^([A-Za-z]{1,13})\s*[-–:]\s+(.+)$/); // "Libertarian - Joe Smith"
+  if (m && PARTY_TOKEN.test(m[1])) return { name: m[2].trim(), partyRaw: m[1] };
+  m = s.match(/^([A-Za-z]{1,13})\s+(.+)$/); // "REP Darline Graham" (prefix must be a party token AND upper-case or a full party word)
+  if (m && PARTY_TOKEN.test(m[1]) && (m[1] === m[1].toUpperCase() || m[1].length > 3) && m[1].length > 1) {
+    return { name: m[2].trim(), partyRaw: m[1] };
+  }
+  return { name: s, partyRaw: null };
+}
+
+/**
+ * Normalized bucket for a source's vote-type / vote-method label. The raw label is always stored too.
+ * @returns {'mail_early'|'election_day'|'provisional'|'other'}
+ */
+export function methodBucket(label) {
+  const k = String(label ?? '').toLowerCase();
+  if (/provision/.test(k)) return 'provisional';
+  if (/election ?day|in[- ]person on|polling place|precinct|e-?day|vote center.*election/.test(k)) return 'election_day';
+  if (/mail|absentee|early|advance|by ?mail|one[- ]stop|pre[- ]?election|in[- ]person absentee|ballot drop|drop ?box/.test(k)) return 'mail_early';
+  return 'other';
+}
