@@ -1,0 +1,18 @@
+{
+  "_howto": "Elections polled by the Tally ENR / TotalResults adapter (server/src/adapters/tallyenr.js). cid = the client slug (https://{cid}.tally-enr.com); electionId from {base}/Election/GetElectionList?cid={cid}. contestTypes = which Tally contest types to read (each contest's contestTypeCode); measures are statewide only when their type is in statewideTypes. Set enabled:false to stop polling. Never use the multi-MB FullDataFile.json.",
+  "base": "https://enr-results-api.totalresults.com",
+  "elections": [
+    {
+      "state": "AR",
+      "cid": "arkansas",
+      "electionId": "11b07106-031e-4d7c-911a-d01fb473d6dd",
+      "name": "Arkansas 2026 General Election & Judicial Runoff",
+      "date": "2026-11-03",
+      "url": "https://arkansas.tally-enr.com/",
+      "contestTypes": ["Federal", "Statewide"],
+      "statewideTypes": ["Federal", "Statewide"],
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}
