@@ -1,0 +1,103 @@
+# Official results source roadmap: 2026 general (Nov 3, 2026)
+
+Probed on election night, 2026-11-03, about 16:00–17:30 MT (before most polls closed), using
+`curl` with the User-Agent `election-map/0.1 (live results dashboard)`. Each state got a few
+requests. No browser UA was spoofed, and nothing was done to get past bot protection: any
+403, Cloudflare challenge, Imperva or Radware page is recorded as "blocked".
+Colorado (Clarity EID 127407) and Iowa (Clarity EID 127077) are covered elsewhere and are left out
+of the table except for the Colorado note at the end.
+
+Legend for **Reachable**: `yes` means data came back to a plain request. `page only` means the HTML
+loaded but no data endpoint was confirmed. `blocked (CF/Akamai/Imperva/Radware/CloudFront/WAF)` means
+the server refused a non-browser client. `n/a` means the state has no election-night feed.
+
+Important finding about Clarity: `/{ST}/elections.json` does **not** reliably show whether a state uses Clarity.
+SC and WV return `[]` there but still serve live elections under specific EIDs. AR, AZ, KY and NC return
+**403** (an unknown prefix such as `/ZZ/` returns 404). So those state folders still exist but are locked, and all
+four states now publish elsewhere (see the table).
+
+## Platforms identified (multi-state first)
+
+| Platform | States | Machine-readable entry point (verified tonight) |
+|---|---|---|
+| **Enhanced Voting** (Angular SPA at `/results/public/{jurisdiction}`) | GA, VA, UT, WA, RI, ID | `GET {host}/results/public/api/jurisdictions/{slug}` returns the election list (`elections[].publicElectionId`) plus `childLocalities` (counties). `GET {host}/results/public/api/elections/{slug}/{publicElectionId}` returns metadata. **`GET {host}/results/public/api/elections/{slug}/{publicElectionId}/data`** returns every ballot item with `summaryResults` (0.3–1.5 MB). Also `/data/ballot-item/{id}`, `/localities`, `/turnout`, `/stats`, `/closeraces`. |
+| **ASP.NET "ResultsAjax.svc" ENR family** (shared codebase; likely BPro/TotalVote heritage, now Civix, **unverified**) | NE, SD, ND, NM, OR | HTML pages plus `ResultsExport.aspx`, which offers CSV/Excel/RSS/XML through an ASP.NET postback. The `ResultsAjax.svc/GetCandidates?ElectionType=General&ElectionID=0` JSON is only autocomplete data. Service roots: NE `neresultswebservice.azurewebsites.us`, SD `sdresws.azurewebsites.us`, OR `orresultswebservices.azureedge.us`, NM `nmresultswebservice.azurewebsites.us/NMResultsAjax.svc`, ND `resultsws.sos.nd.gov`. |
+| **Clarity / Civix ENR** (other than CO/IA) | SC (custom domain), WV | SC: `https://results.enr.clarityelections.com/SC/127300/` (the same EID also works on `www.enr-scvotes.org/SC/127300/`). `current_ver.txt` returned `382659`. WV: the May 2026 primary was `WV/126209`. The **general EID is not found yet**. |
+| **Tally ENR / TotalResults** | AR (only state client found, out of 41 slugs checked) | `GET https://enr-results-api.totalresults.com/Election/GetElectionList?cid=arkansas`, then `Contest/GetContestSearchList?cid=arkansas&electionID={guid}`. Full precinct dump: `https://results.tally-enr.com/results/arkansas/{electionID}/FullDataFile.json` (**50 MB**). |
+| **Civix IVIS ENR** (TX; bundle also references PCC `electionet.pcctg.net`) | TX | `https://goelect.txelections.civixapps.com/api-ivis-system/api/s3/enr/electionConstants` gives the election list as base64 JSON. `/s3/enr/election/{id}` has statewide/federal/district sections, each base64 JSON (1.6 MB). `/s3/enr/election/countyInfo/{id}` is county-level (4 MB). The 2026 general id is **53815**. |
+| **PCC Technology** public reporting | CT | `https://ctemspublic.tgstg.net/ng-app/data/Elections.json` (2026 general ID **108**), then `.../election/108/Version.json`, then `.../election/108/{Version}/Electiondata.json` (plus `Lookupdata.json`, `ballotQuestion_Electiondata.json`, `candidateGrouping_Electiondata.json`). Town-level. |
+
+## State-by-state
+
+| State | Results URL | Platform | Best format | Levels | Reachable w/o browser? | Notes |
+|---|---|---|---|---|---|---|
+| AL | https://www2.alabamavotes.gov/electionNight/statewideResultsByContest.aspx?ecode=… | In-house ASP.NET (SOS) | HTML; "Export Data" postback (format unverified) | statewide, county | yes (page) | The SOS page currently links `ecode=1001305`. Confirm the 2026 general ecode tonight. |
+| AK | https://www.elections.alaska.gov/election-results/e/?id=26genr | In-house (WordPress) | PDF summary reports (e.g. `wp-content/uploads/2026/11/…ComboReportRAll.pdf`) | statewide, district | yes (page) | No JSON or CSV found. Uses RCV, so the first-choice tally is what appears on election night. |
+| AZ | https://results.arizona.vote/ (linked from azsos.gov "unofficial-enr") | AZ SOS custom app (moved off Clarity) | unknown (JSON believed behind the SPA) | statewide, county | **blocked (Cloudflare 403)**, azsos.gov also 403 | The Clarity `/AZ/` prefix is locked (403). Use county sites (Maricopa, Pima) as an alternative and check their bot rules. |
+| AR | https://arkansas.tally-enr.com/ (redirect from enr.totalresults.com/arkansas) | **Tally ENR** | **JSON API** (see platforms) | statewide, county, precinct | yes | 2026 general electionID `11b07106-031e-4d7c-911a-d01fb473d6dd`. The Clarity `/AR/` 403 is because AR moved to Tally. |
+| CA | https://electionresults.sos.ca.gov/ | In-house SOS API | **JSON**: `https://api.sos.ca.gov/returns/{race}` (e.g. `governor`), `/returns/maps/{race}` for counties, `/returns/status` for county reporting | statewide, county | API yes; front page sits behind Imperva | No US Senate race in CA in 2026 (`/returns/us-senate` returns 500). House slug pattern not verified. |
+| CT | https://ctemspublic.tgstg.net/ | **PCC Technology** | **JSON** (see platforms) | statewide, town | yes | Electiondata.json is 380 KB. |
+| DE | https://elections.delaware.gov/results/enr/GE2026.html | In-house plus Socrata open data | **JSON/CSV (SODA)**: `https://data.delaware.gov/resource/yg7x-kgjc.json?election_name=2026%20General%20Election` | statewide (district fields?) | yes | Has a `data_as_of` field (it showed Sep 29 pre-election). Live update cadence unverified. |
+| DC | https://electionresults.dcboe.org/ | Custom React + SignalR app | unverified (SPA; data API not found in main bundle) | citywide, ward, precinct | yes (page) | Needs a closer look at the other JS chunks or the SignalR hub. |
+| FL | https://results.elections.myflorida.com/ | In-house ASP (FL DOS) | **TSV**: `ResultsExtract.Asp?ElectionDate=11/3/2026&OfficialResults=N&PartyRaces=N&DATAMODE=` | statewide, county | yes | Returned only a header row before polls closed. Columns include county and precinct reporting. |
+| GA | https://results.sos.ga.gov/results/public/Georgia | **Enhanced Voting** | **JSON** | statewide, county, precinct | yes | publicElectionId `11032026GeneralAndSpecialElection`. 274 ballot items. |
+| HI | https://elections.hawaii.gov/election-results/ | In-house (Hart tabulation exports) | **TSV**: `wp-content/results/2026 General/media.txt` (precinct), `summary.txt`, plus PDFs | statewide, county, precinct | yes | The 2026 General folder 404s until the first release (about 7:45pm HST). The format matches the 2026 Primary folder. |
+| ID | https://results.voteidaho.gov/results/public/ID | **Enhanced Voting** | **JSON** | statewide, county | yes | Jurisdiction slug `ID`, election `nov2026`. 44 counties. |
+| IL | https://www.elections.il.gov/ | none statewide on election night | n/a (SBE posts certified results weeks later) | — | n/a | Live results come from county clerks and Chicago BOE. Low priority. |
+| IN | https://enr.indianavoters.in.gov/site/index.html | In-house AngularJS + Azure blob JSON | **JSON**: `/site/data/version.json` → versioned files `/site/data/{name}_{version}.json` | statewide, county | yes | `version.json` and `settings.json` work. The exact versioned filename (e.g. `statewideElectionsR`) **still needs resolving** because the guessed suffixes 404'd. |
+| KS | https://sos.ks.gov/elections/election-results.html | Power BI (GCC) embed `app.powerbigov.us` | Power BI dashboard; precinct XLSX after certification | statewide, county | page yes; no feed | Power BI internal query API is not a public feed. Low value for live use. |
+| KY | https://vrsws.sos.ky.gov/liveresults/ | In-house (KY SOS) | unknown | statewide, county | **blocked (Akamai 403 "Acceptable Use Policy" page)** | The Clarity `/KY/` prefix is locked (403). KY moved to the SOS-hosted live results site. |
+| LA | https://voterportal.sos.la.gov/graphical | In-house (LA SOS) | **JSON**: `/ElectionResults/ElectionResults/Data?blob=ElectionDates.htm` (returns JSON; 2026-11-03 = PKElectionID 344); XLSX at `s3-us-west-2.amazonaws.com/mediaresults.sos.la.gov/HumanReadableElectionResults/…` | statewide, parish, precinct | yes | The blob names for races and parishes still need mapping from the Angular app. |
+| ME | https://www.maine.gov/sos/cec/elec/results/ | none on election night | XLSX posted days later | — | **blocked (CloudFront 403)** | No statewide ENR. Media/AP only on election night. |
+| MD | https://elections.maryland.gov/elections/2026/general_results/index.html | In-house static HTML | HTML (`gen_qresults_2026_*.html`, `_by_county_*`) | statewide, county | yes | Static pages are easy to scrape. CSVs usually come after canvass. |
+| MA | https://electionstats.state.ma.us/ | ElectionStats (historical) | none live | — | n/a | No statewide live ENR. Towns report and AP covers election night. |
+| MI | https://mielections.us/election/results/ | In-house (MI SOS) | historically HTML + TXT downloads | statewide, county | **no (connection timed out)** | May be blocking or firewalled. Retry later and fall back to county sites. |
+| MN | https://electionresults.sos.mn.gov/ | In-house (MN SOS) | historically TXT files at `electionresultsfiles.sos.mn.gov` | statewide, county, precinct | **blocked (Radware bot manager; files host also 403)** | The best feed in the Midwest if access is ever allowed. Ask MN SOS for API access. |
+| MS | https://www.sos.ms.gov/elections-voting/election-results | none statewide on election night | n/a (SOS posts certified results only) | — | n/a | Counties report and AP covers election night. |
+| MO | https://enr.sos.mo.gov/ | In-house (MO SOS) | unknown | statewide, county | **blocked (Cloudflare 403)** | |
+| MT | https://electionresults.mt.gov/ (sosmt.gov) | In-house | unknown | statewide, county | **blocked (Cloudflare 403)** | |
+| NE | https://electionresults.nebraska.gov/ | **ResultsAjax.svc family** | CSV/XML export (postback) | statewide, county | yes | |
+| NV | https://silverstateelection.nv.gov/ | In-house (NV SOS) | unknown | statewide, county | **blocked (Imperva redirect loop)** | |
+| NH | https://www.sos.nh.gov/elections/elections/election-results | none on election night | posted later | — | **blocked (403)** | Town results go through media/AP. |
+| NJ | https://www.nj.gov/state/elections/election-information-results.shtml | none statewide live | PDFs after certification | — | n/a | County clerks run their own ENR (several on Clarity county folders). Senate race in 2026, so treat counties as a fallback. |
+| NM | https://electionresults.sos.nm.gov/ | **ResultsAjax.svc family** (`NMResultsAjax.svc`) | CSV/XML export (postback) | statewide, county | yes | |
+| NY | https://nyenr.elections.ny.gov/ | In-house (NYSBOE) | unknown | statewide, county | **blocked (Cloudflare 403, intermittent; one 200)** | |
+| NC | https://er.ncsbe.gov/ | In-house (NCSBE) | **JSON (served as .txt)**: `https://er.ncsbe.gov/enr/elections.txt`, then `https://er.ncsbe.gov/enr/20261103/data/results_0.txt` (+ `county.txt`, `contest.txt`); precinct ZIP: `https://s3.amazonaws.com/dl.ncsbe.gov/ENRS/2026_11_03/results_pct_20261103.zip` | statewide, county, precinct | yes | The Clarity `/NC/` 403 is irrelevant because NC has always run its own ENR. Senate race 2026. |
+| ND | https://results.sos.nd.gov/ | **ResultsAjax.svc family** | CSV/Excel/RSS/XML export (postback) | statewide, county, precinct | yes | |
+| OH | https://liveresults.ohiosos.gov/ | In-house (OH SOS) | **XML (NIST SP 1500-100)**: `Api/v1/download?filename=VSSC1622XmlFileBlob` (1.2 MB); JSON `Api/v1/Contest/getContestList`, `GetContestsByCounty`, `GetElectionSummaryCsv` | statewide, county | yes | A standards-based feed. Gov + Senate 2026. High value. |
+| OK | https://results.okelections.us/OKER/?elecDate=20261103 | In-house (OK SEB) | unknown | statewide, county | **blocked (AWS WAF 403)** | Linked from oklahoma.gov 2026 results pages. Clarity OK list is stale. |
+| OR | https://results.oregonvotes.gov/ | **ResultsAjax.svc family** | CSV/XML export (postback) | statewide, county | yes | |
+| PA | https://www.electionreturns.pa.gov/ | In-house (PA DOS) | unknown (JSON API historically) | statewide, county | **blocked (Imperva challenge + reCAPTCHA)** | High-value state, but no clean access. |
+| RI | https://electionresults.ri.gov/results/public/rhodeisland | **Enhanced Voting** | **JSON** | statewide, town | yes | publicElectionId `2026StatewideGeneralElection`. 453 ballot items. |
+| SC | https://www.enr-scvotes.org/SC/127300/ | **Clarity** (custom domain) | Clarity JSON/XML (`current_ver.txt`, then version files) | statewide, county, precinct | yes | The EID was found by its "Statewide General Election" link on scvotes.gov. `SC/elections.json` is `[]`. Governor + Senate 2026. |
+| SD | https://electionresults.sd.gov/ | **ResultsAjax.svc family** | CSV/XML export (`/ResultsExport.aspx`) | statewide, county | yes | |
+| TN | https://sos.tn.gov/elections/results (elections.tn.gov) | In-house | unknown | statewide, county | **blocked (CloudFront 403)** | |
+| TX | https://goelect.txelections.civixapps.com/ivis-enr-ui/races | **Civix IVIS ENR** | **JSON (base64 sections)** | statewide, county | yes (results.texas-election.com front page is Cloudflare 403) | Election id 53815. Senate + Gov 2026; 38 House seats. High value. |
+| UT | https://electionresults.utah.gov/results/public/Utah | **Enhanced Voting** | **JSON** | statewide, county | yes | publicElectionId `General11032026`. |
+| VT | https://electionresults.vermont.gov/ | Custom Angular + Azure static JSON | **JSON**: `https://static.electionresults.vermont.gov/elections/elections.json`, then `/elections/{electionGuid}.json` (120 KB) | statewide, town | yes | 2026 general GUID `68d61e96-1d28-4210-8c1d-8e90512ae105`. |
+| VA | https://enr.elections.virginia.gov/results/public/virginia | **Enhanced Voting** | **JSON** | statewide, county/city, precinct | yes | publicElectionId `2026-November-General`. 133 localities. |
+| WA | https://results.votewa.gov/results/public/washington | **Enhanced Voting** | **JSON** | statewide, county | yes | publicElectionId `20261103`. Mostly mail ballots, so results arrive slowly. |
+| WV | https://results.enr.clarityelections.com/WV/{EID}/ | **Clarity** | Clarity JSON/XML | statewide, county, precinct | yes (primary EID 126209 works) | **The general EID was not found.** Get it from sos.wv.gov or govotewv.com tonight (it is likely around 1273xx). |
+| WI | https://elections.wi.gov/elections/election-results | none statewide on election night | n/a | — | **blocked (Cloudflare 403)** | WEC doesn't publish election-night totals. Counties report and AP covers the night. |
+| WY | https://sos.wyo.gov/Elections/ElectionResults.aspx | In-house | PDF/HTML | statewide, county | yes (page) | No live feed found. **Unverified**. |
+
+### Colorado note
+Every `coloradosos.gov` URL returned **403 (Cloudflare)** to our client, and no workaround was tried. Web search
+found only a 2017 SOS press release pointing to `results.enr.clarityelections.com/CO/…` and a Mesa County 2025 page
+that uses the statewide CO Clarity site with CSV downloads. Search also says the Colorado Sun shows SOS data
+through AP. I could not confirm that the SOS links EID 127407 tonight, and I found no separate CO SOS
+JSON/XML feed. Treat Clarity CO 127407 as the canonical machine source.
+
+## Suggested next adapters (ordered by value)
+
+1. **Enhanced Voting** (GA, VA, UT, WA, RI, ID): one adapter covers 6 states, including the GA Senate+Gov race and the VA Senate race. Clean JSON, no keys, and all endpoints were verified tonight. The county split is in `/data` (`ballotItemWithBreakdown`, `localityElections`) or per-locality jurisdictions.
+2. **Clarity** (reuse the CO/IA adapter): add SC EID 127300 now and WV once its general EID is known. Make the adapter accept a configured EID instead of relying on `elections.json`.
+3. **Civix IVIS (TX)**: one big state with base64-wrapped JSON sections and an easy decoder.
+4. **NCSBE (NC)**: JSON-in-.txt plus a precinct ZIP. A swing-state Senate race.
+5. **Ohio NIST 1500-100 XML**: a standards-based feed. If the parser is written generically for the NIST CDF, it can be reused if other states adopt the format.
+6. **California SOS API**: per-race JSON with a county map endpoint (Governor, House).
+7. **Tally ENR (AR)**: use the `Contest/*` API rather than the 50 MB FullDataFile.
+8. **ResultsAjax.svc family** (NE, SD, ND, NM, OR): 5 states but only a postback CSV/XML export, so it needs an ASP.NET VIEWSTATE round-trip. Worth one shared adapter after the JSON sources.
+9. **Single-state JSON/TSV sources**: CT (PCC JSON), VT (static JSON), FL (TSV extract), DE (Socrata SODA), HI (media.txt TSV, late night), LA (Data?blob= JSON, blob map TBD), IN (versioned JSON, filename TBD).
+10. **HTML scrape only**: MD (static pages), AL (ASP.NET), AK (PDF), WY (PDF).
+11. **No usable free official feed tonight**, so AP/media or county fallbacks are needed. Blocked: AZ, KY, MI, MN, MO, MT, NV, NY, OK, PA, TN, WI. No statewide ENR: IL, MA, ME, MS, NH, NJ. Low-yield: KS (Power BI). For the blocked states, the only polite route is asking the office for feed access or an allowlist.
