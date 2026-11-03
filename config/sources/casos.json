@@ -1,0 +1,23 @@
+{
+  "_howto": "Elections polled by the California SOS adapter (server/src/adapters/casos.js). base is the SOS results API. candidateRaces: statewide candidate contests, each with the API slug of its statewide file and (optionally) its county map file. houseSlug returns every U.S. House district (statewide per district; the API has no county breakdown for House that we found). measuresSlug is the statewide measures file; countyMeasures:true also fetches {measuresSlug}/county/{slug} for each county (58 requests, only when the statewide files change). statusSlug gives county turnout; it is ignored when its lastReportTimestamp is older than the election date (it held Sep 2024 test data on the afternoon of 2026-11-03). CA has no U.S. Senate race in 2026 (/returns/us-senate answers 500).",
+  "base": "https://api.sos.ca.gov/returns",
+  "elections": [
+    {
+      "state": "CA",
+      "key": "ca-2026-general",
+      "name": "California 2026 General Election",
+      "date": "2026-11-03",
+      "url": "https://electionresults.sos.ca.gov/",
+      "timeZone": "America/Los_Angeles",
+      "candidateRaces": [
+        { "office": "governor", "slug": "governor", "countyMap": "maps/governor" }
+      ],
+      "houseSlug": "us-rep/district/all",
+      "measuresSlug": "ballot-measures",
+      "countyMeasures": true,
+      "statusSlug": "status",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}

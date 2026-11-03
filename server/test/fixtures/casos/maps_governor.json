@@ -1,0 +1,94 @@
+{
+ "statewide": {
+  "raceTitle": "Governor - Statewide Results",
+  "Reporting": "0% (0 of 23,860) precincts reporting",
+  "ReportingTime": "November 2, 2026, 6:28 p.m.",
+  "candidates": [
+   {
+    "Name": "Xavier Becerra",
+    "Party": "Dem",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "0c434a"
+   },
+   {
+    "Name": "Steve Hilton",
+    "Party": "Rep",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "a1f4c7"
+   }
+  ]
+ },
+ "alameda": {
+  "raceTitle": "Governor - Alameda County Results",
+  "Reporting": "0% (0 of 627) precincts reporting",
+  "ReportingTime": "November 2, 2026, 6:28 p.m.",
+  "candidates": [
+   {
+    "Name": "Xavier Becerra",
+    "Party": "Dem",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "0c434a"
+   },
+   {
+    "Name": "Steve Hilton",
+    "Party": "Rep",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "a1f4c7"
+   }
+  ]
+ },
+ "contra-costa": {
+  "raceTitle": "Governor - Contra Costa County Results",
+  "Reporting": "0% (0 of 951) precincts reporting",
+  "ReportingTime": "November 2, 2026, 6:28 p.m.",
+  "candidates": [
+   {
+    "Name": "Xavier Becerra",
+    "Party": "Dem",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "0c434a"
+   },
+   {
+    "Name": "Steve Hilton",
+    "Party": "Rep",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "a1f4c7"
+   }
+  ]
+ },
+ "los-angeles": {
+  "raceTitle": "Governor - Los Angeles County Results",
+  "Reporting": "0% (0 of 2,853) precincts reporting",
+  "ReportingTime": "November 2, 2026, 6:28 p.m.",
+  "candidates": [
+   {
+    "Name": "Xavier Becerra",
+    "Party": "Dem",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "0c434a"
+   },
+   {
+    "Name": "Steve Hilton",
+    "Party": "Rep",
+    "Votes": "0",
+    "Percent": "0.0",
+    "incumbent": false,
+    "color": "a1f4c7"
+   }
+  ]
+ }
+}
