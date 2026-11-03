@@ -1,0 +1,183 @@
+{
+  "_howto": "Elections polled by the Clarity adapter (server/src/adapters/clarity.js). path = the URL segment(s) before the election id: 'CO' for a statewide site, 'PA/Allegheny' for a county site. Find ids at https://results.enr.clarityelections.com/{path}/elections.json. Set enabled:false to stop polling one without deleting it. County sites need countyFips (5 digits) and scope 'county'.",
+  "elections": [
+    {
+      "state": "CO",
+      "path": "CO",
+      "eid": "127407",
+      "scope": "state",
+      "name": "Colorado 2026 General",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "IA",
+      "path": "IA",
+      "eid": "127077",
+      "scope": "state",
+      "name": "Iowa 2026 General Election",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "AZ",
+      "path": "AZ/Pinal",
+      "eid": "127280",
+      "scope": "county",
+      "countyFips": "04021",
+      "name": "Pinal County, AZ",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "IL",
+      "path": "IL/DuPage",
+      "eid": "127290",
+      "scope": "county",
+      "countyFips": "17043",
+      "name": "DuPage County, IL",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "IL",
+      "path": "IL/Madison",
+      "eid": "127555",
+      "scope": "county",
+      "countyFips": "17119",
+      "name": "Madison County, IL",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "MI",
+      "path": "MI/Ottawa",
+      "eid": "127391",
+      "scope": "county",
+      "countyFips": "26139",
+      "name": "Ottawa County, MI",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "NE",
+      "path": "NE/Sarpy",
+      "eid": "127564",
+      "scope": "county",
+      "countyFips": "31153",
+      "name": "Sarpy County, NE",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "NJ",
+      "path": "NJ/Cumberland",
+      "eid": "127562",
+      "scope": "county",
+      "countyFips": "34011",
+      "name": "Cumberland County, NJ",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "NJ",
+      "path": "NJ/Somerset",
+      "eid": "127569",
+      "scope": "county",
+      "countyFips": "34035",
+      "name": "Somerset County, NJ",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "OH",
+      "path": "OH/Hamilton",
+      "eid": "127473",
+      "scope": "county",
+      "countyFips": "39061",
+      "name": "Hamilton County, OH",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "PA",
+      "path": "PA/Beaver",
+      "eid": "127285",
+      "scope": "county",
+      "countyFips": "42007",
+      "name": "Beaver County, PA",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "PA",
+      "path": "PA/Fayette",
+      "eid": "127583",
+      "scope": "county",
+      "countyFips": "42051",
+      "name": "Fayette County, PA",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Denton",
+      "eid": "127398",
+      "scope": "county",
+      "countyFips": "48121",
+      "name": "Denton County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/El_Paso",
+      "eid": "127348",
+      "scope": "county",
+      "countyFips": "48141",
+      "name": "El Paso County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Galveston",
+      "eid": "127478",
+      "scope": "county",
+      "countyFips": "48167",
+      "name": "Galveston County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Gregg",
+      "eid": "127493",
+      "scope": "county",
+      "countyFips": "48183",
+      "name": "Gregg County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Kaufman",
+      "eid": "127485",
+      "scope": "county",
+      "countyFips": "48257",
+      "name": "Kaufman County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Midland",
+      "eid": "127299",
+      "scope": "county",
+      "countyFips": "48329",
+      "name": "Midland County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Rockwall",
+      "eid": "127294",
+      "scope": "county",
+      "countyFips": "48397",
+      "name": "Rockwall County, TX",
+      "verified": "2026-11-03"
+    },
+    {
+      "state": "TX",
+      "path": "TX/Williamson",
+      "eid": "127488",
+      "scope": "county",
+      "countyFips": "48491",
+      "name": "Williamson County, TX",
+      "verified": "2026-11-03"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "_howto": "Which states hold which races on 2026-11-03, from public knowledge. Used ONLY to tell 'no race here' (grey) apart from 'a race we have no source for yet' on states without a live source. When a live source covers a state, the contests in its feed win over this list. House: every state elects its delegation; DC's non-voting delegate is not counted.",
+  "senate": ["AL","AK","AR","CO","DE","FL","GA","ID","IL","IA","KS","KY","LA","ME","MA","MI","MN","MS","MT","NE","NH","NJ","NM","NC","OH","OK","OR","RI","SC","SD","TN","TX","VA","WV","WY"],
+  "senateNotes": { "FL": "special election", "OH": "special election" },
+  "governor": ["AL","AK","AZ","AR","CA","CO","CT","FL","GA","HI","ID","IL","IA","KS","ME","MD","MA","MI","MN","NE","NV","NH","NM","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","VT","WI","WY"],
+  "house": "all-states-except-DC"
+}
