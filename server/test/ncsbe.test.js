@@ -27,7 +27,7 @@ test('NC: races, districts, measures and skipped offices', () => {
   assert.ok(measures.find((m) => m.name === 'CITY OF RALEIGH HOUSING BONDS REFERENDUM').statewide === false);
   assert.equal(measures[0].title, measures[0].name);
   // Unknown party labels are reported, not dropped.
-  assert.ok(un.some(([k, v]) => k === 'party' && v === 'GRE'));
+  assert.ok(!un.some(([k, v]) => k === 'party' && v === 'GRE')); // GRE is a known label now
   assert.ok(!un.some(([k]) => k === 'county'));
 });
 

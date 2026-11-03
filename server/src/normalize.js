@@ -8,7 +8,7 @@ const KNOWN_OTHER = new Set([
   '', 'lbr', 'lib', 'libertarian', 'grn', 'green', 'uni', 'unity', 'uaf', 'unaffiliated', 'apv', 'approval voting',
   'fwd', 'forward', 'acn', 'american constitution', 'con', 'constitution', 'ind', 'independent', 'np', 'nonpartisan',
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
-  'ccp', 'n', 'y', 'unc', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
+  'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
 ]);
 
 /** @returns {{party:'DEM'|'REP'|'OTHER', known:boolean}} */
@@ -110,7 +110,7 @@ export function splitPartyPrefix(label) {
 export function methodBucket(label) {
   const k = String(label ?? '').toLowerCase();
   if (/provision/.test(k)) return 'provisional';
-  if (/election ?day|in[- ]person on|polling place|precinct|e-?day|vote center.*election/.test(k)) return 'election_day';
+  if (/election ?day|in[- ]person on|polling place|precinct|e-?day|vote center.*election|machine/.test(k)) return 'election_day';
   if (/mail|absentee|early|advance|by ?mail|one[- ]stop|pre[- ]?election|in[- ]person absentee|ballot drop|drop ?box/.test(k)) return 'mail_early';
   return 'other';
 }

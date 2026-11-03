@@ -49,8 +49,8 @@ test('DE: vote arithmetic and county columns', () => {
 
 test('DE: unknown party labels are reported', () => {
   const d = load();
-  d.statewide[1]['Party Name'] = 'Independent Party of Delaware';
+  d.statewide[1]['Party Name'] = 'Zebra Party';
   const un = [];
   parseDeEnr(d, target, (...a) => un.push(a));
-  assert.deepEqual(un.map((x) => x.slice(0, 2)), [['party', 'Independent Party of Delaware']]);
+  assert.deepEqual(un.map((x) => x.slice(0, 2)), [['party', 'Zebra Party']]);
 });
