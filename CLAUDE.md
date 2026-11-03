@@ -1,7 +1,7 @@
 # election-map — project constitution
 
 A **public**, no-login, live election-night results map for the 2026 US midterms, served at
-https://election.postnerfclarity.com through a Cloudflare tunnel to <HOST> (<HOST_OS>). Nothing in it is
+https://election.jamiecahn.com through a Cloudflare tunnel to <HOST> (<HOST_OS>). Nothing in it is
 confidential and nothing in it ever needs a secret.
 
 ## What the app is

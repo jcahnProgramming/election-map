@@ -12,7 +12,7 @@ export const config = {
   dataDir: process.env.DATA_DIR ?? path.join(ROOT, 'data'),
   pollIntervalMs: Math.max(15, Number(process.env.POLL_INTERVAL_SECONDS ?? 60)) * 1000,
   maxBackoffMs: 10 * 60 * 1000,
-  userAgent: 'election-map/0.1 (live public results dashboard; +https://election.postnerfclarity.com)',
+  userAgent: `election-map/${changelog.releases?.[0]?.version ?? '0'} (live public results dashboard; +https://election.jamiecahn.com)`,
   version: changelog.releases?.[0]?.version ?? '0.0.0',
   clientDist: path.join(ROOT, 'client', 'dist'),
 };

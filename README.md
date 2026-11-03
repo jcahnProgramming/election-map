@@ -29,7 +29,7 @@ Push to `main` on Gitea → `.gitea/workflows/deploy.yml` runs on <HOST>'s act_r
    then checks the container isn't restart-looping.
 
 The app is published on `<LAN_IP>:${ELECTION_MAP_PORT:-3710}` only; the Cloudflare tunnel maps
-`election.postnerfclarity.com` → `http://<LAN_IP>:<port>`.
+`election.jamiecahn.com` → `http://<LAN_IP>:<port>`.
 
 ### One-time setup on <HOST>
 
