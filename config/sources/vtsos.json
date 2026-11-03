@@ -1,0 +1,19 @@
+{
+  "_howto": "Elections polled by the Vermont SOS adapter (server/src/adapters/vtsos.js). guid comes from {base}/elections/elections.json. sections are the keys of the election index whose files hold contests we track (federal = U.S. House/Senate, stateWide = Governor; add a ballot-question section here if one appears). The source reports by town and names each town's county (townDistricts), so county results are sums of towns. timeZone is the zone of lastUpdatedDate.",
+  "base": "https://static.electionresults.vermont.gov",
+  "elections": [
+    {
+      "state": "VT",
+      "guid": "68d61e96-1d28-4210-8c1d-8e90512ae105",
+      "name": "Vermont 2026 General Election",
+      "date": "2026-11-03",
+      "url": "https://electionresults.vermont.gov/",
+      "timeZone": "America/New_York",
+      "sections": ["federal", "stateWide"],
+      "races": ["senate", "governor", "house"],
+      "measures": true,
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}
