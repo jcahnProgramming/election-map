@@ -1,0 +1,17 @@
+/* TEMPORARY shell styles: layout only. A real design will replace this. */
+body { font-family: system-ui, sans-serif; margin: 0; padding: 8px 16px; color: #111; background: #fff; }
+table { border-collapse: collapse; margin: 8px 0; }
+th, td { border: 1px solid #ccc; padding: 2px 6px; text-align: left; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.notice { border: 1px solid #999; padding: 4px 8px; margin: 4px 0; background: #ffffe8; }
+.error { border: 1px solid #c00; padding: 4px 8px; margin: 4px 0; background: #fee; }
+.map { width: 100%; max-width: 975px; height: auto; display: block; }
+.map path.area { cursor: pointer; }
+.map path.area:hover { stroke: #000; stroke-width: 2px; }
+.tooltip { position: fixed; pointer-events: none; background: #fff; border: 1px solid #333; padding: 4px 6px; font-size: 13px; z-index: 20; max-width: 320px; }
+.tooltip table { margin: 2px 0; font-size: 12px; }
+.sidebar { position: fixed; top: 0; right: 0; bottom: 0; width: 360px; max-width: 90vw; overflow-y: auto; background: #fff; border-left: 2px solid #333; padding: 8px; z-index: 10; }
+.sidebar-toggle { position: fixed; top: 8px; right: 8px; z-index: 11; }
+.legend span.swatch { display: inline-block; width: 14px; height: 14px; vertical-align: middle; border: 1px solid #888; margin: 0 2px 0 8px; }
+.legend { font-size: 12px; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
