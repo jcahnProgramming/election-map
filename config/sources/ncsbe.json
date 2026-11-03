@@ -1,0 +1,17 @@
+{
+  "_howto": "Elections polled by the NCSBE adapter (server/src/adapters/ncsbe.js). folder = the YYYYMMDD folder under https://er.ncsbe.gov/enr/ (listed in /enr/elections.txt as edt MM/DD/YYYY). Statewide totals: /enr/{folder}/data/results_0.txt; per county: results_{cid}.txt (cid from county.txt, 1-100), re-downloaded only when that county's 'imp' (last updated) stamp changes. Set enabled:false to stop polling.",
+  "base": "https://er.ncsbe.gov/enr",
+  "timeZone": "America/New_York",
+  "countyConcurrency": 4,
+  "elections": [
+    {
+      "state": "NC",
+      "folder": "20261103",
+      "date": "2026-11-03",
+      "name": "North Carolina 2026 General Election",
+      "url": "https://er.ncsbe.gov/?election_dt=11/03/2026",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}
