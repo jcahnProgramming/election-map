@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+client/dist
+data
+.env
+.env.*
+!.env.example
+.git
+.gitea
+*.log
+logs
+coverage
+.DS_Store

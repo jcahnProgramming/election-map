@@ -1,0 +1,217 @@
+# Redeploys election-map on <HOST> on every push to main. Mirrors Overwatch's deploy workflow.
+#
+# How it reaches the host: the job container can see <HOST>'s Docker daemon (the
+# runner passes its mounted /var/run/docker.sock into job containers), but NOT
+# <HOST>'s filesystem. So every step that touches the deployment launches a
+# short-lived helper container through that daemon and bind-mounts the host
+# path into it. The host daemon resolves bind mounts against the host
+# filesystem, which is what makes this operate on the real deployment.
+#
+# The deploy dir is mounted at the SAME path inside the helpers. That way the
+# relative `./data` volume in docker-compose.yml resolves to the real host path
+# when compose passes it back to the daemon.
+#
+# The app's port is bound to <LAN_IP> only (the Cloudflare tunnel's target), never 0.0.0.0,
+# so 127.0.0.1 on <HOST> does NOT answer: the health probe targets the bind IP and port read
+# from the host's .env (ELECTION_MAP_BIND_IP / ELECTION_MAP_PORT, defaults <LAN_IP> / 3710).
+#
+# Hard constraints:
+#   - never create, overwrite or modify .env (the workflow checks its hash before and after).
+#     The owner creates it once from .env.example; the preflight fails if it is missing.
+#   - never delete, reset or chown ./data
+#   - never `git reset --hard` / `git clean`; fast-forward only
+
+name: Deploy to <HOST>
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  DEPLOY_DIR: <DEPLOY_DIR>
+  # Internal bridge address of Gitea. The tailnet hostname does not resolve from containers.
+  GITEA_INTERNAL_URL: <GITEA_INTERNAL_URL>
+  APP_CONTAINER: election-map
+  GIT_IMAGE: alpine/git:latest
+  DOCKER_IMAGE: docker:cli
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # docker:cli ships the docker CLI + compose plugin and nothing else we depend on.
+    container:
+      image: docker:cli
+    defaults:
+      run:
+        shell: sh
+    timeout-minutes: 20
+    steps:
+      - name: Preflight — host Docker daemon, deploy dir and probe address
+        run: |
+          set -eu
+          if ! docker version >/dev/null 2>&1; then
+            echo "::error::No Docker daemon reachable from the job container."
+            echo "The runner must pass its docker.sock into job containers."
+            echo "In act_runner's config.yaml, container.docker_host must be empty or 'automount', not '-'."
+            exit 1
+          fi
+          echo "Docker daemon: $(docker info --format '{{.Name}} / {{.ServerVersion}}')"
+
+          # --mount (unlike -v) FAILS if the host path does not exist instead of
+          # silently creating an empty directory.
+          docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR,readonly" \
+            -w "$DEPLOY_DIR" --entrypoint sh "$GIT_IMAGE" -c '
+              set -eu
+              missing=0
+              for f in .git docker-compose.yml Dockerfile .env data; do
+                if [ ! -e "$f" ]; then echo "::error::$PWD/$f not found on host"; missing=1; fi
+              done
+              [ "$missing" = 0 ] || exit 1
+              echo "Host deploy dir OK: $PWD" >&2
+              echo ".env sha256: $(sha256sum .env | cut -d" " -f1)" >&2
+            '
+
+          # Where the app is published, from the host .env (read only; same defaults as docker-compose.yml).
+          # Saved for the health-probe step.
+          docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR,readonly" \
+            -w "$DEPLOY_DIR" --entrypoint sh "$GIT_IMAGE" -c '
+              val() { grep -E "^[[:space:]]*$1=" .env | tail -n 1 | cut -d= -f2- | tr -d "\r\"'"'"' \t"; }
+              ip=$(val ELECTION_MAP_BIND_IP); port=$(val ELECTION_MAP_PORT)
+              echo "${ip:-<LAN_IP>}:${port:-3710}"
+            ' > /tmp/probe_addr
+          addr=$(cat /tmp/probe_addr)
+          case "$addr" in
+            *[!0-9.:]*|:*|*:) echo "::error::Unusable probe address \"$addr\" from .env (ELECTION_MAP_BIND_IP / ELECTION_MAP_PORT)."; exit 1 ;;
+          esac
+          echo "Health probe address: http://$addr"
+
+      - name: Record .env fingerprint
+        run: |
+          set -eu
+          docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR,readonly" \
+            -w "$DEPLOY_DIR" --entrypoint sh "$GIT_IMAGE" -c 'sha256sum .env | cut -d" " -f1' > /tmp/env.sha
+          echo "Recorded .env fingerprint."
+
+      - name: Pull latest main into host working copy (fast-forward only)
+        env:
+          GIT_TOKEN: ${{ gitea.token }}
+          REPO_PATH: ${{ gitea.repository }}
+          PUSHED_SHA: ${{ gitea.sha }}
+        run: |
+          set -eu
+          # Fetch from Gitea's internal address explicitly, because the clone's own
+          # `origin` URL may use the tailnet hostname that containers can't resolve.
+          # The token travels in an env var and an http header, never in argv or .git/config.
+          docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR" \
+            -w "$DEPLOY_DIR" \
+            -e GIT_TOKEN -e REPO_PATH -e PUSHED_SHA -e GITEA_INTERNAL_URL \
+            --entrypoint sh "$GIT_IMAGE" -c '
+              set -eu
+              git config --global --add safe.directory "$PWD"
+              auth="Authorization: Basic $(printf "x-access-token:%s" "$GIT_TOKEN" | base64 | tr -d "\n")"
+
+              branch=$(git rev-parse --abbrev-ref HEAD)
+              if [ "$branch" != "main" ]; then
+                echo "::error::Host working copy is on branch \"$branch\", expected main. Refusing to deploy."
+                exit 1
+              fi
+              if ! git diff --quiet || ! git diff --cached --quiet; then
+                echo "::error::Host working copy has local modifications to tracked files. Refusing to deploy:"
+                git status --short --untracked-files=no
+                exit 1
+              fi
+
+              before=$(git rev-parse HEAD)
+              git -c http.extraHeader="$auth" fetch --no-tags "$GITEA_INTERNAL_URL/$REPO_PATH.git" main
+              git merge --ff-only FETCH_HEAD
+              # Keep origin/main in step so `git status` on the host stays accurate.
+              if git remote get-url origin >/dev/null 2>&1; then
+                git update-ref refs/remotes/origin/main FETCH_HEAD
+              fi
+              after=$(git rev-parse HEAD)
+
+              echo "Deployed commit: $before -> $after"
+              if [ "$after" != "$PUSHED_SHA" ]; then
+                echo "::warning::HEAD ($after) differs from the pushed commit ($PUSHED_SHA). A newer push is probably on main already."
+              fi
+            '
+
+      - name: Rebuild and restart stack
+        run: |
+          set -eu
+          docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR" \
+            --mount "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock" \
+            -w "$DEPLOY_DIR" "$DOCKER_IMAGE" \
+            docker compose up -d --build
+
+      - name: Verify election-map is healthy
+        run: |
+          set -eu
+          addr=$(cat /tmp/probe_addr)
+          # Probes run in a helper on the HOST network, against the LAN bind address (not 127.0.0.1:
+          # the port is published on <LAN_IP> only).
+          probe() {
+            docker run --rm --network host "$DOCKER_IMAGE" \
+              sh -c "wget -q -S -O /dev/null '$1' 2>&1 | grep -q 'HTTP/1.1 200'"
+          }
+          # /api/health must answer 200 AND report "ok": true.
+          health() {
+            docker run --rm --network host "$DOCKER_IMAGE" \
+              sh -c "wget -q -O - 'http://$addr/api/health' 2>/dev/null | grep -Eq '\"ok\"[[:space:]]*:[[:space:]]*true'"
+          }
+          running() {
+            [ "$(docker inspect -f '{{.State.Running}} {{.State.Restarting}}' "$1" 2>/dev/null)" = "true false" ]
+          }
+
+          ok=0
+          for i in $(seq 1 30); do
+            api=fail; ui=fail
+            health && api=ok || true
+            probe "http://$addr/" && ui=ok || true
+            echo "attempt $i: /api/health=$api  /=$ui  (http://$addr)"
+            if [ "$api$ui" = okok ] && running "$APP_CONTAINER"; then
+              ok=1; break
+            fi
+            sleep 3
+          done
+          [ "$ok" = 1 ] || { echo "::error::election-map did not become healthy within ~90s (needs 200 + \"ok\":true from http://$addr/api/health)."; exit 1; }
+
+          # Catch crash loops that answer once and then die: the restart count must stay flat.
+          r1=$(docker inspect -f '{{.RestartCount}}' "$APP_CONTAINER")
+          sleep 15
+          r2=$(docker inspect -f '{{.RestartCount}}' "$APP_CONTAINER")
+          if [ "$r1" != "$r2" ] || ! running "$APP_CONTAINER"; then
+            echo "::error::$APP_CONTAINER restarted after coming up (restart count $r1 -> $r2). Likely a crash loop."
+            exit 1
+          fi
+          health || { echo "::error::election-map stopped responding"; exit 1; }
+          echo "election-map healthy and stable at http://$addr"
+
+      - name: Confirm .env untouched
+        if: always()
+        run: |
+          set -eu
+          [ -s /tmp/env.sha ] || { echo "No fingerprint recorded (earlier step failed); skipping."; exit 0; }
+          now=$(docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR,readonly" \
+            -w "$DEPLOY_DIR" --entrypoint sh "$GIT_IMAGE" -c 'sha256sum .env | cut -d" " -f1')
+          if [ "$now" != "$(cat /tmp/env.sha)" ]; then
+            echo "::error::.env on <HOST> changed during the deploy. This must never happen. Investigate."
+            exit 1
+          fi
+          echo ".env unchanged."
+
+      - name: Diagnostics on failure
+        if: failure()
+        run: |
+          docker run --rm \
+            --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR,readonly" \
+            --mount "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock" \
+            -w "$DEPLOY_DIR" "$DOCKER_IMAGE" \
+            sh -c 'docker compose ps -a; echo; docker compose logs --no-color --tail=150' || true

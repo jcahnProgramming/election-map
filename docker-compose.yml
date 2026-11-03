@@ -1,0 +1,32 @@
+# election-map — public live election-night results dashboard (UI + API + Socket.io), one container.
+#
+# Deploy dir on <HOST>: <DEPLOY_DIR>, a git clone of this repo. Compose resolves
+# relative paths against that dir, so ./data lands at <DEPLOY_DIR>/data
+# (the SQLite database). Never delete, reset or chown it.
+
+services:
+  election-map:
+    container_name: election-map
+    build: .
+    image: election-map:local
+    restart: unless-stopped
+    # Container user. <HOST_OS> <APPDATA> is usually nobody:users -> set PUID=99 PGID=100 in .env
+    user: "${PUID:-1000}:${PGID:-1000}"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATA_DIR: /data
+      PORT: 3710
+    ports:
+      # Bound to <HOST>'s LAN address ONLY, never 0.0.0.0: the Cloudflare tunnel points at
+      # http://<LAN_IP>:<port>, and that is the only way the public should reach the app.
+      # Consequence: 127.0.0.1 on the host does NOT answer; the deploy health probe uses <LAN_IP>.
+      - "${ELECTION_MAP_BIND_IP:-<LAN_IP>}:${ELECTION_MAP_PORT:-3710}:3710"
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3710/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
