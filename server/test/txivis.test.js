@@ -48,7 +48,7 @@ test('TX 2026 general (election night, before first votes): races, levels, versi
   assert.deepEqual(r.races.find((x) => x.district === '10').units.map((u) => u.name), ['TX', 'Travis']);
 
   // Unknown party labels are reported, not dropped; candidates stay in the race.
-  assert.ok(seen.some(([k, v]) => k === 'party' && v === 'W'));
+  assert.ok(!seen.some(([k, v]) => k === 'party' && v === 'W'));
   assert.ok(!seen.some(([k, v]) => k === 'party' && v === 'GRE'), 'GRE is a known third-party label');
   assert.ok(!seen.some(([k]) => k === 'county'), 'LASALLE resolves through the config alias');
 });

@@ -31,7 +31,7 @@ test('VT 2026 general (live, before first town reports): races, version, timesta
   assert.deepEqual(gov.units.map((u) => [u.level, u.countyFips ?? null]),
     [['state', null], ['county', '50001'], ['county', '50007'], ['county', '50013']]);
   assert.ok(gov.units.every((u) => u.votes.every((v) => v === 0)));
-  assert.ok(seen.some(([k, v]) => k === 'party' && v === 'FREEDOM AND UNITY'));
+  assert.ok(!seen.some(([k, v]) => k === 'party' && v === 'FREEDOM AND UNITY'));
   assert.ok(!seen.some(([k]) => k === 'county' || k === 'town'));
 });
 

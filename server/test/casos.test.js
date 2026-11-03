@@ -42,10 +42,10 @@ test('CA 2026 general (live, before first report): governor with counties, House
   assert.deepEqual(house.map((x) => x.district), ['1', '13', '6']);
   assert.equal(house[0].name, 'U.S. House of Representatives District 1');
   assert.ok(house.every((x) => x.units.length === 1 && x.units[0].level === 'state'));
-  // Top-two: "NPP" is no party preference; reported until normalize.js knows it, but kept as OTHER.
+  // Top-two: "NPP" is no party preference; a known label (not reported), kept as OTHER.
   const d6 = house.find((x) => x.district === '6');
   assert.ok(d6.choices.some((c) => c.partyRaw === 'NPP' && c.party === 'OTHER'));
-  assert.ok(seen.some(([k, v]) => k === 'party' && v === 'NPP'));
+  assert.ok(!seen.some(([k, v]) => k === 'party' && v === 'NPP'));
 
   const measures = r.races.filter((x) => x.office === 'measure');
   assert.equal(measures.length, 14);
