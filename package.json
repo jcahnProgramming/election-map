@@ -1,0 +1,16 @@
+{
+  "name": "election-map",
+  "private": true,
+  "description": "Live election-night results map for the 2026 US midterms",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "postinstall": "npm --prefix server install --no-audit --no-fund && npm --prefix client install --no-audit --no-fund",
+    "dev": "node scripts/dev.js",
+    "build": "node scripts/check-changelog.js && npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "check-changelog": "node scripts/check-changelog.js"
+  }
+}

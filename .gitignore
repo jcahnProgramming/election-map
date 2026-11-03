@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment (no secrets today, but host-specific)
+.env
+.env.*
+!.env.example
+
+# Build output
+client/dist/
+
+# SQLite data (never committed)
+data/
+*.db
+*.db-*
+
+# Logs / coverage / OS
+logs/
+*.log
+npm-debug.log*
+coverage/
+.DS_Store
+Thumbs.db
