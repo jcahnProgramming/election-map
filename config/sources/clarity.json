@@ -18,6 +18,15 @@
       "verified": "2026-11-03"
     },
     {
+      "state": "SC",
+      "path": "SC",
+      "eid": "127300",
+      "scope": "state",
+      "name": "South Carolina 2026 General",
+      "verified": "2026-11-03",
+      "note": "Not listed in SC/elections.json (returns []); id found via scvotes.gov"
+    },
+    {
       "state": "AZ",
       "path": "AZ/Pinal",
       "eid": "127280",
