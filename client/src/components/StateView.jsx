@@ -5,7 +5,7 @@ import Details from './Details.jsx';
 import { loadCounties, fitPath, ABBR_TO_FIPS } from '../geo.js';
 import { effectiveStatus } from '../shading.js';
 import { partyShares, leadText, candidateList, hasCandidates } from '../calc.js';
-import { fmtVotes, fmtPct, fmtReporting, shortLabel, longLabel, hostOf } from '../format.js';
+import { fmtVotes, fmtPct, fmtReporting, shortLabel, longLabel, hostOf, reportingText } from '../format.js';
 import { fmtMT, coverageCopy, OFFICIAL_LINK_TEXT, staleSourceText } from '../calc.js';
 import AllRaces from './AllRaces.jsx';
 import { SeatRows, PartyTag, RunningMate, DistrictRows } from './EntryTip.jsx';
@@ -52,14 +52,16 @@ export function TotalsStrip({ entry, race, stateName, compact = false }) {
         <div className="card" style={{ gridColumn: '1 / -1' }}>
           <span className="k">{longLabel(race)} · vote for {entry.seats}</span>
           <span className="small">Several candidates win this contest, so there is no two-way margin. Most votes counted so far
-            {pct != null ? ` · ${fmtReporting(pct)} reporting` : ''}:</span>
+            {reportingText(entry, 'reporting') ? ` · ${reportingText(entry, 'reporting')}` : ''}:</span>
           <div className="seat-rows"><SeatRows entry={entry} /></div>
         </div>
       </div>
     );
   }
-  const reportingCard = card('', 'Reporting',
-    pct != null ? fmtReporting(pct) : '—',
+  // A source that publishes counties complete instead of a % (Clarity statewide sites) gets that, never a derived %.
+  const counties = pct == null && entry.countiesTotal > 0;
+  const reportingCard = card('', counties ? 'Counties complete' : 'Reporting',
+    pct != null ? fmtReporting(pct) : counties ? `${fmtVotes(entry.countiesComplete ?? 0)} of ${fmtVotes(entry.countiesTotal)}` : '—',
     status === 'reporting' ? leadText(entry) : pct == null ? 'Not published by this source' : 'No votes counted yet');
   if (hasCandidates(entry)) {
     // The top three candidates by name (every candidate is listed in Details below), then reporting.

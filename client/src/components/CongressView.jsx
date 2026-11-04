@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { chamberTotals, hemicycle, closestSeats, seatStatus, partyTag } from '../calc.js';
-import { fmtReporting } from '../format.js';
+import { fmtReporting, reportingText } from '../format.js';
 import { fmtMargin } from '../shading.js';
 import Avatar from './Avatar.jsx';
 import { RunningMate } from './EntryTip.jsx';
@@ -79,7 +79,7 @@ export function Closest({ up, onOpen }) {
                   <span className="nm">{s.lead?.name}<RunningMate name={s.lead?.runningMate} /></span>
                 </span>
                 <span className="chip" style={{ background: bg, color: fg }}>{text ?? (partyTag(s.lead) || 'OTHER')}</span>
-                <span className="cm">{fmtMargin(s.marginPts)} pts · {s.pctReporting != null ? `${fmtReporting(s.pctReporting)} in` : '% in n/a'}</span>
+                <span className="cm">{fmtMargin(s.marginPts)} pts · {reportingText(s) ?? '% in n/a'}</span>
               </a>
             </li>
           );

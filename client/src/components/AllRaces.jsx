@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { PARTY_COLOR, isTossupMargin, fmtMargin } from '../shading.js';
-import { fmtVotes, fmtPct, fmtReporting, barWidth } from '../format.js';
+import { fmtVotes, fmtPct, fmtReporting, barWidth, reportingText } from '../format.js';
 import { candidateList, partyTag, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import { PartyTag, RunningMate } from './EntryTip.jsx';
 import Avatar from './Avatar.jsx';
@@ -114,7 +114,7 @@ function Row({ c, open, onToggle, onOpenMeasure }) {
           <span className="chip" style={{ background: chip.colors[0], color: chip.colors[1] }} title={chip.title}>{chip.text}</span>
           <span className="rg-margin">{showMargin ? `${fmtMargin(c.marginPts)} pts` : ''}</span>
         </span>
-        <span className="rg-rep">{c.pctReporting != null ? `${fmtReporting(c.pctReporting)} in` : '% in n/a'}</span>
+        <span className="rg-rep">{reportingText(c) ?? '% in n/a'}</span>
       </button>
       {open && (
         <div className="rg-cands" id={detailsId}>

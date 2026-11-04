@@ -46,11 +46,13 @@ test('CO: turnout per county, precincts, no vote-type split, measures', () => {
   assert.equal(r.sourceUpdatedAt, '2026-11-03T17:46:50.000Z');
   assert.equal(r.election.date, '2026-11-03');
   const st = r.turnout.find((u) => u.level === 'state');
-  assert.deepEqual(st, { level: 'state', name: 'CO', registered: 4086478, ballotsCast: 0, turnoutPct: 0, ballotsOutstanding: null, precinctsReporting: 0, precinctsTotal: 4297 });
+  assert.deepEqual(st, { level: 'state', name: 'CO', registered: 4086478, ballotsCast: 0, turnoutPct: 0, ballotsOutstanding: null, precinctsReporting: null, precinctsTotal: null });
   assert.equal(r.turnout.filter((u) => u.level === 'county').length, 64);
   assert.equal(r.turnout.find((u) => u.countyFips === '08001').registered, 330215);
   const sen = r.races.find((x) => x.office === 'senate');
-  assert.equal(sen.units[0].precinctsTotal, 4230);
+  // The official page shows counties complete, not precincts: no derived precinct % on a statewide site.
+  assert.deepEqual([sen.units[0].precinctsReporting, sen.units[0].precinctsTotal, sen.units[0].pctReporting], [null, null, null]);
+  assert.deepEqual([sen.units[0].countiesComplete, sen.units[0].countiesTotal], [0, 64]);
   assert.equal(sen.units.length, 65);
   assert.equal(sen.units[0].methods, undefined, 'CO publishes only "Total Votes": no method split');
   const m = r.races.find((x) => x.office === 'measure');
@@ -88,7 +90,7 @@ test('SC: party prefixes stripped from names, six vote types, precincts from set
   const labels = sen.units[0].methods.map((m) => m.label);
   assert.ok(labels.includes('Absentee By Mail') && labels.includes('Early Voting') && labels.includes('Election Day'));
   assert.equal(sen.units[0].methods.find((m) => m.label === 'Provisional').bucket, 'provisional');
-  assert.equal(r.turnout[0].precinctsTotal, 2312);
+  assert.equal(r.turnout[0].precinctsTotal, null); // not on the official page
   assert.equal(r.sourceUpdatedAt, '2026-10-30T14:04:18.000Z');
   assert.deepEqual(unmatched.filter((u) => u[0] === 'county'), []);
 });
@@ -225,7 +227,7 @@ test('WV (live, early count 2026-11-04 01:00Z): Senate, House 2, amendment, legi
   const { r, unmatched } = parse('wv');
   assert.deepEqual(unmatched, []);
   assert.equal(r.sourceUpdatedAt, '2026-11-04T01:00:26.000Z');
-  assert.deepEqual(r.turnout.find((u) => u.level === 'state'), { level: 'state', name: 'WV', registered: 1210307, ballotsCast: 37091, turnoutPct: 3.06, ballotsOutstanding: null, precinctsReporting: 124, precinctsTotal: 1642 });
+  assert.deepEqual(r.turnout.find((u) => u.level === 'state'), { level: 'state', name: 'WV', registered: 1210307, ballotsCast: 37091, turnoutPct: 3.06, ballotsOutstanding: null, precinctsReporting: null, precinctsTotal: null });
   assert.equal(r.turnout.filter((u) => u.level === 'county').length, 55);
   const sen = r.races.find((x) => x.office === 'senate');
   assert.deepEqual(sen.choices.map((c) => c.party), ['DEM', 'REP', 'OTHER']);
@@ -233,10 +235,33 @@ test('WV (live, early count 2026-11-04 01:00Z): Senate, House 2, amendment, legi
   assert.equal(sen.units.filter((u) => u.level === 'county').length, 55);
   const h2 = r.races.find((x) => x.office === 'house');
   assert.equal(h2.district, '2');
-  assert.deepEqual([h2.units[0].precinctsReporting, h2.units[0].precinctsTotal], [67, 760]);
+  assert.deepEqual([h2.units[0].precinctsReporting, h2.units[0].precinctsTotal, h2.units[0].pctReporting], [null, null, null]);
+  assert.deepEqual([h2.units[0].countiesComplete, h2.units[0].countiesTotal], [3, 27]); // the district's counties, as published
   const m = r.races.find((x) => x.office === 'measure');
   assert.deepEqual([m.units[0].yes, m.units[0].no], [23137, 10858]);
   enrichRaces(r, 'clarity');
   assert.equal(r.races.find((x) => /13th Senatorial/.test(x.name)).level, 'legislative');
   assert.equal(r.races.find((x) => /79th District/.test(x.name)).level, 'legislative');
+});
+
+test('statewide Clarity site: counties complete is stored and served; a % reporting is never derived (Colorado 45% -> 37%)', async () => {
+  const { openDb, writeSnapshot } = await import('../src/db.js');
+  const { createResults } = await import('../src/results.js');
+  const { r } = parse('wv');
+  const db = openDb(':memory:');
+  writeSnapshot(db, { ...r, source: 'clarity', fetchedAt: '2026-11-04T01:00:00Z' });
+  const res = createResults(db, [{ id: 'clarity', name: 'Clarity', targets: () => [] }]);
+  const sen = res.state('WV', 'senate').statewide;
+  assert.equal(sen.pctReporting, null);
+  assert.deepEqual([sen.countiesComplete, sen.countiesTotal], [4, 55]);
+  const n = res.national('senate').states.find((s) => s.state === 'WV');
+  assert.equal(n.pctReporting, null); // so the national Est. reporting never mixes in a derived %
+  assert.deepEqual([n.countiesComplete, n.countiesTotal], [4, 55]);
+});
+
+test('county-run Clarity site keeps the precincts its own page shows (summary PR/TP are precincts there)', () => {
+  const { r } = parse('denton');
+  const sen = r.races.find((x) => x.office === 'senate');
+  assert.equal(sen.units[0].precinctsTotal, 252);
+  assert.equal(sen.units[0].countiesTotal, undefined);
 });

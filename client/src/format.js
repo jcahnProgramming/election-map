@@ -4,6 +4,15 @@ export const fmtVotes = (n) => (isNum(n) ? nf.format(Number(n)) : '—');
 export const fmtPct = (n, digits = 1) => (isNum(n) ? `${Number(n).toFixed(digits)}%` : '—');
 /** Reporting % for display: whole numbers, except keep one decimal below 1 so "0.4%" isn't shown as "0%". */
 export const fmtReporting = (n) => (isNum(n) ? `${Number(n) > 0 && Number(n) < 1 ? Number(n).toFixed(1) : Math.round(Number(n))}%` : '—');
+/**
+ * What a source says about how much is counted: its own % ("37% in"), or, for sources that publish counties complete
+ * instead (Clarity statewide sites), "5 of 64 counties complete". Never a % we derived. null when neither is published.
+ */
+export function reportingText(e, word = 'in') {
+  if (isNum(e?.pctReporting)) return `${fmtReporting(e.pctReporting)} ${word}`;
+  if (isNum(e?.countiesTotal) && Number(e.countiesTotal) > 0) return `${fmtVotes(e.countiesComplete ?? 0)} of ${fmtVotes(e.countiesTotal)} counties complete`;
+  return null;
+}
 export const barWidth = (pct) => `${isNum(pct) ? Math.max(0, Math.min(100, Number(pct))).toFixed(1) : 0}%`;
 
 export const RACES = ['senate', 'governor', 'house'];

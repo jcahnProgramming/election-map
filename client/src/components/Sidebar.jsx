@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { measureStatus, measureShares, MEASURE_STATUS_LABEL, positionDisplay, websiteLabel, displayDomain } from '../calc.js';
-import { fmtVotes, fmtPct, fmtReporting, barWidth } from '../format.js';
+import { fmtVotes, fmtPct, fmtReporting, barWidth, reportingText } from '../format.js';
 
 const ext = { target: '_blank', rel: 'noopener noreferrer' };
 
@@ -134,7 +134,7 @@ function Measure({ m, highlight }) {
             <span style={{ color: 'var(--no-text)' }}>No {fmtPct(noPct)} · {fmtVotes(m.no)}</span>
           </div>
           <span className="measure-foot">
-            {m.pctReporting != null ? `${fmtReporting(m.pctReporting)} reporting` : '% reporting not published'}
+            {reportingText(m, 'reporting') ?? '% reporting not published'}
             {m.sourceName ? (
               <> · {m.sourceUrl ? <a href={m.sourceUrl} {...ext}>{m.sourceName}</a> : m.sourceName}</>
             ) : null}

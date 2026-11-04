@@ -54,7 +54,7 @@ export default function Details({ race, scope, entry, county, countyMissing, rac
               <span className="big">{tp != null ? fmtPct(tp) : fmtVotes(t.ballotsCast)}</span>
               <span className="small">
                 {tp != null
-                  ? `${fmtVotes(t?.ballotsCast)} counted / ${fmtVotes(t?.registered)} registered`
+                  ? `${fmtVotes(t?.ballotsCast)} ballots cast of ${fmtVotes(t?.registered)} ${entry?.source === 'clarity' ? 'active voters' : 'registered voters'} · share of voters, not of votes counted`
                   : 'ballots cast · registered voters not published'}
               </span>
             </>

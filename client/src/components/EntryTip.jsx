@@ -1,7 +1,7 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
 import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel, staleSourceText, otherRaceLine } from '../calc.js';
-import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
+import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf, reportingText } from '../format.js';
 import { photoCredits } from '../avatar.js';
 import Avatar from './Avatar.jsx';
 
@@ -155,7 +155,7 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
   const status = kind === 'county' && !entry ? 'no-data' : effectiveStatus(entry);
   const pct = entry?.pctReporting;
   const reporting = status === 'reporting' || status === 'awaiting'
-    ? (pct != null ? `${fmtReporting(pct)} in` : '% in not published')
+    ? (reportingText(entry) ?? '% in not published')
     : '';
   return (
     <>

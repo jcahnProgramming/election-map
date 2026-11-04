@@ -175,3 +175,30 @@ test('staleSourceText: only when the source stopped responding; names the time o
   assert.equal(staleSourceText(null), null);
   assert.equal(staleSourceText({ sourceResponding: false }), 'Official source not responding — showing last update');
 });
+
+test('reportingText: the source\'s own % when published; else "X of Y counties complete"; never a derived %', async () => {
+  const { reportingText } = await import('../src/format.js');
+  // Colorado (Clarity statewide): no % published, only counties complete.
+  const co = { pctReporting: null, precinctsReporting: null, precinctsTotal: null, countiesComplete: 5, countiesTotal: 64, totalVotes: 1927294 };
+  assert.equal(reportingText(co), '5 of 64 counties complete');
+  assert.equal(reportingText(co, 'reporting'), '5 of 64 counties complete');
+  assert.doesNotMatch(reportingText(co), /%/);
+  assert.equal(reportingText({ pctReporting: 45.9 }), '46% in');
+  assert.equal(reportingText({ pctReporting: 0.4 }, 'reporting'), '0.4% reporting');
+  assert.equal(reportingText({ pctReporting: null }), null);
+  assert.equal(reportingText({ countiesComplete: 0, countiesTotal: 64 }), '0 of 64 counties complete');
+});
+
+test('Est. reporting leaves out states that publish counties complete instead of a %', () => {
+  const states = [
+    { state: 'CO', pctReporting: null, countiesComplete: 5, countiesTotal: 64, totalVotes: 1_900_000 },
+    { state: 'LA', pctReporting: 50, totalVotes: 100_000 },
+  ];
+  assert.equal(estReporting(states), 50);
+});
+
+test('measureStatus: a counties-only source shows its counted lead instead of "too early" all night', () => {
+  assert.equal(measureStatus({ pctReporting: null, countiesComplete: 5, countiesTotal: 64, yes: 600, no: 400 }), 'yes');
+  assert.equal(measureStatus({ pctReporting: null, yes: 600, no: 400 }), 'too-early'); // nothing published at all
+  assert.equal(measureStatus({ pctReporting: 5, yes: 600, no: 400 }), 'too-early'); // a real % below the gate
+});

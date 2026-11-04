@@ -92,7 +92,8 @@ export function createResults(db, adapters, opts = {}) {
     votes: db.prepare(`SELECT c.position, c.name, c.party, c.party_raw, c.running_mate, v.votes, u.level, u.county_fips, u.name AS unit
       FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id JOIN reporting_units u ON u.id = v.unit_id
       WHERE v.snapshot_id = ? AND v.race_id = ? ORDER BY c.position`),
-    reporting: db.prepare(`SELECT u.level, u.county_fips, u.name AS unit, x.precincts_reporting pr, x.precincts_total pt, x.pct_reporting pct
+    reporting: db.prepare(`SELECT u.level, u.county_fips, u.name AS unit, x.precincts_reporting pr, x.precincts_total pt, x.pct_reporting pct,
+        x.counties_complete cc, x.counties_total ct
       FROM unit_reporting x JOIN reporting_units u ON u.id = x.unit_id WHERE x.snapshot_id = ? AND x.race_id = ?`),
     methods: db.prepare(`SELECT u.level, u.county_fips, u.name AS unit, m.choice_pos, m.method_raw, m.method_bucket, m.method_order, m.votes
       FROM method_counts m JOIN reporting_units u ON u.id = m.unit_id WHERE m.snapshot_id = ? AND m.race_id = ?
@@ -102,7 +103,8 @@ export function createResults(db, adapters, opts = {}) {
         t.precincts_reporting, t.precincts_total
       FROM unit_turnout t JOIN reporting_units u ON u.id = t.unit_id WHERE t.snapshot_id = ?`),
     measures: db.prepare(`SELECT r.id, r.name, r.title, r.state, r.source_key, e.source, e.url, l.snapshot_id, l.fetched_at,
-        s.source_updated_at, m.yes, m.no, x.pct_reporting pct, x.precincts_reporting pr, x.precincts_total pt
+        s.source_updated_at, m.yes, m.no, x.pct_reporting pct, x.precincts_reporting pr, x.precincts_total pt,
+        x.counties_complete cc, x.counties_total ct
       FROM races r JOIN elections e ON e.id = r.election_id JOIN latest_snapshot l ON l.election_id = e.id
       JOIN snapshots s ON s.id = l.snapshot_id
       JOIN reporting_units u ON u.state = r.state AND u.level = 'state' AND u.county_fips = ''
@@ -129,7 +131,8 @@ export function createResults(db, adapters, opts = {}) {
       FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id JOIN reporting_units u ON u.id = v.unit_id
       WHERE v.snapshot_id = ? AND u.level = 'county' GROUP BY v.race_id, c.position ORDER BY v.race_id, c.position`),
     unitMeasures: db.prepare('SELECT race_id, yes, no FROM measure_counts WHERE snapshot_id = ? AND unit_id = ?'),
-    unitReporting: db.prepare(`SELECT race_id, precincts_reporting pr, precincts_total pt, pct_reporting pct
+    unitReporting: db.prepare(`SELECT race_id, precincts_reporting pr, precincts_total pt, pct_reporting pct,
+        counties_complete cc, counties_total ct
       FROM unit_reporting WHERE snapshot_id = ? AND unit_id = ?`),
   };
 
@@ -176,7 +179,7 @@ export function createResults(db, adapters, opts = {}) {
       unit(v).candidates.push({ name: v.name, party: v.party, partyRaw: v.party_raw, ...(v.running_mate ? { runningMate: v.running_mate } : {}), votes: v.votes });
     }
     for (const x of q.reporting.all(r.snapshot_id, r.id)) {
-      Object.assign(unit(x), { pr: x.pr, pt: x.pt, pct: x.pct ?? pctOf(x.pr, x.pt) });
+      Object.assign(unit(x), { pr: x.pr, pt: x.pt, pct: x.pct ?? pctOf(x.pr, x.pt), cc: x.cc ?? null, ct: x.ct ?? null });
     }
     const rows = q.methods.all(r.snapshot_id, r.id);
     if (rows.length) {
@@ -399,6 +402,8 @@ export function createResults(db, adapters, opts = {}) {
       ...(otherContests.length ? { otherContests } : {}),
       precinctsReporting: sw?.pr ?? null,
       precinctsTotal: sw?.pt ?? null,
+      // Sources that publish counties complete instead of a % (Clarity statewide sites): never turned into a %.
+      ...(sw?.ct ? { countiesComplete: sw.cc ?? 0, countiesTotal: sw.ct } : {}),
       ballotsCast: turnout.get('state')?.ballotsCast ?? null,
       ...sourceFields(races[0]),
     };
@@ -422,6 +427,7 @@ export function createResults(db, adapters, opts = {}) {
       state: r.state, contest: r.name, district: r.district ?? null, live: true,
       totalVotes: s.totalVotes, leader: s.leader, tied: s.tied, marginPts: s.marginPts, multiSeat: !!s.multiSeat,
       pctReporting: u?.pct ?? null,
+      ...(u?.ct ? { countiesComplete: u.cc ?? 0, countiesTotal: u.ct } : {}),
       lead: lead ? { name: lead.name, party: lead.party, partyRaw: lead.partyRaw ?? null, runningMate: lead.runningMate ?? null, photo: lead.photo ?? null } : null,
       // Top-two / same-party contests: the seat goes to that party whichever of the two leads.
       runnerUpParty: second && second.votes > 0 ? second.party : null,
@@ -668,6 +674,7 @@ export function createResults(db, adapters, opts = {}) {
           scope: e.scope,
           ...row,
           pctReporting: pct,
+          ...(rp?.ct ? { countiesComplete: rp.cc ?? 0, countiesTotal: rp.ct } : {}),
           precinctsReporting: rp?.pr ?? null,
           precinctsTotal: rp?.pt ?? null,
           source: e.source,
@@ -800,6 +807,7 @@ export function createResults(db, adapters, opts = {}) {
         no: m.no,
         pctYes: m.yes + m.no > 0 ? Math.round((1000 * m.yes) / (m.yes + m.no)) / 10 : null,
         pctReporting: m.pct ?? pctOf(m.pr, m.pt),
+        ...(m.ct ? { countiesComplete: m.cc ?? 0, countiesTotal: m.ct } : {}),
         source: m.source,
         sourceName: adapterName(m.source),
         sourceUrl: m.url ?? null,

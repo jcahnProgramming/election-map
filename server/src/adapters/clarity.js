@@ -209,12 +209,18 @@ export function parseClarity({ target: t, version, summary, details = null, sett
       sumPy = num(c.TP);
     }
 
+    // A statewide Clarity site's own page shows no precinct-reporting figure: per contest it shows counties complete
+    // ("5 of 64", the summary's PR/TP at state level) and election-wide turnout. The per-county PX/PY precinct counts in
+    // details.json appear nowhere on the official page and drift as counties revise "participating" (Colorado's derived
+    // "% in" fell from 45 to 37 while votes rose). So on statewide sites: counties complete, never a derived %.
+    const statewideSite = t.scope === 'state';
     const units = [{
       ...top,
       votes: (c.V ?? []).map(Number),
-      precinctsReporting: sumPx,
-      precinctsTotal: sumPy,
-      pctReporting: sumPy ? round1((100 * sumPx) / sumPy) : null,
+      precinctsReporting: statewideSite ? null : sumPx,
+      precinctsTotal: statewideSite ? null : sumPy,
+      pctReporting: !statewideSite && sumPy ? round1((100 * sumPx) / sumPy) : null,
+      ...(statewideSite && num(c.TP) ? { countiesComplete: num(c.PR) ?? 0, countiesTotal: num(c.TP) } : {}),
     }];
 
     // County breakdown, when this is a statewide site that publishes it.
@@ -225,9 +231,9 @@ export function parseClarity({ target: t, version, summary, details = null, sett
         units.push({
           level: 'county', countyFips: m.fips, name: m.name, clarityName: countyName,
           votes: (det.V?.[i] ?? []).map(Number),
-          precinctsReporting: det.PX?.[i] ?? null,
-          precinctsTotal: det.PY?.[i] ?? null,
-          pctReporting: det.PY?.[i] ? round1((100 * (det.PX?.[i] ?? 0)) / det.PY[i]) : null,
+          precinctsReporting: null, // not on the official page (see the statewide unit above)
+          precinctsTotal: null,
+          pctReporting: null,
         });
       });
     }
@@ -326,9 +332,8 @@ function attachMethods(units, choices, xc) {
 function buildTurnout(t, xml, settings, top, county, races) {
   const out = [];
   const reg = (n) => (n ? n : null); // 0 registered voters means "not published", not zero voters
-  const precincts = settings && num(settings.stateprecinctsparticipating)
-    ? { precinctsReporting: num(settings.stateprecinctsreporting), precinctsTotal: num(settings.stateprecinctsparticipating) }
-    : { precinctsReporting: null, precinctsTotal: null };
+  // Statewide sites: no precinct counts (the official page shows none; see parseClarity). County sites: none here either.
+  const precincts = { precinctsReporting: null, precinctsTotal: null };
   const x = xml?.turnout;
   if (x) {
     out.push({
@@ -341,7 +346,7 @@ function buildTurnout(t, xml, settings, top, county, races) {
         if (!m) continue;
         out.push({
           level: 'county', countyFips: m.fips, name: m.name, registered: reg(c.registered), ballotsCast: c.ballotsCast,
-          turnoutPct: c.turnoutPct, ballotsOutstanding: null, precinctsReporting: c.precinctsReporting, precinctsTotal: c.precinctsTotal,
+          turnoutPct: c.turnoutPct, ballotsOutstanding: null, precinctsReporting: null, precinctsTotal: null,
         });
       }
     }

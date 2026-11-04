@@ -73,7 +73,11 @@ export function methodShares(methods) {
 
 /** 'too-early' | 'yes' | 'no' | 'tied'. Never passed/failed. */
 export function measureStatus(m, minPct = MEASURE_TOO_EARLY_PCT) {
-  if (!m || !isNum(m.pctReporting) || Number(m.pctReporting) < minPct) return 'too-early';
+  if (!m) return 'too-early';
+  // A source that publishes counties complete instead of a % (Colorado: all-mail, millions counted at "5 of 64"): no
+  // % to gate on, so its counted votes are shown as they are, next to "X of Y counties complete".
+  const countiesOnly = !isNum(m.pctReporting) && isNum(m.countiesTotal) && Number(m.countiesTotal) > 0;
+  if (!countiesOnly && (!isNum(m.pctReporting) || Number(m.pctReporting) < minPct)) return 'too-early';
   const yes = Number(m.yes) || 0, no = Number(m.no) || 0;
   if (yes + no === 0) return 'too-early';
   if (yes === no) return 'tied';

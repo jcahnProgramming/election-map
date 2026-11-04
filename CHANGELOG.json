@@ -4,9 +4,11 @@
     {
       "version": "0.5.4",
       "date": "2026-11-03",
-      "title": "Fixes",
+      "title": "Only published reporting figures",
       "sections": {
         "Fixed": [
+          "Colorado, Iowa, South Carolina and West Virginia show what their official results pages publish: \"5 of 64 counties complete\" instead of a precinct % we worked out ourselves (Colorado's fell from 45% to 37% while votes rose). Those states are left out of the national estimated-reporting figure",
+          "Turnout reads as ballots cast out of active (or registered) voters, clearly a share of voters, not of votes counted",
           "\"Official source not responding\" shows again right after a restart (it used to disappear for about 20 minutes after each deploy)"
         ]
       }

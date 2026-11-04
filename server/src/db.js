@@ -149,7 +149,10 @@ const COLUMNS = [
   ['races', 'level', 'TEXT'],
   ['races', 'kind', 'TEXT'],
   ['races', 'jurisdiction', 'TEXT'],
-  ['candidates', 'running_mate', 'TEXT'], // joint tickets (FL Governor / Lt. Governor): the running mate, never the headline name
+  ['candidates', 'running_mate', 'TEXT'],
+  // Sources that publish counties complete instead of a precinct % (Clarity statewide sites): "5 of 64 counties complete".
+  ['unit_reporting', 'counties_complete', 'INTEGER'],
+  ['unit_reporting', 'counties_total', 'INTEGER'], // joint tickets (FL Governor / Lt. Governor): the running mate, never the headline name
 ];
 
 const RACES_V03 = `CREATE TABLE races_v03 (
@@ -301,7 +304,7 @@ export function writeSnapshot(db, r) {
             .forEach((v, i) => st.insertVotes.run(snapshotId, raceId, unitId, candIds[i], int(v) ?? 0, r.source, now));
         }
         st.insertReporting.run(snapshotId, raceId, unitId, int(u.precinctsReporting), int(u.precinctsTotal),
-          num(u.pctReporting), r.source, now);
+          num(u.pctReporting), r.source, now, int(u.countiesComplete), int(u.countiesTotal));
         (u.methods ?? []).forEach((m, order) => {
           if (m?.label == null) return;
           const label = String(m.label);
@@ -366,7 +369,8 @@ function prepared(db) {
     unitId: db.prepare('SELECT id FROM reporting_units WHERE state = ? AND level = ? AND county_fips = ?'),
     insertVotes: db.prepare('INSERT INTO vote_counts VALUES (?,?,?,?,?,?,?)'),
     insertMeasure: db.prepare('INSERT INTO measure_counts VALUES (?,?,?,?,?,?,?)'),
-    insertReporting: db.prepare('INSERT INTO unit_reporting VALUES (?,?,?,?,?,?,?,?)'),
+    insertReporting: db.prepare(`INSERT INTO unit_reporting (snapshot_id, race_id, unit_id, precincts_reporting, precincts_total,
+      pct_reporting, source, fetched_at, counties_complete, counties_total) VALUES (?,?,?,?,?,?,?,?,?,?)`),
     insertTurnout: db.prepare(`INSERT INTO unit_turnout (snapshot_id, unit_id, registered, ballots_cast, turnout_pct, ballots_outstanding,
       precincts_reporting, precincts_total, source, fetched_at) VALUES (?,?,?,?,?,?,?,?,?,?)`),
     insertMethod: db.prepare(`INSERT OR IGNORE INTO method_counts (snapshot_id, race_id, unit_id, choice_pos, method_raw, method_bucket,
