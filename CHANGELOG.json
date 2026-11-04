@@ -2,6 +2,28 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.4.0",
+      "date": "2026-11-03",
+      "title": "Polish: tooltips, candidate faces, measure positions",
+      "sections": {
+        "New": [
+          "Every candidate row has a small circle with their initials, tinted by party. Official or openly licensed photos will appear once each is checked by hand, and only in contests where every major candidate has one, so no candidate gets a face while an opponent gets initials. Each photo shows its credit and license",
+          "Ballot measures always list both major parties: Support, Oppose or Neutral once a position is checked against the party's own source, \"Not yet verified\" while it is being checked, or \"No published position\"",
+          "Campaign websites for both sides of a measure, as listed in the official voter guide or filings (including measures the Legislature referred)",
+          "States without live results now say why: the results site doesn't allow automated access, the state doesn't publish live statewide results we can read, or we haven't connected it yet, always next to the official results link"
+        ],
+        "Improved": [
+          "Map tooltips are wider (320–420 px) so candidate names wrap instead of being cut off, and vote counts never break mid-number",
+          "On phones, tapping a state or county shows its details in a panel at the bottom of the screen; tap again (or the button) to open it",
+          "Checked party positions and campaign websites for California, Colorado, Florida, Idaho, North Carolina, Ohio and Virginia measures are now shown",
+          "Map legend: \"No live results here\" (same hatching)"
+        ],
+        "Fixed": [
+          "Florida write-in candidates (listed as \"WRI\") are shown on the write-in line, not as party candidates"
+        ]
+      }
+    },
+    {
       "version": "0.3.4",
       "date": "2026-11-03",
       "title": "Faster recovery from source errors",

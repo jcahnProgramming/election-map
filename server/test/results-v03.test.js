@@ -211,7 +211,10 @@ test('measures: official info merged; unreviewed websites and party positions ne
   assert.equal(a81.info.placedBy.proponentName, 'Jane Q. Public');
   assert.equal(a81.info.proponentWebsite, null); // reviewed: false
   assert.deepEqual(a81.info.opposition, { name: 'No on 81', sourceUrl: 'https://example.gov/filing', website: 'https://no.example' });
-  assert.deepEqual(a81.info.partyPositions.map((p) => p.party), ['Alpha Party', 'Zeta Party']); // alphabetical, reviewed only
+  // Both major parties always listed (no position published), then other parties with a reviewed position, alphabetical.
+  assert.deepEqual(a81.info.partyPositions.map((p) => [p.party, p.position]),
+    [['Democratic Party', null], ['Republican Party', null], ['Alpha Party', 'support'], ['Zeta Party', 'oppose']]);
+  assert.deepEqual(a81.info.campaignWebsites, [{ side: 'oppose', url: 'https://no.example', sourceUrl: 'https://example.gov/filing', note: null }]);
   assert.ok(!JSON.stringify(m).includes('yes.example'));
   assert.ok(!JSON.stringify(m).includes('Unreviewed Party'));
   // "Amendment 8" must not match "Amendment 81"; it shows as researched-but-not-in-a-feed.

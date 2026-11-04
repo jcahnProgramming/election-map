@@ -94,13 +94,13 @@ button { cursor: pointer; }
 .empty .s a { color: var(--muted); }
 
 /* ---------- Tooltip ---------- */
-.tip { position: fixed; z-index: 30; width: 260px; max-width: calc(100vw - 16px); pointer-events: none; background: var(--raised); border: 1px solid var(--border-2); border-radius: 10px; padding: 12px 14px; box-shadow: var(--shadow-pop); display: flex; flex-direction: column; gap: 8px; }
+.tip { position: fixed; z-index: 30; width: max-content; min-width: min(320px, calc(100vw - 16px)); max-width: min(420px, calc(100vw - 16px)); pointer-events: none; background: var(--raised); border: 1px solid var(--border-2); border-radius: 10px; padding: 12px 14px; box-shadow: var(--shadow-pop); display: flex; flex-direction: column; gap: 8px; }
 .tip-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .tip-head .t { font-weight: 700; font-size: 15px; }
 .tip-head .r { font-family: var(--font-num); font-size: 12px; color: var(--muted); white-space: nowrap; }
 .tip-row { display: flex; flex-direction: column; gap: 4px; }
-.tip-row .line { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; }
-.tip-row .who { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.tip-row .line { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13px; }
+.tip-row .who { display: flex; align-items: center; gap: 6px; font-weight: 600; min-width: 0; }
 .tip-row .val { font-family: var(--font-num); white-space: nowrap; }
 .sw8 { width: 8px; height: 8px; border-radius: 2px; flex: none; }
 .tip .foot { font-size: 12px; color: var(--muted); line-height: 1.4; }
@@ -314,3 +314,52 @@ button { cursor: pointer; }
 .conn-state { font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .hdr-stat .v .ago { margin-left: 6px; font-size: 12px; font-weight: 500; color: var(--muted); }
 .update-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px; padding: 8px 16px; background: var(--panel); border-bottom: 1px solid var(--border-2); font-size: 14px; color: var(--text); }
+
+/* ---------- 0.4: tooltip width, bottom sheet, candidate avatars ---------- */
+/* Tooltip: content-sized between 320 and 420 px (MapSvg also sets the bounds inline from tip.js). Names wrap at word
+   boundaries; vote counts and percentages never wrap. */
+.tip .nm, .rg-cands .nm, .seat-rows .nm { min-width: 0; overflow-wrap: break-word; word-break: normal; }
+.tip .val, .seat-rows .val, .rg-cands .num { white-space: nowrap; flex: none; }
+.tip .tip-head .t { overflow-wrap: break-word; min-width: 0; }
+/* Phone width: the hover details are a bottom sheet you can scroll and close. */
+.tip.sheet { left: 0 !important; right: 0; bottom: 0; top: auto !important; width: auto; min-width: 0; max-width: none; max-height: 62vh;
+  border-radius: 14px 14px 0 0; border-bottom: 0; pointer-events: auto; padding: 10px 16px calc(14px + env(safe-area-inset-bottom)); gap: 10px; z-index: 35; }
+.sheet-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sheet-open { min-height: 40px; }
+.sheet-close { margin-left: auto; }
+.sheet-body { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; min-height: 0; }
+
+.av { position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%;
+  border: 1px solid; font-family: var(--font-ui); font-weight: 700; letter-spacing: .02em; line-height: 1; user-select: none; }
+.av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+.av-int { cursor: help; }
+.av-credit { display: none; position: absolute; left: 0; top: calc(100% + 6px); z-index: 20; width: max-content; max-width: 260px;
+  background: var(--raised); border: 1px solid var(--border-2); border-radius: var(--r-md); padding: 6px 8px; box-shadow: var(--shadow-pop);
+  font-size: 11.5px; font-weight: 400; letter-spacing: 0; line-height: 1.4; color: var(--text-2); text-transform: none; white-space: normal; }
+.av-credit .av-src { display: block; color: var(--muted-2); font-family: var(--font-num); overflow-wrap: anywhere; }
+.av-int:hover .av-credit, .av-int:focus .av-credit, .av-int:focus-visible .av-credit { display: block; }
+.av-int:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.cand-row { flex-direction: row; align-items: center; gap: 10px; }
+.cand-body { display: flex; flex-direction: column; gap: 4px; flex: 1 1 auto; min-width: 0; }
+.tip-row.cand-row .who { display: block; }
+.cand-card .cand-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.cand-card .cand-head .k.cand { min-width: 0; overflow-wrap: break-word; }
+.rg-cands .who .nm { min-width: 0; }
+.rg-cands li { align-items: center; }
+.m-sites { gap: 4px; }
+.m-note { flex-basis: 100%; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+.m-parties { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; }
+.m-parties li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 12px; }
+.m-parties .pp-party { color: #C9D1DB; }
+.m-parties .pp-pos { font-weight: 700; text-decoration: none; white-space: nowrap; }
+.m-parties a.pp-pos:hover { text-decoration: underline; }
+.m-parties .pp-pos.none { font-weight: 400; font-style: italic; }
+/* No live results (coverage status) */
+.no-live { display: flex; flex-direction: column; gap: 2px; }
+.no-live .t { font-size: 13px; font-weight: 600; color: var(--text); }
+.tip .official-link { font-size: 13px; font-weight: 600; color: var(--link); text-decoration: none; overflow-wrap: anywhere; }
+.tip .official-link .host { font-weight: 400; color: var(--muted); font-family: var(--font-num); font-size: 12px; }
+.official-btn { text-decoration: none; color: var(--link); border-color: var(--link); }
+.official-btn:hover { color: var(--link-hover); }
+.no-live-panel { min-height: 220px; }

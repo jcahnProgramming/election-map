@@ -215,14 +215,14 @@
           "position": "support",
           "source_url": "https://idahodems.org/idaho-democratic-party-endorses-reproductive-freedom-and-privacy-act/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "Idaho Republican Party",
           "position": "oppose",
           "source_url": "https://idgop.org/the-truth-about-the-radical-abortion-initiative/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,

@@ -40,7 +40,7 @@
         "value": "https://yesonprop1ca.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/1/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": null,
       "opposition_website": null,
@@ -50,14 +50,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "no_position",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": {
@@ -126,7 +126,7 @@
         "value": "https://YesonProp2.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/2/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": null,
       "opposition_website": null,
@@ -136,14 +136,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "oppose",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": {
@@ -212,7 +212,7 @@
         "value": "https://YesProp3CA.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/3/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on Proposition 3, Sponsored by California Taxpayers Association",
@@ -224,7 +224,7 @@
         "value": "https://VoteNoProp3.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/3/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -232,14 +232,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "oppose",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -284,14 +284,14 @@
         "value": "https://www.CAFairElections.org",
         "source_url": "https://voterguide.sos.ca.gov/propositions/4/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": null,
       "opposition_website": {
         "value": "https://www.caltax.org/prop4",
         "source_url": "https://voterguide.sos.ca.gov/propositions/4/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -299,14 +299,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "oppose",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": {
@@ -374,7 +374,7 @@
         "value": "https://fixtherecall.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/5/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": null,
       "opposition_website": null,
@@ -384,14 +384,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "oppose",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": {
@@ -460,7 +460,7 @@
         "value": "https://voteyeson37.com/",
         "source_url": "https://voterguide.sos.ca.gov/propositions/37/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": null,
       "opposition_website": null,
@@ -470,14 +470,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "no_position",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -524,7 +524,7 @@
         "value": "https://yeson38.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/38/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on Proposition 38",
@@ -539,14 +539,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "support",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -592,7 +592,7 @@
         "value": "https://www.VoterIDCA.org",
         "source_url": "https://voterguide.sos.ca.gov/propositions/39/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on 39 - Block Election Rigging Sponsored by Nurses, Teachers, and Nonprofit Labor and Community Health Clinic Organziations",
@@ -604,7 +604,7 @@
         "value": "https://CAforvotingrights.org",
         "source_url": "https://voterguide.sos.ca.gov/propositions/39/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -612,14 +612,14 @@
           "position": "oppose",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "support",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -665,7 +665,7 @@
         "value": "https://www.yeson40.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/40/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on Prop 40 - Doctors, Teachers, Small Businesses, Working Families and Public Safety Against the Reckless Wealth Tax Experiment",
@@ -677,7 +677,7 @@
         "value": "https://VoteNoOn40.org",
         "source_url": "https://voterguide.sos.ca.gov/propositions/40/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -685,14 +685,14 @@
           "position": "support",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "oppose",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -738,7 +738,7 @@
         "value": "https://YesonProp41.org",
         "source_url": "https://voterguide.sos.ca.gov/propositions/41/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "Yes on 40 - Billionaire Tax Now - No on 41 & 42, Sponsored by Service Employees International Union - United Healthcare Workers West",
@@ -750,7 +750,8 @@
         "value": "https://www.yeson40.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/41/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true,
+        "note": "Website of the committee that also supports Prop 40, as listed in the official voter guide."
       },
       "party_positions": [
         {
@@ -758,14 +759,14 @@
           "position": "oppose",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "support",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -811,7 +812,7 @@
         "value": "https://YesOnProp42.org",
         "source_url": "https://voterguide.sos.ca.gov/propositions/42/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "Yes on 40 - Billionaire Tax Now - No on 41 & 42, Sponsored by Service Employees International Union - United Healthcare Workers West",
@@ -823,7 +824,8 @@
         "value": "https://www.yeson40.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/42/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true,
+        "note": "Website of the committee that also supports Prop 40, as listed in the official voter guide."
       },
       "party_positions": [
         {
@@ -831,14 +833,14 @@
           "position": "oppose",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "support",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -884,7 +886,7 @@
         "value": "https://YESon43.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/43/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on Prop 43: Stop the Local Taxpayer Deception Act, Sponsored by Labor Organizations",
@@ -896,7 +898,7 @@
         "value": "https://Noprop43CA.com",
         "source_url": "https://voterguide.sos.ca.gov/propositions/43/index.htm",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -904,14 +906,14 @@
           "position": "oppose",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "support",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": {
@@ -979,7 +981,7 @@
         "value": "https://yesonproposition44.com",
         "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on Prop 44 - Stop the Attack on Patients and Community Health Clinics, Sponsored by California Primary Care Association Adovcates",
@@ -991,7 +993,7 @@
         "value": "https://www.NoProp44.com",
         "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -999,14 +1001,14 @@
           "position": "oppose",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "oppose",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,
@@ -1051,7 +1053,7 @@
         "value": "https://YESonProp45.com",
         "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "No on Prop 45, Sponsored by Labor, Health and Environmental Organizations",
@@ -1063,7 +1065,7 @@
         "value": "https://Noprop45CA.com",
         "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [
         {
@@ -1071,14 +1073,14 @@
           "position": "oppose",
           "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         },
         {
           "party": "California Republican Party",
           "position": "support",
           "source_url": "https://cagop.org/endorsements/",
           "as_of": "2026-11-03",
-          "reviewed": false
+          "reviewed": true
         }
       ],
       "legislative_vote": null,

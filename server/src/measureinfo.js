@@ -46,6 +46,11 @@ export function findMeasureInfo(ek, state, name, title) {
   return list.find((m) => m._match.some((re) => re.test(hay))) ?? null;
 }
 
+/** Every party named in a state's measure file (names only, reviewed or not: a party's name is not a position). */
+export function statePartyNames(ek, state) {
+  return [...new Set((load(ek).get(state) ?? []).flatMap((m) => (m.party_positions ?? []).map((p) => p?.party).filter(Boolean)))];
+}
+
 /** All static entries for one state (or every state when null). */
 export function measureInfoList(ek, state = null) {
   const all = load(ek);
@@ -55,9 +60,50 @@ export function measureInfoList(ek, state = null) {
 
 const reviewed = (x) => (x && x.reviewed === true ? x : null);
 const val = (x) => (x && x.value != null ? x : null);
+/** A website whose side (for / against) the official source doesn't make clear: `"side": "unclear"` in the file. */
+const sideUnclear = (x) => x?.side === 'unclear';
+
+export const POSITIONS = ['support', 'oppose', 'no_position'];
+const MAJOR = [
+  { key: 'DEM', re: /\bdemocrat(ic)?\b/i, fallback: 'Democratic Party' },
+  { key: 'REP', re: /\brepublican\b|\bgop\b/i, fallback: 'Republican Party' },
+];
+const majorOf = (party) => MAJOR.find((p) => p.re.test(String(party ?? '')))?.key ?? null;
+
+/**
+ * Party positions as shown on a measure card: always both major parties (Democratic, then Republican) with their
+ * reviewed position, then any other party that has a reviewed position. A major party with an entry on this measure that
+ * isn't reviewed yet gets `pending: true` ("Not yet verified") and no position or link; one with no entry at all gets
+ * `position: null, pending: false` ("No published position"). Unreviewed positions and their sources never leave the
+ * server. The parties' names come from the state's own file (any measure), so the card says "Colorado Democratic Party".
+ */
+export function partyPositionsOf(m, stateParties = []) {
+  const valid = (m?.party_positions ?? []).filter((p) => p && p.party && POSITIONS.includes(p.position));
+  const ok = valid.filter((p) => p.reviewed === true);
+  const out = [];
+  for (const maj of MAJOR) {
+    const p = ok.find((x) => majorOf(x.party) === maj.key);
+    const unrev = p ? null : valid.find((x) => majorOf(x.party) === maj.key);
+    const name = p?.party ?? unrev?.party ?? stateParties.find((x) => majorOf(x) === maj.key) ?? maj.fallback;
+    out.push({ party: name, major: maj.key, position: p?.position ?? null, pending: !!unrev, sourceUrl: p?.source_url ?? null });
+  }
+  const others = ok.filter((x) => !majorOf(x.party)).sort((a, b) => a.party.localeCompare(b.party))
+    .map((p) => ({ party: p.party, major: null, position: p.position, pending: false, sourceUrl: p.source_url ?? null }));
+  return [...out, ...others];
+}
+
+/** Reviewed campaign websites: [{ side: 'support'|'oppose'|null, url, sourceUrl, note }] (null = side not clear). */
+export function campaignWebsitesOf(m) {
+  const out = [];
+  for (const [k, side] of [['proponent_website', 'support'], ['opposition_website', 'oppose']]) {
+    const w = reviewed(val(m?.[k]));
+    if (w) out.push({ side: sideUnclear(w) ? null : side, url: w.value, sourceUrl: w.source_url ?? null, note: w.note ?? null });
+  }
+  return out;
+}
 
 /** The public shape of one static entry: only sourced values, and gated values only once reviewed. */
-export function publicInfo(m) {
+export function publicInfo(m, stateParties = []) {
   if (!m) return null;
   const pb = m.placed_by ?? null;
   const lv = m.legislative_vote ?? null;
@@ -75,18 +121,17 @@ export function publicInfo(m) {
       ? { type: pb.type, proponentName: pb.proponent_name ?? null, billNumber: pb.bill_number ?? null, detail: pb.detail ?? null,
         sourceUrl: pb.source_url ?? null, asOf: pb.as_of ?? null }
       : null,
-    proponentWebsite: reviewed(val(m.proponent_website)) && { url: m.proponent_website.value, sourceUrl: m.proponent_website.source_url ?? null },
+    proponentWebsite: reviewed(val(m.proponent_website)) && !sideUnclear(m.proponent_website)
+      ? { url: m.proponent_website.value, sourceUrl: m.proponent_website.source_url ?? null, note: m.proponent_website.note ?? null } : null,
     opposition: val(m.opposition_committee_name)
       ? {
         name: m.opposition_committee_name.value,
         sourceUrl: m.opposition_committee_name.source_url ?? null,
-        website: reviewed(val(m.opposition_website)) ? m.opposition_website.value : null,
+        website: reviewed(val(m.opposition_website)) && !sideUnclear(m.opposition_website) ? m.opposition_website.value : null,
       }
       : null,
-    partyPositions: (m.party_positions ?? [])
-      .filter((p) => p && p.reviewed === true && p.party && ['support', 'oppose', 'no_position'].includes(p.position))
-      .map((p) => ({ party: p.party, position: p.position, sourceUrl: p.source_url ?? null }))
-      .sort((a, b) => a.party.localeCompare(b.party)),
+    campaignWebsites: campaignWebsitesOf(m),
+    partyPositions: partyPositionsOf(m, stateParties),
     legislativeVote: lv && Array.isArray(lv.chambers) && lv.chambers.length
       ? { chambers: lv.chambers, rollCallUrl: lv.roll_call_url ?? null, sourceUrl: lv.source_url ?? null, asOf: lv.as_of ?? null }
       : null,

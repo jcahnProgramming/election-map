@@ -1,0 +1,262 @@
+{
+  "state": "IA",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "Ashley Hinson"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Congresswoman_Ashley_Hinson_Official_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Congresswoman_Ashley_Hinson_Official_portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Office of Congresswoman Ashley Hinson",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Josh Turek"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Joshua_Turek_%28cropped_2%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Joshua_Turek_(cropped_2).jpg",
+      "license": "Copyrighted free use (Copyrighted free use)",
+      "credit": "Iowa General Assembly",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Iowa House member portrait from legis.iowa.gov."
+    },
+    {
+      "match": [
+        "Thomas Laehn"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Mariannette Miller-Meeks"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Mariannette_Miller-Meeks_117th_U.S_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mariannette_Miller-Meeks_117th_U.S_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Christina Bohannan"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/ChristinaBohannan.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:ChristinaBohannan.jpg",
+      "license": "Copyrighted free use (Copyrighted free use)",
+      "credit": "Iowa General Assembly",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Iowa House member portrait (89th GA) from legis.iowa.gov."
+    },
+    {
+      "match": [
+        "Michael Bridgford"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Joe Mitchell"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Joe_Mitchell.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Joe_Mitchell.jpg",
+      "license": "Copyrighted free use (Copyrighted free use)",
+      "credit": "Iowa General Assembly",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Former Iowa state Rep. Joe Mitchell (portrait from legis.iowa.gov, 89th GA); Wikipedia intro does not mention the 2026 IA-2 race: confirm identity."
+    },
+    {
+      "match": [
+        "Lindsay James"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Member_of_the_Iowa_House_of_Representatives_Lindsay_James.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Member_of_the_Iowa_House_of_Representatives_Lindsay_James.jpg",
+      "license": "Copyrighted free use (Copyrighted free use)",
+      "credit": "Iowa Legislative Assembly",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Iowa House member portrait from legis.iowa.gov; Wikipedia article confirms she is the IA-2 Democratic nominee."
+    },
+    {
+      "match": [
+        "Rick Stewart"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Dave Bushaw"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Zach Nunn"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Official_Portrait_of_Rep._Zach_Lunn_119th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Official_Portrait_of_Rep._Zach_Lunn_119th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "File name misspells \"Lunn\"; description and source (nunn.house.gov) identify Rep. Zach Nunn of Iowa."
+    },
+    {
+      "match": [
+        "Sarah Trone Garriott"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Sarah_Trone_Garriott_2023_%28cropped_2%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Sarah_Trone_Garriott_2023_(cropped_2).jpg",
+      "license": "Copyrighted free use (Copyrighted free use)",
+      "credit": "Iowa General Assembly",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Iowa Senate member portrait from legis.iowa.gov."
+    },
+    {
+      "match": [
+        "Chris McGowan"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Dave Dawson"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Zach Lahn and Derek Wulf"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Zach_Lahn_IA_State_Fair_2026.jog_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Zach_Lahn_IA_State_Fair_2026.jog_(cropped).jpg",
+      "license": "CC0",
+      "credit": "Raydo",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Own-work photo at the 2026 Iowa State Fair; small image (286x409). Photo of Zach Lahn (top of ticket)."
+    },
+    {
+      "match": [
+        "Rob Sand and Dave Muhlbauer"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/58/Rob_Sand_campaign_headshot_%28cropped_1%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rob_Sand_campaign_headshot_(cropped_1).jpg",
+      "license": "CC0",
+      "credit": "Rob Sand for Governor",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Campaign headshot released CC0 on the campaign Flickr; photo of Rob Sand (top of ticket)."
+    }
+  ]
+}

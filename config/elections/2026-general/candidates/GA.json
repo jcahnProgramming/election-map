@@ -1,0 +1,519 @@
+{
+  "state": "GA",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "Andrew Clyde"
+      ],
+      "office": "house",
+      "district": "9",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Rep._Andrew_Clyde_official_photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Andrew_Clyde_official_photo.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Caitlyn Gegen"
+      ],
+      "office": "house",
+      "district": "9",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jon Ossoff"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Jon_Ossoff_Senate_Portrait_2021.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jon_Ossoff_Senate_Portrait_2021.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. Senate Photographic Studio",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Mike Collins"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Rep._Mike_Collins_official_photo%2C_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Mike_Collins_official_photo%2C_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "John Cowan"
+      ],
+      "office": "house",
+      "district": "11",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Chris Harden"
+      ],
+      "office": "house",
+      "district": "11",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Pamela \"Pam\" Delancy"
+      ],
+      "office": "house",
+      "district": "10",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Houston Gaines"
+      ],
+      "office": "house",
+      "district": "10",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Official_headshot_of_Houston_Gaines.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Official_headshot_of_Houston_Gaines.jpg",
+      "license": "Public domain (PD-GAHoR)",
+      "credit": "Georgia House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Georgia House of Representatives official headshot (state legislator photo)"
+    },
+    {
+      "match": [
+        "Sanford Bishop"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Official_photo_of_Sen._Sanford_Bishop.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Official_photo_of_Sen._Sanford_Bishop.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "File title says \"Sen.\" in error; description identifies US Rep. Sanford D. Bishop (D-GA)"
+    },
+    {
+      "match": [
+        "Matt Day"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jasmine Clark"
+      ],
+      "office": "house",
+      "district": "13",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Member_of_the_Georgia_House_of_Representatives_Jasmine_Michelle_Clark.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Member_of_the_Georgia_House_of_Representatives_Jasmine_Michelle_Clark.jpg",
+      "license": "Public domain (PD-GAHoR)",
+      "credit": "Georgia House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Georgia House of Representatives official photo (state legislator)"
+    },
+    {
+      "match": [
+        "Jonathan Chavez"
+      ],
+      "office": "house",
+      "district": "13",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Rich McCormick"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Rep._Rich_McCormick_official_photo%2C_118th_Congress_%281%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Rich_McCormick_official_photo%2C_118th_Congress_%281%29.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Tony Kozycki"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Lucy McBath"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Lucy_McBath%2C_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Lucy_McBath%2C_official_portrait%2C_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Kevin E. Martin"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Austin Scott"
+      ],
+      "office": "house",
+      "district": "8",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Removed: Commons file was taken from the member's Facebook page; social media is not an allowed source. Use the official House portrait if one is on Commons."
+    },
+    {
+      "match": [
+        "Kelly Esti"
+      ],
+      "office": "house",
+      "district": "8",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Clay Fuller"
+      ],
+      "office": "house",
+      "district": "14",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Clay_Fuller%2C_official_portrait_%28119th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Clay_Fuller%2C_official_portrait_%28119th_Congress%29.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brian Thorpe",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Shawn Harris"
+      ],
+      "office": "house",
+      "district": "14",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article (name redirects to an unrelated band); no Commons image found"
+    },
+    {
+      "match": [
+        "Nikema Williams"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Rep._Nikema_Williams_official_photo%2C_117th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Nikema_Williams_official_photo%2C_117th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "John \"Bongo\" Salvesen"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Amanda Hollowell"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "James \"Jim\" Kingston"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Ceretta Smith"
+      ],
+      "office": "house",
+      "district": "12",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Rick W. Allen",
+        "Rick Allen"
+      ],
+      "office": "house",
+      "district": "12",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Rick_Allen_Official_Photo%2C_114th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rick_Allen_Official_Photo%2C_114th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Brian Jack"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Jack_Brian_119th_Congress_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jack_Brian_119th_Congress_%28cropped%29.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Maura Keller"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Henry \"Hank\" Johnson Jr."
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Hank_Johnson_official_photo_2.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Hank_Johnson_official_photo_2.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US House Office of Photography",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Jim Duffie"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Keisha Lance Bottoms"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Keisha_Lance_Bottoms.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Keisha_Lance_Bottoms.jpg",
+      "license": "Public domain (PD-USGov-POTUS)",
+      "credit": "Executive Office of the President of the United States",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Rick Jackson"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Rick_Jackson_%28cropped%29.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rick_Jackson_%28cropped%29.png",
+      "license": "CC BY 4.0",
+      "credit": "Cherie Martin",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons file is a crop of a YouTube video still (Rick Jackson at Appalachian Gun, Northern Georgia)"
+    }
+  ]
+}

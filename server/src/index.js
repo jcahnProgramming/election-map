@@ -12,12 +12,14 @@ import { stateByAbbr } from './geo.js';
 import { logger } from './log.js';
 import { createApiCache } from './apicache.js';
 import { createRateLimit } from './ratelimit.js';
-import { currentElectionKey } from './elections.js';
+import { currentElectionKey, loadElections } from './elections.js';
+import { createPhotos } from './photos.js';
 
 const log = logger('server');
 const db = openDb();
 const adapters = await loadAdapters();
-const results = createResults(db, adapters);
+const photos = createPhotos();
+const results = createResults(db, adapters, { photos });
 
 const app = express();
 app.disable('x-powered-by');
@@ -119,6 +121,11 @@ api.get('/coverage', (req, res) => {
 api.use((req, res) => res.status(404).json({ error: 'not found' }));
 app.use('/api', api);
 
+// Candidate photos: reviewed ones only, resized and cached on our disk (never hotlinked from third-party sites).
+app.get('/photos/:id.jpg', rateLimit.middleware, (req, res) => {
+  photos.serve(req, res).catch(() => res.status(500).end());
+});
+
 // The built frontend (production / docker). In dev, Vite serves it and proxies /api here.
 if (existsSync(config.clientDist)) {
   app.use(express.static(config.clientDist, { index: false, maxAge: '1h' }));
@@ -151,6 +158,9 @@ const stop = startPolling({
     }
   },
 });
+
+// Fetch every reviewed photo once (a couple at a time) so contests can show them; failures just mean initials.
+for (const e of loadElections().elections) photos.prefetch(e.key).catch((err) => log.warn(`photo prefetch: ${err.message}`));
 
 server.listen(config.port, () => {
   log.info(`election-map ${config.version} on :${config.port} — ${adapters.length} adapter(s): ${adapters.map((a) => `${a.id} (${a.targets().length} targets)`).join(', ')}`);

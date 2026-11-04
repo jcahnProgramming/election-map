@@ -18,10 +18,16 @@ confidential and nothing in it ever needs a secret.
 - Every state links to its official results page (`config/official-results.json`); every number names its source
   and that source's last update.
 - Shading: leader's colour (DEM blue / REP red / OTHER green), lighter for narrower margins; margin under
-  2 points → purple. No race for the office → neutral grey. A race we have no source for → hatched grey.
+  2 points → purple. No race for the office → neutral grey. A race we have no source for → hatched grey
+  ("No live results here"), with reason-based copy from `config/coverage-status.json` (live / planned / blocked /
+  no_feed; source of truth `docs/source-roadmap.md`) next to the official results link. Never imply the state is at fault.
   The shading rule lives in `client/src/shading.js` (pure function; the design must reuse it, not fork it).
 - A right-hand sidebar of statewide ballot measures (yes / no / % yes / % reporting), with official measure
   information from static per-election files (`config/elections/<key>/measures/<ST>.json`, `docs/measures-data.md`).
+- Candidate avatars: initials on a party tint by default. Photos only from `config/elections/<key>/candidates/<ST>.json`
+  (allowed sources only, `reviewed: true`, fetched once and served from our own domain; `docs/photos-data.md`), and in
+  a contest only when every major candidate has one (fairness rule in `server/src/photos.js`). Review checklist:
+  `docs/photos-review.md` (regenerate with `node scripts/photos-review.js`). Never commit image files.
 - Always visible: "Unofficial results — counts change as ballots are reported".
 
 ## Rules (non-negotiable)
@@ -30,13 +36,15 @@ confidential and nothing in it ever needs a secret.
 2. **Never sum party totals across different races.** Two Senate contests in one state (regular + special)
    are listed separately. The only cross-contest sum is House districts → statewide House popular vote.
 3. **Honest empty states.** Every state says which of these is true: reporting / no votes counted yet /
-   no data source yet / no race for this office. When a source has no counties, say so in words (`countyNote`);
+   no live results here (and why: coverageStatus) / no race for this office. When a source has no counties, say so in words (`countyNote`);
    never draw a blank map. County-run sites in a state without a statewide feed are `countyData: "partial"`
    and never become a statewide number.
 4. **Adapter registry, no hardcoded source lists.** Each source is one file in `server/src/adapters/`
    that declares itself (id, name, `targets()`, `fetch()`); the registry loads every file there. Which elections
    / states an adapter polls comes from `config/sources/<id>.json`, not code. Adding a state = one adapter
-   file, or one config entry for a platform we already speak.
+   file, or one config entry for a platform we already speak — **and, in the same change, set that state to
+   `"live"` in `config/coverage-status.json`** (`server/test/coverage-status.test.js` fails otherwise; parking a target
+   with `enabled:false` means setting it back to `"planned"`).
 5. **Free official sources only.** No paid APIs, no API keys. Polite User-Agent naming the project
    (never an email). Never spoof a browser User-Agent or work around bot protection: a source that blocks us
    goes on the roadmap (`docs/source-roadmap.md`) instead.
@@ -64,7 +72,8 @@ confidential and nothing in it ever needs a secret.
   classification, `splitPartyPrefix`, `methodBucket`. `contests.js` classifies every contest (level / office key /
   kind) from `config/contest-rules.json` + per-adapter `contestRules`. `measureinfo.js` loads the static measure files
   and enforces the review gate. `geo.js` FIPS. `elections.js` election keys (current from
-  `config/elections.json`). `apicache.js` / `ratelimit.js` public-traffic hardening.
+  `config/elections.json`). `apicache.js` / `ratelimit.js` public-traffic hardening. `photos.js` candidate photos
+  (review gate, fairness rule, disk cache under `DATA_DIR/photos`, served at `GET /photos/:id.jpg`).
 - `server/src/adapters/*.js` one file per source: clarity (CO/IA/SC + county sites), enhancedvoting (GA/VA/UT/WA/RI/ID),
   txivis, casos, vtsos, ncsbe, tallyenr (AR), deenr, nistcdf (OH; generic parser in `_nist-cdf.js`), pccct, fldos.
   Files starting with `_` are helpers the registry skips. An adapter's `sourceKey` must be unique per election.
@@ -79,7 +88,8 @@ confidential and nothing in it ever needs a secret.
 
 ## API
 `GET /api/health`, `/api/offices`, `/api/national?office=&level=` (`race=` still accepted), `/api/state/:abbr?office=`,
-`/api/state/:abbr/contests?q=`, `/api/measures[?state=]`, `/api/coverage`, `/api/elections`, `/api/changelog`.
+`/api/state/:abbr/contests?q=`, `/api/measures[?state=]`, `/api/coverage` (incl. each state's `coverageStatus`), `/api/elections`,
+`/api/changelog`; `GET /photos/:id.jpg` reviewed candidate photos (not under /api, rate-limited).
 Client routes are query strings: `?level=state&office=ag&state=CO&tab=all` (0.2 `#/CO/senate` links are rewritten). Every read takes `?election=` (default: current); nothing may assume one election.
 Reads are cached in memory between polls and sent with `Cache-Control: public, max-age=15`; health is no-store;
 /api/* is rate-limited per IP. Socket.io: `results:update` {sourceId, election, states, fetchedAt} when new numbers land (clients refetch);

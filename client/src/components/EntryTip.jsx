@@ -1,8 +1,10 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
-import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag } from '../calc.js';
+import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import { TOSSUP_MARGIN } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
+import { photoCredits } from '../avatar.js';
+import Avatar from './Avatar.jsx';
 
 /** Small party tag from the source's label (DEM / REP / LIB / IND / …); nothing for a nonpartisan candidate. */
 export function PartyTag({ tag, party }) {
@@ -14,25 +16,31 @@ export function PartyTag({ tag, party }) {
  * Every candidate by name with party tag, votes and %, sorted by votes; write-ins on their own line.
  * `cap` limits the named rows (tooltips: 5) and adds "N more"; the state view shows them all.
  */
-export function CandidateRows({ entry, cap = Infinity, bars = true }) {
+export function CandidateRows({ entry, cap = Infinity, bars = true, interactive = true }) {
   const { rows, writeIns, more } = candidateList(entry, cap);
   return (
     <>
       {rows.map((c, i) => (
-        <div className="tip-row" key={`${c.name}-${i}`}>
-          <div className="line">
-            <span className="who"><span className="sw8" style={{ background: PARTY_COLOR[c.party] || PARTY_COLOR.OTHER }} />{c.name}<PartyTag tag={c.tag} party={c.party} /></span>
-            <span className="val">{fmtVotes(c.votes)} · {fmtPct(c.pct)}</span>
+        <div className="tip-row cand-row" key={`${c.name}-${i}`}>
+          <Avatar name={c.name} party={c.party} photo={c.photo} interactive={interactive} />
+          <div className="cand-body">
+            <div className="line">
+              <span className="who"><span className="nm">{c.name}<PartyTag tag={c.tag} party={c.party} /></span></span>
+              <span className="val">{fmtVotes(c.votes)} · {fmtPct(c.pct)}</span>
+            </div>
+            {bars && <div className="bar thin"><div style={{ width: barWidth(c.pct), background: PARTY_COLOR[c.party] || PARTY_COLOR.OTHER }} /></div>}
           </div>
-          {bars && <div className="bar thin"><div style={{ width: barWidth(c.pct), background: PARTY_COLOR[c.party] || PARTY_COLOR.OTHER }} /></div>}
         </div>
       ))}
       {more > 0 && <span className="foot">+ {more} more candidate{more === 1 ? '' : 's'} in the state view</span>}
       {writeIns.map((w, i) => (
-        <div className="tip-row wi" key={`wi-${w.name}-${i}`}>
-          <div className="line">
-            <span className="who">{w.name}{w.named ? <span className="ptag oth">WRITE-IN</span> : null}</span>
-            <span className="val">{fmtVotes(w.votes)} · {fmtPct(w.pct)}</span>
+        <div className="tip-row cand-row wi" key={`wi-${w.name}-${i}`}>
+          <Avatar name={w.name} party="OTHER" interactive={interactive} />
+          <div className="cand-body">
+            <div className="line">
+              <span className="who"><span className="nm">{w.name}{w.named ? <span className="ptag oth">WRITE-IN</span> : null}</span></span>
+              <span className="val">{fmtVotes(w.votes)} · {fmtPct(w.pct)}</span>
+            </div>
           </div>
         </div>
       ))}
@@ -69,8 +77,16 @@ export function OtherRaces({ races }) {
 }
 
 /** Top-N candidates of a multi-seat contest (vote for 2+): names and votes, never a two-way margin. */
-export function SeatRows({ entry, cap }) {
-  return <CandidateRows entry={entry} cap={cap ?? Math.max(5, (entry.seats || 2) + 1)} bars={false} />;
+export function SeatRows({ entry, cap, interactive = true }) {
+  return <CandidateRows entry={entry} cap={cap ?? Math.max(5, (entry.seats || 2) + 1)} bars={false} interactive={interactive} />;
+}
+
+/** Map tooltips can't be hovered, so the credit + license of every photo shown is listed at the bottom. */
+function PhotoCredits({ entry, cap }) {
+  const shown = new Set(candidateList(entry, cap).rows.map((c) => c.name));
+  const lines = photoCredits((entry?.candidates || []).filter((c) => shown.has(c.name)));
+  if (!lines.length) return null;
+  return <span className="foot src">{lines.join(' · ')}</span>;
 }
 
 const ROWS = [
@@ -114,14 +130,16 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
       )}
       {status === 'reporting' && entry.multiSeat && (
         <>
-          <SeatRows entry={entry} />
+          <SeatRows entry={entry} interactive={false} />
           <span className="foot">{leadText(entry)}</span>
+          <PhotoCredits entry={entry} cap={Math.max(5, (entry.seats || 2) + 1)} />
         </>
       )}
       {status === 'reporting' && !entry.multiSeat && (
         <>
-          {hasCandidates(entry) ? <CandidateRows entry={entry} cap={5} /> : <PartyRows entry={entry} />}
+          {hasCandidates(entry) ? <CandidateRows entry={entry} cap={5} interactive={false} /> : <PartyRows entry={entry} />}
           <span className="foot">{leadText(entry)}</span>
+          {hasCandidates(entry) && <PhotoCredits entry={entry} cap={5} />}
           {entry.otherContests?.length > 0 && !entry.otherRaces && (
             <span className="foot">
               Also on the ballot: {entry.otherContests.map((c) => c.name).join('; ')}. Shown separately in the state view.
@@ -132,9 +150,18 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
       {status === 'awaiting' && (
         <span className="foot">No votes counted yet{sourceName || entry?.sourceName ? ` · source: ${sourceName || entry.sourceName}` : ''}.</span>
       )}
-      {status === 'no-source' && (
-        <span className="foot">{entry?.sourceNote || 'No data source yet — view official results ↗'}</span>
-      )}
+      {status === 'no-source' && (entry?.coverageStatus === 'live' && entry?.sourceNote
+        ? <span className="foot">{entry.sourceNote}</span>
+        : (
+          <div className="no-live">
+            <span className="t">{coverageCopy(entry?.coverageStatus).title}</span>
+            <span className="foot">{coverageCopy(entry?.coverageStatus).detail}</span>
+          </div>
+        ))}
+      {status === 'no-source' && (entry?.official?.url
+        // A real link: clickable in the phone bottom sheet (the desktop tooltip follows the pointer; the bar under the map links too).
+        ? <a className="official-link" href={entry.official.url} target="_blank" rel="noopener noreferrer">{OFFICIAL_LINK_TEXT} <span className="host">{hostOf(entry.official.url)}</span></a>
+        : <span className="foot">Official results page not on file yet.</span>)}
       {kind === 'state' && entry?.sourceName && (status === 'reporting' || status === 'awaiting') && (
         <span className="foot src">Source: {entry.sourceName}{fmtMT(entry.sourceUpdatedAt || entry.fetchedAt) ? ` · updated ${fmtMT(entry.sourceUpdatedAt || entry.fetchedAt)}` : ''}</span>
       )}

@@ -121,7 +121,7 @@ export function partyTag(c) {
   return raw.length <= 5 ? raw.toUpperCase() : raw.slice(0, 4).toUpperCase();
 }
 
-export const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
+export const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|wri|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
 
 /**
  * Every candidate the source lists, sorted by votes, with a party tag and % of the votes counted. Write-ins come last on
@@ -136,7 +136,9 @@ export function candidateList(entry, cap = Infinity) {
   const pct = (v) => (total > 0 ? (100 * (Number(v) || 0)) / total : null);
   const byVotes = (a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0);
   const named = all.filter((c) => !isWriteIn(c)).sort(byVotes);
-  const rows = named.slice(0, cap).map((c) => ({ name: c.name, tag: partyTag(c), party: c.party, votes: Number(c.votes) || 0, pct: pct(c.votes) }));
+  const rows = named.slice(0, cap).map((c) => ({
+    name: c.name, tag: partyTag(c), party: c.party, votes: Number(c.votes) || 0, pct: pct(c.votes), photo: c.photo ?? null,
+  }));
   // Write-ins: the generic "Write-in" line as is; named write-in candidates each on their own line. When capped (tooltips),
   // they count toward "N more" except the generic line.
   const wiAll = all.filter(isWriteIn).sort(byVotes).map((c) => ({
@@ -195,3 +197,33 @@ export function fmtMT(iso) {
   if (Number.isNaN(d.getTime())) return null;
   return `${mtFmt.format(d)} MT`;
 }
+
+// ---------- Measure cards (0.4) ----------
+// Party positions use neutral position colours, never party colours. A reviewed "no_position" is the party's own
+// published neutrality ("Neutral"); no reviewed position at all is "No published position".
+export const POSITION_DISPLAY = {
+  support: { label: 'Support', color: '#5EEAD4' },
+  oppose: { label: 'Oppose', color: '#FCD34D' },
+  no_position: { label: 'Neutral', color: '#C9D1DB' },
+  none: { label: 'No published position', color: '#9AA4B2' },
+  pending: { label: 'Not yet verified', color: '#9AA4B2' },
+};
+/** Display for a served party position: `pending` (an entry exists, not reviewed yet) wins over a missing position. */
+export const positionDisplay = (position, pending = false) => (pending ? POSITION_DISPLAY.pending : POSITION_DISPLAY[position] ?? POSITION_DISPLAY.none);
+
+/** The label in front of a reviewed campaign website: by side, or a plain "Campaign website" when the side isn't clear. */
+export const websiteLabel = (w) => (w?.side === 'support' ? 'Yes campaign' : w?.side === 'oppose' ? 'No campaign' : 'Campaign website');
+
+/** The domain as printed in the official guide: scheme and trailing slash dropped, case kept ("www.CAFairElections.org"). */
+export const displayDomain = (url) => String(url ?? '').replace(/^https?:\/\//i, '').replace(/\/$/, '');
+
+// ---------- Why a state has no live results (0.4) ----------
+// From config/coverage-status.json via the API. Never implies the state is at fault; the official link stays prominent.
+const COVERAGE_COPY = {
+  blocked: { title: "Live results aren't available here.", detail: "This state's results site doesn't allow automated access." },
+  no_feed: { title: "Live results aren't available here.", detail: "This state doesn't publish statewide results in a form we can read live." },
+  planned: { title: 'Live results coming soon.', detail: "We haven't connected this state's official results yet." },
+};
+/** { title, detail } for a state with no live results (unknown / "live" without this office → the "coming soon" copy). */
+export const coverageCopy = (status) => COVERAGE_COPY[status] ?? COVERAGE_COPY.planned;
+export const OFFICIAL_LINK_TEXT = 'View official results ↗';

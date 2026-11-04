@@ -1,0 +1,313 @@
+{
+  "state": "ID",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "Natalie M Fleming",
+        "Natalie Fleming"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Natalie_Fleming.jpg/500px-Natalie_Fleming.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Natalie_Fleming.jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Natibrat",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Self-uploaded (2020); Commons description: Independent candidate for U.S. Senate representing Idaho."
+    },
+    {
+      "match": [
+        "Todd Achilles"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Todd_Achilles_on_LibertyDad%27s_stream.png/500px-Todd_Achilles_on_LibertyDad%27s_stream.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Todd_Achilles_on_LibertyDad%27s_stream.png",
+      "license": "CC BY 4.0",
+      "credit": "DL a.k.a. LibertyDad",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Frame from a CC BY YouTube stream (LibertyDad), not a portrait."
+    },
+    {
+      "match": [
+        "Matt Loesby"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Jim Risch"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Jim_Risch%2C_official_portrait%2C_112th_Congress.jpg/500px-Jim_Risch%2C_official_portrait%2C_112th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jim_Risch,_official_portrait,_112th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Senate",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Official Senate portrait from 2011."
+    },
+    {
+      "match": [
+        "Ellie Gilbreath"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Emre Houser"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Tripp Charles Hutchinson"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Will Johanson"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Mike Simpson"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Mike_simpson_official_portrait.jpg/500px-Mike_simpson_official_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mike_simpson_official_portrait.jpg",
+      "license": "Public domain (PD-USGov)",
+      "credit": "Mike Simpson U.S. House Office",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Brendan J. Gomez",
+        "Brendan Gomez"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Kaylee Peterson"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Sarah Zabel"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons has photos of USAF Maj. Gen. Sarah Zabel, but nothing identifies her as this candidate; no Wikipedia article; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Russ Fulcher"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Russ_Fulcher%2C_official_portrait%2C_116th_Congress.jpg/500px-Russ_Fulcher%2C_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Russ_Fulcher,_official_portrait,_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Pro-Life"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article has no image; no Commons image found."
+    },
+    {
+      "match": [
+        "Terri Pickens"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Terri_Pickens_for_Idaho_2026%2C_2.png/500px-Terri_Pickens_for_Idaho_2026%2C_2.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Terri_Pickens_for_Idaho_2026,_2.png",
+      "license": "CC BY 4.0",
+      "credit": "Terri Pickens",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Uploaded by campaign staff (credit: terriforidaho.com) under CC BY 4.0; landscape 6720x4480 image, likely needs cropping. Files \", 3.png\" and \", 4.png\" are alternatives."
+    },
+    {
+      "match": [
+        "John R. Stegner",
+        "John Stegner"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article (former Idaho Supreme Court justice) has no image; no Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Paul Sand"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "Brad Little"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Brad_Little_official_photo.jpg/500px-Brad_Little_official_photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Brad_Little_official_photo.jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Phil White/Office of the Governor of Idaho.",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Official governor photo (from gov.idaho.gov) as hosted on Commons with CC BY-SA 4.0."
+    },
+    {
+      "match": [
+        "Jacob Burnett"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    }
+  ]
+}

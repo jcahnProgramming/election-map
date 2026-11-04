@@ -12,7 +12,10 @@ import { STATES, stateByAbbr, countiesOf } from './geo.js';
 import { readConfig } from './config.js';
 import { loadElections } from './elections.js';
 import { officeLabel } from './contests.js';
-import { findMeasureInfo, measureInfoList, publicInfo } from './measureinfo.js';
+import { findMeasureInfo, measureInfoList, publicInfo, statePartyNames } from './measureinfo.js';
+import { attachPhotos } from './photos.js';
+
+export const COVERAGE_STATUSES = ['live', 'planned', 'blocked', 'no_feed'];
 
 /** The headline offices every election shows; `/api/offices` adds whatever else the feeds carry. */
 export const RACES = ['senate', 'governor', 'house'];
@@ -36,9 +39,12 @@ const wholeState = (d) => !d || d === 'AL';
 /**
  * @param {import('better-sqlite3').Database} db
  * @param {object[]} adapters  the registry (id, name, targets())
- * @param {{ elections?: { current:string, elections:object[] } }} [opts]  override config/elections.json (tests)
+ * @param {{ elections?: { current:string, elections:object[] }, photos?: ReturnType<import('./photos.js').createPhotos> }} [opts]
+ *   elections: override config/elections.json (tests); photos: candidate photos (none when absent: initials everywhere)
  */
 export function createResults(db, adapters, opts = {}) {
+  /** Fairness decision for one contest (photos for every major candidate, or none). */
+  const decidePhotos = (ek, state, office, district, candidates) => opts.photos?.decide(ek, state, office, district, candidates) ?? null;
   const electionsLoaded = opts.elections ?? loadElections(); // read once; config changes ship with a restart
   const electionsCfg = () => electionsLoaded;
   const adapterName = (id) => adapters.find((a) => a.id === id)?.name ?? id ?? null;
@@ -54,6 +60,10 @@ export function createResults(db, adapters, opts = {}) {
     if (!expected || !Array.isArray(expected[race])) return true; // an office the file doesn't list: unknown, never "no race"
     return expected[race].includes(st);
   }
+
+  const coverageAll = readConfig('coverage-status.json', { states: {} });
+  /** Why a state does or doesn't have live results: live | planned | blocked | no_feed (config/coverage-status.json). */
+  const coverageStatusOf = (abbr) => (COVERAGE_STATUSES.includes(coverageAll.states?.[abbr]?.status) ? coverageAll.states[abbr].status : null);
 
   const officialAll = readConfig('official-results.json', { states: {} });
   /** The state's own official results page (config/official-results.json). */
@@ -294,7 +304,7 @@ export function createResults(db, adapters, opts = {}) {
    */
   function stateRace(ek, abbr, race, srcs = sourcesByState(ek)) {
     const st = stateByAbbr(abbr);
-    const base = { state: st.abbr, fips: st.fips, name: st.name };
+    const base = { state: st.abbr, fips: st.fips, name: st.name, coverageStatus: coverageStatusOf(st.abbr) };
     const empty = {
       contests: [], candidates: [], parties: { DEM: 0, REP: 0, OTHER: 0 }, totalVotes: 0, leader: null, tied: false, marginPts: null,
       pctReporting: null, precinctsReporting: null, precinctsTotal: null, ballotsCast: null,
@@ -340,13 +350,18 @@ export function createResults(db, adapters, opts = {}) {
       contests = [first.name];
       otherContests = rest.map((r) => {
         const u = loadRace(r).get('state');
-        return { name: r.name, ...summarize(u?.candidates ?? [], u?.pct, r.vote_for), precinctsReporting: u?.pr ?? null, precinctsTotal: u?.pt ?? null };
+        const sum = summarize(u?.candidates ?? [], u?.pct, r.vote_for);
+        sum.candidates = attachPhotos(sum.candidates, decidePhotos(ek, st.abbr, race, r.district, sum.candidates));
+        return { name: r.name, ...sum, precinctsReporting: u?.pr ?? null, precinctsTotal: u?.pt ?? null };
       });
     }
     const turnout = loadTurnout(races[0].snapshot_id);
     const sw = units.get('state');
     const voteFor = race === 'house' ? 1 : races[0].vote_for ?? 1;
     const s = summarize(sw?.candidates ?? [], sw?.pct, voteFor);
+    // Photos: decided once per contest on the statewide numbers; counties reuse the same decision.
+    const photos = race === 'house' ? null : decidePhotos(ek, st.abbr, race, races[0].district, s.candidates);
+    s.candidates = attachPhotos(s.candidates, photos);
     const counties = new Map([...units].filter(([k]) => k !== 'state'));
     const entry = {
       ...base,
@@ -362,7 +377,7 @@ export function createResults(db, adapters, opts = {}) {
       ballotsCast: turnout.get('state')?.ballotsCast ?? null,
       ...sourceFields(races[0]),
     };
-    return { entry, counties, turnout, methods: methodsOut(sw?.methods) };
+    return { entry, counties, turnout, methods: methodsOut(sw?.methods), photos };
   }
 
   function national(race, ek = electionsCfg().current) {
@@ -510,6 +525,7 @@ export function createResults(db, adapters, opts = {}) {
             cands = countySums.get(r.id) ?? [];
           }
           const s = summarize(cands.map((c) => ({ name: c.name, party: c.party, partyRaw: c.party_raw, ...(c.running_mate ? { runningMate: c.running_mate } : {}), votes: c.votes })), pct, r.vote_for);
+          if (e.scope === 'state') s.candidates = attachPhotos(s.candidates, decidePhotos(ek, st.abbr, r.office, r.district, s.candidates));
           const yesNo = r.kind === 'retention' || r.kind === 'yes_no';
           const first = s.candidates[0];
           row = {
@@ -570,7 +586,7 @@ export function createResults(db, adapters, opts = {}) {
     }
     return {
       election: ek, state: st.abbr, name: st.name, generatedAt: new Date().toISOString(), q: needle || null,
-      total: out.length, matched: matched.length, groups, note, sources, official: officialOf(st.abbr, ek),
+      total: out.length, matched: matched.length, groups, note, sources, official: officialOf(st.abbr, ek), coverageStatus: coverageStatusOf(st.abbr),
     };
   }
 
@@ -606,7 +622,7 @@ export function createResults(db, adapters, opts = {}) {
       const out = state(abbr, t.office, ek);
       return { ...out, topOffice: t.office, statewide: { ...out.statewide, topOffice: t.office, topLabel: t.entry.topLabel, otherRaces: t.entry.otherRaces } };
     }
-    const { entry, counties: stateCounties, turnout, methods } = stateRace(ek, abbr, race);
+    const { entry, counties: stateCounties, turnout, methods, photos } = stateRace(ek, abbr, race);
     const known = new Map(countiesOf(entry.state).map((c) => [c.fips, c.name]));
     let counties = stateCounties;
     let countyData = 'no-source';
@@ -629,7 +645,7 @@ export function createResults(db, adapters, opts = {}) {
       countyData = 'unavailable';
       countyNote = `There is no ${labelOf(race)} race on this state's ballot in our sources.`;
     } else if (entry.status === 'no-source') {
-      countyNote = `We don't have a results source for ${entry.name} yet, so there are no numbers to show.`;
+      countyNote = `No live results for ${entry.name} here yet; its official results page has them.`;
     } else if (counties?.size) {
       countyData = 'available';
     } else {
@@ -644,7 +660,7 @@ export function createResults(db, adapters, opts = {}) {
       statewide: { ...entry, turnout: st, methods },
       countyData, countyNote,
       counties: [...(counties ?? new Map()).values()].map((u) => ({
-        fips: u.fips, name: known.get(u.fips) ?? u.name, ...summarize(u.candidates, u.pct, entry.voteFor ?? 1),
+        fips: u.fips, name: known.get(u.fips) ?? u.name, ...withPhotos(summarize(u.candidates, u.pct, entry.voteFor ?? 1), countyData === 'available' ? photos : null),
         ...(race === 'house' ? { partySum: true } : {}),
         precinctsReporting: u.pr ?? null, precinctsTotal: u.pt ?? null,
         turnout: u.turnout !== undefined ? u.turnout : turnout?.get(u.fips) ?? null,
@@ -652,6 +668,11 @@ export function createResults(db, adapters, opts = {}) {
         ...(countyData === 'partial' ? { source: u.source, sourceName: u.sourceName, sourceUrl: u.sourceUrl, fetchedAt: u.fetchedAt } : {}),
       })),
     };
+  }
+
+  /** A summary with the contest's photo decision applied to its candidates. */
+  function withPhotos(sum, decision) {
+    return decision ? { ...sum, candidates: attachPhotos(sum.candidates, decision) } : sum;
   }
 
   function measures(abbr, ek = electionsCfg().current) {
@@ -677,7 +698,7 @@ export function createResults(db, adapters, opts = {}) {
         sourceUpdatedAt: m.source_updated_at ?? null,
         fetchedAt: m.fetched_at,
         official: officialOf(m.state, ek),
-        info: publicInfo(info),
+        info: publicInfo(info, info ? statePartyNames(ek, info.state) : []),
       };
     });
     // Measures we researched but no feed of ours carries (yet): shown with their information, and honestly no counts.
@@ -690,7 +711,7 @@ export function createResults(db, adapters, opts = {}) {
       yes: null, no: null, pctYes: null, pctReporting: null,
       source: null, sourceName: null, sourceUrl: null, sourceUpdatedAt: null, fetchedAt: null,
       official: officialOf(m.state, ek),
-      info: publicInfo(m),
+      info: publicInfo(m, statePartyNames(ek, m.state)),
     }));
     const measures = [...live, ...staticOnly].sort((a, b) => a.state.localeCompare(b.state) || Number(b.live) - Number(a.live));
     return { election: ek, measures };
@@ -710,6 +731,7 @@ export function createResults(db, adapters, opts = {}) {
           state: s.abbr, fips: s.fips, name: s.name,
           sources: [...new Set(t.map((x) => x.source))],
           levels,
+          coverageStatus: coverageStatusOf(s.abbr),
           races: Object.fromEntries(RACES.map((r) => [r, expectsRace(ek, s.abbr, r)])),
         };
       }),

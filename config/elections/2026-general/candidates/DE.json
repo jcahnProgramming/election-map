@@ -1,0 +1,74 @@
+{
+  "state": "DE",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "SARAH MCBRIDE",
+        "Sarah McBride"
+      ],
+      "office": "house",
+      "district": "AL",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Representative_Sarah_McBride_Official_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Representative_Sarah_McBride_Official_Portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "JOSEPH \"DR. JOE\" ARMINIO",
+        "Joseph Arminio"
+      ],
+      "office": "house",
+      "district": "AL",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "CHRIS COONS",
+        "Chris Coons"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Chris_Coons_official_Senate_photo.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Chris_Coons_official_Senate_photo.png",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Senate",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "MICHAEL \"DR. MIKE\" KATZ",
+        "Michael Katz"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article (Michael Katz, former DE state senator) has no image; no Commons file found."
+    }
+  ]
+}

@@ -1,0 +1,332 @@
+{
+  "state": "UT",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "RILEY OWEN"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons \"Riley Owen\" files are a footballer, not this candidate; no Wikipedia article; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "JESSE WEST"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "ELIAS HENRY MONTGOMERY"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "BEN MCADAMS"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Ben_McAdams%2C_official_portrait%2C_116th_Congress.jpg/500px-Ben_McAdams%2C_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ben_McAdams,_official_portrait,_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Official portrait from his prior House term (116th Congress)."
+    },
+    {
+      "match": [
+        "BABAK \"BOBBY\" DARVISH",
+        "BABAK DARVISH"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "ROBERT M. MOESINGER",
+        "ROBERT MOESINGER"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "PETER CROSBY"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "BLAKE D. MOORE",
+        "BLAKE MOORE"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Rep._Blake_Moore_official_photo%2C_2022.jpg/500px-Rep._Blake_Moore_official_photo%2C_2022.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Blake_Moore_official_photo,_2022.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "CARLTON E. BOWEN",
+        "CARLTON BOWEN"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "DANIEL COTTAM"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "CELESTE MALOY"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Celeste_Maloy_118th_Congress.jpeg/500px-Celeste_Maloy_118th_Congress.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Celeste_Maloy_118th_Congress.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brendan O'Hara, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "ADONIS HOOSLYN"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "MICHAEL R. STODDARD",
+        "MICHAEL STODDARD"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "AYDEN SCOTT"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "CASSIE EASLEY"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "KENT S. UDELL",
+        "KENT UDELL"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "TAYLOR WRIGHT"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "MIKE KENNEDY"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Kennedy_Mike_119th_Congress_2.jpg/500px-Kennedy_Mike_119th_Congress_2.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Kennedy_Mike_119th_Congress_2.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brendan O'Hara, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "JONNY LARSEN"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "STEVEN BURT"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    }
+  ]
+}

@@ -77,7 +77,7 @@ export function shade(entry, tossup = TOSSUP_MARGIN) {
     case 'no-race':
       return { ...base, key: 'no-race', fill: PALETTE.noRace, label: 'No race' };
     case 'no-source':
-      return { ...base, key: 'no-source', fill: `url(#${NO_SOURCE_PATTERN_ID})`, label: 'Race, no data source yet' };
+      return { ...base, key: 'no-source', fill: `url(#${NO_SOURCE_PATTERN_ID})`, label: 'No live results here' };
     case 'awaiting':
       return { ...base, key: 'awaiting', fill: PALETTE.awaiting, stroke: PALETTE.awaitingStroke, dash: '3 2', label: 'No votes counted yet' };
     case 'no-data':
@@ -105,7 +105,7 @@ export function legendItems(tossup = TOSSUP_MARGIN, { multiSeat = false } = {}) 
     { kind: 'fill', color: PALETTE.REP[2], label: 'Rep 12+' },
     { kind: 'other', colors: PALETTE.OTHER, label: 'Other party leading' },
     { kind: 'awaiting', color: PALETTE.awaiting, stroke: PALETTE.awaitingStroke, label: 'No votes counted yet' },
-    { kind: 'hatch', color: PALETTE.noSourceBg, line: PALETTE.noSourceLine, label: 'Race, no data source yet' },
+    { kind: 'hatch', color: PALETTE.noSourceBg, line: PALETTE.noSourceLine, label: 'No live results here' },
     { kind: 'fill', color: PALETTE.noRace, label: 'No race' },
     ...(multiSeat ? [{ kind: 'fill', color: PALETTE.multiSeat, label: 'Multi-seat contest: votes counted, no margin' }] : []),
   ];

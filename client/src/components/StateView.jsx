@@ -6,9 +6,10 @@ import { loadCounties, fitPath, ABBR_TO_FIPS } from '../geo.js';
 import { effectiveStatus } from '../shading.js';
 import { partyShares, leadText, candidateList, hasCandidates } from '../calc.js';
 import { fmtVotes, fmtPct, fmtReporting, shortLabel, longLabel, hostOf } from '../format.js';
-import { fmtMT } from '../calc.js';
+import { fmtMT, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import AllRaces from './AllRaces.jsx';
 import { SeatRows, PartyTag } from './EntryTip.jsx';
+import Avatar from './Avatar.jsx';
 
 /** Statewide strip: Dem / Rep / Other / Reporting (or an honest status in place of numbers). */
 export function TotalsStrip({ entry, race, stateName, compact = false }) {
@@ -32,7 +33,9 @@ export function TotalsStrip({ entry, race, stateName, compact = false }) {
   if (!hasNums) {
     const msg = status === 'no-race'
       ? `No ${shortLabel(race)} race on the ballot in ${stateName} this year`
-      : `${stateName} has a ${shortLabel(race)} race, but we don't have a results source for it yet`;
+      : entry.coverageStatus === 'live' && entry.sourceNote
+        ? entry.sourceNote
+        : `${coverageCopy(entry.coverageStatus).title} ${coverageCopy(entry.coverageStatus).detail}`;
     return (
       <div className="grid grid-4 stat-cards">
         <div className="card" style={{ gridColumn: '1 / -1' }}>
@@ -65,8 +68,11 @@ export function TotalsStrip({ entry, race, stateName, compact = false }) {
     return (
       <div className="grid grid-4 stat-cards">
         {rows.map((c, i) => (
-          <div className="card" key={`${c.name}-${i}`}>
-            <span className={`k cand ${cls(c.party)}`}>{c.name}<PartyTag tag={c.tag} party={c.party} /></span>
+          <div className="card cand-card" key={`${c.name}-${i}`}>
+            <span className="cand-head">
+              <Avatar name={c.name} party={c.party} photo={c.photo} size={40} />
+              <span className={`k cand ${cls(c.party)}`}>{c.name}<PartyTag tag={c.tag} party={c.party} /></span>
+            </span>
             <span className="big">{fmtVotes(c.votes)}</span>
             <span className="small">{fmtPct(c.pct)}</span>
           </div>
@@ -104,9 +110,10 @@ export function SourceStrip({ entry, official, name }) {
   const covered = entry && (entry.status === 'reporting' || entry.status === 'awaiting');
   return (
     <p className="source-bar">
-      {covered && entry.sourceName ? <SourceLine entry={entry} /> : <span>{entry?.sourceNote || `No data source yet for ${name}`}</span>}
+      {covered && entry.sourceName ? <SourceLine entry={entry} />
+        : <span>{entry?.sourceNote || (entry?.status === 'no-race' ? 'No race for this office in our sources' : coverageCopy(entry?.coverageStatus).title)}</span>}
       {official?.url
-        ? <a className="official" href={official.url} target="_blank" rel="noopener noreferrer">Official results ↗{official.office ? <span className="who"> {official.office}</span> : null}</a>
+        ? <a className="official" href={official.url} target="_blank" rel="noopener noreferrer">{covered ? 'Official results ↗' : OFFICIAL_LINK_TEXT}{official.office ? <span className="who"> {official.office}</span> : null}</a>
         : <span className="muted">Official results page not on file yet</span>}
     </p>
   );
@@ -166,6 +173,7 @@ export default function StateView({ abbr, race, tab = 'overview', data, error, c
             entryFor={(f) => byFips[f.id]}
             selectedId={pinned}
             onPick={(f) => setPinned((p) => (p === f.id ? null : f.id))}
+            pickLabel={(f) => (pinned === f.id ? "Back to statewide" : "Show county details")}
             renderTip={(f, e) => (
               <EntryTip kind="county" title={countyLabel(e || { name: f.properties?.name })} entry={e} race={race} sourceName={sw?.sourceName} />
             )}
@@ -187,10 +195,17 @@ export default function StateView({ abbr, race, tab = 'overview', data, error, c
     panel = (
       <div className="empty">
         <MapIcon />
-        <span className="t">No results source for {name} yet</span>
-        <span className="d">
-          {data.countyNote || `${name} has a ${shortLabel(race)} race, but we don't read its official results yet. It's on our list.`}
-        </span>
+        {data.statewide?.coverageStatus === 'live' && data.statewide?.sourceNote ? (
+          <span className="d">{data.statewide.sourceNote}</span>
+        ) : (
+          <>
+            <span className="t">{coverageCopy(data.statewide?.coverageStatus).title}</span>
+            <span className="d">{coverageCopy(data.statewide?.coverageStatus).detail}</span>
+          </>
+        )}
+        {(data.official?.url || data.statewide?.official?.url) && (
+          <a className="btn official-btn" href={data.official?.url || data.statewide.official.url} target="_blank" rel="noopener noreferrer">{OFFICIAL_LINK_TEXT}</a>
+        )}
       </div>
     );
   } else {
