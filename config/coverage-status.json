@@ -6,8 +6,7 @@
       "reason": "PDF summary reports only"
     },
     "AL": {
-      "status": "planned",
-      "reason": "ASP.NET export (needs a scraper)"
+      "status": "live"
     },
     "AR": {
       "status": "live"
