@@ -268,3 +268,12 @@ test('migration: a 0.1-shaped database upgrades in place and keeps its rows', ()
   db.close();
   openDb(file).close(); // idempotent
 });
+
+test('county-site note: singular for one county ("its own results"); FL official link is Florida Election Watch', () => {
+  const res = seed();
+  const tx = res.state('TX', 'senate'); // one county site (Denton)
+  assert.match(tx.countyNote, /1 county publishes its own results/);
+  assert.doesNotMatch(tx.countyNote, /their own/);
+  const fl = res.state('FL', 'senate');
+  assert.equal(fl.official?.url, 'https://floridaelectionwatch.gov/'); // the SOS-named election-night site, not results.elections.myflorida.com
+});

@@ -59,10 +59,10 @@
       "reachable": true
     },
     "FL": {
-      "url": "https://results.elections.myflorida.com/",
+      "url": "https://floridaelectionwatch.gov/",
       "office": "Florida Department of State, Division of Elections",
-      "linked_from": null,
-      "as_of": "2026-11-03",
+      "linked_from": "https://dos.fl.gov/communications/press-releases/2026/secretary-of-state-cord-byrd-provides-election-readiness-update-for-the-november-3rd-general-election/",
+      "as_of": "2026-11-04",
       "reachable": true
     },
     "GA": {
