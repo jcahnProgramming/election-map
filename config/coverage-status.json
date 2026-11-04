@@ -33,8 +33,7 @@
       "status": "live"
     },
     "FL": {
-      "status": "planned",
-      "reason": "adapter fldos built, disabled until real data is checked"
+      "status": "live"
     },
     "GA": {
       "status": "live"

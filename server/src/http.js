@@ -33,6 +33,16 @@ export async function get(url, { conditional = false, timeoutMs = 20000, accept 
   return { status: res.status, notModified: false, text, headers: res.headers };
 }
 
+/** HEAD a URL (change detection without downloading the body). Same UA / timeout as get(). */
+export async function head(url, { timeoutMs = 20000 } = {}) {
+  const res = await fetch(url, {
+    method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(timeoutMs),
+    headers: { 'User-Agent': config.userAgent, Accept: '*/*' },
+  });
+  if (!res.ok) throw new HttpError(url, res.status);
+  return { status: res.status, headers: res.headers };
+}
+
 export async function getJson(url, opts) {
   const r = await get(url, { ...opts, accept: 'application/json' });
   return { ...r, json: JSON.parse(r.text) };

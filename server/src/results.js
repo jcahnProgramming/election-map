@@ -89,7 +89,7 @@ export function createResults(db, adapters, opts = {}) {
       ORDER BY e.county_fips, CAST(r.source_key AS INTEGER), r.source_key`),
     liveStateSource: db.prepare(`SELECT 1 FROM elections e JOIN latest_snapshot l ON l.election_id = e.id
       WHERE e.election_key = ? AND e.state = ? AND e.scope = 'state'`),
-    votes: db.prepare(`SELECT c.position, c.name, c.party, c.party_raw, v.votes, u.level, u.county_fips, u.name AS unit
+    votes: db.prepare(`SELECT c.position, c.name, c.party, c.party_raw, c.running_mate, v.votes, u.level, u.county_fips, u.name AS unit
       FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id JOIN reporting_units u ON u.id = v.unit_id
       WHERE v.snapshot_id = ? AND v.race_id = ? ORDER BY c.position`),
     reporting: db.prepare(`SELECT u.level, u.county_fips, u.name AS unit, x.precincts_reporting pr, x.precincts_total pt, x.pct_reporting pct
@@ -123,9 +123,9 @@ export function createResults(db, adapters, opts = {}) {
       WHERE r.election_id = ? AND EXISTS (SELECT 1 FROM unit_reporting x WHERE x.snapshot_id = ? AND x.race_id = r.id)
       ORDER BY CAST(r.source_key AS INTEGER), r.source_key`),
     unitIdOf: db.prepare('SELECT id FROM reporting_units WHERE state = ? AND level = ? AND county_fips = ?'),
-    unitVotes: db.prepare(`SELECT v.race_id, c.position, c.name, c.party, c.party_raw, v.votes
+    unitVotes: db.prepare(`SELECT v.race_id, c.position, c.name, c.party, c.party_raw, c.running_mate, v.votes
       FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id WHERE v.snapshot_id = ? AND v.unit_id = ? ORDER BY v.race_id, c.position`),
-    countySumVotes: db.prepare(`SELECT v.race_id, c.position, c.name, c.party, c.party_raw, SUM(v.votes) AS votes
+    countySumVotes: db.prepare(`SELECT v.race_id, c.position, c.name, c.party, c.party_raw, c.running_mate, SUM(v.votes) AS votes
       FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id JOIN reporting_units u ON u.id = v.unit_id
       WHERE v.snapshot_id = ? AND u.level = 'county' GROUP BY v.race_id, c.position ORDER BY v.race_id, c.position`),
     unitMeasures: db.prepare('SELECT race_id, yes, no FROM measure_counts WHERE snapshot_id = ? AND unit_id = ?'),
@@ -173,7 +173,7 @@ export function createResults(db, adapters, opts = {}) {
       return units.get(k);
     };
     for (const v of q.votes.all(r.snapshot_id, r.id)) {
-      unit(v).candidates.push({ name: v.name, party: v.party, partyRaw: v.party_raw, votes: v.votes });
+      unit(v).candidates.push({ name: v.name, party: v.party, partyRaw: v.party_raw, ...(v.running_mate ? { runningMate: v.running_mate } : {}), votes: v.votes });
     }
     for (const x of q.reporting.all(r.snapshot_id, r.id)) {
       Object.assign(unit(x), { pr: x.pr, pt: x.pt, pct: x.pct ?? pctOf(x.pr, x.pt) });
@@ -524,7 +524,7 @@ export function createResults(db, adapters, opts = {}) {
             countySums ??= byRace(q.countySumVotes.all(e.snapshot_id));
             cands = countySums.get(r.id) ?? [];
           }
-          const s = summarize(cands.map((c) => ({ name: c.name, party: c.party, partyRaw: c.party_raw, votes: c.votes })), pct, r.vote_for);
+          const s = summarize(cands.map((c) => ({ name: c.name, party: c.party, partyRaw: c.party_raw, ...(c.running_mate ? { runningMate: c.running_mate } : {}), votes: c.votes })), pct, r.vote_for);
           if (e.scope === 'state') s.candidates = attachPhotos(s.candidates, decidePhotos(ek, st.abbr, r.office, r.district, s.candidates));
           const yesNo = r.kind === 'retention' || r.kind === 'yes_no';
           const first = s.candidates[0];

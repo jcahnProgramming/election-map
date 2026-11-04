@@ -24,9 +24,9 @@ const head = headerOnly.replace(/\r?\n$/, '');
 const row = (o) => head.split('\t').map((h) => o[h.trim()] ?? '').join('\t');
 const base = { ElectionDate: '11/3/2026', Precincts: '10', PrecinctsReporting: '0', CanVotes: '0' };
 const tsv = [head,
-  row({ ...base, PartyCode: 'REP', PartyName: 'Republican Party', RaceCode: 'GOV', OfficeDesc: 'Governor and Lieutenant Governor', CountyName: 'Alachua', CanNameLast: 'Roe', CanNameFirst: 'Ann' }),
-  row({ ...base, PartyCode: 'DEM', PartyName: 'Democratic Party', RaceCode: 'GOV', OfficeDesc: 'Governor and Lieutenant Governor', CountyName: 'Alachua', CanNameLast: 'Doe', CanNameFirst: 'Bo' }),
-  row({ ...base, PartyCode: 'REP', PartyName: 'Republican Party', RaceCode: 'GOV', OfficeDesc: 'Governor and Lieutenant Governor', CountyName: 'Miami-Dade', CanNameLast: 'Roe', CanNameFirst: 'Ann', Precincts: '', PrecinctsReporting: '' }),
+  row({ ...base, PartyCode: 'REP', PartyName: 'Republican Party', RaceCode: 'GOV', OfficeDesc: 'Governor and Lieutenant Governor', CountyName: 'Alachua', CanNameLast: 'Mate', CanNameFirst: 'Roe' }),
+  row({ ...base, PartyCode: 'DEM', PartyName: 'Democratic Party', RaceCode: 'GOV', OfficeDesc: 'Governor and Lieutenant Governor', CountyName: 'Alachua', CanNameLast: 'Pal', CanNameFirst: 'Doe' }),
+  row({ ...base, PartyCode: 'REP', PartyName: 'Republican Party', RaceCode: 'GOV', OfficeDesc: 'Governor and Lieutenant Governor', CountyName: 'Miami-Dade', CanNameLast: 'Mate', CanNameFirst: 'Roe', Precincts: '', PrecinctsReporting: '' }),
   row({ ...base, PartyCode: 'DEM', PartyName: 'Democratic Party', RaceCode: 'USR', OfficeDesc: 'United States Representative', Juris1num: '07', CountyName: 'Seminole', CanNameLast: 'Lee', CanNameFirst: 'Cy' }),
   row({ ...base, PartyCode: 'XYZ', PartyName: 'Mystery Party', RaceCode: 'USR', OfficeDesc: 'United States Representative', Juris1num: '07', CountyName: 'Atlantis', CanNameLast: 'Fox', CanNameFirst: 'Di' }),
 ].join('\r\n');
@@ -36,7 +36,7 @@ test('FL: zero-count rows, missing precincts, unknown county/party are handled a
   const { races } = parseFl(tsv, target, { unmatched: (...a) => unmatched.push(a) });
   const gov = races.find((r) => r.office === 'governor');
   assert.ok(gov.statewide);
-  assert.deepEqual(gov.choices.map((c) => [c.name, c.party, c.partyRaw]), [['Ann Roe', 'REP', 'REP'], ['Bo Doe', 'DEM', 'DEM']]);
+  assert.deepEqual(gov.choices.map((c) => [c.name, c.runningMate, c.party, c.partyRaw]), [['Roe', 'Mate', 'REP', 'REP'], ['Doe', 'Pal', 'DEM', 'DEM']]);
   assert.deepEqual(gov.units[0].votes, [0, 0]);
   assert.equal(gov.units.find((u) => u.name === 'Miami-Dade').precinctsTotal, null);
   assert.equal(gov.units[0].precinctsTotal, 10);
@@ -95,4 +95,111 @@ test('FL: every contest is stored; retention is a Yes/No candidate race, not a m
   assert.deepEqual([ss.level, ss.office], ['legislative', 'state_senate']);
   assert.deepEqual([am.level, am.kind], ['measure', 'yes_no']);
   assert.equal(by('Governor and Lieutenant Governor').office, 'governor');
+});
+
+// ---- Florida Election Watch (2026 general), real file: 20261103_ElecResultsFL.txt, Last-Modified 01:30:03Z.
+// Verified against Election Watch's own "Contest Results by County" pages: Amendments 1-3 statewide identical;
+// Senate / Governor identical in 66 of 67 counties (the page already showed a newer Columbia upload than the file).
+const live = readFileSync(fileURLToPath(new URL('./fixtures/fldos/electionwatch-2026-11-04T0130Z.txt', import.meta.url)), 'utf8');
+const flCfg = JSON.parse(readFileSync(new URL('../../config/sources/fldos.json', import.meta.url), 'utf8')).elections.find((e) => e.state === 'FL');
+const liveTarget = { key: 'FL-2026-general', state: 'FL', ticketNames: flCfg.ticketNames.names };
+const parseLive = (t = liveTarget) => { const un = []; const r = parseFl(live, t, { unmatched: (...a) => un.push(a) }); return { ...r, un }; };
+const sw = (race) => race.units[0].votes;
+const county = (race, name) => race.units.find((u) => u.name === name).votes;
+
+test('FL live: Governor tickets show the top-of-ticket candidate, never the running mate', () => {
+  const { races } = parseLive();
+  const gov = races.find((r) => r.office === 'governor');
+  const by = Object.fromEntries(gov.choices.map((c) => [c.partyRaw + ':' + c.name, c]));
+  assert.equal(by['REP:Byron Donalds'].runningMate, 'Bryan Avila');
+  assert.equal(by['DEM:David Jolly'].runningMate, 'Gwen Graham');
+  const mates = new Set(gov.choices.map((c) => c.runningMate));
+  for (const c of gov.choices) {
+    assert.ok(!mates.has(c.name), `${c.name} is a running mate, not a candidate`);
+    assert.ok(!c.name.includes('/'), `no ticket separator in "${c.name}"`);
+  }
+  assert.equal(gov.choices.length, 10);
+  // Without the official full-name list: the file's own surnames, top of ticket first; nothing invented.
+  const bare = parseLive({ key: 'x', state: 'FL' }).races.find((r) => r.office === 'governor');
+  assert.deepEqual([bare.choices[0].name, bare.choices[0].runningMate], ['Donalds', 'Avila']);
+  // Single-candidate races are untouched (first + middle + last).
+  const sen = races.find((r) => r.office === 'senate');
+  assert.deepEqual(sen.choices.map((c) => c.name), ['Ashley Moody', 'Angie Nixon', 'Neil J. Gillespie']);
+  assert.equal(sen.choices[0].runningMate, undefined);
+});
+
+test('FL live: RaceName column, party codes bucketed with raw labels kept, nothing unmatched', () => {
+  const { races, un, rowCount } = parseLive();
+  assert.equal(rowCount, 3063);
+  assert.deepEqual(un, []);
+  const sen = races.find((r) => r.office === 'senate');
+  assert.deepEqual(sen.choices.map((c) => [c.party, c.partyRaw]), [['REP', 'REP'], ['DEM', 'DEM'], ['OTHER', 'NPA']]);
+  const gov = races.find((r) => r.office === 'governor');
+  assert.equal(gov.choices.find((c) => c.partyRaw === 'LPF').party, 'OTHER');
+  assert.ok(gov.choices.filter((c) => c.partyRaw === 'WRI').every((c) => c.party === 'OTHER'));
+});
+
+test('FL live: statewide and large-county totals equal the official file / Election Watch pages', () => {
+  const { races } = parseLive();
+  const sen = races.find((r) => r.office === 'senate');
+  const gov = races.find((r) => r.office === 'governor');
+  assert.equal(sen.units.length - 1, 67);
+  assert.deepEqual(sw(sen), [3948914, 3782566, 88316]);
+  assert.deepEqual(sw(gov).slice(0, 2), [3875246, 3838531]);
+  assert.deepEqual(county(sen, 'Miami-Dade'), [344413, 398077, 8342]);
+  assert.deepEqual(county(sen, 'Broward'), [204624, 408033, 6113]);
+  assert.deepEqual(county(sen, 'Hillsborough'), [226707, 270892, 6015]);
+  assert.deepEqual(county(gov, 'Miami-Dade').slice(0, 2), [344354, 397736]);
+  const amd = (re) => races.find((r) => r.office === 'measure' && re.test(r.name));
+  const a1 = amd(/Budget Stabilization/); const a2 = amd(/Tangible Personal Property/); const a3 = amd(/Increased Homestead/);
+  assert.deepEqual([a1.units[0].yes, a1.units[0].no], [2986346, 4341242]);
+  assert.deepEqual([a2.units[0].yes, a2.units[0].no], [4265830, 3110127]);
+  assert.deepEqual([a3.units[0].yes, a3.units[0].no], [4626443, 2872292]);
+  const bro = a1.units.find((u) => u.name === 'Broward');
+  assert.deepEqual([bro.yes, bro.no], [217267, 358964]);
+});
+
+test('FL live: Amendments 1-3 attach to the measures config (config/elections/2026-general/measures/FL.json)', async () => {
+  const { findMeasureInfo, resetMeasureInfo } = await import('../src/measureinfo.js');
+  resetMeasureInfo();
+  const { races } = parseLive();
+  const ids = races.filter((r) => r.office === 'measure').map((r) => findMeasureInfo('2026-general', 'FL', r.name, r.title)?.measure_id ?? null);
+  assert.deepEqual(ids.sort(), ['Amendment 1', 'Amendment 2', 'Amendment 3']);
+});
+
+test('FL Election Watch: the Downloads page own versioned link is used; other hosts are refused', async () => {
+  const { findFileLink } = await import('../src/adapters/fldos.js');
+  const page = 'https://floridaelectionwatch.gov/Downloads';
+  const html = '<a href="https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt?v=202351267" title="Tab">x</a>';
+  assert.equal(findFileLink(html, '20261103_ElecResultsFL.txt', page), 'https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt?v=202351267');
+  assert.equal(findFileLink('<a href="https://evil.example/20261103_ElecResultsFL.txt?v=1">', '20261103_ElecResultsFL.txt', page), null);
+  assert.equal(findFileLink('<p>no link</p>', '20261103_ElecResultsFL.txt', page), null);
+});
+
+test('FL Election Watch fetch: download only when the ETag moves; a stale all-zero copy never replaces counts', async () => {
+  const adapter = (await import('../src/adapters/fldos.js')).default;
+  const t = { key: 'FL-test-fetch', state: 'FL', label: 'FL', url: 'u', date: '2026-11-03', downloadsUrl: 'https://floridaelectionwatch.gov/Downloads',
+    fileName: '20261103_ElecResultsFL.txt', ticketNames: flCfg.ticketNames.names };
+  let etag = '"a"'; let body = live; const calls = [];
+  const fileLink = 'https://flelectionfiles.floridados.gov/enightfilespublic/20261103_ElecResultsFL.txt?v=1';
+  const http = {
+    get: async (url) => {
+      if (url.includes('Downloads')) { calls.push('page'); return { text: `<a href="${fileLink}">` }; }
+      calls.push('file');
+      return { text: body, headers: new Headers({ etag, 'last-modified': 'Wed, 04 Nov 2026 01:30:03 GMT' }) };
+    },
+    head: async () => { calls.push('head'); return { headers: new Headers({ etag }) }; },
+  };
+  const ctx = { http, unmatched: () => {}, log: { info() {}, warn() {} } };
+  const r1 = await adapter.fetch(t, ctx);
+  assert.equal(r1.changed, true);
+  assert.equal(r1.result.sourceUpdatedAt, '2026-11-04T01:30:03.000Z');
+  assert.deepEqual(calls, ['page', 'head', 'file']);
+  calls.length = 0;
+  const r2 = await adapter.fetch(t, ctx);
+  assert.equal(r2.changed, false);
+  assert.deepEqual(calls, ['page', 'head']); // unchanged ETag: no download
+  etag = '"b"'; body = live.replace(/\t\d+(\r?)$/gm, '\t0$1'); // a stale all-zero copy under a new ETag
+  const r3 = await adapter.fetch(t, ctx);
+  assert.equal(r3.changed, false);
 });

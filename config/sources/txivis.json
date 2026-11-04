@@ -1,5 +1,5 @@
 {
-  "_howto": "Elections polled by the Texas Civix IVIS ENR adapter (server/src/adapters/txivis.js). electionId comes from {base}/electionConstants (base64 JSON: electionInfo.{year}.GE). timeZone is the zone of Home.LastUpdatedTime. countyAliases maps a source county spelling to the atlas name when matchCounty misses it. Set enabled:false to stop polling. Every race of every section (Federal, StateWide, StateWideQ, Districted) is stored with its county breakdown from countyInfo. allContests defaults to false: the SOS feed has no county or municipal offices. contestRules: name rules for this source, tried before config/contest-rules.json.",
+  "_howto": "Elections polled by the Texas Civix IVIS ENR adapter (server/src/adapters/txivis.js). electionId comes from {base}/electionConstants (base64 JSON: electionInfo.{year}.GE). timeZone is the zone of Home.LastUpdatedTime: UTC (verified live 2026-11-04: 'Nov 04, 2026 01:13:09' published at 01:13Z, i.e. 19:13 in Texas). countyAliases maps a source county spelling to the atlas name when matchCounty misses it. Set enabled:false to stop polling. Every race of every section (Federal, StateWide, StateWideQ, Districted) is stored with its county breakdown from countyInfo. allContests defaults to false: the SOS feed has no county or municipal offices. contestRules: name rules for this source, tried before config/contest-rules.json.",
   "base": "https://goelect.txelections.civixapps.com/api-ivis-system/api/s3/enr",
   "contestRules": [
     {
@@ -20,7 +20,7 @@
       "electionId": "53815",
       "name": "Texas 2026 November General Election",
       "url": "https://goelect.txelections.civixapps.com/ivis-enr-ui/races",
-      "timeZone": "America/Chicago",
+      "timeZone": "UTC",
       "countyAliases": {
         "LASALLE": "La Salle"
       },
