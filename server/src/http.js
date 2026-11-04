@@ -1,8 +1,60 @@
 // One HTTP client for every adapter: polite User-Agent (project name, no email), timeouts,
 // gzip, and conditional requests (ETag / Last-Modified) remembered per URL.
-import { config } from './config.js';
+import { X509Certificate } from 'node:crypto';
+import { readdirSync, readFileSync } from 'node:fs';
+import path from 'node:path';
+import tls from 'node:tls';
+import { config, CONFIG_DIR } from './config.js';
 
 const validators = new Map(); // url → { etag, lastModified, body }
+
+/**
+ * Public intermediate CA certificates (config/ca/*.pem) added to Node's default trust store, for official sites that
+ * send an incomplete chain (browsers fetch the missing intermediate themselves; Node doesn't). Verification stays on:
+ * the chain must still end at a root Node already trusts. Same effect as NODE_EXTRA_CA_CERTS. (Node >= 22.19.)
+ */
+//
+// Fails soft, always: a missing API, an unreadable or invalid .pem, or a rejected store update is logged and skipped.
+// Server startup never depends on it; only the sources that need the intermediate (Alaska) then fail their polls.
+export function loadExtraCAs(dir = path.join(CONFIG_DIR, 'ca'), { tlsApi = tls, log = console } = {}) {
+  let files = [];
+  try {
+    files = readdirSync(dir).filter((f) => f.endsWith('.pem'));
+  } catch {
+    return 0; // no config/ca folder: nothing to add
+  }
+  const certs = [];
+  for (const f of files) {
+    try {
+      const text = readFileSync(path.join(dir, f), 'utf8');
+      const blocks = text.match(/-----BEGIN CERTIFICATE-----[\s\S]+?-----END CERTIFICATE-----/g) ?? [];
+      if (!blocks.length) throw new Error('no PEM certificate block');
+      for (const b of blocks) {
+        new X509Certificate(b); // throws on a malformed certificate
+        certs.push(b);
+      }
+    } catch (err) {
+      log.warn?.(`[http] extra CA ${f} skipped: ${err.message}`);
+    }
+  }
+  if (!certs.length) return 0;
+  if (typeof tlsApi.setDefaultCACertificates !== 'function' || typeof tlsApi.getCACertificates !== 'function') {
+    log.warn?.(`[http] ${certs.length} extra CA certificate(s) in ${dir} ignored: this Node (${process.version}) has no tls.setDefaultCACertificates`);
+    return 0;
+  }
+  try {
+    tlsApi.setDefaultCACertificates([...tlsApi.getCACertificates('default'), ...certs]);
+  } catch (err) {
+    log.warn?.(`[http] extra CA certificates in ${dir} not added: ${err.message}`);
+    return 0;
+  }
+  return certs.length;
+}
+try {
+  loadExtraCAs();
+} catch (err) {
+  console.warn(`[http] extra CA loading failed: ${err.message}`); // belt and braces: never block startup
+}
 
 export class HttpError extends Error {
   constructor(url, status) {

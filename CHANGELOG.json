@@ -2,6 +2,25 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.4.2",
+      "date": "2026-11-03",
+      "title": "Ten more states",
+      "sections": {
+        "New": [
+          "Live results for West Virginia, Oregon, New Mexico, Nebraska, South Dakota, North Dakota, Alaska, Maryland, Indiana, Louisiana and Alabama from each state's official results site, with every contest those sites publish",
+          "West Virginia (Secretary of State): U.S. Senate, both U.S. House seats, Amendment 1, the legislature and judicial races, by county",
+          "Oregon, New Mexico, Nebraska and South Dakota: U.S. Senate, Governor, U.S. House, statewide offices and measures by county, plus every legislative, judicial and local contest",
+          "North Dakota: the same, as soon as its results site switches from the 2024 election to tonight's",
+          "Alaska (Division of Elections): U.S. Senate, U.S. House, Governor, the legislature, ballot measures and judicial retention, statewide with the vote-method split (first-choice counts in ranked-choice races)",
+          "Maryland (State Board of Elections): Governor, Comptroller, Attorney General, all 8 U.S. House seats, the General Assembly, judges, Questions 1–3 and every county contest, by county with early / election day / mail-in / provisional votes",
+          "Indiana (Election Division): all 9 U.S. House seats, Secretary of State, Comptroller and Treasurer by county, the General Assembly, judges and every county and local contest",
+          "Louisiana (Secretary of State): U.S. Senate, all 6 U.S. House seats, Public Service Commission, BESE, the 10 constitutional amendments and every parish and local race, by parish",
+          "Alabama (Secretary of State): Governor, Lieutenant Governor, U.S. Senate, the contested U.S. House seats and Attorney General, by county (the first page of the state's results; the rest of the ballot isn't available to us)",
+          "Hawaii (Office of Elections): source ready but switched off until its first results file tonight has been checked"
+        ]
+      }
+    },
+    {
       "version": "0.4.1",
       "date": "2026-11-03",
       "title": "Florida results link",

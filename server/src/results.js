@@ -581,7 +581,8 @@ export function createResults(db, adapters, opts = {}) {
       note = srcs.length
         ? `Our source for ${st.name} hasn't published anything yet.`
         : `We don't have a results source for ${st.name} yet. Its official results page has every contest.`;
-    } else if (!beyondTop) {
+    } else if (!beyondTop || srcs.some((t) => t.allContests === false)) {
+      // A source we only partly read (allContests:false, e.g. Alabama's first results page) always says so.
       note = `${st.name}'s source in our system publishes only the top races${srcs.some((t) => t.allContests === false) ? ' we read from it' : ''}. Its official results page has every contest.`;
     }
     return {

@@ -2,12 +2,10 @@
   "_howto": "Why each state does or doesn't have live results here. Source of truth: docs/source-roadmap.md. status: \"live\" (a statewide adapter polls it), \"planned\" (a machine-readable feed exists, adapter not built or not enabled yet), \"blocked\" (the results site rejects automated access; we never work around that), \"no_feed\" (the state publishes no statewide machine-readable live results). reason: internal note, never shown. Adding a state's adapter = flip it to \"live\" in the same change (server/test/coverage-status.test.js checks this).",
   "states": {
     "AK": {
-      "status": "no_feed",
-      "reason": "PDF summary reports only"
+      "status": "live"
     },
     "AL": {
-      "status": "planned",
-      "reason": "ASP.NET export (needs a scraper)"
+      "status": "live"
     },
     "AR": {
       "status": "live"
@@ -27,7 +25,7 @@
     },
     "DC": {
       "status": "planned",
-      "reason": "React + SignalR app, data API not found yet"
+      "reason": "JSON API found (cityWide/getCityWide/{id}); the 2026 general isn't published in it yet"
     },
     "DE": {
       "status": "live"
@@ -40,7 +38,7 @@
     },
     "HI": {
       "status": "planned",
-      "reason": "TSV media.txt after first release"
+      "reason": "Adapter built (hioe, summary.txt TSV), parked until the first general release is checked"
     },
     "IA": {
       "status": "live"
@@ -53,8 +51,7 @@
       "reason": "no statewide election-night results (county clerks)"
     },
     "IN": {
-      "status": "planned",
-      "reason": "versioned JSON, filename not resolved yet"
+      "status": "live"
     },
     "KS": {
       "status": "no_feed",
@@ -65,16 +62,14 @@
       "reason": "Akamai 403 (\"Acceptable Use Policy\")"
     },
     "LA": {
-      "status": "planned",
-      "reason": "JSON blobs, map not built yet"
+      "status": "live"
     },
     "MA": {
       "status": "no_feed",
       "reason": "no statewide live results"
     },
     "MD": {
-      "status": "planned",
-      "reason": "static HTML pages"
+      "status": "live"
     },
     "ME": {
       "status": "no_feed",
@@ -104,12 +99,10 @@
       "status": "live"
     },
     "ND": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "NE": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "NH": {
       "status": "no_feed",
@@ -120,8 +113,7 @@
       "reason": "no statewide live results (county clerks)"
     },
     "NM": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "NV": {
       "status": "blocked",
@@ -139,8 +131,7 @@
       "reason": "AWS WAF 403"
     },
     "OR": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "PA": {
       "status": "blocked",
@@ -153,8 +144,7 @@
       "status": "live"
     },
     "SD": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "TN": {
       "status": "blocked",
@@ -180,8 +170,7 @@
       "reason": "WEC publishes no election-night totals (site also 403)"
     },
     "WV": {
-      "status": "planned",
-      "reason": "Clarity, general EID not found yet"
+      "status": "live"
     },
     "WY": {
       "status": "no_feed",

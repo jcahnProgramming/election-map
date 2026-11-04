@@ -1,15 +1,20 @@
 // Party labels and contest names from many sources → our small normalized vocabulary.
 // Everything that isn't clearly DEM or REP is OTHER; the raw label is always kept alongside.
 
-const DEM = new Set(['dem', 'd', 'democrat', 'democratic', 'democratic party', 'dfl', 'democratic farmer labor', 'democratic-farmer-labor', 'democratic farmer-labor']);
+const DEM = new Set(['dem', 'd', 'democrat', 'democratic', 'democratic party', 'dfl', 'democratic farmer labor', 'democratic-farmer-labor', 'democratic farmer-labor',
+  'democratic-npl', 'democratic npl', 'dem-npl']); // ND: Democratic-Nonpartisan League
 const REP = new Set(['rep', 'r', 'gop', 'republican', 'republican party']);
 // Labels we have seen and know are third parties / unaffiliated, so we don't log them as unknown.
 const KNOWN_OTHER = new Set([
+  'pacific green', 'legal marijuana now', 'nebraska working people', 'america first', 'by petition', // OR, NE (ResultsAjax)
   '', 'lbr', 'lib', 'libertarian', 'grn', 'green', 'uni', 'unity', 'uaf', 'unaffiliated', 'apv', 'approval voting',
   'fwd', 'forward', 'acn', 'american constitution', 'con', 'constitution', 'ind', 'independent', 'np', 'nonpartisan',
+  'und', 'undeclared', // AK
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
   'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'w', 'l', 'npp', 'peace and justice', 'freedom and unity', 'progressive', 'epic', 'independent american', 'labor democrat', 'no kings', 'cascade', 'fan', 'for all neighbors', 'no party preference', 'g', 'i', 'other-part', 'indep', 'nonprtycan', 'non-partis', 'none', 'wf', 'working families', 'lpf', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
+  'working class party', 'other candidates', // MD
   'p&f', 'peace and freedom', 'nonp', 'non partisan', 'pc', 'petitioning candidate',
+  'lbn', 'mtn', 'mountain', // WV Clarity: Libertarian, Mountain Party
 ]);
 
 /** @returns {{party:'DEM'|'REP'|'OTHER', known:boolean}} */
