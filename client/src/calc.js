@@ -137,7 +137,7 @@ export function candidateList(entry, cap = Infinity) {
   const byVotes = (a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0);
   const named = all.filter((c) => !isWriteIn(c)).sort(byVotes);
   const rows = named.slice(0, cap).map((c) => ({
-    name: c.name, tag: partyTag(c), party: c.party, votes: Number(c.votes) || 0, pct: pct(c.votes), photo: c.photo ?? null,
+    name: c.name, tag: partyTag(c), party: c.party, votes: Number(c.votes) || 0, pct: pct(c.votes), photo: c.photo ?? null, runningMate: c.runningMate ?? null,
   }));
   // Write-ins: the generic "Write-in" line as is; named write-in candidates each on their own line. When capped (tooltips),
   // they count toward "N more" except the generic line.
@@ -227,3 +227,101 @@ const COVERAGE_COPY = {
 /** { title, detail } for a state with no live results (unknown / "live" without this office → the "coming soon" copy). */
 export const coverageCopy = (status) => COVERAGE_COPY[status] ?? COVERAGE_COPY.planned;
 export const OFFICIAL_LINK_TEXT = 'View official results ↗';
+
+// ---------- Congress / balance of power (0.5) ----------
+// A seat's state right now, from its stored contest. The toss-up threshold is the map's (TOSSUP_MARGIN). Never a call.
+/** 'dLead' | 'rLead' | 'oLead' | 'toss' | 'none' for one seat up (see /api/congress). */
+export function seatStatus(seat, tossup = TOSSUP_MARGIN) {
+  if (!seat || !seat.live || !(Number(seat.totalVotes) > 0)) return 'none';
+  const party = seat.lead?.party ?? seat.leader;
+  // Top-two / same-party contest: the seat goes to that party whichever candidate leads.
+  const sameParty = party && seat.runnerUpParty && seat.runnerUpParty === party && party !== 'OTHER';
+  if (!sameParty) {
+    if (seat.tied || !seat.leader) return 'toss';
+    if (isNum(seat.marginPts) && Math.abs(Number(seat.marginPts)) < tossup) return 'toss';
+  }
+  return party === 'DEM' ? 'dLead' : party === 'REP' ? 'rLead' : 'oLead';
+}
+
+/** Category order on the bar and the seat chart: Dem held, independents (Dem caucus), Dem leading, toss-up, no data,
+ * other party leading, Rep leading, independents (Rep caucus), Rep held. */
+export const SEAT_CATEGORIES = [
+  { key: 'dHeld', color: '#2457D6', label: 'Dem — not up this year' },
+  { key: 'iDem', color: '#5B7FD6', label: 'Independent (caucuses Dem) — not up' },
+  { key: 'dLead', color: '#93B4FA', label: 'Dem leading' },
+  { key: 'toss', color: '#8B6FD6', label: `Toss-up (<${TOSSUP_MARGIN} pts)` },
+  { key: 'none', color: '#2A313C', stroke: '#3A4350', label: 'No votes yet / no live data' },
+  { key: 'oLead', color: '#34B36B', label: 'Other party leading' },
+  { key: 'rLead', color: '#F7A1A1', label: 'Rep leading' },
+  { key: 'iRep', color: '#D65B5B', label: 'Independent (caucuses Rep) — not up' },
+  { key: 'rHeld', color: '#C42323', label: 'Rep — not up this year' },
+];
+
+/**
+ * Totals for one chamber: holdovers (seats not up; independents counted with their caucus) + every seat up classified
+ * by seatStatus. Always sums to `seats` when the inputs are complete.
+ * @param {{ seats:number, majority:number, holdovers?:{party,caucus}[], up:object[] }} ch
+ */
+export function chamberTotals(ch, tossup = TOSSUP_MARGIN) {
+  const n = Object.fromEntries(SEAT_CATEGORIES.map((c) => [c.key, 0]));
+  for (const h of ch?.holdovers || []) {
+    if (h.party === 'I') n[h.caucus === 'REP' ? 'iRep' : 'iDem']++;
+    else n[h.caucus === 'REP' || h.party === 'R' ? 'rHeld' : 'dHeld']++;
+  }
+  for (const s of ch?.up || []) n[seatStatus(s, tossup)]++;
+  const dHeld = n.dHeld + n.iDem, rHeld = n.rHeld + n.iRep;
+  const dem = dHeld + n.dLead, rep = rHeld + n.rLead, undecided = n.toss + n.none;
+  const detail = (held, lead) => `${held ? `${held} held + ` : ''}${lead} leading`;
+  return {
+    counts: n, dem, rep, undecided, other: n.oLead,
+    total: dem + rep + undecided + n.oLead,
+    demDetail: detail(dHeld, n.dLead),
+    repDetail: detail(rHeld, n.rLead),
+    undecidedDetail: `${n.toss} toss-up · ${n.none} no votes/data${n.oLead ? ` · ${n.oLead} other party leading` : ''}`,
+    segments: SEAT_CATEGORIES.filter((c) => n[c.key] > 0).map((c) => ({ ...c, n: n[c.key] })),
+  };
+}
+
+/**
+ * Hemicycle seat positions (left to right, inner to outer within a column) in a 460×250 frame: `n` dots over `rows`
+ * arcs from radius r0 to r1, seats per arc proportional to its radius. Deterministic: the same n always gives the same
+ * layout, so seats fill in the category order.
+ */
+export function hemicycle(n, rows, r0, r1, cx = 230, cy = 210) {
+  const radii = [];
+  for (let i = 0; i < rows; i++) radii.push(r0 + (r1 - r0) * (rows === 1 ? 0 : i / (rows - 1)));
+  const sum = radii.reduce((a, b) => a + b, 0);
+  const counts = radii.map((r) => Math.round((n * r) / sum));
+  counts[rows - 1] += n - counts.reduce((a, b) => a + b, 0);
+  const pts = [];
+  radii.forEach((r, i) => {
+    const k = counts[i];
+    for (let j = 0; j < k; j++) {
+      const t = Math.PI * (1 - (k === 1 ? 0.5 : j / (k - 1)));
+      pts.push({ x: cx + r * Math.cos(t), y: cy - r * Math.sin(t), t, r });
+    }
+  });
+  pts.sort((a, b) => b.t - a.t || a.r - b.r);
+  return pts.map((p) => ({ x: Math.round(p.x * 10) / 10, y: Math.round(p.y * 10) / 10 }));
+}
+
+/** Senate seats up with votes counted, closest first (absolute margin), for the "Closest Senate races" list. */
+export function closestSeats(up, limit = 8) {
+  return (up || []).filter((s) => s.live && Number(s.totalVotes) > 0 && isNum(s.marginPts))
+    .sort((a, b) => Math.abs(Number(a.marginPts)) - Math.abs(Number(b.marginPts)) || a.state.localeCompare(b.state))
+    .slice(0, limit);
+}
+
+/** "District 7" / "At large". */
+export const districtLabel = (d) => (!d || /^(al|at[- ]?large|0+)$/i.test(String(d)) ? 'At large' : `District ${Number(d) || d}`);
+
+/** One district row: status + margin text ("+4.2" / "Toss-up" / "No votes yet"). */
+export function districtLine(seat, tossup = TOSSUP_MARGIN) {
+  const st = seatStatus({ live: true, ...seat }, tossup);
+  if (st === 'none') return { status: st, text: 'No votes yet' };
+  if (st === 'toss') return { status: st, text: 'Toss-up' };
+  return { status: st, text: isNum(seat.marginPts) ? `+${Math.abs(Number(seat.marginPts)).toFixed(1)}` : '' };
+}
+
+/** "1 county publishes its own results" / "3 counties publish their own results". */
+export const countWord = (n, one, many) => `${n} ${n === 1 ? one : many}`;

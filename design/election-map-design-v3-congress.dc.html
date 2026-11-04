@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Congress — Balance of Power</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0E1116}
+a{color:#93B4FA}a:hover{color:#C7D7FD}
+button{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0E1116; color: #E6EDF3; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding: 16px 24px; border-bottom: 1px solid #232A35;">
+    <div style="display: flex; align-items: center; gap: 12px; flex: 1 1 280px;">
+      <div style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; box-shadow: 0 0 0 4px rgba(239,68,68,.18);" aria-hidden="true"></div>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em;">Election Night 2026</h1>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .06em; color: #FBBF24; border: 1px solid #5B4A1C; background: #2A2312; padding: 3px 8px; border-radius: 4px;">SAMPLE DATA</span>
+    </div>
+    <nav aria-label="View" style="display: flex; gap: 4px; background: #161B22; border: 1px solid #232A35; border-radius: 10px; padding: 4px;">
+      <a href="Main.dc.html" style="display: flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 7px; font-size: 14px; font-weight: 600; color: #9AA4B2; text-decoration: none;">Map</a>
+      <a href="Congress.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 7px; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #2E3744; text-decoration: none;">Congress</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 20px; font-size: 13px; color: #9AA4B2;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em;">Last update</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #E6EDF3; font-weight: 600;">[HH:MM MT]</span>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding: 24px; display: flex; flex-direction: column; gap: 20px; max-width: 1400px; width: 100%; box-sizing: border-box; margin: 0 auto;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <h2 style="margin: 0; font-size: 22px; font-weight: 700;">Balance of power</h2>
+      <p style="margin: 0; font-size: 14px; color: #9AA4B2;">Seats held by each party plus seats where they currently have more votes counted. "Leading" is not a call; this site does not call races.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+      <sc-for list="{{chambers}}" as="ch" hint-placeholder-count="2">
+        <section aria-label="{{ch.name}}" style="flex: 1 1 480px; min-width: 0; background: #161B22; border: 1px solid #232A35; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px;">
+            <h3 style="margin: 0; font-size: 18px; font-weight: 700;">{{ch.name}}</h3>
+            <span style="font-size: 13px; color: #9AA4B2;">{{ch.seats}} seats · {{ch.majority}} for majority</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+            <div style="background: #11161D; border: 1px solid #232A35; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #93B4FA; font-weight: 600;">Democrats</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600;">{{ch.dTotal}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{ch.dDetail}}</span>
+            </div>
+            <div style="background: #11161D; border: 1px solid #232A35; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9AA4B2; font-weight: 600;">Undecided</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600;">{{ch.uTotal}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{ch.uDetail}}</span>
+            </div>
+            <div style="background: #11161D; border: 1px solid #232A35; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #F7A1A1; font-weight: 600;">Republicans</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 600;">{{ch.rTotal}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{ch.rDetail}}</span>
+            </div>
+          </div>
+
+          <div style="display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: #2A313C; position: relative;" role="img" aria-label="{{ch.barLabel}}">
+            <sc-for list="{{ch.bar}}" as="seg" hint-placeholder-count="6">
+              <div style="width: {{seg.w}}; background: {{seg.color}};"></div>
+            </sc-for>
+            <div style="position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; background: #E6EDF3;" aria-hidden="true"></div>
+          </div>
+
+          <svg viewBox="0 0 460 250" style="width: 100%; height: auto; display: block;" role="img" aria-label="{{ch.chartLabel}}">
+            <sc-for list="{{ch.dots}}" as="dt" hint-placeholder-count="0">
+              <circle cx="{{dt.x}}" cy="{{dt.y}}" r="{{dt.r}}" fill="{{dt.fill}}" stroke="{{dt.stroke}}" stroke-width="1"></circle>
+            </sc-for>
+            <line x1="230" y1="18" x2="230" y2="44" stroke="#E6EDF3" stroke-width="2"></line>
+            <text x="230" y="12" text-anchor="middle" fill="#9AA4B2" font-size="11" font-family="Inter, sans-serif">{{ch.majority}} for majority</text>
+            <text x="230" y="238" text-anchor="middle" fill="#E6EDF3" font-size="26" font-weight="700" font-family="IBM Plex Mono, monospace">{{ch.dTotal}}–{{ch.rTotal}}</text>
+          </svg>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: #9AA4B2;">
+            <sc-for list="{{ch.legend}}" as="lg" hint-placeholder-count="6">
+              <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: {{lg.color}}; border: 1px solid {{lg.stroke}};"></span>{{lg.label}}</span>
+            </sc-for>
+          </div>
+          <span style="font-size: 12px; color: #6B7686;">{{ch.note}}</span>
+        </section>
+      </sc-for>
+    </div>
+
+    <section aria-label="Closest Senate races" style="background: #161B22; border: 1px solid #232A35; border-radius: 14px; overflow: hidden;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; padding: 16px 20px; border-bottom: 1px solid #232A35;">
+        <h3 style="margin: 0; font-size: 16px; font-weight: 700;">Closest Senate races</h3>
+        <span style="font-size: 12px; color: #6B7686;">Sorted by current margin · click a race to open its state</span>
+      </div>
+      <sc-for list="{{closest}}" as="cr" hint-placeholder-count="6">
+        <a href="Main.dc.html" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: center; padding: 12px 20px; border-bottom: 1px solid #1C222B; text-decoration: none; color: #E6EDF3;">
+          <span style="font-size: 14px; font-weight: 600;">{{cr.state}}</span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px;">
+            <span style="width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; background: {{cr.avBg}}; color: {{cr.avFg}};">{{cr.initials}}</span>
+            [Leading candidate]
+          </span>
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 2px 8px; border-radius: 4px; justify-self: start; background: {{cr.chipBg}}; color: {{cr.chipFg}};">{{cr.lead}}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2; text-align: right;">{{cr.margin}} · {{cr.rep}} in</span>
+        </a>
+      </sc-for>
+    </section>
+    <p style="margin: 0; font-size: 12px; color: #6B7686;">Unofficial results — counts change as ballots are reported. Seats not up this year come from the official chamber rosters. "Leading" means more votes counted so far; this site does not call races.</p>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  hemicycle(n, rows, r0, r1, dotR) {
+    const cx = 230, cy = 210;
+    const radii = [];
+    for (let i = 0; i < rows; i++) radii.push(r0 + (r1 - r0) * (rows === 1 ? 0 : i / (rows - 1)));
+    const total = radii.reduce((a, b) => a + b, 0);
+    const counts = radii.map(r => Math.round(n * r / total));
+    let diff = n - counts.reduce((a, b) => a + b, 0);
+    counts[rows - 1] += diff;
+    const pts = [];
+    radii.forEach((r, i) => {
+      const k = counts[i];
+      for (let j = 0; j < k; j++) {
+        const t = Math.PI * (1 - (k === 1 ? 0.5 : j / (k - 1)));
+        pts.push({ x: cx + r * Math.cos(t), y: cy - r * Math.sin(t), t, r });
+      }
+    });
+    pts.sort((a, b) => b.t - a.t || a.r - b.r);
+    return pts.map(p => ({ x: p.x.toFixed(1), y: p.y.toFixed(1), r: dotR }));
+  }
+  build(name, seats, majority, cats, rows, r0, r1, dotR, note) {
+    const pts = this.hemicycle(seats, rows, r0, r1, dotR);
+    let idx = 0;
+    const dots = [];
+    cats.forEach(c => { for (let i = 0; i < c.n; i++) { const p = pts[idx++]; dots.push({ ...p, fill: c.color, stroke: c.stroke || c.color }); } });
+    const by = (k) => cats.filter(c => c.key === k).reduce((a, c) => a + c.n, 0);
+    const dHeld = by('dHeld'), dLead = by('dLead'), rHeld = by('rHeld'), rLead = by('rLead'), toss = by('toss'), none = by('none');
+    return {
+      name, seats, majority,
+      dTotal: dHeld + dLead, rTotal: rHeld + rLead, uTotal: toss + none,
+      dDetail: (dHeld ? dHeld + ' held + ' : '') + dLead + ' leading',
+      rDetail: (rHeld ? rHeld + ' held + ' : '') + rLead + ' leading',
+      uDetail: toss + ' toss-up · ' + none + ' no votes/data',
+      bar: cats.map(c => ({ w: (c.n / seats * 100).toFixed(2) + '%', color: c.color })),
+      barLabel: name + ': Democrats ' + (dHeld + dLead) + ', undecided ' + (toss + none) + ', Republicans ' + (rHeld + rLead),
+      chartLabel: name + ' seat chart, ' + seats + ' seats',
+      dots,
+      legend: cats.filter((c, i, arr) => arr.findIndex(x => x.label === c.label) === i).map(c => ({ color: c.color, stroke: c.stroke || c.color, label: c.label })),
+      note
+    };
+  }
+  renderVals() {
+    const senate = this.build('U.S. Senate', 100, 51, [
+      { key: 'dHeld', n: 32, color: '#2457D6', label: 'Dem — not up this year' },
+      { key: 'dHeld', n: 2, color: '#5B7FD6', label: 'Independent (caucuses Dem) — not up' },
+      { key: 'dLead', n: 8, color: '#93B4FA', label: 'Dem leading' },
+      { key: 'toss', n: 3, color: '#8B6FD6', label: 'Toss-up (<2 pts)' },
+      { key: 'none', n: 14, color: '#2A313C', stroke: '#3A4350', label: 'No votes yet / no live data' },
+      { key: 'rLead', n: 10, color: '#F7A1A1', label: 'Rep leading' },
+      { key: 'rHeld', n: 31, color: '#C42323', label: 'Rep — not up this year' }
+    ], 5, 105, 205, 8.5, 'Independents are shown with the party they caucus with, per the official Senate roster. In a 50–50 Senate the Vice President breaks ties.');
+    const house = this.build('U.S. House', 435, 218, [
+      { key: 'dLead', n: 96, color: '#93B4FA', label: 'Dem leading' },
+      { key: 'toss', n: 9, color: '#8B6FD6', label: 'Toss-up (<2 pts)' },
+      { key: 'none', n: 240, color: '#2A313C', stroke: '#3A4350', label: 'No votes yet / no live data' },
+      { key: 'rLead', n: 90, color: '#F7A1A1', label: 'Rep leading' }
+    ], 11, 70, 208, 4.1, 'All 435 seats are up every two years. Districts in states without live data stay grey until counts arrive.');
+    const states = ['Georgia', 'Michigan', 'North Carolina', 'Maine', 'Ohio', 'Texas', 'Iowa', 'New Hampshire'];
+    const closest = states.map((s, i) => {
+      const m = [0.6, 1.4, 2.8, 3.5, 4.9, 6.2, 7.0, 8.4][i];
+      const d = i % 2 === 0;
+      const toss = m < 2;
+      return {
+        state: s, margin: m.toFixed(1) + ' pts', rep: (30 + i * 7) + '%',
+        lead: toss ? 'TOSS-UP' : d ? 'DEM' : 'REP',
+        chipBg: toss ? '#2B2346' : d ? '#16264A' : '#3A1818', chipFg: toss ? '#C4B5FD' : d ? '#93B4FA' : '#F7A1A1',
+        initials: '[AB]'.slice(1, 3), avBg: d ? '#1E3260' : '#4A1F1F', avFg: d ? '#C7D7FD' : '#FBCACA'
+      };
+    });
+    return { chambers: [senate, house], closest };
+  }
+}
+</script>
+</body>
+</html>

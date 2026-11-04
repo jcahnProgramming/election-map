@@ -13,7 +13,7 @@ import { readConfig } from './config.js';
 import { loadElections } from './elections.js';
 import { officeLabel } from './contests.js';
 import { findMeasureInfo, measureInfoList, publicInfo, statePartyNames } from './measureinfo.js';
-import { attachPhotos } from './photos.js';
+import { attachPhotos, normDistrict } from './photos.js';
 
 export const COVERAGE_STATUSES = ['live', 'planned', 'blocked', 'no_feed'];
 
@@ -337,9 +337,15 @@ export function createResults(db, adapters, opts = {}) {
     let units;
     let contests;
     let otherContests = [];
-    if (race === 'house') {
-      units = combineHouse(races.map(loadRace));
+    let districts = null;
+    // House: the statewide popular vote is a sum by party across districts, plus one row per district. A state with a
+    // single at-large district is just that one contest, shown by candidate like a Senate race.
+    const houseSum = race === 'house' && !(races.length === 1 && wholeState(races[0].district));
+    if (houseSum) {
+      const loaded = races.map(loadRace);
+      units = combineHouse(loaded);
       contests = races.map((r) => r.name);
+      districts = races.map((r, i) => seatOf(ek, r, loaded[i])).sort(byDistrict);
     } else {
       // Two contests for the same office (e.g. a regular and a special Senate race) are different races:
       // never summed. The regular contest is the headline (a special / unexpired-term one goes after it); the rest are
@@ -357,10 +363,10 @@ export function createResults(db, adapters, opts = {}) {
     }
     const turnout = loadTurnout(races[0].snapshot_id);
     const sw = units.get('state');
-    const voteFor = race === 'house' ? 1 : races[0].vote_for ?? 1;
+    const voteFor = houseSum ? 1 : races[0].vote_for ?? 1;
     const s = summarize(sw?.candidates ?? [], sw?.pct, voteFor);
     // Photos: decided once per contest on the statewide numbers; counties reuse the same decision.
-    const photos = race === 'house' ? null : decidePhotos(ek, st.abbr, race, races[0].district, s.candidates);
+    const photos = houseSum ? null : decidePhotos(ek, st.abbr, race, races[0].district, s.candidates);
     s.candidates = attachPhotos(s.candidates, photos);
     const counties = new Map([...units].filter(([k]) => k !== 'state'));
     const entry = {
@@ -368,7 +374,8 @@ export function createResults(db, adapters, opts = {}) {
       status: s.totalVotes > 0 ? 'reporting' : 'awaiting',
       hasCountyData: counties.size > 0,
       voteFor,
-      ...(race === 'house' ? { partySum: true } : {}), // the House statewide popular vote: a sum by party, not people
+      ...(houseSum ? { partySum: true, districts } : {}), // the House statewide popular vote: a sum by party, not people
+      ...(race === 'house' && !houseSum ? { atLarge: true } : {}),
       contests,
       ...s,
       ...(otherContests.length ? { otherContests } : {}),
@@ -378,6 +385,88 @@ export function createResults(db, adapters, opts = {}) {
       ...sourceFields(races[0]),
     };
     return { entry, counties, turnout, methods: methodsOut(sw?.methods), photos };
+  }
+
+  /** "1", "2", … "AL" in district order. */
+  const byDistrict = (a, b) => (Number(a.district) || 0) - (Number(b.district) || 0) || String(a.district ?? '').localeCompare(String(b.district ?? ''));
+
+  /**
+   * One contest as a seat: who has the most votes counted (raw numbers; the client classifies toss-ups with the map's
+   * threshold). Never a call. `units` = loadRace(r) when already loaded.
+   */
+  function seatOf(ek, r, units = loadRace(r)) {
+    const u = units.get('state');
+    const s = summarize(u?.candidates ?? [], u?.pct, r.vote_for);
+    const cands = attachPhotos(s.candidates, decidePhotos(ek, r.state, r.office, r.district, s.candidates));
+    const lead = s.totalVotes > 0 ? cands[0] : null;
+    const second = s.totalVotes > 0 ? cands[1] : null;
+    return {
+      state: r.state, contest: r.name, district: r.district ?? null, live: true,
+      totalVotes: s.totalVotes, leader: s.leader, tied: s.tied, marginPts: s.marginPts, multiSeat: !!s.multiSeat,
+      pctReporting: u?.pct ?? null,
+      lead: lead ? { name: lead.name, party: lead.party, partyRaw: lead.partyRaw ?? null, runningMate: lead.runningMate ?? null, photo: lead.photo ?? null } : null,
+      // Top-two / same-party contests: the seat goes to that party whichever of the two leads.
+      runnerUpParty: second && second.votes > 0 ? second.party : null,
+      fetchedAt: r.fetched_at ?? null, sourceUpdatedAt: r.source_updated_at ?? null,
+    };
+  }
+
+  const chambersCache = new Map();
+  const chambersOf = (ek) => {
+    if (!chambersCache.has(ek)) chambersCache.set(ek, readConfig(`elections/${ek}/chambers.json`, null));
+    return chambersCache.get(ek);
+  };
+  const isSpecial = (r) => /\b(special|unexpired|vacancy)\b/i.test(r.name);
+
+  /**
+   * Congress / balance of power (`/api/congress`): seats not up this election (config/elections/<key>/chambers.json,
+   * from the official rosters) and one entry per seat that is up, from its stored contest. A seat with no contest in
+   * our feeds is `live: false` ("no live data"); one with no votes yet has totalVotes 0. Nothing here is a call.
+   */
+  function congress(ek = electionsCfg().current) {
+    const ch = chambersOf(ek);
+    if (!ch) return { election: ek, available: false, generatedAt: new Date().toISOString() };
+    const statewideRaces = (abbr, office) => oneElection(q.races.all(ek, abbr, office)
+      .filter((r) => (r.level == null || r.level === 'federal' || r.level === 'statewide')));
+    const noData = (state) => ({ state, contest: null, district: null, live: false, totalVotes: 0, leader: null, tied: false,
+      marginPts: null, multiSeat: false, pctReporting: null, lead: null, runnerUpParty: null, fetchedAt: null, sourceUpdatedAt: null });
+
+    const senateUp = [];
+    const byState = new Map();
+    for (const u of ch.senate.up) { if (!byState.has(u.state)) byState.set(u.state, []); byState.get(u.state).push(u); }
+    for (const [abbr, seats] of byState) {
+      const races = statewideRaces(abbr, 'senate').filter((r) => wholeState(r.district));
+      const regular = races.filter((r) => !isSpecial(r));
+      const special = races.filter(isSpecial);
+      for (const seat of seats) {
+        // One seat up and one contest: that's it, whatever its name. Otherwise regular / special by name.
+        const r = seats.length === 1 && races.length === 1 ? races[0] : (seat.seat === 'special' ? special[0] : regular[0]);
+        const out = r ? seatOf(ek, r) : noData(abbr);
+        senateUp.push({ ...out, seat: seat.seat, class: seat.class ?? null, name: stateByAbbr(abbr)?.name ?? abbr });
+      }
+    }
+    senateUp.sort((a, b) => a.state.localeCompare(b.state) || a.seat.localeCompare(b.seat));
+
+    const houseSeats = [];
+    for (const [abbr, n] of Object.entries(ch.house.districts)) {
+      const races = statewideRaces(abbr, 'house');
+      const byD = new Map(races.map((r) => [normDistrict(r.district), r]));
+      for (let d = 1; d <= n; d++) {
+        const r = n === 1 ? (races.find((x) => wholeState(x.district)) ?? races[0]) : byD.get(String(d));
+        const out = r ? seatOf(ek, r) : noData(abbr);
+        houseSeats.push({ ...out, district: n === 1 ? 'AL' : String(d), name: stateByAbbr(abbr)?.name ?? abbr });
+      }
+    }
+
+    return {
+      election: ek, available: true, generatedAt: new Date().toISOString(), asOf: ch.as_of ?? null,
+      senate: {
+        seats: ch.senate.seats, majority: ch.senate.majority, tieBreak: ch.senate.tieBreak ?? null, source: ch.senate.source ?? null,
+        holdovers: ch.senate.holdovers.map(({ state, name, party, caucus }) => ({ state, name, party, caucus })),
+        up: senateUp,
+      },
+      house: { seats: ch.house.seats, majority: ch.house.majority, source: ch.house.source ?? null, up: houseSeats },
+    };
   }
 
   function national(race, ek = electionsCfg().current) {
@@ -437,7 +526,7 @@ export function createResults(db, adapters, opts = {}) {
     }
     return {
       ...chosen,
-      entry: { ...chosen.entry, topOffice: pick, topLabel: pick === 'house' ? 'U.S. House · statewide popular vote' : officeLabel(pick), otherRaces },
+      entry: { ...chosen.entry, topOffice: pick, topLabel: pick === 'house' ? (chosen.entry.partySum ? 'U.S. House · statewide popular vote' : 'U.S. House · at large') : officeLabel(pick), otherRaces },
       office: pick,
     };
   }
@@ -632,7 +721,7 @@ export function createResults(db, adapters, opts = {}) {
     // With a statewide source, county sites only fill in counties the state actually has (they must agree with its list).
     if (sites && hasStatewide) for (const k of [...sites.keys()]) if (!known.has(k)) sites.delete(k);
     const n = sites?.size ?? 0;
-    const publish = `${n} ${n === 1 ? 'county publishes' : 'counties publish'} their own results`;
+    const publish = `${n} ${n === 1 ? 'county publishes its' : 'counties publish their'} own results`;
     if (n && hasStatewide) {
       counties = sites;
       countyData = 'partial';
@@ -661,7 +750,7 @@ export function createResults(db, adapters, opts = {}) {
       countyData, countyNote,
       counties: [...(counties ?? new Map()).values()].map((u) => ({
         fips: u.fips, name: known.get(u.fips) ?? u.name, ...withPhotos(summarize(u.candidates, u.pct, entry.voteFor ?? 1), countyData === 'available' ? photos : null),
-        ...(race === 'house' ? { partySum: true } : {}),
+        ...(entry.partySum ? { partySum: true } : {}),
         precinctsReporting: u.pr ?? null, precinctsTotal: u.pt ?? null,
         turnout: u.turnout !== undefined ? u.turnout : turnout?.get(u.fips) ?? null,
         methods: methodsOut(u.methods),
@@ -751,7 +840,7 @@ export function createResults(db, adapters, opts = {}) {
     return cfg.elections.some((e) => e.key === key) ? key : null;
   }
 
-  return { national, state, measures, coverage, elections, resolveElection, offices, levelOfOffice, contests };
+  return { national, state, measures, coverage, elections, resolveElection, offices, levelOfOffice, contests, congress };
 }
 
 export const labelOf = (race) => ({ senate: 'U.S. Senate', governor: 'Governor', house: 'U.S. House' })[race] ?? officeLabel(race);

@@ -114,6 +114,10 @@ api.get('/measures', (req, res) => {
   if (st && !stateByAbbr(st)) return res.status(404).json({ error: 'unknown state' });
   res.json(results.measures(st, ek));
 });
+api.get('/congress', (req, res) => {
+  const ek = electionParam(req, res);
+  if (ek) res.json(results.congress(ek));
+});
 api.get('/coverage', (req, res) => {
   const ek = electionParam(req, res);
   if (ek) res.json(results.coverage(ek));

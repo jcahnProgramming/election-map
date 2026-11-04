@@ -7,6 +7,7 @@ import { fmtReporting } from './format.js';
 import { stateFeatures, FIPS_TO_ABBR } from './geo.js';
 import { newerDataVersion, isNewerAppVersion, safetyPollDue, updatedAgo } from './live.js';
 import NationalView from './components/NationalView.jsx';
+import CongressView from './components/CongressView.jsx';
 import StateView from './components/StateView.jsx';
 import Sidebar from './components/Sidebar.jsx';
 import Legend from './components/Legend.jsx';
@@ -45,26 +46,34 @@ function parseLocation(loc) {
   const lv = p.get('level');
   const levelAsked = lv === 'top' || lv === 'state' || lv === 'federal' ? lv : null;
   const st = String(p.get('state') || '').toUpperCase();
-  const rest = { state: /^[A-Z]{2}$/.test(st) ? st : null, tab: p.get('tab') === 'all' ? 'all' : 'overview' };
+  const tab = p.get('tab') === 'all' ? 'all' : 'overview';
+  const rest = {
+    view: p.get('view') === 'congress' ? 'congress' : 'map',
+    state: /^[A-Z]{2}$/.test(st) ? st : null, tab,
+    q: tab === 'all' ? String(p.get('q') || '').slice(0, 100) : '',
+  };
   // No level and no office (a bare URL), or level=top: the Top race view.
   if (levelAsked === TOP || (!levelAsked && !OFFICE_RE.test(office)) || office === TOP) return { ...rest, office: TOP, level: TOP };
   if (!OFFICE_RE.test(office)) office = levelAsked === 'state' ? 'governor' : DEFAULT_OFFICE;
   const level = levelAsked ?? (FEDERAL.has(office) ? 'federal' : 'state');
   return { ...rest, office, level };
 }
-function toSearch({ state, office, level, tab }) {
+function toSearch({ view, state, office, level, tab, q }) {
+  if (view === 'congress') return '?view=congress';
   const p = new URLSearchParams();
   if (level === TOP) {
     // The default view: no level / office in the URL.
     if (state) p.set('state', state);
     if (state && tab === 'all') p.set('tab', 'all');
-    const q = p.toString();
-    return q ? `?${q}` : '';
+    if (state && tab === 'all' && q) p.set('q', q);
+    const qs = p.toString();
+    return qs ? `?${qs}` : '';
   }
   p.set('level', level);
   p.set('office', ALIAS_OF[office] ?? office);
   if (state) p.set('state', state);
   if (state && tab === 'all') p.set('tab', 'all');
+  if (state && tab === 'all' && q) p.set('q', q);
   return `?${p.toString()}`;
 }
 
@@ -84,6 +93,8 @@ function useRoute() {
     setRoute((cur) => {
       const r = { ...cur, ...next };
       if (next.state !== undefined && next.state !== cur.state && next.tab === undefined) r.tab = 'overview';
+      if (next.tab !== undefined && next.q === undefined) r.q = '';
+      if (next.view === undefined && (next.state !== undefined || next.office !== undefined || next.level !== undefined)) r.view = 'map';
       const search = toSearch(r);
       if (search !== window.location.search) window.history.pushState(null, '', `${window.location.pathname}${search}`);
       return parseLocation({ search, hash: '' });
@@ -166,9 +177,28 @@ const FALLBACK_OFFICES = {
   state: [{ office: 'governor', label: 'Governor' }],
 };
 
+/** Map | Congress: real links (shareable, open in a new tab), current view marked with aria-current. */
+function ViewSwitch({ view, onPick }) {
+  const item = (k, label, href) => (
+    <a className="view-btn" href={href} aria-current={view === k ? 'page' : undefined}
+      onClick={(e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        onPick(k);
+      }}>{label}</a>
+  );
+  return (
+    <nav className="view-switch" aria-label="View">
+      {item('map', 'Map', window.location.pathname)}
+      {item('congress', 'Congress', '?view=congress')}
+    </nav>
+  );
+}
+
 export default function App() {
   const [route, navigate] = useRoute();
-  const { state: abbr, office: race, level, tab } = route;
+  const { state: abbr, office: race, level, tab, view, q: allQuery } = route;
+  const congressView = view === 'congress';
   const [tick, setTick] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [changelogOpen, setChangelogOpen] = useState(false);
@@ -232,6 +262,7 @@ export default function App() {
   const stateBox = useLive(abbr ? `${abbr}/${race}` : null, tick, () => api.state(abbr, race, dataVersion.current));
   const contestsBox = useLive(abbr && tab === 'all' ? abbr : null, tick, () => api.contests(abbr, dataVersion.current));
   const measuresBox = useLive(abbr || '*', tick, () => api.measures(abbr, dataVersion.current));
+  const congressBox = useLive(congressView ? 'congress' : null, tick, () => api.congress(dataVersion.current));
   const changelog = useLive('changelog', 0, () => api.changelog());
   const health = useLive('health', 0, () => api.health());
   useEffect(() => {
@@ -245,13 +276,17 @@ export default function App() {
   const version = changelog.data?.currentVersion || health.data?.version || changelog.data?.releases?.[0]?.version || null;
   // A deploy happened since this page loaded: the server runs a newer version than this bundle.
   const newVersion = isNewerAppVersion(APP_VERSION, serverVersion) ? serverVersion : null;
-  const viewAt = abbr ? (tab === 'all' ? contestsBox.at : stateBox.at) : national.at;
+  const viewAt = congressView ? congressBox.at : abbr ? (tab === 'all' ? contestsBox.at : stateBox.at) : national.at;
 
   const nStates = national.data?.states;
   const est = estReporting(nStates);
   const stateData = abbr ? stateBox.data : null;
 
+  const congressData = congressBox.data;
   const lastUpdate = useMemo(() => {
+    if (congressView && congressData?.available) {
+      return newestTime([...congressData.senate.up, ...congressData.house.up].flatMap((x) => [x.fetchedAt, x.sourceUpdatedAt]));
+    }
     if (abbr) {
       const sw = stateData?.statewide;
       const t = newestTime([sw?.fetchedAt, sw?.sourceUpdatedAt, ...(sw?.otherContests || []).map((c) => c.fetchedAt)]);
@@ -259,18 +294,19 @@ export default function App() {
       // A state with no source of its own: show when the national picture last changed.
     }
     return newestTime((nStates || []).flatMap((s) => [s.fetchedAt, s.sourceUpdatedAt]));
-  }, [abbr, stateData, nStates]);
+  }, [abbr, stateData, nStates, congressView, congressData]);
 
   const stateName = abbr ? stateData?.name || STATE_OPTIONS.find((o) => o.a === abbr)?.n || abbr : null;
-  const viewError = abbr ? (tab === 'all' ? contestsBox.error : stateBox.error) : national.error;
+  const viewError = congressView ? congressBox.error : abbr ? (tab === 'all' ? contestsBox.error : stateBox.error) : national.error;
   const closeChangelog = useCallback(() => setChangelogOpen(false), []);
 
   // A new view starts at the top.
-  useEffect(() => { window.scrollTo(0, 0); }, [abbr]);
+  useEffect(() => { window.scrollTo(0, 0); }, [abbr, view]);
 
   useEffect(() => {
-    document.title = `${stateName ? `${stateName} · ` : ''}${shortLabel(race)} · Election Night 2026 (unofficial)`;
-  }, [stateName, race, officesBox.data]);
+    document.title = congressView ? 'Congress · Election Night 2026 (unofficial)'
+      : `${stateName ? `${stateName} · ` : ''}${shortLabel(race)} · Election Night 2026 (unofficial)`;
+  }, [stateName, race, officesBox.data, congressView]);
 
   // In Top race, the state view shows that state's top office (the server resolves it).
   const viewRace = race === TOP ? (stateData?.topOffice ?? TOP) : race;
@@ -301,7 +337,9 @@ export default function App() {
           <span className="sr-only" role="status">{connected ? 'Live updates connected' : 'Live updates reconnecting'}</span>
         </div>
 
-        <div className="race-picker">
+        <ViewSwitch view={view} onPick={(v) => navigate(v === 'congress' ? { view: 'congress' } : { view: 'map' })} />
+
+        {!congressView && <div className="race-picker">
           <div className="level-group" role="group" aria-label="Election level">
             {LEVELS.map(([k, label]) => (
               <button key={k} type="button" className="level-btn" aria-pressed={k === level} onClick={() => pickLevel(k)}>{label}</button>
@@ -317,13 +355,15 @@ export default function App() {
               ))}
             </div>
           )}
-        </div>
+        </div>}
 
         <div className="hdr-meta">
-          <div className="hdr-stat" title="Votes-weighted across states reporting a % of precincts or votes counted">
-            <span className="k">Est. reporting</span>
-            <span className="v">{est != null ? fmtReporting(est) : '—'}</span>
-          </div>
+          {!congressView && (
+            <div className="hdr-stat" title="Votes-weighted across states reporting a % of precincts or votes counted">
+              <span className="k">Est. reporting</span>
+              <span className="v">{est != null ? fmtReporting(est) : '—'}</span>
+            </div>
+          )}
           <div className="hdr-stat">
             <span className="k">Last update</span>
             <span className="v">{fmtMT(lastUpdate) || '—'} <UpdatedAgo at={viewAt} /></span>
@@ -331,13 +371,27 @@ export default function App() {
           <button type="button" className="btn-ghost" onClick={() => setChangelogOpen(true)} aria-haspopup="dialog" aria-label={`What's new${version ? `: version ${version}` : ''}`}>
             {version ? `v${version}` : 'v…'}
           </button>
-          <button type="button" className="btn" onClick={() => setSidebarOpen((o) => !o)} aria-expanded={sidebarOpen} aria-controls="measures">
+          {!congressView && <button type="button" className="btn" onClick={() => setSidebarOpen((o) => !o)} aria-expanded={sidebarOpen} aria-controls="measures">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" /></svg>
             Ballot measures
-          </button>
+          </button>}
         </div>
       </header>
 
+      {congressView ? (
+        <div className="body">
+          <main className="main congress-main">
+            {viewError && (
+              <div className="banner err" role="alert">{viewError}{congressData ? ' Showing the last data we received.' : ''}</div>
+            )}
+            <CongressView data={congressData} error={congressBox.error}
+              onOpenState={(st) => navigate({ view: 'map', level: 'federal', office: 'senate', state: st })} />
+            <p className="disclaimer">
+              Unofficial results — counts change as ballots are reported. "Leading" means more votes counted so far; this site does not call races.
+            </p>
+          </main>
+        </div>
+      ) : (
       <div className="body">
         <main className="main">
           <div className="toolbar">
@@ -383,7 +437,7 @@ export default function App() {
 
           {abbr ? (
             <StateView abbr={abbr} race={viewRace} tab={tab} data={stateData} error={stateBox.error}
-              contests={contestsBox.data} contestsError={contestsBox.error} onOpenMeasure={openMeasure} />
+              contests={contestsBox.data} contestsError={contestsBox.error} onOpenMeasure={openMeasure} query={allQuery} />
           ) : (
             <NationalView data={national.data} race={race} error={national.error} onSelectState={(s) => navigate({ state: s })} />
           )}
@@ -410,6 +464,7 @@ export default function App() {
           />
         )}
       </div>
+      )}
 
       {changelogOpen && (
         <Changelog data={changelog.data} error={changelog.error} currentVersion={version} onClose={closeChangelog} />

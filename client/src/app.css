@@ -363,3 +363,83 @@ button { cursor: pointer; }
 .official-btn { text-decoration: none; color: var(--link); border-color: var(--link); }
 .official-btn:hover { color: var(--link-hover); }
 .no-live-panel { min-height: 220px; }
+
+/* ---------- 0.5: Map | Congress switch ---------- */
+.view-switch { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 4px; }
+.view-btn { display: flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 7px; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none; }
+.view-btn:hover { color: var(--text); }
+.view-btn[aria-current='page'] { color: #fff; background: var(--border-2); }
+
+/* ---------- Congress view ---------- */
+.congress-main { max-width: 1400px; margin: 0 auto; width: 100%; }
+.congress { display: flex; flex-direction: column; gap: 20px; }
+.congress-intro h2 { margin: 0 0 4px; font-size: 22px; font-weight: 700; }
+.congress-intro p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.chambers { display: flex; flex-wrap: wrap; gap: 20px; }
+.chamber { flex: 1 1 480px; min-width: 0; background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-xl); padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.chamber-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; }
+.chamber-head h3 { margin: 0; font-size: 18px; font-weight: 700; }
+.chamber-head span { font-size: 13px; color: var(--muted); }
+.chamber-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ccard { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.ccard .k { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; }
+.ccard .big { font-family: var(--font-num); font-size: 30px; font-weight: 600; }
+.ccard .small { font-family: var(--font-num); font-size: 12px; color: var(--muted); }
+.seat-bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--track); position: relative; }
+.seat-bar > div { height: 100%; }
+.seat-bar .majority-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--text); }
+.hemicycle { width: 100%; height: auto; display: block; font-family: var(--font-ui); }
+.seat-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 12px; color: var(--muted); }
+.seat-legend li { display: flex; align-items: center; gap: 6px; }
+.seat-legend .dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid; flex: none; }
+.seat-legend b { color: var(--text-2); font-family: var(--font-num); font-weight: 600; }
+.chamber-note { margin: 0; font-size: 12px; color: var(--muted-2); line-height: 1.5; }
+.closest { background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-xl); overflow: hidden; }
+.closest-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.closest-head h3 { margin: 0; font-size: 16px; font-weight: 700; }
+.closest-head span { font-size: 12px; color: var(--muted-2); }
+.closest ul { list-style: none; margin: 0; padding: 0; }
+.closest-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 20px; border-bottom: 1px solid #1C222B; text-decoration: none; color: var(--text); }
+.closest li:last-child .closest-row { border-bottom: 0; }
+.closest-row:hover { background: var(--panel-2); color: var(--text); }
+.closest-row .cs { font-size: 14px; font-weight: 600; }
+.closest-row .cs .sub { font-weight: 400; color: var(--muted); }
+.closest-row .cl { display: flex; align-items: center; gap: 8px; font-size: 13px; min-width: 0; }
+.closest-row .cl .nm { min-width: 0; overflow-wrap: break-word; }
+.closest-row .chip { justify-self: start; }
+.closest-row .cm { font-family: var(--font-num); font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+
+/* ---------- House district rows (tooltips + state view) ---------- */
+.district-rows { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--border-2); padding-top: 8px; }
+.district-row { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 8px; align-items: center; font-size: 12.5px; }
+.district-row .dn { color: var(--muted); white-space: nowrap; }
+.district-row .dl { display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 600; }
+.district-row .dl .nm { min-width: 0; overflow-wrap: break-word; }
+.district-row .dm { font-family: var(--font-num); white-space: nowrap; text-align: right; }
+.district-row.st-dLead .dm { color: var(--dem-text); }
+.district-row.st-rLead .dm { color: var(--rep-text); }
+.district-row.st-toss .dm { color: var(--tossup-text); }
+.district-row.st-none .dm { color: var(--muted); }
+.more-link { color: var(--link) !important; text-decoration: none; font-weight: 600; }
+.districts-card { gap: 10px; }
+.districts-card .district-rows { border-top: 0; padding-top: 0; }
+.districts-card .district-row { font-size: 13.5px; }
+.tip.sheet .district-rows { max-height: none; }
+
+/* Running mates: after the name, smaller and muted. */
+.rm { margin-left: 6px; font-size: .85em; font-weight: 400; color: var(--muted); white-space: normal; }
+.card .k.cand .rm { text-transform: none; letter-spacing: 0; color: var(--muted) !important; }
+
+@media (max-width: 640px) {
+  .chamber { flex-basis: 100%; padding: 14px; }
+  .chamber-cards { gap: 6px; }
+  .ccard { padding: 10px; }
+  .ccard .big { font-size: 22px; }
+  .ccard .k { font-size: 10px; letter-spacing: .02em; overflow-wrap: anywhere; }
+  .ccard .small { font-size: 11px; }
+  .closest-row { grid-template-columns: minmax(0, 1fr) auto; padding: 10px 14px; gap: 6px 10px; }
+  .closest-row .cl { grid-column: 1; grid-row: 2; }
+  .closest-row .chip { grid-column: 2; grid-row: 1; justify-self: end; }
+  .closest-row .cm { grid-column: 2; grid-row: 2; }
+  .view-switch { order: 2; }
+}

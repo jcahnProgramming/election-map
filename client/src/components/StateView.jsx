@@ -8,7 +8,7 @@ import { partyShares, leadText, candidateList, hasCandidates } from '../calc.js'
 import { fmtVotes, fmtPct, fmtReporting, shortLabel, longLabel, hostOf } from '../format.js';
 import { fmtMT, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import AllRaces from './AllRaces.jsx';
-import { SeatRows, PartyTag } from './EntryTip.jsx';
+import { SeatRows, PartyTag, RunningMate, DistrictRows } from './EntryTip.jsx';
 import Avatar from './Avatar.jsx';
 
 /** Statewide strip: Dem / Rep / Other / Reporting (or an honest status in place of numbers). */
@@ -71,7 +71,7 @@ export function TotalsStrip({ entry, race, stateName, compact = false }) {
           <div className="card cand-card" key={`${c.name}-${i}`}>
             <span className="cand-head">
               <Avatar name={c.name} party={c.party} photo={c.photo} size={40} />
-              <span className={`k cand ${cls(c.party)}`}>{c.name}<PartyTag tag={c.tag} party={c.party} /></span>
+              <span className={`k cand ${cls(c.party)}`}>{c.name}<PartyTag tag={c.tag} party={c.party} /><RunningMate name={c.runningMate} /></span>
             </span>
             <span className="big">{fmtVotes(c.votes)}</span>
             <span className="small">{fmtPct(c.pct)}</span>
@@ -119,7 +119,7 @@ export function SourceStrip({ entry, official, name }) {
   );
 }
 
-export default function StateView({ abbr, race, tab = 'overview', data, error, contests, contestsError, onOpenMeasure }) {
+export default function StateView({ abbr, race, tab = 'overview', data, error, contests, contestsError, onOpenMeasure, query = '' }) {
   const [geo, setGeo] = useState(null);
   const [geoError, setGeoError] = useState(null);
   const [pinned, setPinned] = useState(null); // county FIPS
@@ -226,7 +226,7 @@ export default function StateView({ abbr, race, tab = 'overview', data, error, c
     return (
       <>
         <SourceStrip entry={sw} official={official} name={contests?.name || name} />
-        <AllRaces data={contests} error={contestsError} stateName={contests?.name || name} onOpenMeasure={onOpenMeasure} />
+        <AllRaces data={contests} error={contestsError} stateName={contests?.name || name} onOpenMeasure={onOpenMeasure} initialQuery={query} />
       </>
     );
   }
@@ -237,8 +237,17 @@ export default function StateView({ abbr, race, tab = 'overview', data, error, c
       <TotalsStrip entry={sw} race={race} stateName={name} />
       {sw?.contests?.length > 0 && (
         <p className="contest-line">
-          {race === 'house' ? `${sw.contests.length} district contest${sw.contests.length === 1 ? '' : 's'}, summed into the statewide House popular vote` : <b>{sw.contests.join('; ')}</b>}
+          {sw.partySum ? `${sw.contests.length} district contest${sw.contests.length === 1 ? '' : 's'}, summed into the statewide House popular vote` : <b>{sw.contests.join('; ')}</b>}
         </p>
+      )}
+      {sw?.partySum && sw.districts?.length > 0 && (
+        <section className="card districts-card" aria-label="U.S. House districts">
+          <div className="methods-head">
+            <span className="k">Districts · U.S. House</span>
+            <span className="note">Each district is its own contest: who has the most votes counted so far</span>
+          </div>
+          <DistrictRows districts={sw.districts} state={sw.state} />
+        </section>
       )}
       <div className="map-panel">{panel}</div>
 

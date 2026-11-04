@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Election Night Map</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0E1116}
+a{color:#93B4FA}a:hover{color:#C7D7FD}
+.st path{transition:fill .25s ease}
+button{font:inherit}
+select{font:inherit}
+</style>
+</helmet>
+<div style="position: relative; min-height: 100vh; background: #0E1116; color: #E6EDF3; font-family: Inter, system-ui, sans-serif; display: flex; flex-direction: column;">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding: 16px 24px; border-bottom: 1px solid #232A35;">
+    <div style="display: flex; align-items: center; gap: 12px; flex: 1 1 280px;">
+      <div style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; box-shadow: 0 0 0 4px rgba(239,68,68,.18);" aria-hidden="true"></div>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em;">Election Night 2026</h1>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .06em; color: #FBBF24; border: 1px solid #5B4A1C; background: #2A2312; padding: 3px 8px; border-radius: 4px;">SAMPLE DATA</span>
+    </div>
+
+    <nav aria-label="View" style="display: flex; gap: 4px; background: #161B22; border: 1px solid #232A35; border-radius: 10px; padding: 4px;">
+      <a href="Main.dc.html" aria-current="page" style="display: flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 7px; font-size: 14px; font-weight: 600; color: #FFFFFF; background: #2E3744; text-decoration: none;">Map</a>
+      <a href="Congress.dc.html" style="display: flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 7px; font-size: 14px; font-weight: 600; color: #9AA4B2; text-decoration: none;">Congress</a>
+    </nav>
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+      <div role="group" aria-label="Election level" style="display: flex; gap: 4px; background: #161B22; border: 1px solid #232A35; border-radius: 10px; padding: 4px;">
+        <sc-for list="{{levels}}" as="lvl" hint-placeholder-count="2">
+          <button type="button" aria-pressed="{{lvl.pressed}}" onClick="{{lvl.pick}}" style="border: 0; cursor: pointer; min-height: 36px; padding: 0 14px; border-radius: 7px; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; background: {{lvl.bg}}; color: {{lvl.fg}};">{{lvl.label}}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{showRacePills}}" hint-placeholder-val="{{false}}">
+      <div role="group" aria-label="Race" style="display: flex; flex-wrap: wrap; gap: 4px; background: #161B22; border: 1px solid #232A35; border-radius: 10px; padding: 4px;">
+        <sc-for list="{{races}}" as="r" hint-placeholder-count="3">
+          <button type="button" aria-pressed="{{r.pressed}}" onClick="{{r.pick}}" style="border: 0; cursor: pointer; min-height: 36px; padding: 0 14px; border-radius: 7px; font-size: 14px; font-weight: 600; background: {{r.bg}}; color: {{r.fg}};">{{r.label}}</button>
+        </sc-for>
+      </div>
+      </sc-if>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 20px; font-size: 13px; color: #9AA4B2;">
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em;">Est. reporting</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #E6EDF3; font-weight: 600;">{{nationalReporting}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em;">Last update</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: #E6EDF3; font-weight: 600;">[HH:MM MT]</span>
+      </div>
+      <button type="button" onClick="{{toggleChangelog}}" aria-label="What's new — version 0.1.0" style="cursor: pointer; min-height: 40px; padding: 0 12px; border-radius: 8px; border: 1px solid #2E3744; background: transparent; color: #9AA4B2; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600;">v0.1.0</button>
+      <button type="button" onClick="{{toggleSidebar}}" aria-expanded="{{sidebarOpen}}" style="cursor: pointer; min-height: 40px; padding: 0 14px; border-radius: 8px; border: 1px solid #2E3744; background: #161B22; color: #E6EDF3; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        Ballot measures
+      </button>
+    </div>
+  </header>
+
+  <div style="display: flex; flex-wrap: wrap; flex: 1 1 auto; min-height: 0;">
+
+    <main style="flex: 999 1 560px; min-width: 0; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px;">
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; justify-content: space-between;">
+        <nav aria-label="Breadcrumb" style="display: flex; align-items: center; gap: 8px; font-size: 15px;">
+          <sc-if value="{{inState}}" hint-placeholder-val="{{false}}">
+            <button type="button" onClick="{{goNational}}" style="cursor: pointer; border: 0; background: transparent; color: #93B4FA; font-size: 15px; font-weight: 600; padding: 8px 0; min-height: 40px;">← United States</button>
+            <span style="color: #4B5563;" aria-hidden="true">/</span>
+            <span style="font-weight: 700;">{{selName}}</span>
+          </sc-if>
+          <sc-if value="{{notInState}}" hint-placeholder-val="{{true}}">
+            <span style="font-weight: 700;">United States</span>
+            <span style="color: #9AA4B2;">· {{raceLong}}</span>
+          </sc-if>
+        </nav>
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #9AA4B2;">
+          Jump to state
+          <select onChange="{{jump}}" value="{{jumpValue}}" style="min-height: 36px; background: #161B22; color: #E6EDF3; border: 1px solid #2E3744; border-radius: 8px; padding: 0 10px; font-size: 14px;">
+            <option value="">United States</option>
+            <sc-for list="{{stateOptions}}" as="o" hint-placeholder-count="5">
+              <option value="{{o.a}}">{{o.n}}</option>
+            </sc-for>
+          </select>
+        </label>
+      </div>
+
+      <sc-if value="{{inState}}" hint-placeholder-val="{{false}}">
+        <div role="group" aria-label="State view" style="display: flex; gap: 4px; border-bottom: 1px solid #232A35;">
+          <sc-for list="{{stateTabs}}" as="tb" hint-placeholder-count="2">
+            <button type="button" aria-pressed="{{tb.pressed}}" onClick="{{tb.pick}}" style="cursor: pointer; border: 0; background: transparent; min-height: 40px; padding: 0 14px; font-size: 14px; font-weight: 600; color: {{tb.fg}}; border-bottom: 2px solid {{tb.line}}; margin-bottom: -1px;">{{tb.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{notInState}}" hint-placeholder-val="{{true}}">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+          <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #93B4FA; font-weight: 600;">Democrat leading</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 600;">{{tally.dem}}</span>
+          </div>
+          <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #C4B5FD; font-weight: 600;">Toss-up (&lt;2 pts)</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 600;">{{tally.toss}}</span>
+          </div>
+          <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #F7A1A1; font-weight: 600;">Republican leading</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 28px; font-weight: 600;">{{tally.rep}}</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{inOverview}}" hint-placeholder-val="{{false}}">
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+          <sc-for list="{{stateTotals}}" as="t" hint-placeholder-count="4">
+            <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; color: {{t.color}};">{{t.label}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600;">{{t.big}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #9AA4B2;">{{t.small}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{showMapBox}}" hint-placeholder-val="{{true}}">
+      <div style="position: relative; background: #11161D; border: 1px solid #232A35; border-radius: 14px; padding: 8px;">
+        <sc-if value="{{loading}}" hint-placeholder-val="{{false}}">
+          <div style="height: 420px; display: flex; align-items: center; justify-content: center; color: #9AA4B2; font-size: 14px;">Loading map…</div>
+        </sc-if>
+
+        <sc-if value="{{showNationalMap}}" hint-placeholder-val="{{true}}">
+          <div style="position: relative;" onMouseLeave="{{clearHover}}">
+            <svg viewBox="0 0 975 610" style="width: 100%; height: auto; display: block;" role="img" aria-label="US map shaded by who is leading in each state">
+              <g class="st">
+                <sc-for list="{{statesView}}" as="s" hint-placeholder-count="0">
+                  <path d="{{s.d}}" fill="{{s.fill}}" stroke="{{s.stroke}}" stroke-width="{{s.sw}}" stroke-linejoin="round" style="cursor: pointer;" onMouseEnter="{{s.enter}}" onMouseMove="{{move}}" onClick="{{s.open}}"></path>
+                </sc-for>
+              </g>
+            </svg>
+            <sc-if value="{{tip.show}}" hint-placeholder-val="{{false}}">
+              <div style="position: absolute; left: {{tip.x}}px; top: {{tip.y}}px; width: 300px; pointer-events: none; background: #1B212B; border: 1px solid #2E3744; border-radius: 10px; padding: 12px 14px; box-shadow: 0 12px 32px rgba(0,0,0,.45); display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+                  <span style="font-weight: 700; font-size: 15px;">{{tip.title}}</span>
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{tip.reporting}}</span>
+                </div>
+                <span style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600; margin-top: -4px;">{{tip.office}}</span>
+                <sc-if value="{{tip.hasRace}}" hint-placeholder-val="{{true}}">
+                  <sc-for list="{{tip.rows}}" as="row" hint-placeholder-count="3">
+                    <div style="display: flex; flex-direction: column; gap: 4px;">
+                      <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                        <span style="display: flex; align-items: center; gap: 6px; font-weight: 600; min-width: 0;"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{row.color}}; flex: none;"></span>{{row.label}}<span style="font-size: 10px; font-weight: 700; letter-spacing: .04em; color: {{row.partyFg}}; border: 1px solid #2E3744; border-radius: 3px; padding: 0 4px; flex: none;">{{row.party}}</span></span>
+                        <span style="font-family: 'IBM Plex Mono', monospace;">{{row.votes}} · {{row.pct}}</span>
+                      </div>
+                      <div style="height: 4px; background: #2A313C; border-radius: 2px;"><div style="height: 4px; border-radius: 2px; width: {{row.w}}; background: {{row.color}};"></div></div>
+                    </div>
+                  </sc-for>
+                  <span style="font-size: 12px; color: #9AA4B2;">{{tip.lead}}</span>
+                </sc-if>
+                <sc-if value="{{tip.hasOthers}}" hint-placeholder-val="{{false}}">
+                  <div style="display: flex; flex-direction: column; gap: 4px; border-top: 1px solid #2E3744; padding-top: 8px;">
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600;">Other races in this state</span>
+                    <sc-for list="{{tip.others}}" as="ot" hint-placeholder-count="2">
+                      <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 12px;">
+                        <span style="color: #9AA4B2;">{{ot.label}}</span>
+                        <span style="color: #C9D1DB; text-align: right;">{{ot.text}}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{tip.noRace}}" hint-placeholder-val="{{false}}">
+                  <span style="font-size: 13px; color: #9AA4B2;">No {{raceShort}} race on the ballot here this year.</span>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showCounties}}" hint-placeholder-val="{{false}}">
+          <div style="position: relative;" onMouseLeave="{{clearHover}}">
+            <svg viewBox="0 0 975 610" style="width: 100%; height: auto; display: block;" role="img" aria-label="Colorado counties shaded by who is leading">
+              <g class="st">
+                <sc-for list="{{countiesView}}" as="c" hint-placeholder-count="0">
+                  <path d="{{c.d}}" fill="{{c.fill}}" stroke="{{c.stroke}}" stroke-width="{{c.sw}}" stroke-linejoin="round" style="cursor: pointer;" onMouseEnter="{{c.enter}}" onMouseMove="{{move}}" onClick="{{c.pick}}"></path>
+                </sc-for>
+              </g>
+            </svg>
+            <sc-if value="{{tip.show}}" hint-placeholder-val="{{false}}">
+              <div style="position: absolute; left: {{tip.x}}px; top: {{tip.y}}px; width: 300px; pointer-events: none; background: #1B212B; border: 1px solid #2E3744; border-radius: 10px; padding: 12px 14px; box-shadow: 0 12px 32px rgba(0,0,0,.45); display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+                  <span style="font-weight: 700; font-size: 15px;">{{tip.title}}</span>
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{tip.reporting}}</span>
+                </div>
+                <sc-for list="{{tip.rows}}" as="row" hint-placeholder-count="3">
+                  <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
+                      <span style="display: flex; align-items: center; gap: 6px; font-weight: 600; min-width: 0;"><span style="width: 8px; height: 8px; border-radius: 2px; background: {{row.color}}; flex: none;"></span>{{row.label}}<span style="font-size: 10px; font-weight: 700; letter-spacing: .04em; color: {{row.partyFg}}; border: 1px solid #2E3744; border-radius: 3px; padding: 0 4px; flex: none;">{{row.party}}</span></span>
+                      <span style="font-family: 'IBM Plex Mono', monospace;">{{row.votes}} · {{row.pct}}</span>
+                    </div>
+                    <div style="height: 4px; background: #2A313C; border-radius: 2px;"><div style="height: 4px; border-radius: 2px; width: {{row.w}}; background: {{row.color}};"></div></div>
+                  </div>
+                </sc-for>
+                <span style="font-size: 12px; color: #9AA4B2;">{{tip.lead}}</span>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showNoCounty}}" hint-placeholder-val="{{false}}">
+          <div style="min-height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 32px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#6B7686" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"></path><path d="M9 3v15"></path><path d="M15 6v15"></path></svg>
+            <span style="font-size: 17px; font-weight: 700;">No county breakdown for {{selName}} yet</span>
+            <span style="font-size: 14px; color: #9AA4B2; max-width: 440px; line-height: 1.5;">This state's source only publishes statewide totals so far. The numbers above are the full statewide count.</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #6B7686;">Source: [state results site]</span>
+          </div>
+        </sc-if>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{inOverview}}" hint-placeholder-val="{{false}}">
+        <section aria-label="Details" style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;">
+            <h2 style="margin: 0; font-size: 16px; font-weight: 700;">Details · {{detail.scope}}</h2>
+            <sc-if value="{{detail.showBack}}" hint-placeholder-val="{{false}}">
+              <button type="button" onClick="{{unpin}}" style="cursor: pointer; border: 0; background: transparent; color: #93B4FA; font-size: 14px; font-weight: 600; min-height: 36px; padding: 0;">← Back to statewide</button>
+            </sc-if>
+            <sc-if value="{{detail.hint}}" hint-placeholder-val="{{false}}">
+              <span style="font-size: 13px; color: #6B7686;">Click a county to see its details</span>
+            </sc-if>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+            <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9AA4B2; font-weight: 600;">Turnout so far</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600;">{{detail.turnout}}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{detail.counted}} counted / {{detail.registered}} registered</span>
+            </div>
+            <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9AA4B2; font-weight: 600;">Precincts reporting</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600;">{{detail.precincts}}</span>
+              <div style="height: 6px; background: #2A313C; border-radius: 3px;"><div style="height: 6px; border-radius: 3px; background: #9AA4B2; width: {{detail.precW}};"></div></div>
+            </div>
+            <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9AA4B2; font-weight: 600;">Ballots left to count</span>
+              <sc-if value="{{detail.leftPublished}}" hint-placeholder-val="{{true}}">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 600;">{{detail.left}}</span>
+                <span style="font-size: 12px; color: #9AA4B2;">Estimate published by the election office</span>
+              </sc-if>
+              <sc-if value="{{detail.leftMissing}}" hint-placeholder-val="{{false}}">
+                <span style="font-size: 15px; font-weight: 600; color: #9AA4B2; padding-top: 4px;">Not published</span>
+                <span style="font-size: 12px; color: #6B7686;">This source doesn't report outstanding ballots</span>
+              </sc-if>
+            </div>
+          </div>
+          <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;">
+              <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #9AA4B2; font-weight: 600;">Vote method · {{raceShort}}</span>
+              <span style="font-size: 12px; color: #6B7686;">Method names come from each source</span>
+            </div>
+            <sc-if value="{{detail.hasMethods}}" hint-placeholder-val="{{true}}">
+              <sc-for list="{{detail.methods}}" as="vm" hint-placeholder-count="3">
+                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: center;">
+                  <div style="display: flex; flex-direction: column; gap: 2px;">
+                    <span style="font-size: 14px; font-weight: 600;">{{vm.label}}</span>
+                    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{vm.votes}} votes · {{vm.share}} of counted</span>
+                  </div>
+                  <div style="display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: #2A313C;">
+                    <div style="width: {{vm.dW}}; background: #4F86F7;"></div>
+                    <div style="width: {{vm.oW}}; background: #6B7686;"></div>
+                    <div style="width: {{vm.rW}}; background: #EF5B5B;"></div>
+                  </div>
+                  <div style="display: flex; justify-content: flex-end; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
+                    <span style="color: #93B4FA;">D {{vm.dPct}}</span>
+                    <span style="color: #F7A1A1;">R {{vm.rPct}}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{detail.noMethods}}" hint-placeholder-val="{{false}}">
+              <span style="font-size: 14px; color: #9AA4B2;">No {{raceShort}} race on the ballot here this year.</span>
+            </sc-if>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{showAllRaces}}" hint-placeholder-val="{{false}}">
+        <section aria-label="All races" style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;">
+            <label style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 320px; font-size: 13px; color: #9AA4B2;">
+              Search races
+              <input type="search" value="{{raceQuery}}" onChange="{{setQuery}}" placeholder="Office, district, county or city" style="min-height: 40px; background: #161B22; color: #E6EDF3; border: 1px solid #2E3744; border-radius: 8px; padding: 0 12px; font-size: 14px;">
+            </label>
+            <span style="font-size: 13px; color: #9AA4B2;">{{allRacesCount}} contests on the {{selName}} ballot in our sources</span>
+          </div>
+          <sc-for list="{{raceGroups}}" as="g" hint-placeholder-count="3">
+            <div style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; overflow: hidden;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid #232A35;">
+                <h3 style="margin: 0; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;">{{g.title}}</h3>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2;">{{g.count}}</span>
+              </div>
+              <sc-for list="{{g.rows}}" as="rr" hint-placeholder-count="3">
+                <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #1C222B;">
+                  <span style="font-size: 14px; font-weight: 500;">{{rr.name}}</span>
+                  <span style="display: flex; align-items: center; gap: 8px; font-size: 13px;">
+                    <span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 2px 8px; border-radius: 4px; background: {{rr.chipBg}}; color: {{rr.chipFg}};">{{rr.lead}}</span>
+                    <span style="font-family: 'IBM Plex Mono', monospace; color: #C9D1DB;">{{rr.margin}}</span>
+                  </span>
+                  <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9AA4B2; text-align: right;">{{rr.rep}} in</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+          <sc-if value="{{noRaceResults}}" hint-placeholder-val="{{false}}">
+            <div style="padding: 24px; text-align: center; font-size: 14px; color: #9AA4B2;">No contests match “{{raceQuery}}”.</div>
+          </sc-if>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{showMapBox}}" hint-placeholder-val="{{true}}">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-size: 12px; color: #9AA4B2;">
+        <sc-for list="{{legend}}" as="l" hint-placeholder-count="8">
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 14px; height: 14px; border-radius: 3px; background: {{l.color}}; border: 1px solid #2E3744;"></span>{{l.label}}</span>
+        </sc-for>
+      </div>
+      </sc-if>
+      <p style="margin: 0; font-size: 12px; color: #6B7686;">Unofficial results — counts change as ballots are reported. "Leading" means more votes counted so far; this site does not call races.</p>
+    </main>
+
+    <sc-if value="{{sidebarOpen}}" hint-placeholder-val="{{true}}">
+      <aside aria-label="Ballot measures" style="flex: 1 1 340px; max-width: 420px; background: #11161D; border-left: 1px solid #232A35; padding: 20px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <h2 style="margin: 0; font-size: 17px; font-weight: 700;">Ballot measures</h2>
+            <span style="font-size: 13px; color: #9AA4B2;">{{measureScope}}</span>
+          </div>
+          <button type="button" onClick="{{toggleSidebar}}" aria-label="Close ballot measures" style="cursor: pointer; width: 40px; height: 40px; border-radius: 8px; border: 1px solid #2E3744; background: #161B22; color: #E6EDF3; display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <div style="display: flex; gap: 14px; font-size: 12px; color: #9AA4B2;">
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #2DD4BF;"></span>Yes</span>
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #F59E0B;"></span>No</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; overflow-y: auto;">
+          <sc-for list="{{measures}}" as="m" hint-placeholder-count="4">
+            <article style="background: #161B22; border: 1px solid #232A35; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; background: #232A35; color: #E6EDF3; padding: 3px 6px; border-radius: 4px;">{{m.state}}</span>
+                <div style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0;">
+                  <span style="font-size: 14px; font-weight: 600;">{{m.id}}</span>
+                  <span style="font-size: 13px; color: #C9D1DB; font-weight: 500;">[Official ballot title]</span>
+                </div>
+                <span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: {{m.pillBg}}; color: {{m.pillFg}};">{{m.status}}</span>
+              </div>
+              <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #9AA4B2;">[Official neutral summary from the state's ballot or voter guide, one to three sentences.]</p>
+              <div style="display: flex; flex-direction: column; gap: 6px; font-size: 12px;">
+                <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px;">
+                  <span style="text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600;">Placed on ballot by</span>
+                  <sc-if value="{{m.sponsorLinked}}" hint-placeholder-val="{{true}}">
+                    <a href="#" style="font-weight: 600;">{{m.sponsor}} ↗</a>
+                    <span style="color: #6B7686;">(their website)</span>
+                  </sc-if>
+                  <sc-if value="{{m.sponsorPlain}}" hint-placeholder-val="{{false}}">
+                    <span style="color: #C9D1DB; font-weight: 500;">{{m.sponsor}}</span>
+                  </sc-if>
+                </div>
+                <sc-if value="{{m.hasOpposition}}" hint-placeholder-val="{{false}}">
+                  <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px;">
+                    <span style="text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600;">Registered opposition</span>
+                    <a href="#" style="font-weight: 600;">[Opposition committee] ↗</a>
+                    <span style="color: #6B7686;">(their website)</span>
+                  </div>
+                </sc-if>
+              </div>
+              <sc-if value="{{m.hasParties}}" hint-placeholder-val="{{true}}">
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600;">Official party positions</span>
+                  <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    <sc-for list="{{m.parties}}" as="pp" hint-placeholder-count="2">
+                      <a href="#" style="display: flex; align-items: center; gap: 6px; text-decoration: none; font-size: 12px; background: #11161D; border: 1px solid #232A35; border-radius: 999px; padding: 4px 10px; color: #C9D1DB;">
+                        <span>{{pp.party}}</span>
+                        <span style="font-weight: 700; color: {{pp.color}};">{{pp.position}}</span>
+                      </a>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if value="{{m.hasVote}}" hint-placeholder-val="{{false}}">
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  <span style="font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600;">Legislature's vote to refer</span>
+                  <sc-for list="{{m.votes}}" as="lv" hint-placeholder-count="2">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">
+                      <span style="color: #C9D1DB;">{{lv.chamber}} {{lv.total}}</span>
+                      <span style="color: #9AA4B2;">{{lv.breakdown}}</span>
+                    </div>
+                  </sc-for>
+                  <a href="#" style="font-size: 12px; font-weight: 600;">Roll call record ↗</a>
+                </div>
+              </sc-if>
+              <sc-if value="{{m.open}}" hint-placeholder-val="{{false}}">
+                <div style="background: #11161D; border: 1px solid #232A35; border-radius: 8px; padding: 12px; max-height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;">
+                  <span style="font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: #6B7686; font-weight: 600;">Ballot text as it appears on the ballot</span>
+                  <p style="margin: 0; font-size: 13px; line-height: 1.6; color: #C9D1DB; white-space: pre-line;">[Full ballot question text, exactly as printed on the official ballot.]</p>
+                </div>
+              </sc-if>
+              <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;">
+                <button type="button" onClick="{{m.toggle}}" aria-expanded="{{m.openAttr}}" style="cursor: pointer; border: 0; background: transparent; color: #93B4FA; font-size: 13px; font-weight: 600; min-height: 32px; padding: 0;">{{m.toggleLabel}}</button>
+                <a href="#" style="font-size: 13px; font-weight: 600;">Official source ↗</a>
+              </div>
+              <div style="display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: #2A313C;">
+                <div style="width: {{m.yesW}}; background: #2DD4BF;"></div>
+                <div style="width: {{m.noW}}; background: #F59E0B;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 12px;">
+                <span style="color: #5EEAD4;">Yes {{m.yesPct}} · {{m.yes}}</span>
+                <span style="color: #FCD34D;">No {{m.noPct}} · {{m.no}}</span>
+              </div>
+              <span style="font-size: 12px; color: #6B7686;">{{m.reporting}} reporting</span>
+            </article>
+          </sc-for>
+          <sc-if value="{{noMeasures}}" hint-placeholder-val="{{false}}">
+            <div style="padding: 24px 8px; text-align: center; font-size: 14px; color: #9AA4B2;">No statewide ballot measures for {{selName}} in our sources.</div>
+          </sc-if>
+        </div>
+      </aside>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{changelogOpen}}" hint-placeholder-val="{{false}}">
+    <div style="position: absolute; inset: 0; background: rgba(5,8,12,.6); display: flex; align-items: flex-start; justify-content: center; padding: 80px 16px 16px; z-index: 10;">
+      <section role="dialog" aria-label="Changelog" style="width: 100%; max-width: 520px; max-height: 70vh; overflow-y: auto; background: #161B22; border: 1px solid #2E3744; border-radius: 14px; box-shadow: 0 24px 64px rgba(0,0,0,.5); padding: 20px 22px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <div style="display: flex; flex-direction: column; gap: 2px;">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 700;">What's new</h2>
+            <span style="font-size: 13px; color: #9AA4B2;">From CHANGELOG.json</span>
+          </div>
+          <button type="button" onClick="{{toggleChangelog}}" aria-label="Close changelog" style="cursor: pointer; width: 40px; height: 40px; border-radius: 8px; border: 1px solid #2E3744; background: #11161D; color: #E6EDF3; display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg>
+          </button>
+        </div>
+        <article style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #232A35; padding-top: 14px;">
+          <div style="display: flex; align-items: baseline; gap: 10px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">0.1.0</span>
+            <span style="font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 2px 8px; border-radius: 999px; background: #123B36; color: #5EEAD4;">CURRENT</span>
+            <span style="font-size: 13px; color: #9AA4B2; margin-left: auto;">Nov 3, 2026</span>
+          </div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: #C9D1DB;">
+            <li>Skeleton: national map, race selector, state drill-down, ballot measures sidebar</li>
+            <li>Live results from official state and county sources</li>
+          </ul>
+        </article>
+        <article style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #232A35; padding-top: 14px;">
+          <div style="display: flex; align-items: baseline; gap: 10px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600;">[next version]</span>
+            <span style="font-size: 13px; color: #9AA4B2; margin-left: auto;">[date]</span>
+          </div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: #C9D1DB;">
+            <li>[Entry from CHANGELOG.json]</li>
+          </ul>
+        </article>
+      </section>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"tossupMargin":{"editor":"float","default":2,"min":0.5,"max":5,"step":0.5,"unit":"pts","section":"Shading"},"$preview":{"width":1440,"height":940}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { level: 'top', race: 'top', stateTab: 'overview', raceQuery: '', sel: '', hover: '', tipX: 0, tipY: 0, sidebarOpen: true, changelogOpen: false, county: '', openMeasure: '', states: null, counties: null };
+  }
+  componentDidMount() {
+    fetch('/_blob/30b1a50a34ae0a54c188aa4e270cf766').then(r => r.json()).then(states => this.setState({ states })).catch(() => this.setState({ states: [] }));
+    fetch('/_blob/7b20947d240a2b6ed1647da6e80c76f6').then(r => r.json()).then(counties => this.setState({ counties })).catch(() => this.setState({ counties: [] }));
+  }
+  rng(str) {
+    let h = 1779033703 ^ str.length;
+    for (let i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+    return () => { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; };
+  }
+  sample(key, scale) {
+    const r = this.rng(key);
+    const margin = (r() * 2 - 1) * 28;
+    const other = 1 + r() * 3;
+    const rep = Math.round(35 + r() * 65);
+    const total = Math.round((0.25 + r() * 5.5) * 1e6 * scale * rep / 100);
+    const dShare = (100 - other) / 2 + margin / 2;
+    const rShare = 100 - other - dShare;
+    return { margin, rep, total, dem: Math.round(total * dShare / 100), gop: Math.round(total * rShare / 100), oth: Math.round(total * other / 100), dShare, rShare, other };
+  }
+  fillFor(m, toss) {
+    const a = Math.abs(m);
+    if (a < toss) return '#8B6FD6';
+    if (m > 0) return a < 5 ? '#93B4FA' : a < 12 ? '#4F86F7' : '#2457D6';
+    return a < 5 ? '#F7A1A1' : a < 12 ? '#EF5B5B' : '#C42323';
+  }
+  fmt(n) { return n.toLocaleString('en-US'); }
+  rows(d) {
+    const mk = (label, party, partyFg, color, v, p) => ({ label, party, partyFg, color, votes: this.fmt(v), pct: p.toFixed(1) + '%', w: Math.max(0, Math.min(100, p)).toFixed(1) + '%' });
+    const lib = Math.round(d.oth * 0.7), wi = d.oth - lib;
+    const rows = [
+      mk('[Candidate name]', 'DEM', '#93B4FA', '#4F86F7', d.dem, d.dShare),
+      mk('[Candidate name]', 'REP', '#F7A1A1', '#EF5B5B', d.gop, d.rShare),
+      mk('[Candidate name]', 'LIB', '#C9D1DB', '#9AA4B2', lib, d.other * 0.7),
+      mk('Write-ins', '', '#9AA4B2', '#6B7686', wi, d.other * 0.3)
+    ];
+    return rows.sort((a, b) => parseFloat(b.pct) - parseFloat(a.pct));
+  }
+  leadText(d, toss) {
+    const a = Math.abs(d.margin);
+    if (a < toss) return 'Toss-up · margin ' + a.toFixed(1) + ' pts';
+    return (d.margin > 0 ? 'Democrat' : 'Republican') + ' leading by ' + a.toFixed(1) + ' pts';
+  }
+  renderVals() {
+    const toss = this.props.tossupMargin ?? 2;
+    const RACES = {
+      top: { level: 'top', label: 'Top race', long: 'Top race on each state’s ballot', set: null },
+      senate: { level: 'federal', label: 'Senate', long: 'U.S. Senate', set: 'AL AK AR CO DE FL GA ID IL IA KS KY LA ME MA MI MN MS MT NE NH NJ NM NC OH OK OR RI SC SD TN TX VA WV WY' },
+      house: { level: 'federal', label: 'House', long: 'U.S. House · statewide popular vote', set: null },
+      governor: { level: 'state', label: 'Governor', long: 'Governor', set: 'AL AK AZ AR CA CO CT FL GA HI ID IL IA KS ME MD MA MI MN NE NV NH NM NY OH OK OR PA RI SC SD TN TX VT WI WY' },
+      ag: { level: 'state', label: 'Attorney General', long: 'Attorney General', set: 'AL AZ AR CA CO CT DE FL GA ID IL IA KS MD MA MI MN NE NV NM NY NC ND OH OK RI SC SD TX VT WI' },
+      sos: { level: 'state', label: 'Secretary of State', long: 'Secretary of State', set: 'AL AZ AR CA CO CT GA ID IL IA KS MA MI MN NE NV NM ND OH RI SC SD VT WI WY' }
+    };
+    const race = this.state.race;
+    const R = RACES[race];
+    const officeFor = (a) => race !== 'top' ? race : (RACES.senate.set.split(' ').includes(a) ? 'senate' : RACES.governor.set.split(' ').includes(a) ? 'governor' : 'house');
+    const inRace = (a) => !R.set || R.set.split(' ').includes(a);
+    const states = this.state.states || [];
+    const sel = this.state.sel;
+    const hover = this.state.hover;
+    const tally = { dem: 0, rep: 0, toss: 0 };
+    let repNum = 0, repDen = 0;
+    const data = {};
+    states.forEach(s => {
+      if (!inRace(s.a)) { data[s.a] = null; return; }
+      const d = this.sample(s.a + officeFor(s.a), 1);
+      data[s.a] = d;
+      if (Math.abs(d.margin) < toss) tally.toss++; else if (d.margin > 0) tally.dem++; else tally.rep++;
+      repNum += d.rep * d.total; repDen += d.total;
+    });
+    const statesView = states.map(s => {
+      const d = data[s.a];
+      const hov = hover === s.a;
+      return {
+        d: s.d,
+        fill: d ? this.fillFor(d.margin, toss) : '#2A313C',
+        stroke: hov ? '#FFFFFF' : '#0E1116',
+        sw: hov ? 2 : 0.8,
+        enter: () => this.setState({ hover: s.a }),
+        open: () => this.setState({ sel: s.a, hover: '', county: '', stateTab: 'overview', raceQuery: '' })
+      };
+    });
+
+    let tip = { show: false, x: 0, y: 0, title: '', office: '', reporting: '', rows: [], lead: '', hasRace: false, noRace: false, hasOthers: false, others: [] };
+    const counties = this.state.counties || [];
+    let countiesView = [];
+    if (!sel && hover) {
+      const s = states.find(x => x.a === hover);
+      const d = data[hover];
+      const shown = officeFor(hover);
+      const others = ['senate', 'governor', 'house'].filter(k => k !== shown && (!RACES[k].set || RACES[k].set.split(' ').includes(hover))).map(k => {
+        const d2 = this.sample(hover + k, 1);
+        const a2 = Math.abs(d2.margin);
+        return { label: RACES[k].label, text: a2 < toss ? 'Toss-up (' + a2.toFixed(1) + ' pts)' : '[Candidate] (' + (d2.margin > 0 ? 'D' : 'R') + ') +' + a2.toFixed(1) };
+      });
+      if (s) tip = { show: true, x: this.state.tipX, y: this.state.tipY, title: s.n, office: RACES[shown].long, reporting: d ? d.rep + '% in' : '', rows: d ? this.rows(d) : [], lead: d ? this.leadText(d, toss) : '', hasRace: !!d, noRace: !d, hasOthers: others.length > 0, others };
+    }
+    if (sel === 'CO') {
+      countiesView = counties.map(c => {
+        const d = this.sample(c.id + race, 0.03);
+        const hov = hover === c.id || this.state.county === c.id;
+        return { d: c.d, fill: inRace('CO') ? this.fillFor(d.margin, toss) : '#2A313C', stroke: hov ? '#FFFFFF' : '#0E1116', sw: hov ? 2.5 : 1, enter: () => this.setState({ hover: c.id }), pick: () => this.setState({ county: c.id }) };
+      });
+      if (hover && inRace('CO')) {
+        const c = counties.find(x => x.id === hover);
+        if (c) {
+          const d = this.sample(c.id + race, 0.03);
+          tip = { show: true, x: this.state.tipX, y: this.state.tipY, title: c.n + ' County', reporting: d.rep + '% in', rows: this.rows(d), lead: this.leadText(d, toss), hasRace: true, noRace: false };
+        }
+      }
+    }
+
+    const selState = states.find(x => x.a === sel);
+    const selName = selState ? selState.n : '';
+    const sd = sel ? data[sel] : null;
+    const stateTotals = sd ? [
+      ...this.rows(sd).slice(0, 3).map(r => ({ label: r.label + (r.party ? ' · ' + r.party : ''), color: r.partyFg, big: r.votes, small: r.pct })),
+      { label: 'Reporting', color: '#9AA4B2', big: sd.rep + '%', small: this.leadText(sd, toss) }
+    ] : [
+      { label: R.long, color: '#9AA4B2', big: '—', small: 'No race on the ballot this year' },
+      { label: 'Democratic', color: '#93B4FA', big: '—', small: '' },
+      { label: 'Republican', color: '#F7A1A1', big: '—', small: '' },
+      { label: 'Reporting', color: '#9AA4B2', big: '—', small: '' }
+    ];
+
+    const pc = sel === 'CO' && this.state.county ? counties.find(x => x.id === this.state.county) : null;
+    const dKey = pc ? pc.id : sel;
+    const dScale = pc ? 0.03 : 1;
+    const dd = sel && inRace(sel) ? this.sample(dKey + race, dScale) : null;
+    const dr = this.rng(dKey + 'details');
+    const tRate = 0.5 + dr() * 0.28;
+    const repPct = dd ? dd.rep : Math.round(35 + dr() * 65);
+    const counted = dd ? dd.total : Math.round((0.25 + dr() * 5.5) * 1e6 * dScale * repPct / 100);
+    const expected = Math.round(counted / (repPct / 100));
+    const registered = Math.round(expected / tRate);
+    const precTotal = pc ? 20 + Math.floor(dr() * 180) : 400 + Math.floor(dr() * 3200);
+    const precIn = Math.round(precTotal * repPct / 100);
+    const leftPublished = dr() > 0.4;
+    const mail = 55 + dr() * 28, prov = 1 + dr() * 2, ed = 100 - mail - prov;
+    const mkM = (label, share, shift) => {
+      const dp = Math.max(5, Math.min(90, dd.dShare + shift));
+      const rp = Math.max(5, 100 - dd.other - dp);
+      const op = Math.max(0, 100 - dp - rp);
+      return { label, votes: this.fmt(Math.round(counted * share / 100)), share: share.toFixed(0) + '%', dPct: dp.toFixed(1) + '%', rPct: rp.toFixed(1) + '%', dW: dp.toFixed(1) + '%', rW: rp.toFixed(1) + '%', oW: op.toFixed(1) + '%' };
+    };
+    const detail = {
+      scope: pc ? pc.n + ' County' : (selName || ''),
+      showBack: !!pc, hint: sel === 'CO' && !pc,
+      turnout: (counted / registered * 100).toFixed(1) + '%',
+      counted: this.fmt(counted), registered: this.fmt(registered),
+      precincts: this.fmt(precIn) + ' / ' + this.fmt(precTotal),
+      precW: (precIn / precTotal * 100).toFixed(1) + '%',
+      leftPublished, leftMissing: !leftPublished,
+      left: '~' + this.fmt(Math.max(0, expected - counted)),
+      hasMethods: !!dd, noMethods: !dd,
+      methods: dd ? [mkM('Mail / early', mail, 4), mkM('Election Day', ed, -8), mkM('Provisional', prov, 2)] : []
+    };
+
+    const MEASURES = [
+      ['CO', 'Amendment [#]'], ['CO', 'Proposition [#]'], ['CA', 'Proposition [#]'], ['FL', 'Amendment [#]'],
+      ['MO', 'Amendment [#]'], ['NV', 'Question [#]'], ['AZ', 'Proposition [#]'], ['MI', 'Proposal [#]'], ['OH', 'Issue [#]']
+    ];
+    const measures = MEASURES.filter(m => !sel || m[0] === sel).map((m, i) => {
+      const r = this.rng(m[0] + i + 'measure');
+      const yesP = 30 + r() * 40;
+      const rep = Math.round(30 + r() * 70);
+      const tot = Math.round((0.3 + r() * 4) * 1e6 * rep / 100);
+      const early = rep < 40;
+      const lead = yesP >= 50;
+      const mKey = m[0] + i;
+      const isOpen = this.state.openMeasure === mKey;
+      return {
+        state: m[0], id: m[1],
+        open: isOpen, openAttr: isOpen ? 'true' : 'false',
+        toggleLabel: isOpen ? 'Hide ballot text' : 'Full ballot text',
+        sponsor: ['[Proponent organization, from the official filing]', 'Referred by the Legislature ([bill number])', 'Not listed by the state'][i % 3],
+        sponsorLinked: i % 3 === 0, sponsorPlain: i % 3 !== 0,
+        hasOpposition: i % 3 === 0,
+        hasParties: i % 3 !== 2,
+        parties: [
+          { party: 'Democratic Party', position: ['SUPPORT', 'OPPOSE', 'NO POSITION'][i % 3], color: ['#5EEAD4', '#FCD34D', '#9AA4B2'][i % 3] },
+          { party: 'Libertarian Party', position: 'NO POSITION', color: '#9AA4B2' },
+          { party: 'Republican Party', position: ['OPPOSE', 'SUPPORT', 'NO POSITION'][i % 3], color: ['#FCD34D', '#5EEAD4', '#9AA4B2'][i % 3] }
+        ],
+        hasVote: i % 3 === 1,
+        votes: [
+          { chamber: 'Senate', total: '[yes]–[no]', breakdown: 'D [y]–[n] · R [y]–[n]' },
+          { chamber: 'House', total: '[yes]–[no]', breakdown: 'D [y]–[n] · R [y]–[n]' }
+        ],
+        toggle: () => this.setState({ openMeasure: isOpen ? '' : mKey }),
+        yesW: yesP.toFixed(1) + '%', noW: (100 - yesP).toFixed(1) + '%',
+        yesPct: yesP.toFixed(1) + '%', noPct: (100 - yesP).toFixed(1) + '%',
+        yes: this.fmt(Math.round(tot * yesP / 100)), no: this.fmt(Math.round(tot * (100 - yesP) / 100)),
+        reporting: rep + '%',
+        status: early ? 'TOO EARLY' : lead ? 'YES LEADS' : 'NO LEADS',
+        pillBg: early ? '#232A35' : lead ? '#123B36' : '#3B2A10',
+        pillFg: early ? '#9AA4B2' : lead ? '#5EEAD4' : '#FCD34D'
+      };
+    });
+
+    const q = (this.state.raceQuery || '').trim().toLowerCase();
+    const mkRow = (name, key, partisan) => {
+      const rr = this.rng(key + sel);
+      const m = (rr() * 2 - 1) * 30;
+      const rep = Math.round(20 + rr() * 80) + '%';
+      if (!partisan) {
+        const yes = 40 + rr() * 30;
+        return { name, lead: yes >= 50 ? 'YES' : 'NO', chipBg: yes >= 50 ? '#123B36' : '#3B2A10', chipFg: yes >= 50 ? '#5EEAD4' : '#FCD34D', margin: Math.abs(yes * 2 - 100).toFixed(1) + ' pts', rep };
+      }
+      const a = Math.abs(m);
+      const tossR = a < toss;
+      return { name, lead: tossR ? 'TOSS-UP' : m > 0 ? 'DEM' : 'REP', chipBg: tossR ? '#2B2346' : m > 0 ? '#16264A' : '#3A1818', chipFg: tossR ? '#C4B5FD' : m > 0 ? '#93B4FA' : '#F7A1A1', margin: a.toFixed(1) + ' pts', rep };
+    };
+    const allGroups = sel ? [
+      { title: 'Federal', rows: [mkRow('U.S. Senate', 'sen', true), mkRow('U.S. House · District 1', 'h1', true), mkRow('U.S. House · District 2', 'h2', true), mkRow('U.S. House · District 3', 'h3', true)] },
+      { title: 'Statewide', rows: [mkRow('Governor', 'gov', true), mkRow('Attorney General', 'ag', true), mkRow('Secretary of State', 'sos', true), mkRow('State Treasurer', 'tr', true)] },
+      { title: 'State legislature', rows: [mkRow('State Senate · District [#]', 'ss1', true), mkRow('State Senate · District [#]', 'ss2', true), mkRow('State House · District [#]', 'sh1', true), mkRow('State House · District [#]', 'sh2', true)] },
+      { title: 'County', rows: [mkRow('[County] County Commissioner · District [#]', 'cc1', true), mkRow('[County] County Sheriff', 'sh', true), mkRow('[County] County Clerk', 'cl', true)] },
+      { title: 'Local', rows: [mkRow('Mayor · [City]', 'my', true), mkRow('City Council · [City] Ward [#]', 'cw', true), mkRow('School Board · [District]', 'sb', true)] },
+      { title: 'Judicial', rows: [mkRow('Retention · [Judge name], [Court]', 'j1', false), mkRow('Retention · [Judge name], [Court]', 'j2', false)] }
+    ] : [];
+    const allRacesCount = allGroups.reduce((n, g) => n + g.rows.length, 0);
+    const raceGroups = allGroups.map(g => {
+      const rows = q ? g.rows.filter(r => (g.title + ' ' + r.name).toLowerCase().includes(q)) : g.rows;
+      return { title: g.title, rows, count: rows.length + (rows.length === 1 ? ' contest' : ' contests') };
+    }).filter(g => g.rows.length > 0);
+
+    const loading = !this.state.states;
+    return {
+      showRacePills: this.state.level !== 'top',
+      levels: [['top', 'Top race'], ['federal', 'Federal'], ['state', 'State']].map(([k, label]) => ({
+        label, pressed: k === this.state.level ? 'true' : 'false',
+        bg: k === this.state.level ? '#E6EDF3' : 'transparent', fg: k === this.state.level ? '#0E1116' : '#9AA4B2',
+        pick: () => this.setState({ level: k, race: Object.keys(RACES).find(r => RACES[r].level === k), hover: '' })
+      })),
+      races: Object.keys(RACES).filter(k => k !== 'top' && RACES[k].level === this.state.level).map(k => ({
+        label: RACES[k].label, pressed: k === race ? 'true' : 'false',
+        bg: k === race ? '#2E3744' : 'transparent', fg: k === race ? '#FFFFFF' : '#9AA4B2',
+        pick: () => this.setState({ race: k, hover: '' })
+      })),
+      stateTabs: [['overview', 'Overview'], ['all', 'All races']].map(([k, label]) => ({
+        label, pressed: k === this.state.stateTab ? 'true' : 'false',
+        fg: k === this.state.stateTab ? '#E6EDF3' : '#9AA4B2', line: k === this.state.stateTab ? '#93B4FA' : 'transparent',
+        pick: () => this.setState({ stateTab: k, hover: '' })
+      })),
+      inOverview: !!sel && this.state.stateTab === 'overview',
+      showMapBox: !sel || this.state.stateTab === 'overview',
+      showAllRaces: !!sel && this.state.stateTab === 'all',
+      raceQuery: this.state.raceQuery,
+      setQuery: (e) => this.setState({ raceQuery: e.target.value }),
+      raceGroups, allRacesCount, noRaceResults: !!sel && raceGroups.length === 0,
+      raceLong: R.long, raceShort: R.label,
+      nationalReporting: repDen ? Math.round(repNum / repDen) + '%' : '—',
+      tally,
+      loading,
+      inState: !!sel, notInState: !sel, selName,
+      showNationalMap: !loading && !sel,
+      showCounties: !loading && sel === 'CO',
+      showNoCounty: !loading && !!sel && sel !== 'CO',
+      statesView, countiesView, tip, stateTotals,
+      stateOptions: states.map(s => ({ a: s.a, n: s.n })).sort((x, y) => x.n.localeCompare(y.n)),
+      jumpValue: sel,
+      jump: (e) => this.setState({ sel: e.target.value, hover: '', county: '', stateTab: 'overview', raceQuery: '' }),
+      goNational: () => this.setState({ sel: '', hover: '', county: '', stateTab: 'overview', raceQuery: '' }),
+      unpin: () => this.setState({ county: '' }),
+      detail,
+      clearHover: () => this.setState({ hover: '' }),
+      move: (e) => {
+        const svg = e.currentTarget.ownerSVGElement || e.currentTarget;
+        const r = svg.getBoundingClientRect();
+        let x = e.clientX - r.left + 16, y = e.clientY - r.top + 16;
+        if (x > r.width - 276) x -= 300;
+        if (y > r.height - 190) y -= 200;
+        this.setState({ tipX: Math.max(0, x), tipY: Math.max(0, y) });
+      },
+      changelogOpen: this.state.changelogOpen,
+      toggleChangelog: () => this.setState({ changelogOpen: !this.state.changelogOpen }),
+      sidebarOpen: this.state.sidebarOpen,
+      toggleSidebar: () => this.setState({ sidebarOpen: !this.state.sidebarOpen }),
+      measures, noMeasures: measures.length === 0,
+      measureScope: sel ? selName : 'All states',
+      legend: [
+        { color: '#2457D6', label: 'Dem 12+' }, { color: '#4F86F7', label: 'Dem 5–12' }, { color: '#93B4FA', label: 'Dem <5' },
+        { color: '#8B6FD6', label: 'Toss-up <' + toss + ' pts' },
+        { color: '#F7A1A1', label: 'Rep <5' }, { color: '#EF5B5B', label: 'Rep 5–12' }, { color: '#C42323', label: 'Rep 12+' },
+        { color: '#2A313C', label: 'No race' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
