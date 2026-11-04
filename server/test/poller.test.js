@@ -42,3 +42,24 @@ test('poller survives a source going from down → empty → malformed → popul
   assert.deepEqual(votes, [120, 80]);
   assert.ok(updates.some((u) => u.changed));
 });
+
+test('retry delay: HTTP 5xx keeps the 60 s interval for 2 failures, then backs off to at most 2 min', async () => {
+  const { retryDelayMs } = await import('../src/poller.js');
+  const { HttpError } = await import('../src/http.js');
+  const i = 60_000;
+  const e502 = new HttpError('https://results.enr.clarityelections.com/CO/127407/current_ver.txt', 502);
+  assert.deepEqual([1, 2, 3, 4, 5, 10].map((f) => retryDelayMs(f, e502, i)), [60_000, 60_000, 120_000, 120_000, 120_000, 120_000]);
+  assert.equal(retryDelayMs(1, new HttpError('u', 503), i), 60_000);
+  assert.equal(retryDelayMs(3, new HttpError('u', 504), 15_000), 30_000); // short intervals still back off, capped at 2 min
+});
+
+test('retry delay: 429 / 4xx and non-HTTP errors keep the long exponential backoff (up to 10 min)', async () => {
+  const { retryDelayMs } = await import('../src/poller.js');
+  const { HttpError } = await import('../src/http.js');
+  const i = 60_000;
+  for (const s of [429, 403, 404]) {
+    assert.deepEqual([1, 2, 3, 4].map((f) => retryDelayMs(f, new HttpError('u', s), i, 600_000)), [120_000, 240_000, 480_000, 600_000], `HTTP ${s}`);
+  }
+  assert.equal(retryDelayMs(1, new Error('Unexpected payload'), i, 600_000), 120_000);
+  assert.equal(retryDelayMs(6, new Error('timeout'), i, 600_000), 600_000);
+});

@@ -8,6 +8,24 @@ import { currentElectionKey } from './elections.js';
 
 const log = logger('poller');
 
+/** A source's own server error (HTTP 5xx: overloaded / bad gateway), as opposed to a refusal (429 / 4xx). */
+const SERVER_ERROR_MAX_MS = 2 * 60 * 1000;
+
+/**
+ * Delay before the next try after `failures` consecutive failures.
+ * HTTP 5xx (election-night overload, e.g. Clarity's CloudFront 502s): keep the normal interval for the first 2
+ * failures, then back off, never beyond 2 minutes. Anything else (429, other 4xx, i.e. anything that may mean
+ * "slow down" or blocking, plus non-HTTP errors) keeps the long exponential backoff up to config.maxBackoffMs.
+ */
+export function retryDelayMs(failures, err, intervalMs, maxBackoffMs = config.maxBackoffMs) {
+  const status = Number(err?.status);
+  if (status >= 500 && status <= 599) {
+    if (failures <= 2) return intervalMs;
+    return Math.min(SERVER_ERROR_MAX_MS, intervalMs * 2 ** Math.min(failures - 2, 6));
+  }
+  return Math.min(maxBackoffMs, intervalMs * 2 ** Math.min(failures, 6));
+}
+
 /** Per-source health for /api/health: id → { id, lastSuccess, lastError, lastErrorAt, targets } */
 export const health = new Map();
 
@@ -61,7 +79,7 @@ export function startPolling({ db, adapters, onUpdate, intervalMs = config.pollI
           th.failures += 1;
           th.lastError = h.lastError = `${err.message}`;
           h.lastErrorAt = started;
-          const backoff = Math.min(config.maxBackoffMs, intervalMs * 2 ** Math.min(th.failures, 6));
+          const backoff = retryDelayMs(th.failures, err, intervalMs);
           ctx.log.error(`fetch failed (${th.failures} in a row), retrying in ${Math.round(backoff / 1000)}s: ${err.message}`);
           schedule(backoff);
         }
