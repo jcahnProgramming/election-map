@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { Server } from 'socket.io';
 import { config, changelog } from './config.js';
-import { openDb } from './db.js';
+import { openDb, latestDataVersion } from './db.js';
 import { loadAdapters } from './adapters/index.js';
 import { startPolling, health } from './poller.js';
 import { createResults, RACES } from './results.js';
@@ -31,7 +31,7 @@ const cache = createApiCache({ ttlMs: 10_000 });
 const api = express.Router();
 api.use(rateLimit.middleware);
 api.use((req, res, next) => {
-  res.set('Cache-Control', req.path === '/health' ? 'no-cache, no-store' : 'public, max-age=15, stale-while-revalidate=30');
+  res.set('Cache-Control', req.path === '/health' ? 'no-cache, no-store' : 'public, max-age=15');
   next();
 });
 
@@ -39,6 +39,8 @@ api.get('/health', (req, res) => {
   res.json({
     ok: true,
     version: config.version,
+    // Clients refetch with ?v=<dataVersion> on reconnect / tab focus / safety-net poll (health is never cached).
+    dataVersion: latestDataVersion(db),
     sources: [...health.values()].map((h) => ({
       id: h.id, name: h.name, lastSuccess: h.lastSuccess, lastError: h.lastError, lastErrorAt: h.lastErrorAt,
       targets: h.targets,

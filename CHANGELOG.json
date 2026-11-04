@@ -2,6 +2,20 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.2.2",
+      "date": "2026-11-03",
+      "title": "Reliable live updates",
+      "sections": {
+        "Fixed": [
+          "Live updates now always show the new numbers instead of a copy cached for up to 45 seconds, and numbers can no longer step backwards",
+          "The page catches up after a lost connection, a server restart or a sleeping tab, and checks for new numbers every minute if nothing has arrived"
+        ],
+        "New": [
+          "\"Updated Xs ago\" next to Last update, a visible \"Reconnecting…\" when the live connection drops, and a \"New version available\" banner after a deploy"
+        ]
+      }
+    },
+    {
       "version": "0.2.1",
       "date": "2026-11-03",
       "title": "Vermont reporting fix",
