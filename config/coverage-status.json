@@ -53,8 +53,7 @@
       "reason": "no statewide election-night results (county clerks)"
     },
     "IN": {
-      "status": "planned",
-      "reason": "versioned JSON, filename not resolved yet"
+      "status": "live"
     },
     "KS": {
       "status": "no_feed",
