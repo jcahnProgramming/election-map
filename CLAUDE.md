@@ -14,6 +14,14 @@ confidential and nothing in it ever needs a secret.
   hardcoded). Hover → votes counted per party; click → the state with counties shaded, where the source has counties.
 - State view tabs: **Overview** (the selected office) and **All races** (every contest in the state's feeds,
   grouped Federal / Statewide / State legislature / County / Local / Judicial / Ballot measures, searchable).
+  House (Federal > House, and the Top race House fallback): the statewide popular vote by party, plus one row per
+  district (leading candidate and margin, Toss-up or No votes yet); an at-large state is its one contest, by candidate.
+- **Congress** view (`?view=congress`, Map | Congress switch in the header): balance of power per chamber = seats not
+  up this election (`config/elections/<key>/chambers.json`, from the official Senate roster / House Clerk data, each
+  sourced; independents counted with their caucus and labelled) + seats each party currently leads, from the stored
+  contests (toss-up = the map's `TOSSUP_MARGIN`; no contest or no votes = "no votes / no live data"). Top-two same-party
+  contests count for that party. Never "won" / "called". The seat math lives in `client/src/calc.js` (`seatStatus`,
+  `chamberTotals`, `hemicycle`). Specials (e.g. OH, FL in 2026) are seats up, never holdovers.
 - Multi-seat contests (vote for 2+) are never shaded or summarized as a two-way margin: top-N candidates instead.
 - Every state links to its official results page (`config/official-results.json`); every number names its source
   and that source's last update.
@@ -80,17 +88,19 @@ confidential and nothing in it ever needs a secret.
 - `config/sources/<id>.json` what each adapter polls (`enabled:false` parks a target). `config/races-2026.json` which states hold which
   races (only used for states with no source). `config/clarity-county-candidates.json` research output.
   `config/official-results.json` every state's official results page. `config/elections/<key>/measures/<ST>.json`
-  researched measure information (not under `data/`: that's the SQLite bind mount).
-- `design/election-map-design-v2.dc.html` the current Claude Design export: the spec (v1 kept for history). `client/` is its React port
+  researched measure information (not under `data/`: that's the SQLite bind mount). `config/elections/<key>/chambers.json`
+  seats not up / up this election and House districts per state (Congress view).
+- `design/election-map-design-v3-map.dc.html` + `design/election-map-design-v3-congress.dc.html` the current Claude Design
+  exports: the spec (v1, v2 kept for history). `client/` is its React port
   (tokens in `client/src/tokens.css`, pure calculations in `client/src/calc.js`, shading in `shading.js`).
 - `docs/data-contract.md` adapter result → DB → API shape. `null` = not published; never show 0 for missing data.
 - `docs/source-roadmap.md` what every uncovered state publishes: the to-do list for new adapters.
 
 ## API
 `GET /api/health`, `/api/offices`, `/api/national?office=&level=` (`race=` still accepted), `/api/state/:abbr?office=`,
-`/api/state/:abbr/contests?q=`, `/api/measures[?state=]`, `/api/coverage` (incl. each state's `coverageStatus`), `/api/elections`,
+`/api/state/:abbr/contests?q=`, `/api/congress`, `/api/measures[?state=]`, `/api/coverage` (incl. each state's `coverageStatus`), `/api/elections`,
 `/api/changelog`; `GET /photos/:id.jpg` reviewed candidate photos (not under /api, rate-limited).
-Client routes are query strings: `?level=state&office=ag&state=CO&tab=all` (0.2 `#/CO/senate` links are rewritten). Every read takes `?election=` (default: current); nothing may assume one election.
+Client routes are query strings: `?level=state&office=ag&state=CO&tab=all[&q=…]`, `?view=congress` (0.2 `#/CO/senate` links are rewritten). Every read takes `?election=` (default: current); nothing may assume one election.
 Reads are cached in memory between polls and sent with `Cache-Control: public, max-age=15`; health is no-store;
 /api/* is rate-limited per IP. Socket.io: `results:update` {sourceId, election, states, fetchedAt} when new numbers land (clients refetch);
 `source:checked` after every successful poll (heartbeat).

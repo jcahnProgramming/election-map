@@ -36,5 +36,6 @@ export const api = {
   changelog: () => getJson('/api/changelog'),
   measures: (abbr, v) => getJson(withVersion(abbr ? `/api/measures?state=${encodeURIComponent(abbr)}` : '/api/measures', v)),
   coverage: () => getJson('/api/coverage'),
+  congress: (v) => getJson(withVersion('/api/congress', v)),
   health: () => getJson('/api/health'),
 };

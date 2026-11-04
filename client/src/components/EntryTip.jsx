@@ -1,10 +1,54 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
-import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
-import { TOSSUP_MARGIN } from '../shading.js';
+import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel } from '../calc.js';
+import { isTossupMargin, fmtMargin } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
 import { photoCredits } from '../avatar.js';
 import Avatar from './Avatar.jsx';
+
+/** A ticket's running mate (e.g. a governor's lieutenant governor): after the name, smaller and muted. */
+export function RunningMate({ name }) {
+  if (!name) return null;
+  return <span className="rm">with {name}</span>;
+}
+
+/**
+ * U.S. House: one row per district, in district order — leading candidate (avatar, name, party tag) and margin, or
+ * Toss-up / No votes yet. `cap` rows then "+ N more districts" linking to the state's All races tab, filtered to the House.
+ */
+export function DistrictRows({ districts, cap = Infinity, state, interactive = true }) {
+  const list = districts || [];
+  if (!list.length) return null;
+  const shown = list.slice(0, cap);
+  const more = list.length - shown.length;
+  return (
+    <div className="district-rows">
+      {shown.map((d) => {
+        const line = districtLine(d);
+        const lead = line.status !== 'none' ? d.lead : null;
+        return (
+          <div className={`district-row st-${line.status}`} key={`${d.district}-${d.contest}`}>
+            <span className="dn">{districtLabel(d.district)}</span>
+            <span className="dl">
+              {lead ? (
+                <>
+                  <Avatar name={lead.name} party={lead.party} photo={lead.photo} size={24} interactive={interactive} />
+                  <span className="nm">{lead.name}<PartyTag tag={partyTag(lead)} party={lead.party} /><RunningMate name={lead.runningMate} /></span>
+                </>
+              ) : <span className="muted">—</span>}
+            </span>
+            <span className="dm">{line.text}</span>
+          </div>
+        );
+      })}
+      {more > 0 && (
+        <a className="foot more-link" href={`?level=federal&office=house&state=${encodeURIComponent(state)}&tab=all&q=${encodeURIComponent('U.S. House')}`}>
+          + {more} more district{more === 1 ? '' : 's'}
+        </a>
+      )}
+    </div>
+  );
+}
 
 /** Small party tag from the source's label (DEM / REP / LIB / IND / …); nothing for a nonpartisan candidate. */
 export function PartyTag({ tag, party }) {
@@ -25,7 +69,7 @@ export function CandidateRows({ entry, cap = Infinity, bars = true, interactive 
           <Avatar name={c.name} party={c.party} photo={c.photo} interactive={interactive} />
           <div className="cand-body">
             <div className="line">
-              <span className="who"><span className="nm">{c.name}<PartyTag tag={c.tag} party={c.party} /></span></span>
+              <span className="who"><span className="nm">{c.name}<PartyTag tag={c.tag} party={c.party} /><RunningMate name={c.runningMate} /></span></span>
               <span className="val">{fmtVotes(c.votes)} · {fmtPct(c.pct)}</span>
             </div>
             {bars && <div className="bar thin"><div style={{ width: barWidth(c.pct), background: PARTY_COLOR[c.party] || PARTY_COLOR.OTHER }} /></div>}
@@ -57,11 +101,11 @@ export function OtherRaces({ races }) {
   const line = (r) => {
     if (r.status !== 'reporting' || !r.totalVotes) return 'No votes counted yet';
     if (r.multiSeat) return `Vote for ${r.seats}`;
-    const m = r.marginPts != null ? Math.abs(Number(r.marginPts)) : null;
-    if (r.tied || !r.leader || (m != null && m < TOSSUP_MARGIN)) return 'Toss-up';
+    const m = r.marginPts != null ? fmtMargin(r.marginPts) : null;
+    if (r.tied || !r.leader || isTossupMargin(r.marginPts)) return 'Toss-up';
     const who = r.partySum ? `${r.leader === 'DEM' ? 'Democrats' : r.leader === 'REP' ? 'Republicans' : 'Other parties'} lead`
       : `${r.leadName}${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw }) ? ` (${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw })})` : ''}`;
-    return `${who} +${m?.toFixed(1)}`;
+    return `${who} +${m}`;
   };
   return (
     <div className="other-races">
@@ -139,6 +183,9 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
         <>
           {hasCandidates(entry) ? <CandidateRows entry={entry} cap={5} interactive={false} /> : <PartyRows entry={entry} />}
           <span className="foot">{leadText(entry)}</span>
+          {kind === 'state' && entry.partySum && entry.districts?.length > 0 && (
+            <DistrictRows districts={entry.districts} cap={8} state={entry.state} interactive={false} />
+          )}
           {hasCandidates(entry) && <PhotoCredits entry={entry} cap={5} />}
           {entry.otherContests?.length > 0 && !entry.otherRaces && (
             <span className="foot">
@@ -149,6 +196,9 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
       )}
       {status === 'awaiting' && (
         <span className="foot">No votes counted yet{sourceName || entry?.sourceName ? ` · source: ${sourceName || entry.sourceName}` : ''}.</span>
+      )}
+      {status === 'awaiting' && kind === 'state' && entry?.partySum && entry.districts?.length > 0 && (
+        <DistrictRows districts={entry.districts} cap={8} state={entry.state} interactive={false} />
       )}
       {status === 'no-source' && (entry?.coverageStatus === 'live' && entry?.sourceNote
         ? <span className="foot">{entry.sourceNote}</span>

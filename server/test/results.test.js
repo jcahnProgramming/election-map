@@ -71,6 +71,7 @@ test('state view: counties, partial county sites, measures', () => {
   assert.equal(tx.countyData, 'partial');
   assert.equal(tx.counties[0].fips, '48121');
   assert.match(tx.countyNote, /not statewide totals/);
+  assert.match(tx.countyNote, /\b1 county publishes its own results\b/); // singular, not "their"
   const m = res.measures('CO').measures[0];
   assert.deepEqual([m.yes, m.no, m.pctYes], [300, 100, 75]);
 });

@@ -1,0 +1,854 @@
+{
+  "_howto": "Congress view: seats NOT on the ballot this election (Senate holdovers) and the seats that are. Static and sourced; regenerate when the roster changes (appointments, resignations) before an election. Independents count with the party they caucus with and are labelled as independents. Seats up this year, including special elections, are never holdovers.",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "senate": {
+    "seats": 100,
+    "majority": 51,
+    "tieBreak": "In a 50–50 Senate the Vice President breaks ties.",
+    "source": {
+      "roster": "https://www.senate.gov/general/contact_information/senators_cfm.xml",
+      "roster_page": "https://www.senate.gov/senators/index.htm",
+      "party_division": "https://www.senate.gov/about/parties-leadership/party-division.htm",
+      "caucus": [
+        "https://www.senate.gov/general/committee_membership/committee_memberships_SSHR.xml",
+        "https://www.senate.gov/general/committee_membership/committee_memberships_SSAS.xml"
+      ],
+      "caucus_note": "senate.gov lists Angus S. King, Jr. (I-ME) and Bernard Sanders (I-VT) as independents in the roster and with party \"D\" on the minority side of their committees (Sanders: HELP ranking member; King: Armed Services), i.e. they caucus with the Democrats. The party division page shows the 119th Congress as 53 Republicans, 45 Democrats, 2 Independents.",
+      "as_of": "2026-11-03"
+    },
+    "up": [
+      {
+        "state": "AK",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Dan Sullivan",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "AL",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Tommy Tuberville",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "AR",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Tom Cotton",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "CO",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "John W. Hickenlooper",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "DE",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Christopher A. Coons",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "FL",
+        "seat": "special",
+        "class": "III",
+        "incumbent": "Ashley Moody",
+        "incumbentParty": "R",
+        "note": "Special election for the term ending January 3, 2029 (Class III)"
+      },
+      {
+        "state": "GA",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Jon Ossoff",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "IA",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Joni Ernst",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "ID",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "James E. Risch",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "IL",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Richard J. Durbin",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "KS",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Roger Marshall",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "KY",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Mitch McConnell",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "LA",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Bill Cassidy",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "MA",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Edward J. Markey",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "ME",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Susan M. Collins",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "MI",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Gary C. Peters",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "MN",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Tina Smith",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "MS",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Cindy Hyde-Smith",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "MT",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Steve Daines",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "NC",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Thom Tillis",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "NE",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Pete Ricketts",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "NH",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Jeanne Shaheen",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "NJ",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Cory A. Booker",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "NM",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Ben Ray Luján",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "OH",
+        "seat": "special",
+        "class": "III",
+        "incumbent": "Jon Husted",
+        "incumbentParty": "R",
+        "note": "Special election for the term ending January 3, 2029 (Class III)"
+      },
+      {
+        "state": "OK",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Alan Armstrong",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "OR",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Jeff Merkley",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "RI",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Jack Reed",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "SC",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Darline Graham",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "SD",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Mike Rounds",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "TN",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Bill Hagerty",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "TX",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "John Cornyn",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "VA",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Mark R. Warner",
+        "incumbentParty": "D"
+      },
+      {
+        "state": "WV",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Shelley Moore Capito",
+        "incumbentParty": "R"
+      },
+      {
+        "state": "WY",
+        "seat": "regular",
+        "class": "II",
+        "incumbent": "Cynthia M. Lummis",
+        "incumbentParty": "R"
+      }
+    ],
+    "holdovers": [
+      {
+        "state": "AK",
+        "name": "Lisa Murkowski",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "M001153"
+      },
+      {
+        "state": "AL",
+        "name": "Katie Boyd Britt",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "B001319"
+      },
+      {
+        "state": "AR",
+        "name": "John Boozman",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "B001236"
+      },
+      {
+        "state": "AZ",
+        "name": "Ruben Gallego",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "G000574"
+      },
+      {
+        "state": "AZ",
+        "name": "Mark Kelly",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "K000377"
+      },
+      {
+        "state": "CA",
+        "name": "Adam B. Schiff",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "S001150"
+      },
+      {
+        "state": "CA",
+        "name": "Alex Padilla",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "P000145"
+      },
+      {
+        "state": "CO",
+        "name": "Michael F. Bennet",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "B001267"
+      },
+      {
+        "state": "CT",
+        "name": "Christopher Murphy",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "M001169"
+      },
+      {
+        "state": "CT",
+        "name": "Richard Blumenthal",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "B001277"
+      },
+      {
+        "state": "DE",
+        "name": "Lisa Blunt Rochester",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "B001303"
+      },
+      {
+        "state": "FL",
+        "name": "Rick Scott",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "S001217"
+      },
+      {
+        "state": "GA",
+        "name": "Raphael G. Warnock",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "W000790"
+      },
+      {
+        "state": "HI",
+        "name": "Mazie K. Hirono",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "H001042"
+      },
+      {
+        "state": "HI",
+        "name": "Brian Schatz",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "S001194"
+      },
+      {
+        "state": "IA",
+        "name": "Chuck Grassley",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "G000386"
+      },
+      {
+        "state": "ID",
+        "name": "Mike Crapo",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "C000880"
+      },
+      {
+        "state": "IL",
+        "name": "Tammy Duckworth",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "D000622"
+      },
+      {
+        "state": "IN",
+        "name": "Jim Banks",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "B001299"
+      },
+      {
+        "state": "IN",
+        "name": "Todd Young",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "Y000064"
+      },
+      {
+        "state": "KS",
+        "name": "Jerry Moran",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "M000934"
+      },
+      {
+        "state": "KY",
+        "name": "Rand Paul",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "P000603"
+      },
+      {
+        "state": "LA",
+        "name": "John Kennedy",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "K000393"
+      },
+      {
+        "state": "MA",
+        "name": "Elizabeth Warren",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "W000817"
+      },
+      {
+        "state": "MD",
+        "name": "Angela D. Alsobrooks",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "A000382"
+      },
+      {
+        "state": "MD",
+        "name": "Chris Van Hollen",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "V000128"
+      },
+      {
+        "state": "ME",
+        "name": "Angus S. King, Jr.",
+        "party": "I",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "K000383"
+      },
+      {
+        "state": "MI",
+        "name": "Elissa Slotkin",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "S001208"
+      },
+      {
+        "state": "MN",
+        "name": "Amy Klobuchar",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "K000367"
+      },
+      {
+        "state": "MO",
+        "name": "Josh Hawley",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "H001089"
+      },
+      {
+        "state": "MO",
+        "name": "Eric Schmitt",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "S001227"
+      },
+      {
+        "state": "MS",
+        "name": "Roger F. Wicker",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "W000437"
+      },
+      {
+        "state": "MT",
+        "name": "Tim Sheehy",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "S001232"
+      },
+      {
+        "state": "NC",
+        "name": "Ted Budd",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "B001305"
+      },
+      {
+        "state": "ND",
+        "name": "Kevin Cramer",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "C001096"
+      },
+      {
+        "state": "ND",
+        "name": "John Hoeven",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "H001061"
+      },
+      {
+        "state": "NE",
+        "name": "Deb Fischer",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "F000463"
+      },
+      {
+        "state": "NH",
+        "name": "Margaret Wood Hassan",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "H001076"
+      },
+      {
+        "state": "NJ",
+        "name": "Andy Kim",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "K000394"
+      },
+      {
+        "state": "NM",
+        "name": "Martin Heinrich",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "H001046"
+      },
+      {
+        "state": "NV",
+        "name": "Jacky Rosen",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "R000608"
+      },
+      {
+        "state": "NV",
+        "name": "Catherine Cortez Masto",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "C001113"
+      },
+      {
+        "state": "NY",
+        "name": "Kirsten E. Gillibrand",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "G000555"
+      },
+      {
+        "state": "NY",
+        "name": "Charles E. Schumer",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "S000148"
+      },
+      {
+        "state": "OH",
+        "name": "Bernie Moreno",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "M001242"
+      },
+      {
+        "state": "OK",
+        "name": "James Lankford",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "L000575"
+      },
+      {
+        "state": "OR",
+        "name": "Ron Wyden",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "W000779"
+      },
+      {
+        "state": "PA",
+        "name": "David McCormick",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "M001243"
+      },
+      {
+        "state": "PA",
+        "name": "John Fetterman",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "F000479"
+      },
+      {
+        "state": "RI",
+        "name": "Sheldon Whitehouse",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "W000802"
+      },
+      {
+        "state": "SC",
+        "name": "Tim Scott",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "S001184"
+      },
+      {
+        "state": "SD",
+        "name": "John Thune",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "T000250"
+      },
+      {
+        "state": "TN",
+        "name": "Marsha Blackburn",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "B001243"
+      },
+      {
+        "state": "TX",
+        "name": "Ted Cruz",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "C001098"
+      },
+      {
+        "state": "UT",
+        "name": "John R. Curtis",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "C001114"
+      },
+      {
+        "state": "UT",
+        "name": "Mike Lee",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "L000577"
+      },
+      {
+        "state": "VA",
+        "name": "Tim Kaine",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "K000384"
+      },
+      {
+        "state": "VT",
+        "name": "Bernard Sanders",
+        "party": "I",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "S000033"
+      },
+      {
+        "state": "VT",
+        "name": "Peter Welch",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "W000800"
+      },
+      {
+        "state": "WA",
+        "name": "Maria Cantwell",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "C000127"
+      },
+      {
+        "state": "WA",
+        "name": "Patty Murray",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "III",
+        "bioguide": "M001111"
+      },
+      {
+        "state": "WI",
+        "name": "Tammy Baldwin",
+        "party": "D",
+        "caucus": "DEM",
+        "class": "I",
+        "bioguide": "B001230"
+      },
+      {
+        "state": "WI",
+        "name": "Ron Johnson",
+        "party": "R",
+        "caucus": "REP",
+        "class": "III",
+        "bioguide": "J000293"
+      },
+      {
+        "state": "WV",
+        "name": "James C. Justice",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "J000312"
+      },
+      {
+        "state": "WY",
+        "name": "John Barrasso",
+        "party": "R",
+        "caucus": "REP",
+        "class": "I",
+        "bioguide": "B001261"
+      }
+    ]
+  },
+  "house": {
+    "seats": 435,
+    "majority": 218,
+    "allUp": true,
+    "source": {
+      "url": "https://clerk.house.gov/xml/lists/MemberData.xml",
+      "note": "Districts per state from the Clerk of the House member data (119th Congress; 2020 apportionment). Territories and DC (non-voting) excluded.",
+      "as_of": "2026-11-03"
+    },
+    "districts": {
+      "AK": 1,
+      "AL": 7,
+      "AR": 4,
+      "AZ": 9,
+      "CA": 52,
+      "CO": 8,
+      "CT": 5,
+      "DE": 1,
+      "FL": 28,
+      "GA": 14,
+      "HI": 2,
+      "IA": 4,
+      "ID": 2,
+      "IL": 17,
+      "IN": 9,
+      "KS": 4,
+      "KY": 6,
+      "LA": 6,
+      "MA": 9,
+      "MD": 8,
+      "ME": 2,
+      "MI": 13,
+      "MN": 8,
+      "MO": 8,
+      "MS": 4,
+      "MT": 2,
+      "NC": 14,
+      "ND": 1,
+      "NE": 3,
+      "NH": 2,
+      "NJ": 12,
+      "NM": 3,
+      "NV": 4,
+      "NY": 26,
+      "OH": 15,
+      "OK": 5,
+      "OR": 6,
+      "PA": 17,
+      "RI": 2,
+      "SC": 7,
+      "SD": 1,
+      "TN": 9,
+      "TX": 38,
+      "UT": 4,
+      "VA": 11,
+      "VT": 1,
+      "WA": 10,
+      "WI": 8,
+      "WV": 2,
+      "WY": 1
+    }
+  }
+}
