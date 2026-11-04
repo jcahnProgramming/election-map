@@ -3,13 +3,16 @@ import { createServer } from 'node:http';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { Server } from 'socket.io';
-import { config } from './config.js';
+import { config, changelog } from './config.js';
 import { openDb } from './db.js';
 import { loadAdapters } from './adapters/index.js';
 import { startPolling, health } from './poller.js';
 import { createResults, RACES } from './results.js';
 import { stateByAbbr } from './geo.js';
 import { logger } from './log.js';
+import { createApiCache } from './apicache.js';
+import { createRateLimit } from './ratelimit.js';
+import { currentElectionKey } from './elections.js';
 
 const log = logger('server');
 const db = openDb();
@@ -20,19 +23,17 @@ const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 'loopback, linklocal, uniquelocal'); // behind the Cloudflare tunnel
 
+// Public traffic: a generous per-IP rate limit, short shared caching (Cloudflare + browsers), and an in-memory
+// response cache that is dropped whenever a poll writes new numbers (or after 10 s).
+const rateLimit = createRateLimit({ perMinute: Number(process.env.API_RATE_PER_MINUTE ?? 300) });
+const cache = createApiCache({ ttlMs: 10_000 });
+
 const api = express.Router();
+api.use(rateLimit.middleware);
 api.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store'); // live numbers; the browser should always ask
+  res.set('Cache-Control', req.path === '/health' ? 'no-cache, no-store' : 'public, max-age=15, stale-while-revalidate=30');
   next();
 });
-const raceParam = (req, res) => {
-  const race = String(req.query.race ?? 'senate');
-  if (!RACES.includes(race)) {
-    res.status(400).json({ error: `race must be one of ${RACES.join(', ')}` });
-    return null;
-  }
-  return race;
-};
 
 api.get('/health', (req, res) => {
   res.json({
@@ -44,21 +45,53 @@ api.get('/health', (req, res) => {
     })),
   });
 });
+
+api.use(cache.middleware); // every read below is cached
+
+const raceParam = (req, res) => {
+  const race = String(req.query.race ?? 'senate');
+  if (!RACES.includes(race)) {
+    res.status(400).json({ error: `race must be one of ${RACES.join(', ')}` });
+    return null;
+  }
+  return race;
+};
+/** ?election=<key> (default: config/elections.json `current`). Unknown → 404. */
+const electionParam = (req, res) => {
+  const asked = req.query.election == null ? null : String(req.query.election);
+  const ek = results.resolveElection(asked);
+  if (!ek) {
+    res.status(404).json({ error: `unknown election ${JSON.stringify(asked)}; see /api/elections` });
+    return null;
+  }
+  return ek;
+};
+
+api.get('/elections', (req, res) => res.json(results.elections()));
+api.get('/changelog', (req, res) => res.json({ ...changelog, currentVersion: config.version }));
 api.get('/national', (req, res) => {
   const race = raceParam(req, res);
-  if (race) res.json(results.national(race));
+  const ek = race && electionParam(req, res);
+  if (ek) res.json(results.national(race, ek));
 });
 api.get('/state/:abbr', (req, res) => {
   const race = raceParam(req, res);
-  if (!race) return;
+  const ek = race && electionParam(req, res);
+  if (!ek) return;
   if (!stateByAbbr(req.params.abbr)) return res.status(404).json({ error: 'unknown state' });
-  res.json(results.state(req.params.abbr, race));
+  res.json(results.state(req.params.abbr, race, ek));
 });
 api.get('/measures', (req, res) => {
-  if (req.query.state && !stateByAbbr(req.query.state)) return res.status(404).json({ error: 'unknown state' });
-  res.json(results.measures(req.query.state || null));
+  const ek = electionParam(req, res);
+  if (!ek) return;
+  const st = req.query.state ? String(req.query.state) : null;
+  if (st && !stateByAbbr(st)) return res.status(404).json({ error: 'unknown state' });
+  res.json(results.measures(st, ek));
 });
-api.get('/coverage', (req, res) => res.json(results.coverage()));
+api.get('/coverage', (req, res) => {
+  const ek = electionParam(req, res);
+  if (ek) res.json(results.coverage(ek));
+});
 api.use((req, res) => res.status(404).json({ error: 'not found' }));
 app.use('/api', api);
 
@@ -71,16 +104,27 @@ if (existsSync(config.clientDist)) {
 }
 
 const server = createServer(app);
-const io = new Server(server, { serveClient: false });
+// Behind Cloudflare: accept both websocket and long-polling, and ping well inside Cloudflare's 100 s idle timeout.
+const io = new Server(server, {
+  serveClient: false,
+  transports: ['polling', 'websocket'],
+  allowUpgrades: true,
+  pingInterval: 25_000,
+  pingTimeout: 20_000,
+});
 io.on('connection', (socket) => socket.emit('hello', { version: config.version }));
 
 const stop = startPolling({
   db,
   adapters,
   onUpdate: (u) => {
-    // Every successful fetch: a cheap heartbeat. New numbers: results:update, which clients refetch on.
+    // Every successful fetch: a cheap heartbeat. New numbers: drop the API cache, then results:update,
+    // which clients refetch on.
+    if (u.changed) cache.clear();
     io.emit('source:checked', u);
-    if (u.changed) io.emit('results:update', { sourceId: u.sourceId, states: u.states, fetchedAt: u.fetchedAt });
+    if (u.changed) {
+      io.emit('results:update', { sourceId: u.sourceId, election: u.election ?? currentElectionKey(), states: u.states, fetchedAt: u.fetchedAt });
+    }
   },
 });
 
@@ -90,6 +134,7 @@ server.listen(config.port, () => {
 
 const shutdown = () => {
   stop();
+  rateLimit.stop();
   io.close();
   server.close(() => {
     db.close();

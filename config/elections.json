@@ -1,0 +1,7 @@
+{
+  "_howto": "Elections this app knows about. `current` is the default for every API call and for adapter results that don't name an election. Each entry: key (stable, used in ?election=), name, date (YYYY-MM-DD), and optionally `races` = the config file listing which states hold which races (used only for states with no live source). Adding an election never removes an older one: its snapshots stay queryable with ?election=<key>.",
+  "current": "2026-general",
+  "elections": [
+    { "key": "2026-general", "name": "2026 General Election", "date": "2026-11-03", "races": "races-2026.json" }
+  ]
+}

@@ -10,11 +10,10 @@
 //                   one entry per thing the poller fetches; read from config, not hardcoded
 //   fetch(target, ctx) → { changed:false } | { changed:true, result }
 //                   ctx = { http, log, unmatched(kind, value, context) }
-//                   result = { election:{ sourceKey, state, scope, countyFips?, name, date, url },
-//                              version, races:[{ office, district, name, key, voteFor, statewide,
-//                                choices:[{ name, party, partyRaw }],
-//                                units:[{ level, countyFips?, name, votes:[n per choice] | yes/no,
-//                                         precinctsReporting, precinctsTotal, pctReporting }] }] }
+//                   result: the adapter result in docs/data-contract.md section 1 (election incl. optional electionKey,
+//                   version, sourceUpdatedAt, turnout[], races[] with units[], methods[]). That document is the
+//                   source of truth; missing values are null, never 0.
+//   A target may carry `election` (a key from config/elections.json); otherwise the current election is assumed.
 import { readdirSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';

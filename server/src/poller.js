@@ -4,6 +4,7 @@ import { writeSnapshot, markChecked, recordUnmatched } from './db.js';
 import * as http from './http.js';
 import { config } from './config.js';
 import { logger } from './log.js';
+import { currentElectionKey } from './elections.js';
 
 const log = logger('poller');
 
@@ -42,7 +43,9 @@ export function startPolling({ db, adapters, onUpdate, intervalMs = config.pollI
             r.changed = false; // same version we already stored before a restart
           }
           if (r.changed) {
-            const id = writeSnapshot(db, { ...r.result, source: adapter.id, fetchedAt: at });
+            const result = t.election && !r.result.election.electionKey
+              ? { ...r.result, election: { ...r.result.election, electionKey: t.election } } : r.result;
+            const id = writeSnapshot(db, { ...result, source: adapter.id, fetchedAt: at });
             ctx.log.info(`snapshot ${id} (version ${r.result.version ?? '-'}, ${r.result.races.length} races)`);
           } else {
             markChecked(db, adapter.id, t.key, at);
@@ -51,7 +54,8 @@ export function startPolling({ db, adapters, onUpdate, intervalMs = config.pollI
           th.version = r.version ?? r.result?.version ?? th.version;
           th.failures = 0;
           th.lastError = null;
-          onUpdate?.({ sourceId: adapter.id, target: t.key, states: [t.state], fetchedAt: at, changed: r.changed });
+          const election = r.result?.election?.electionKey ?? t.election ?? currentElectionKey();
+          onUpdate?.({ sourceId: adapter.id, target: t.key, election, states: [t.state], fetchedAt: at, changed: r.changed });
           schedule(intervalMs);
         } catch (err) {
           th.failures += 1;

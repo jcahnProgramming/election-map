@@ -1,5 +1,5 @@
 {
-  "_howto": "Elections polled by the Clarity adapter (server/src/adapters/clarity.js). path = the URL segment(s) before the election id: 'CO' for a statewide site, 'PA/Allegheny' for a county site. Find ids at https://results.enr.clarityelections.com/{path}/elections.json. Set enabled:false to stop polling one without deleting it. County sites need countyFips (5 digits) and scope 'county'.",
+  "_howto": "Elections polled by the Clarity adapter (server/src/adapters/clarity.js). path = the URL segment(s) before the election id: 'CO' for a statewide site, 'PA/Allegheny' for a county site. Find ids at https://results.enr.clarityelections.com/{path}/elections.json. Set enabled:false to stop polling one without deleting it. County sites need countyFips (5 digits) and scope 'county'. Optional `election` = a key from config/elections.json (default: its `current`).",
   "elections": [
     {
       "state": "CO",

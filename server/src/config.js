@@ -5,7 +5,8 @@ import path from 'node:path';
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const CONFIG_DIR = process.env.CONFIG_DIR ?? path.join(ROOT, 'config');
 
-const changelog = JSON.parse(readFileSync(path.join(ROOT, 'CHANGELOG.json'), 'utf8'));
+/** CHANGELOG.json as shipped with this build (the single source of the version). */
+export const changelog = JSON.parse(readFileSync(path.join(ROOT, 'CHANGELOG.json'), 'utf8'));
 
 export const config = {
   port: Number(process.env.PORT ?? 3710),
