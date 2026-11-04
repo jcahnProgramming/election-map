@@ -2,6 +2,22 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.5.0",
+      "date": "2026-11-03",
+      "title": "Congress: balance of power",
+      "sections": {
+        "New": [
+          "Congress view (Map | Congress in the header): for the Senate and the House, seats each party holds that aren't up this year plus seats where it currently has more votes counted, with toss-ups and seats with no votes or no live data counted as undecided. Seats not up come from the official Senate roster; independents are shown with the party they caucus with. This site does not call races",
+          "Seat chart, majority line and the closest Senate races, each opening that state's Senate race",
+          "U.S. House: under the statewide popular vote, one row per district with the candidate ahead and the margin, or Toss-up / No votes yet. \"+ more districts\" opens the state's full list. States with one at-large district show that race's candidates"
+        ],
+        "Improved": [
+          "Running mates are shown next to their candidate (\"with …\"), e.g. Florida's governor tickets",
+          "A search in the All races tab can be shared as a link"
+        ]
+      }
+    },
+    {
       "version": "0.4.1",
       "date": "2026-11-03",
       "title": "Florida results link",
