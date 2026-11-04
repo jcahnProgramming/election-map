@@ -1,0 +1,363 @@
+{
+  "_howto": "Each state's official results page, shown as 'Official results ↗' everywhere a state appears. url = the public results page for this election; office = the official body that publishes it; linked_from = the official page that links to it (when url is on a vendor domain); reachable = false when it blocked a plain request on as_of. Update per election.",
+  "election": "2026-general",
+  "states": {
+    "AL": {
+      "url": "https://www2.alabamavotes.gov/electionNight/statewideResultsByContest.aspx?ecode=1001305",
+      "office": "Alabama Secretary of State",
+      "linked_from": "https://www.sos.alabama.gov/",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "AK": {
+      "url": "https://www.elections.alaska.gov/election-results/e/?id=26genr",
+      "office": "Alaska Division of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "AZ": {
+      "url": "https://results.arizona.vote/",
+      "office": "Arizona Secretary of State",
+      "linked_from": "https://azsos.gov/elections/results-data",
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "AR": {
+      "url": "https://arkansas.tally-enr.com/",
+      "office": "Arkansas Secretary of State",
+      "linked_from": "https://www.sos.arkansas.gov/",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "CA": {
+      "url": "https://electionresults.sos.ca.gov/",
+      "office": "California Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "CO": {
+      "url": "https://results.enr.clarityelections.com/CO/127407/",
+      "office": "Colorado Secretary of State",
+      "linked_from": "https://www.coloradosos.gov/pubs/elections/Results/",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "CT": {
+      "url": "https://ctemspublic.pcctg.net/#/home",
+      "office": "Connecticut Secretary of the State",
+      "linked_from": "https://portal.ct.gov/sots/election-services/election-results/election-results",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "DE": {
+      "url": "https://elections.delaware.gov/results/enr/GE2026.html",
+      "office": "Delaware Department of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "FL": {
+      "url": "https://results.elections.myflorida.com/",
+      "office": "Florida Department of State, Division of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "GA": {
+      "url": "https://results.sos.ga.gov/results/public/Georgia",
+      "office": "Georgia Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "HI": {
+      "url": "https://elections.hawaii.gov/election-results/",
+      "office": "Hawaii Office of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "ID": {
+      "url": "https://results.voteidaho.gov/results/public/ID",
+      "office": "Idaho Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "IL": {
+      "url": "https://www.elections.il.gov/ElectionOperations/ElectionVoteTotals.aspx",
+      "office": "Illinois State Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "IN": {
+      "url": "https://enr.indianavoters.in.gov/site/index.html",
+      "office": "Indiana Secretary of State, Election Division",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "IA": {
+      "url": "https://results.enr.clarityelections.com/IA/127077/",
+      "office": "Iowa Secretary of State",
+      "linked_from": "https://sos.iowa.gov/elections/results/index.html",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "KS": {
+      "url": "https://sos.ks.gov/elections/election-results.html",
+      "office": "Kansas Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "KY": {
+      "url": "https://vrsws.sos.ky.gov/liveresults/",
+      "office": "Kentucky State Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "LA": {
+      "url": "https://voterportal.sos.la.gov/graphical",
+      "office": "Louisiana Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "ME": {
+      "url": "https://www.maine.gov/sos/cec/elec/results/",
+      "office": "Maine Secretary of State, Bureau of Corporations, Elections and Commissions",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "MD": {
+      "url": "https://elections.maryland.gov/elections/2026/general_results/index.html",
+      "office": "Maryland State Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "MA": {
+      "url": "https://electionstats.state.ma.us/",
+      "office": "Secretary of the Commonwealth of Massachusetts, Elections Division",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "MI": {
+      "url": "https://mielections.us/election/results/",
+      "office": "Michigan Department of State, Bureau of Elections",
+      "linked_from": "https://www.michigan.gov/sos/elections/election-results-and-data",
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "MN": {
+      "url": "https://electionresults.sos.mn.gov/",
+      "office": "Minnesota Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "MS": {
+      "url": "https://www.sos.ms.gov/elections-voting/election-results",
+      "office": "Mississippi Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "MO": {
+      "url": "https://enr.sos.mo.gov/",
+      "office": "Missouri Secretary of State",
+      "linked_from": "https://www.sos.mo.gov/elections/results",
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "MT": {
+      "url": "https://electionresults.mt.gov/",
+      "office": "Montana Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "NE": {
+      "url": "https://electionresults.nebraska.gov/",
+      "office": "Nebraska Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "NV": {
+      "url": "https://silverstateelection.nv.gov/",
+      "office": "Nevada Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "NH": {
+      "url": "https://www.sos.nh.gov/elections/elections/election-results",
+      "office": "New Hampshire Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "NJ": {
+      "url": "https://www.nj.gov/state/elections/election-information-results.shtml",
+      "office": "New Jersey Division of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "NM": {
+      "url": "https://electionresults.sos.nm.gov/",
+      "office": "New Mexico Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "NY": {
+      "url": "https://nyenr.elections.ny.gov/",
+      "office": "New York State Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "NC": {
+      "url": "https://er.ncsbe.gov/",
+      "office": "North Carolina State Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "ND": {
+      "url": "https://results.sos.nd.gov/",
+      "office": "North Dakota Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "OH": {
+      "url": "https://liveresults.ohiosos.gov/",
+      "office": "Ohio Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "OK": {
+      "url": "https://results.okelections.us/OKER/?elecDate=20261103",
+      "office": "Oklahoma State Election Board",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "OR": {
+      "url": "https://results.oregonvotes.gov/",
+      "office": "Oregon Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "PA": {
+      "url": "https://www.electionreturns.pa.gov/",
+      "office": "Pennsylvania Department of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "RI": {
+      "url": "https://electionresults.ri.gov/results/public/rhodeisland",
+      "office": "Rhode Island Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "SC": {
+      "url": "https://www.enr-scvotes.org/SC/127300/",
+      "office": "South Carolina Election Commission",
+      "linked_from": "https://scvotes.gov/",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "SD": {
+      "url": "https://electionresults.sd.gov/",
+      "office": "South Dakota Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "TN": {
+      "url": "https://sos.tn.gov/elections/results",
+      "office": "Tennessee Secretary of State, Division of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "TX": {
+      "url": "https://goelect.txelections.civixapps.com/ivis-enr-ui/races",
+      "office": "Texas Secretary of State",
+      "linked_from": "https://www.sos.texas.gov/elections/index.shtml",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "UT": {
+      "url": "https://electionresults.utah.gov/results/public/Utah",
+      "office": "Utah Lieutenant Governor, Office of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "VT": {
+      "url": "https://electionresults.vermont.gov/",
+      "office": "Vermont Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "VA": {
+      "url": "https://enr.elections.virginia.gov/results/public/virginia",
+      "office": "Virginia Department of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "WA": {
+      "url": "https://results.votewa.gov/results/public/washington",
+      "office": "Washington Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "WV": {
+      "url": "https://results.enr.clarityelections.com/WV/127496/",
+      "office": "West Virginia Secretary of State",
+      "linked_from": "https://www.govotewv.com/",
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "WI": {
+      "url": "https://elections.wi.gov/elections/election-results",
+      "office": "Wisconsin Elections Commission",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": false
+    },
+    "WY": {
+      "url": "https://sos.wyo.gov/Elections/ElectionResults.aspx",
+      "office": "Wyoming Secretary of State",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    },
+    "DC": {
+      "url": "https://electionresults.dcboe.org/",
+      "office": "District of Columbia Board of Elections",
+      "linked_from": null,
+      "as_of": "2026-11-03",
+      "reachable": true
+    }
+  }
+}
