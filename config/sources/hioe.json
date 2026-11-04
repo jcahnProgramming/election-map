@@ -1,0 +1,15 @@
+{
+  "_howto": "Elections polled by the Hawaii Office of Elections adapter (server/src/adapters/hioe.js). folder = the results folder under {base} (as linked from https://elections.hawaii.gov/election-results/); the adapter reads {folder}/summary.txt (tab-separated, #FormatVersion 1). A 404 or the placeholder text means 'not released yet' and writes nothing. Statewide only (no county column). Set enabled:false to stop polling.",
+  "base": "https://elections.hawaii.gov/wp-content/results",
+  "contestRules": [],
+  "elections": [
+    {
+      "folder": "2026 General",
+      "name": "Hawaii 2026 General Election",
+      "date": "2026-11-03",
+      "url": "https://elections.hawaii.gov/election-results/",
+      "enabled": false,
+      "note": "Disabled pending data: '2026 General/summary.txt' 404s until the first release (~7:45 pm HST, 05:45 UTC 11/4). Parser verified on the real 2026 Primary summary.txt (same #FormatVersion 1); enable after checking the first general file (Candidate Party codes)."
+    }
+  ]
+}
