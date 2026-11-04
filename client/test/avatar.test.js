@@ -29,6 +29,9 @@ test('photos pass through candidateList only when the server attached them', () 
   const photo = { url: '/photos/abc.jpg', credit: 'U.S. Senate', license: 'Public domain', sourceType: 'official_portrait' };
   const { rows } = candidateList({ candidates: [{ name: 'A', party: 'DEM', votes: 2, photo }, { name: 'B', party: 'REP', votes: 1 }] });
   assert.deepEqual(rows.map((r) => r.photo), [photo, null]);
+  // Florida marks write-ins "WRI": they go on the write-in line, never as a candidate row.
+  const fl = candidateList({ candidates: [{ name: 'A', party: 'DEM', votes: 2 }, { name: 'Pat Doe', party: 'OTHER', partyRaw: 'WRI', votes: 1 }] });
+  assert.deepEqual([fl.rows.map((r) => r.name), fl.writeIns.map((w) => w.name)], [['A'], ['Pat Doe']]);
   assert.equal(photoCredit(photo), 'Photo: U.S. Senate · Public domain · Official portrait');
   assert.equal(photoCredit({ sourceType: 'wikimedia_commons', license: 'CC BY-SA 4.0' }), 'Wikimedia Commons · CC BY-SA 4.0');
   assert.deepEqual(photoCredits(rows), ['A: Photo: U.S. Senate · Public domain · Official portrait']);

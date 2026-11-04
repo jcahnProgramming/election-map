@@ -35,9 +35,9 @@ export const normDistrict = (d) => {
 
 export const photoId = (url) => createHash('sha256').update(String(url)).digest('hex').slice(0, 20);
 
-const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
+const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|wri|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
 // Labels that mean "no party": not a party nominee (they're major only at ≥ 5%).
-const NO_PARTY = /^(|ind|i|indep|independent|una|uaf|unaffiliated|unc|np|npa|nonp|non|nonpartisan|non partisan|no party|no party preference|npp|non-partis|nonprtycan|none|oth|other|other-part|other party|pc|pet|petitioning candidate|w|wi|write-in|write in)$/;
+const NO_PARTY = /^(|ind|i|indep|independent|una|uaf|unaffiliated|unc|np|npa|nonp|non|nonpartisan|non partisan|no party|no party preference|npp|non-partis|nonprtycan|none|oth|other|other-part|other party|pc|pet|petitioning candidate|w|wi|wri|write-in|write in)$/;
 
 /** A party nominee of a party (any label other than "no party" / independent / write-in). */
 export const isPartyNominee = (c) => {

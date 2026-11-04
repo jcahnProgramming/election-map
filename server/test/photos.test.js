@@ -41,6 +41,8 @@ test('major candidates: party nominees + anyone ≥ 5%; write-ins and independen
   assert.equal(isPartyNominee(cand('X', 'OTHER', 'Unaffiliated')), false);
   assert.equal(isPartyNominee(cand('X', 'OTHER', 'Green')), true);
   assert.equal(isPartyNominee(cand('X', 'OTHER', '')), false);
+  assert.equal(isPartyNominee(cand('Florida write-in', 'OTHER', 'WRI')), false); // FL's write-in code
+  assert.equal(isPartyNominee(cand('X', 'OTHER', 'NPA')), false);
 });
 
 test('fairness: photos only when every major candidate has one; minor candidates never get one', () => {

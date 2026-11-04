@@ -121,7 +121,7 @@ export function partyTag(c) {
   return raw.length <= 5 ? raw.toUpperCase() : raw.slice(0, 4).toUpperCase();
 }
 
-export const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
+export const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|wri|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
 
 /**
  * Every candidate the source lists, sorted by votes, with a party tag and % of the votes counted. Write-ins come last on
