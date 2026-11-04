@@ -632,7 +632,7 @@ export function createResults(db, adapters, opts = {}) {
     // With a statewide source, county sites only fill in counties the state actually has (they must agree with its list).
     if (sites && hasStatewide) for (const k of [...sites.keys()]) if (!known.has(k)) sites.delete(k);
     const n = sites?.size ?? 0;
-    const publish = `${n} ${n === 1 ? 'county publishes' : 'counties publish'} their own results`;
+    const publish = `${n} ${n === 1 ? 'county publishes its' : 'counties publish their'} own results`;
     if (n && hasStatewide) {
       counties = sites;
       countyData = 'partial';
