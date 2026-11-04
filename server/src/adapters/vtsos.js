@@ -169,6 +169,25 @@ export function parseVt(index, sections, turnoutFile, t, unmatched = () => {}) {
     return townCounty.get(tid) ?? null; // null also when the county name itself didn't match (already logged)
   };
 
+  // Every town and its voting-district count, from the turnout file (it lists all towns, reported or not), and every
+  // town per county (turnout file + the index's own town → county list).
+  const districtsByTown = new Map(); // tid → [reported, total]
+  const allTowns = new Set();
+  const townsByCounty = new Map(); // fips → Set(tid)
+  const addTown = (tid) => {
+    if (tid == null || Number(tid) === 0) return;
+    allTowns.add(tid);
+    const m = townCounty.get(tid);
+    if (m) { if (!townsByCounty.has(m.fips)) townsByCounty.set(m.fips, new Set()); townsByCounty.get(m.fips).add(tid); }
+  };
+  for (const x of turnoutFile?.d ?? []) {
+    if (x.tid == null || Number(x.tid) === 0) continue;
+    const tot = num(x.tdis);
+    if (tot != null && tot > 0) districtsByTown.set(x.tid, [num(x.tdisr) ?? 0, tot]);
+    addTown(x.tid);
+  }
+  if (!districtsByTown.size) for (const td of index.townDistricts ?? []) addTown(td.townId);
+
   const races = [];
   for (const file of sections) {
     for (const o of contestsOf(file)) {
@@ -207,8 +226,10 @@ export function parseVt(index, sections, turnoutFile, t, unmatched = () => {}) {
       const add = (a, b) => a.map((x, i) => x + b[i]);
 
       // Precincts = the town's voting districts; distReported is repeated on each of a town's rows, so count each town once.
-      const precinctsByTown = new Map();
-      for (const r of townRows) { const f = fraction(r.distReported); if (f && !precinctsByTown.has(r.tid)) precinctsByTown.set(r.tid, f); }
+      // Once results start, the section file only has rows for towns that have reported, so the denominator must come
+      // from every town (the turnout file's tdis), not from the rows present (2 of 247 towns would read "2/2 = 100%").
+      const precinctsByTown = new Map(districtsByTown);
+      for (const r of townRows) { const f = fraction(r.distReported); if (f && f[1] > 0) precinctsByTown.set(r.tid, f); }
 
       const byCounty = new Map(); // fips → { m, votes, pr, pt, towns:Set }
       let stateSum = new Array(choices.length).fill(0);
@@ -229,12 +250,33 @@ export function parseVt(index, sections, turnoutFile, t, unmatched = () => {}) {
           : { precinctsReporting: null, precinctsTotal: null, pctReporting: null };
       };
 
+      // Every town in a unit counts, reported or not. Without the turnout file we only know the towns with rows:
+      // then a unit is only given precincts when rows cover all of its towns (never a "2 of 2" from a partial file).
+      const NONE = { precinctsReporting: null, precinctsTotal: null, pctReporting: null };
+      const rowTowns = new Set(townRows.map((r) => r.tid));
+      const unitPrecincts = (allTids, rowTids) => {
+        if (districtsByTown.size) return allTids ? precincts(allTids) : NONE;
+        return allTids && allTids.size && [...allTids].every((tid) => rowTids.has(tid)) ? precincts(rowTids) : NONE;
+      };
+      const countyTowns = (fips, fallback) => townsByCounty.get(fips) ?? fallback;
+      // The towns a contest covers: statewide = every town; county = the county's towns; town = that town; a legislative
+      // district = unknown (the turnout file doesn't list district towns), so no precincts unless the feed is complete.
+      let contestTowns = null;
+      if (scope.kind === 'statewide') contestTowns = allTowns.size ? allTowns : rowTowns;
+      else if (scope.kind === 'town') contestTowns = rowTowns;
+      else if (scope.kind === 'county') {
+        const fips = byCounty.size === 1 ? [...byCounty.keys()][0] : null;
+        contestTowns = fips ? countyTowns(fips, rowTowns) : null;
+      } else if (!districtsByTown.size) contestTowns = rowTowns;
       const units = [{
         level: 'state', name: scope.unitName ?? t.state, votes: swRow ? rowVotes(swRow) : stateSum,
-        ...precincts(new Set(townRows.map((r) => r.tid))),
+        ...unitPrecincts(contestTowns, rowTowns),
       }];
       for (const c of [...byCounty.values()].sort((a, b) => a.m.fips.localeCompare(b.m.fips))) {
-        units.push({ level: 'county', countyFips: c.m.fips, name: c.m.name, votes: c.votes, ...precincts(c.towns) });
+        // A statewide or county contest covers every town in the county; a district / town contest only its own towns.
+        const inCounty = scope.kind === 'statewide' || scope.kind === 'county' ? countyTowns(c.m.fips, c.towns)
+          : scope.kind === 'town' ? c.towns : (districtsByTown.size ? null : c.towns);
+        units.push({ level: 'county', countyFips: c.m.fips, name: c.m.name, votes: c.votes, ...unitPrecincts(inCounty, c.towns) });
       }
       if (isMeasure) {
         const yi = choices.findIndex((ch) => yesNoSide(ch.name) === 'yes');

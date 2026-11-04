@@ -19,13 +19,22 @@ export async function getJson(path) {
   try { return await res.json(); } catch { throw new ApiError('Results server returned invalid data.'); }
 }
 
+/**
+ * Append the data version from the last `results:update` (`v`) so a refetch after an update is a new cache key
+ * at Cloudflare's edge and in the browser (both honour max-age=15). No `v` (plain page load) = URL unchanged.
+ */
+export function withVersion(path, v) {
+  if (v == null || v === '') return path;
+  return `${path}${path.includes('?') ? '&' : '?'}v=${encodeURIComponent(v)}`;
+}
+
 export const api = {
-  offices: () => getJson('/api/offices'),
-  national: (office) => getJson(`/api/national?office=${encodeURIComponent(office)}`),
-  state: (abbr, office) => getJson(`/api/state/${encodeURIComponent(abbr)}?office=${encodeURIComponent(office)}`),
-  contests: (abbr) => getJson(`/api/state/${encodeURIComponent(abbr)}/contests`),
+  offices: (v) => getJson(withVersion('/api/offices', v)),
+  national: (office, v) => getJson(withVersion(`/api/national?office=${encodeURIComponent(office)}`, v)),
+  state: (abbr, office, v) => getJson(withVersion(`/api/state/${encodeURIComponent(abbr)}?office=${encodeURIComponent(office)}`, v)),
+  contests: (abbr, v) => getJson(withVersion(`/api/state/${encodeURIComponent(abbr)}/contests`, v)),
   changelog: () => getJson('/api/changelog'),
-  measures: (abbr) => getJson(abbr ? `/api/measures?state=${encodeURIComponent(abbr)}` : '/api/measures'),
+  measures: (abbr, v) => getJson(withVersion(abbr ? `/api/measures?state=${encodeURIComponent(abbr)}` : '/api/measures', v)),
   coverage: () => getJson('/api/coverage'),
   health: () => getJson('/api/health'),
 };

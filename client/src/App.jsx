@@ -5,6 +5,7 @@ import { RACES, shortLabel, longLabel, registerOfficeLabels } from './format.js'
 import { estReporting, newestTime, fmtMT } from './calc.js';
 import { fmtReporting } from './format.js';
 import { stateFeatures, FIPS_TO_ABBR } from './geo.js';
+import { newerDataVersion, isNewerAppVersion, safetyPollDue, updatedAgo } from './live.js';
 import NationalView from './components/NationalView.jsx';
 import StateView from './components/StateView.jsx';
 import Sidebar from './components/Sidebar.jsx';
@@ -15,6 +16,9 @@ const DEFAULT_OFFICE = 'senate';
 const REFETCH_DEBOUNCE_MS = 600;
 const LEVELS = [['federal', 'Federal'], ['state', 'State']];
 const FEDERAL = new Set(['president', 'senate', 'house']);
+// The version this bundle was built as (CHANGELOG.json, injected by vite.config.js).
+// eslint-disable-next-line no-undef
+const APP_VERSION = typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : null;
 
 // Short, shareable office names in the URL (?office=ag). Anything else is the server's office key as-is.
 const ALIASES = { ag: 'attorney_general', sos: 'secretary_of_state', lg: 'lieutenant_governor', ltgov: 'lieutenant_governor', gov: 'governor' };
@@ -75,36 +79,67 @@ function useRoute() {
   return [route, navigate];
 }
 
-function useSocket(onUpdate) {
-  const [connected, setConnected] = useState(false);
-  const cb = useRef(onUpdate);
-  cb.current = onUpdate;
+/**
+ * Socket.io connection. `handlers.onUpdate(msg)` on results:update, `handlers.onReconnect()` on every connect after
+ * the first (server restart / network drop: we may have missed updates), `handlers.onHello({version})` on connect.
+ * Listeners are registered once on the Socket object, which socket.io-client keeps across reconnects; there are no rooms.
+ */
+function useSocket(handlers) {
+  const [state, setState] = useState({ connected: false, everConnected: false });
+  const cb = useRef(handlers);
+  cb.current = handlers;
   useEffect(() => {
     // Polling first, then upgrade: works behind Cloudflare even where websockets are blocked.
     const socket = io({ transports: ['polling', 'websocket'] });
-    socket.on('connect', () => { setConnected(true); cb.current({ reconnect: true }); });
-    socket.on('disconnect', () => setConnected(false));
-    socket.on('connect_error', () => setConnected(false));
-    socket.on('results:update', (msg) => cb.current(msg));
+    let connects = 0;
+    socket.on('connect', () => {
+      setState({ connected: true, everConnected: true });
+      if (connects++ > 0) cb.current.onReconnect?.();
+    });
+    socket.on('disconnect', (reason) => {
+      setState((s) => ({ ...s, connected: false }));
+      // A server shutdown (redeploy) closes sockets with "io server disconnect", after which socket.io-client
+      // does NOT reconnect by itself: ask for it explicitly.
+      if (reason === 'io server disconnect') socket.connect();
+    });
+    socket.on('connect_error', () => setState((s) => ({ ...s, connected: false })));
+    socket.on('hello', (msg) => cb.current.onHello?.(msg));
+    socket.on('results:update', (msg) => cb.current.onUpdate?.(msg));
     return () => socket.close();
   }, []);
-  return connected;
+  return state;
 }
 
-/** Fetch `fn()` whenever `key` or `tick` changes; keeps the previous value for the same key while refetching. */
+/**
+ * Fetch `fn()` whenever `key` or `tick` changes; keeps the previous value for the same key while refetching.
+ * `at` = when this key's data last arrived (drives "Updated Xs ago").
+ */
 function useLive(key, tick, fn) {
-  const [box, setBox] = useState({ key: null, data: null, error: null });
+  const [box, setBox] = useState({ key: null, data: null, error: null, at: null });
   const req = useRef(0);
   useEffect(() => {
     if (key == null) return;
     const id = ++req.current;
     fn().then(
-      (data) => id === req.current && setBox({ key, data, error: null }),
-      (e) => id === req.current && setBox((b) => ({ key, data: b.key === key ? b.data : null, error: e.message || String(e) }))
+      (data) => id === req.current && setBox({ key, data, error: null, at: Date.now() }),
+      (e) => id === req.current && setBox((b) => (b.key === key
+        ? { ...b, error: e.message || String(e) }
+        : { key, data: null, error: e.message || String(e), at: null }))
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key, tick]);
-  return box.key === key ? box : { key, data: null, error: null };
+  return box.key === key ? box : { key, data: null, error: null, at: null };
+}
+
+/** "Updated Xs ago", counting up live. Its own 1 s timer so the maps don't re-render every second. */
+function UpdatedAgo({ at }) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const text = at ? updatedAgo(now - at) : null;
+  return text ? <span className="ago">{text}</span> : null;
 }
 
 const STATE_OPTIONS = stateFeatures
@@ -126,26 +161,78 @@ export default function App() {
   const [changelogOpen, setChangelogOpen] = useState(false);
   const [focusMeasure, setFocusMeasure] = useState(null);
 
+  // Data version (newest snapshot's fetchedAt): refetches carry it as ?v= so neither the browser nor Cloudflare's
+  // edge (max-age=15) can answer them with a pre-update copy. null until known: plain first loads stay cacheable.
+  const dataVersion = useRef(null);
+  const lastRefresh = useRef(Date.now()); // last time anything (event, catch-up) refreshed the view
+  const [serverVersion, setServerVersion] = useState(null);
   const debounce = useRef(null);
-  const connected = useSocket(() => {
+  const refetch = useCallback(() => {
+    lastRefresh.current = Date.now();
     clearTimeout(debounce.current);
     debounce.current = setTimeout(() => setTick((t) => t + 1), REFETCH_DEBOUNCE_MS);
+  }, []);
+  // Catch-up (reconnect, tab visible again, safety net): ask the never-cached health endpoint for the current data
+  // version and app version, then refetch the view under that version.
+  const catchingUp = useRef(false);
+  const catchUp = useCallback(() => {
+    if (catchingUp.current) return;
+    catchingUp.current = true;
+    lastRefresh.current = Date.now();
+    api.health()
+      .then((h) => {
+        dataVersion.current = newerDataVersion(dataVersion.current, h?.dataVersion);
+        if (h?.version) setServerVersion(h.version);
+      })
+      .catch(() => {}) // still refetch: the view's own error handling reports an unreachable server
+      .finally(() => { catchingUp.current = false; refetch(); });
+  }, [refetch]);
+
+  const { connected, everConnected } = useSocket({
+    onUpdate: (msg) => {
+      dataVersion.current = newerDataVersion(dataVersion.current, msg?.fetchedAt);
+      refetch();
+    },
+    onReconnect: catchUp,
+    onHello: (msg) => { if (msg?.version) setServerVersion(msg.version); },
   });
 
-  const officesBox = useLive('offices', tick, () => api.offices());
+  // Safety net, independent of the socket: refetch if nothing refreshed the view for 60 s, and as soon as the tab
+  // becomes visible again (timers are throttled in background tabs and events may have been missed).
+  useEffect(() => {
+    const visible = () => document.visibilityState !== 'hidden';
+    const id = setInterval(() => {
+      if (safetyPollDue(lastRefresh.current, Date.now(), { visible: visible() })) catchUp();
+    }, 5000);
+    const onVis = () => { if (visible()) catchUp(); };
+    document.addEventListener('visibilitychange', onVis);
+    return () => { clearInterval(id); document.removeEventListener('visibilitychange', onVis); };
+  }, [catchUp]);
+
+  const officesBox = useLive('offices', tick, () => api.offices(dataVersion.current));
   const levels = officesBox.data?.levels || FALLBACK_OFFICES;
   registerOfficeLabels(levels);
   const officeList = levels[level]?.length ? levels[level] : FALLBACK_OFFICES[level];
 
   // National data always loads: it drives the header (est. reporting) and the national map.
-  const national = useLive(race, tick, () => api.national(race));
-  const stateBox = useLive(abbr ? `${abbr}/${race}` : null, tick, () => api.state(abbr, race));
-  const contestsBox = useLive(abbr && tab === 'all' ? abbr : null, tick, () => api.contests(abbr));
-  const measuresBox = useLive(abbr || '*', tick, () => api.measures(abbr));
+  const national = useLive(race, tick, () => api.national(race, dataVersion.current));
+  const stateBox = useLive(abbr ? `${abbr}/${race}` : null, tick, () => api.state(abbr, race, dataVersion.current));
+  const contestsBox = useLive(abbr && tab === 'all' ? abbr : null, tick, () => api.contests(abbr, dataVersion.current));
+  const measuresBox = useLive(abbr || '*', tick, () => api.measures(abbr, dataVersion.current));
   const changelog = useLive('changelog', 0, () => api.changelog());
   const health = useLive('health', 0, () => api.health());
+  useEffect(() => {
+    // Learn the data version from the first health read, without refetching (the first load is already under way).
+    if (health.data) {
+      dataVersion.current = newerDataVersion(dataVersion.current, health.data.dataVersion);
+      if (health.data.version) setServerVersion((v) => v ?? health.data.version);
+    }
+  }, [health.data]);
 
   const version = changelog.data?.currentVersion || health.data?.version || changelog.data?.releases?.[0]?.version || null;
+  // A deploy happened since this page loaded: the server runs a newer version than this bundle.
+  const newVersion = isNewerAppVersion(APP_VERSION, serverVersion) ? serverVersion : null;
+  const viewAt = abbr ? (tab === 'all' ? contestsBox.at : stateBox.at) : national.at;
 
   const nStates = national.data?.states;
   const est = estReporting(nStates);
@@ -184,10 +271,17 @@ export default function App() {
 
   return (
     <div className="app">
+      {newVersion && (
+        <div className="update-banner" role="status">
+          <span>New version available (v{newVersion})</span>
+          <button type="button" className="btn" onClick={() => window.location.reload()}>Reload</button>
+        </div>
+      )}
       <header className="hdr">
         <div className="hdr-title">
           <span className={`live-dot${connected ? '' : ' off'}`} title={connected ? 'Live updates connected' : 'Reconnecting to live updates…'} aria-hidden="true" />
           <h1>Election Night 2026</h1>
+          {!connected && <span className="conn-state" aria-hidden="true">{everConnected ? 'Reconnecting…' : 'Connecting…'}</span>}
           <span className="sr-only" role="status">{connected ? 'Live updates connected' : 'Live updates reconnecting'}</span>
         </div>
 
@@ -214,7 +308,7 @@ export default function App() {
           </div>
           <div className="hdr-stat">
             <span className="k">Last update</span>
-            <span className="v">{fmtMT(lastUpdate) || '—'}</span>
+            <span className="v">{fmtMT(lastUpdate) || '—'} <UpdatedAgo at={viewAt} /></span>
           </div>
           <button type="button" className="btn-ghost" onClick={() => setChangelogOpen(true)} aria-haspopup="dialog" aria-label={`What's new${version ? `: version ${version}` : ''}`}>
             {version ? `v${version}` : 'v…'}

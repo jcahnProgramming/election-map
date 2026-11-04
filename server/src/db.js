@@ -317,6 +317,14 @@ export function writeSnapshot(db, r) {
   })();
 }
 
+/**
+ * The data version clients key their refetches on: the newest snapshot's fetched_at (the same stamp that
+ * `results:update` carries). Read from the DB so it survives restarts; null before any snapshot exists.
+ */
+export function latestDataVersion(db) {
+  return db.prepare('SELECT MAX(fetched_at) AS v FROM latest_snapshot').get()?.v ?? null;
+}
+
 /** A fetch that succeeded but brought nothing new: just record when we last checked. */
 export function markChecked(db, source, sourceKey, at) {
   db.prepare(`UPDATE latest_snapshot SET checked_at = ? WHERE election_id =

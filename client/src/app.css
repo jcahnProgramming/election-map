@@ -298,3 +298,8 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .map-box path.area { transition: none; }
 }
+
+/* Live-update freshness (0.2.2) */
+.conn-state { font-size: 12px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+.hdr-stat .v .ago { margin-left: 6px; font-size: 12px; font-weight: 500; color: var(--muted); }
+.update-banner { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px; padding: 8px 16px; background: var(--panel); border-bottom: 1px solid var(--border-2); font-size: 14px; color: var(--text); }
