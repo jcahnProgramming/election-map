@@ -6,12 +6,30 @@
 //  - A state with no source says so ("no-source"); a state with no race for the office says that ("no-race").
 //  - Everything is scoped to one election key (config/elections.json); data never leaks between elections.
 //  - null means "the source doesn't publish this"; it is never turned into 0.
+//  - Multi-seat contests (vote for 2+) are never shaded as a two-way margin: they report their top-N candidates.
+//  - Every state carries its official results page (config/official-results.json): every number one click from its source.
 import { STATES, stateByAbbr, countiesOf } from './geo.js';
 import { readConfig } from './config.js';
 import { loadElections } from './elections.js';
+import { officeLabel } from './contests.js';
+import { findMeasureInfo, measureInfoList, publicInfo } from './measureinfo.js';
 
+/** The headline offices every election shows; `/api/offices` adds whatever else the feeds carry. */
 export const RACES = ['senate', 'governor', 'house'];
 const PARTIES = ['DEM', 'REP', 'OTHER'];
+export const OFFICE_RE = /^[a-z][a-z_]{1,48}$/;
+
+/** Selector levels → contest levels they draw from. */
+export const SELECT_LEVELS = { federal: ['federal'], state: ['statewide'] };
+const OFFICE_ORDER = ['president', 'senate', 'house', 'governor', 'lieutenant_governor', 'attorney_general', 'secretary_of_state',
+  'treasurer', 'auditor', 'controller'];
+const GROUPS = [
+  ['federal', 'Federal'], ['statewide', 'Statewide'], ['legislative', 'State legislature'], ['county', 'County'],
+  ['local', 'Local'], ['judicial', 'Judicial'], ['measure', 'Ballot measures'], ['unclassified', 'Other contests'],
+];
+const HEADLINE_LEVELS = new Set(['federal', 'measure']);
+/** No district, or 'at large' (AL): the contest covers the whole state. */
+const wholeState = (d) => !d || d === 'AL';
 
 /**
  * @param {import('better-sqlite3').Database} db
@@ -31,11 +49,20 @@ export function createResults(db, adapters, opts = {}) {
     if (!e?.races) return true; // unknown: say "no source", never claim there is no race
     if (!racesFiles.has(e.races)) racesFiles.set(e.races, readConfig(e.races, null));
     const expected = racesFiles.get(e.races);
-    if (!expected) return true;
-    return (expected[race] ?? []).includes(st);
+    if (!expected || !Array.isArray(expected[race])) return true; // an office the file doesn't list: unknown, never "no race"
+    return expected[race].includes(st);
   }
 
-  const RACE_COLS = `r.id, r.name, r.title, r.district, r.source_key, r.office, e.id AS election_id, e.source, e.scope, e.state,
+  const officialAll = readConfig('official-results.json', { states: {} });
+  /** The state's own official results page (config/official-results.json). */
+  const officialOf = (abbr, ek) => {
+    if (officialAll.election && ek && officialAll.election !== ek) return null; // the links are per election
+    const o = officialAll.states?.[abbr];
+    return o?.url ? { url: o.url, office: o.office ?? null } : null;
+  };
+
+  const RACE_COLS = `r.id, r.name, r.title, r.district, r.source_key, r.office, r.level, r.kind, r.vote_for, r.jurisdiction, r.statewide,
+        e.id AS election_id, e.source, e.scope, e.state,
         e.county_fips, e.url, l.snapshot_id, l.fetched_at, l.checked_at, s.source_updated_at`;
   const RACE_FROM = `FROM races r JOIN elections e ON e.id = r.election_id JOIN latest_snapshot l ON l.election_id = e.id
       JOIN snapshots s ON s.id = l.snapshot_id`;
@@ -71,6 +98,27 @@ export function createResults(db, adapters, opts = {}) {
       LEFT JOIN unit_reporting x ON x.snapshot_id = l.snapshot_id AND x.race_id = r.id AND x.unit_id = u.id
       WHERE e.election_key = ? AND r.office = 'measure' AND r.statewide = 1 AND e.scope = 'state' AND (? IS NULL OR r.state = ?)
       ORDER BY r.state, CAST(r.source_key AS INTEGER), r.source_key`),
+    // ---- 0.3: offices list and the per-state "All races" list ----
+    offices: db.prepare(`SELECT DISTINCT r.office, r.level, r.state, r.district, r.vote_for ${RACE_FROM}
+      WHERE e.election_key = ? AND e.scope = 'state' AND r.level IN ('federal','statewide')
+        AND EXISTS (SELECT 1 FROM unit_reporting x WHERE x.snapshot_id = l.snapshot_id AND x.race_id = r.id)`),
+    liveElections: db.prepare(`SELECT e.id AS election_id, e.source, e.scope, e.county_fips, e.name, e.url, l.snapshot_id, l.fetched_at,
+        l.checked_at, s.source_updated_at
+      FROM elections e JOIN latest_snapshot l ON l.election_id = e.id JOIN snapshots s ON s.id = l.snapshot_id
+      WHERE e.election_key = ? AND e.state = ? ORDER BY e.scope DESC, e.county_fips, e.id`),
+    contestsOf: db.prepare(`SELECT r.id, r.name, r.title, r.office, r.level, r.kind, r.district, r.jurisdiction, r.vote_for, r.statewide,
+        r.source_key FROM races r
+      WHERE r.election_id = ? AND EXISTS (SELECT 1 FROM unit_reporting x WHERE x.snapshot_id = ? AND x.race_id = r.id)
+      ORDER BY CAST(r.source_key AS INTEGER), r.source_key`),
+    unitIdOf: db.prepare('SELECT id FROM reporting_units WHERE state = ? AND level = ? AND county_fips = ?'),
+    unitVotes: db.prepare(`SELECT v.race_id, c.position, c.name, c.party, c.party_raw, v.votes
+      FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id WHERE v.snapshot_id = ? AND v.unit_id = ? ORDER BY v.race_id, c.position`),
+    countySumVotes: db.prepare(`SELECT v.race_id, c.position, c.name, c.party, c.party_raw, SUM(v.votes) AS votes
+      FROM vote_counts v JOIN candidates c ON c.id = v.candidate_id JOIN reporting_units u ON u.id = v.unit_id
+      WHERE v.snapshot_id = ? AND u.level = 'county' GROUP BY v.race_id, c.position ORDER BY v.race_id, c.position`),
+    unitMeasures: db.prepare('SELECT race_id, yes, no FROM measure_counts WHERE snapshot_id = ? AND unit_id = ?'),
+    unitReporting: db.prepare(`SELECT race_id, precincts_reporting pr, precincts_total pt, pct_reporting pct
+      FROM unit_reporting WHERE snapshot_id = ? AND unit_id = ?`),
   };
 
   /** Which states have configured targets in this election, from the adapters themselves. */
@@ -186,7 +234,11 @@ export function createResults(db, adapters, opts = {}) {
     return out;
   }
 
-  function summarize(candidates, pct) {
+  /**
+   * Party totals, leader and margin for one contest. Multi-seat contests (voteFor > 1) elect several candidates, so a
+   * margin between the top two means nothing: they get `multiSeat` + `seats` and no leader / margin.
+   */
+  function summarize(candidates, pct, voteFor = 1) {
     const parties = { DEM: 0, REP: 0, OTHER: 0 };
     let total = 0;
     for (const c of candidates) {
@@ -194,6 +246,13 @@ export function createResults(db, adapters, opts = {}) {
       total += c.votes;
     }
     const sorted = [...candidates].sort((a, b) => b.votes - a.votes);
+    const seats = Number(voteFor) > 1 ? Number(voteFor) : 1;
+    if (seats > 1) {
+      return {
+        candidates: sorted, parties, totalVotes: total, leader: null, tied: false, marginPts: null,
+        multiSeat: true, seats, pctReporting: pct ?? null,
+      };
+    }
     const lead = sorted[0];
     const leader = total > 0 && lead.votes > (sorted[1]?.votes ?? 0) ? lead.party : null;
     const marginPts = total > 0 ? Math.round((10000 * (lead.votes - (sorted[1]?.votes ?? 0))) / total) / 100 : null;
@@ -239,14 +298,26 @@ export function createResults(db, adapters, opts = {}) {
       pctReporting: null, precinctsReporting: null, precinctsTotal: null, ballotsCast: null,
     };
     const stateSources = (srcs.get(st.abbr) ?? []).filter((t) => t.scope === 'state');
-    const races = oneElection(q.races.all(ek, st.abbr, race));
+    base.official = officialOf(st.abbr, ek);
+    base.officeLabel = officeLabel(race);
+    // The map draws statewide contests only: House is the one sum (all districts); any other office uses contests that
+    // cover the whole state (no district), never a county's own office that happens to share a name.
+    const all = q.races.all(ek, st.abbr, race).filter((r) => (r.level == null || r.level === 'federal' || r.level === 'statewide'));
+    const races = oneElection(race === 'house' ? all : all.filter((r) => wholeState(r.district)));
 
     if (!races.length) {
-      // A configured source that hasn't produced data yet is still "no data", but not "no race".
+      // A configured source that hasn't produced data yet is still "no data", but not "no race". For offices beyond
+      // the headline three, "no race" is only claimed when the state's feed carries every contest on the ballot.
       const hasLiveSource = stateSources.length > 0 && q.liveStateSource.get(ek, st.abbr);
-      const status = hasLiveSource ? 'no-race' : expectsRace(ek, st.abbr, race) ? 'no-source' : 'no-race';
+      const feedHasAll = RACES.includes(race) || (stateSources.length > 0 && stateSources.every((t) => t.allContests !== false));
+      let status;
+      if (hasLiveSource) status = feedHasAll ? 'no-race' : 'no-source';
+      else status = expectsRace(ek, st.abbr, race) ? 'no-source' : 'no-race';
       return {
-        entry: { ...base, status, hasCountyData: false, ...empty, ...sourceFields(null, stateSources[0]) },
+        entry: {
+          ...base, status, hasCountyData: false, ...empty, ...sourceFields(null, stateSources[0]),
+          ...(hasLiveSource && !feedHasAll ? { sourceNote: `Our source for ${st.name} only carries some contests; this office isn't one of them.` } : {}),
+        },
         counties: null, turnout: null, methods: null,
       };
     }
@@ -265,17 +336,19 @@ export function createResults(db, adapters, opts = {}) {
       contests = [first.name];
       otherContests = rest.map((r) => {
         const u = loadRace(r).get('state');
-        return { name: r.name, ...summarize(u?.candidates ?? [], u?.pct), precinctsReporting: u?.pr ?? null, precinctsTotal: u?.pt ?? null };
+        return { name: r.name, ...summarize(u?.candidates ?? [], u?.pct, r.vote_for), precinctsReporting: u?.pr ?? null, precinctsTotal: u?.pt ?? null };
       });
     }
     const turnout = loadTurnout(races[0].snapshot_id);
     const sw = units.get('state');
-    const s = summarize(sw?.candidates ?? [], sw?.pct);
+    const voteFor = race === 'house' ? 1 : races[0].vote_for ?? 1;
+    const s = summarize(sw?.candidates ?? [], sw?.pct, voteFor);
     const counties = new Map([...units].filter(([k]) => k !== 'state'));
     const entry = {
       ...base,
       status: s.totalVotes > 0 ? 'reporting' : 'awaiting',
       hasCountyData: counties.size > 0,
+      voteFor,
       contests,
       ...s,
       ...(otherContests.length ? { otherContests } : {}),
@@ -292,8 +365,157 @@ export function createResults(db, adapters, opts = {}) {
     return {
       election: ek,
       race,
+      office: race,
+      officeLabel: officeLabel(race),
       generatedAt: new Date().toISOString(),
       states: STATES.map((s) => stateRace(ek, s.abbr, race, srcs).entry),
+    };
+  }
+
+  /**
+   * Which offices the level selector offers, from the data: Federal = U.S. Senate + U.S. House (+ President when
+   * present); State = Governor plus every statewide (whole-state, single-district) office that at least one covered
+   * state's feed carries in this election. `/api/offices`.
+   */
+  function offices(ek = electionsCfg().current) {
+    const found = new Map(); // office → { level, states:Set, multiSeat }
+    for (const r of q.offices.all(ek)) {
+      if (r.office !== 'house' && !wholeState(r.district)) continue; // districted statewide boards aren't a state-by-state map
+      if (!found.has(r.office)) found.set(r.office, { level: r.level, states: new Set(), multiSeat: false });
+      const o = found.get(r.office);
+      o.states.add(r.state);
+      if (Number(r.vote_for) > 1) o.multiSeat = true;
+    }
+    const ensure = (office, level) => { if (!found.has(office)) found.set(office, { level, states: new Set(), multiSeat: false }); };
+    ensure('senate', 'federal');
+    ensure('house', 'federal');
+    ensure('governor', 'statewide');
+    const rank = (k) => { const i = OFFICE_ORDER.indexOf(k); return i < 0 ? OFFICE_ORDER.length : i; };
+    const list = (lvl) => [...found].filter(([, o]) => SELECT_LEVELS[lvl].includes(o.level))
+      .sort(([a], [b]) => rank(a) - rank(b) || officeLabel(a).localeCompare(officeLabel(b)))
+      .map(([office, o]) => ({ office, label: officeLabel(office), states: [...o.states].sort(), multiSeat: o.multiSeat }));
+    return { election: ek, generatedAt: new Date().toISOString(), levels: { federal: list('federal'), state: list('state') } };
+  }
+
+  /** Which selector level an office belongs to ('federal' | 'state'), or null when it isn't on the map. */
+  function levelOfOffice(office, ek) {
+    const o = offices(ek).levels;
+    if (o.federal.some((x) => x.office === office)) return 'federal';
+    if (o.state.some((x) => x.office === office)) return 'state';
+    return null;
+  }
+
+  /**
+   * Every contest in a state's feeds, grouped Federal / Statewide / State legislature / County / Local / Judicial /
+   * Ballot measures / Other, with search over office, district, county and city names. `/api/state/:abbr/contests`.
+   * Each contest stands alone: nothing here is summed across contests.
+   */
+  function contests(abbr, ek = electionsCfg().current, query = '') {
+    const st = stateByAbbr(abbr);
+    const srcs = sourcesByState(ek).get(st.abbr) ?? [];
+    const out = [];
+    const sources = [];
+    for (const e of q.liveElections.all(ek, st.abbr)) {
+      const src = { source: e.source, sourceName: adapterName(e.source), sourceUrl: e.url ?? null, scope: e.scope,
+        county: e.scope === 'county' ? e.name : null, sourceUpdatedAt: e.source_updated_at ?? null, fetchedAt: e.fetched_at };
+      sources.push(src);
+      const top = e.scope === 'state' ? q.unitIdOf.get(st.abbr, 'state', '') : q.unitIdOf.get(st.abbr, 'county', e.county_fips ?? '');
+      const byRace = (rows) => {
+        const m = new Map();
+        for (const r of rows) {
+          if (!m.has(r.race_id)) m.set(r.race_id, []);
+          m.get(r.race_id).push(r);
+        }
+        return m;
+      };
+      const votes = top ? byRace(q.unitVotes.all(e.snapshot_id, top.id)) : new Map();
+      let countySums = null; // only for contests the source publishes by county alone
+      const meas = new Map((top ? q.unitMeasures.all(e.snapshot_id, top.id) : []).map((r) => [r.race_id, r]));
+      const rep = new Map((top ? q.unitReporting.all(e.snapshot_id, top.id) : []).map((r) => [r.race_id, r]));
+      for (const r of q.contestsOf.all(e.election_id, e.snapshot_id)) {
+        const rp = rep.get(r.id);
+        const pct = rp ? rp.pct ?? pctOf(rp.pr, rp.pt) : null;
+        let row;
+        if (r.office === 'measure') {
+          const m = meas.get(r.id);
+          const yes = m?.yes ?? 0;
+          const no = m?.no ?? 0;
+          const total = yes + no;
+          row = {
+            candidates: [{ name: 'Yes', party: null, votes: yes }, { name: 'No', party: null, votes: no }],
+            totalVotes: total,
+            lead: total > 0 && yes !== no ? (yes > no ? 'YES' : 'NO') : null,
+            marginPts: total > 0 ? Math.round((10000 * Math.abs(yes - no)) / total) / 100 : null,
+            measureId: r.statewide && e.scope === 'state' ? `${e.source}:${st.abbr}:${r.source_key}` : null,
+          };
+        } else {
+          let cands = votes.get(r.id);
+          if (!cands) {
+            countySums ??= byRace(q.countySumVotes.all(e.snapshot_id));
+            cands = countySums.get(r.id) ?? [];
+          }
+          const s = summarize(cands.map((c) => ({ name: c.name, party: c.party, partyRaw: c.party_raw, votes: c.votes })), pct, r.vote_for);
+          const yesNo = r.kind === 'retention' || r.kind === 'yes_no';
+          const first = s.candidates[0];
+          row = {
+            candidates: s.candidates,
+            totalVotes: s.totalVotes,
+            leader: s.leader,
+            tied: s.tied,
+            marginPts: s.marginPts,
+            multiSeat: !!s.multiSeat,
+            seats: s.seats ?? 1,
+            // Who leads, in the contest's own terms: a party (partisan), a name (nonpartisan), YES/NO (questions).
+            lead: !s.totalVotes || s.multiSeat || s.tied ? null
+              : yesNo ? (/^(yes|for)\b/i.test(first.name) ? 'YES' : /^(no|against)\b/i.test(first.name) ? 'NO' : first.name)
+                : r.kind === 'partisan' ? first.party : first.name,
+            leadPartyRaw: !s.totalVotes || s.multiSeat || s.tied || r.kind !== 'partisan' ? null : first.partyRaw || null,
+          };
+          if (row.marginPts != null) row.marginPts = Math.round(row.marginPts * 100) / 100;
+        }
+        const totalShare = (v) => (row.totalVotes > 0 ? Math.round((1000 * v) / row.totalVotes) / 10 : null);
+        row.candidates = row.candidates.map((c) => ({ ...c, pct: totalShare(c.votes) }));
+        out.push({
+          id: `${e.source}:${e.election_id}:${r.source_key}`,
+          name: r.name,
+          title: r.title ?? null,
+          level: r.level ?? 'unclassified',
+          office: r.office,
+          officeLabel: officeLabel(r.office),
+          district: r.district ?? null,
+          jurisdiction: r.jurisdiction ?? (e.scope === 'county' ? e.name : null),
+          kind: r.kind ?? (r.office === 'measure' ? 'yes_no' : 'nonpartisan'),
+          voteFor: r.vote_for ?? null,
+          statewide: !!r.statewide,
+          scope: e.scope,
+          ...row,
+          pctReporting: pct,
+          precinctsReporting: rp?.pr ?? null,
+          precinctsTotal: rp?.pt ?? null,
+          source: e.source,
+        });
+      }
+    }
+    const needle = String(query ?? '').trim().toLowerCase();
+    const groupTitle = Object.fromEntries(GROUPS);
+    const hay = (c) => [c.name, c.title, c.officeLabel, c.district && `district ${c.district}`, c.jurisdiction, groupTitle[c.level],
+      ...(c.candidates ?? []).map((x) => x.name)].filter(Boolean).join(' ').toLowerCase();
+    const terms = needle.split(/\s+/).filter(Boolean);
+    const matched = terms.length ? out.filter((c) => { const h = hay(c); return terms.every((t) => h.includes(t)); }) : out;
+    const groups = GROUPS.map(([level, title]) => ({ level, title, contests: matched.filter((c) => c.level === level) }))
+      .filter((g) => g.contests.length);
+    const beyondTop = out.some((c) => !HEADLINE_LEVELS.has(c.level) && c.office !== 'governor');
+    let note = null;
+    if (!sources.length) {
+      note = srcs.length
+        ? `Our source for ${st.name} hasn't published anything yet.`
+        : `We don't have a results source for ${st.name} yet. Its official results page has every contest.`;
+    } else if (!beyondTop) {
+      note = `${st.name}'s source in our system publishes only the top races${srcs.some((t) => t.allContests === false) ? ' we read from it' : ''}. Its official results page has every contest.`;
+    }
+    return {
+      election: ek, state: st.abbr, name: st.name, generatedAt: new Date().toISOString(), q: needle || null,
+      total: out.length, matched: matched.length, groups, note, sources, official: officialOf(st.abbr, ek),
     };
   }
 
@@ -302,6 +524,8 @@ export function createResults(db, adapters, opts = {}) {
    * is NOT the state: this never feeds the statewide entry or the national map.
    */
   function countySiteUnits(ek, abbr, race) {
+    // Only the headline offices: on a county's own site, "Treasurer" is the county's treasurer, not the state's.
+    if (!RACES.includes(race)) return new Map();
     const byElection = new Map();
     for (const r of q.countyRaces.all(ek, abbr, race)) {
       if (!byElection.has(r.election_id)) byElection.set(r.election_id, []);
@@ -354,11 +578,12 @@ export function createResults(db, adapters, opts = {}) {
     const st = turnout?.get('state') ?? null;
     return {
       election: ek,
-      state: entry.state, fips: entry.fips, name: entry.name, race, status: entry.status,
+      state: entry.state, fips: entry.fips, name: entry.name, race, office: race, officeLabel: officeLabel(race), status: entry.status,
+      official: entry.official ?? null,
       statewide: { ...entry, turnout: st, methods },
       countyData, countyNote,
       counties: [...(counties ?? new Map()).values()].map((u) => ({
-        fips: u.fips, name: known.get(u.fips) ?? u.name, ...summarize(u.candidates, u.pct),
+        fips: u.fips, name: known.get(u.fips) ?? u.name, ...summarize(u.candidates, u.pct, entry.voteFor ?? 1),
         precinctsReporting: u.pr ?? null, precinctsTotal: u.pt ?? null,
         turnout: u.turnout !== undefined ? u.turnout : turnout?.get(u.fips) ?? null,
         methods: methodsOut(u.methods),
@@ -369,13 +594,17 @@ export function createResults(db, adapters, opts = {}) {
 
   function measures(abbr, ek = electionsCfg().current) {
     const st = abbr ? stateByAbbr(abbr)?.abbr ?? '__' : null;
-    return {
-      election: ek,
-      measures: q.measures.all(ek, st, st).map((m) => ({
+    const used = new Set();
+    const live = q.measures.all(ek, st, st).map((m) => {
+      // Researched, official information about the measure (docs/measures-data.md), when we have it.
+      const info = findMeasureInfo(ek, m.state, m.name, m.title);
+      if (info) used.add(info);
+      return {
         id: `${m.source}:${m.state}:${m.source_key}`,
         state: m.state,
         name: m.name,
         title: m.title ?? null,
+        live: true,
         yes: m.yes,
         no: m.no,
         pctYes: m.yes + m.no > 0 ? Math.round((1000 * m.yes) / (m.yes + m.no)) / 10 : null,
@@ -385,8 +614,24 @@ export function createResults(db, adapters, opts = {}) {
         sourceUrl: m.url ?? null,
         sourceUpdatedAt: m.source_updated_at ?? null,
         fetchedAt: m.fetched_at,
-      })),
-    };
+        official: officialOf(m.state, ek),
+        info: publicInfo(info),
+      };
+    });
+    // Measures we researched but no feed of ours carries (yet): shown with their information, and honestly no counts.
+    const staticOnly = measureInfoList(ek, st).filter((m) => !used.has(m)).map((m) => ({
+      id: `info:${m.state}:${m.measure_id}`,
+      state: m.state,
+      name: m.measure_id,
+      title: m.official_title?.value ?? null,
+      live: false,
+      yes: null, no: null, pctYes: null, pctReporting: null,
+      source: null, sourceName: null, sourceUrl: null, sourceUpdatedAt: null, fetchedAt: null,
+      official: officialOf(m.state, ek),
+      info: publicInfo(m),
+    }));
+    const measures = [...live, ...staticOnly].sort((a, b) => a.state.localeCompare(b.state) || Number(b.live) - Number(a.live));
+    return { election: ek, measures };
   }
 
   function coverage(ek = electionsCfg().current) {
@@ -422,7 +667,7 @@ export function createResults(db, adapters, opts = {}) {
     return cfg.elections.some((e) => e.key === key) ? key : null;
   }
 
-  return { national, state, measures, coverage, elections, resolveElection };
+  return { national, state, measures, coverage, elections, resolveElection, offices, levelOfOffice, contests };
 }
 
-export const labelOf = (race) => ({ senate: 'U.S. Senate', governor: 'Governor', house: 'U.S. House' })[race] ?? race;
+export const labelOf = (race) => ({ senate: 'U.S. Senate', governor: 'Governor', house: 'U.S. House' })[race] ?? officeLabel(race);

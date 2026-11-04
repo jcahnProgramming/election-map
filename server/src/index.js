@@ -7,7 +7,7 @@ import { config, changelog } from './config.js';
 import { openDb } from './db.js';
 import { loadAdapters } from './adapters/index.js';
 import { startPolling, health } from './poller.js';
-import { createResults, RACES } from './results.js';
+import { createResults, OFFICE_RE, SELECT_LEVELS } from './results.js';
 import { stateByAbbr } from './geo.js';
 import { logger } from './log.js';
 import { createApiCache } from './apicache.js';
@@ -48,10 +48,21 @@ api.get('/health', (req, res) => {
 
 api.use(cache.middleware); // every read below is cached
 
-const raceParam = (req, res) => {
-  const race = String(req.query.race ?? 'senate');
-  if (!RACES.includes(race)) {
-    res.status(400).json({ error: `race must be one of ${RACES.join(', ')}` });
+/**
+ * The office to show: ?office= (any normalized office key, see /api/offices), or the 0.2 alias ?race=. With only
+ * ?level=federal|state, that level's first office. Default: U.S. Senate.
+ */
+const raceParam = (req, res, ek) => {
+  const level = req.query.level == null ? null : String(req.query.level);
+  if (level != null && !SELECT_LEVELS[level]) {
+    res.status(400).json({ error: `level must be one of ${Object.keys(SELECT_LEVELS).join(', ')}` });
+    return null;
+  }
+  let race = req.query.office ?? req.query.race;
+  if (race == null && level) race = results.offices(ek).levels[level][0]?.office;
+  race = String(race ?? 'senate');
+  if (!OFFICE_RE.test(race)) {
+    res.status(400).json({ error: 'office must be an office key such as senate, house, governor, attorney_general (see /api/offices)' });
     return null;
   }
   return race;
@@ -69,15 +80,26 @@ const electionParam = (req, res) => {
 
 api.get('/elections', (req, res) => res.json(results.elections()));
 api.get('/changelog', (req, res) => res.json({ ...changelog, currentVersion: config.version }));
+api.get('/offices', (req, res) => {
+  const ek = electionParam(req, res);
+  if (ek) res.json(results.offices(ek));
+});
 api.get('/national', (req, res) => {
-  const race = raceParam(req, res);
-  const ek = race && electionParam(req, res);
-  if (ek) res.json(results.national(race, ek));
+  const ek = electionParam(req, res);
+  const race = ek && raceParam(req, res, ek);
+  if (race) res.json(results.national(race, ek));
+});
+api.get('/state/:abbr/contests', (req, res) => {
+  const ek = electionParam(req, res);
+  if (!ek) return;
+  if (!stateByAbbr(req.params.abbr)) return res.status(404).json({ error: 'unknown state' });
+  const qs = req.query.q == null ? '' : String(req.query.q).slice(0, 100);
+  res.json(results.contests(req.params.abbr, ek, qs));
 });
 api.get('/state/:abbr', (req, res) => {
-  const race = raceParam(req, res);
-  const ek = race && electionParam(req, res);
-  if (!ek) return;
+  const ek = electionParam(req, res);
+  const race = ek && raceParam(req, res, ek);
+  if (!race) return;
   if (!stateByAbbr(req.params.abbr)) return res.status(404).json({ error: 'unknown state' });
   res.json(results.state(req.params.abbr, race, ek));
 });
