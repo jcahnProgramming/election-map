@@ -2,6 +2,19 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.4.8",
+      "date": "2026-11-03",
+      "title": "North Dakota results",
+      "sections": {
+        "New": [
+          "North Dakota live results from the Secretary of State as soon as its results site switches to tonight's election: U.S. Senate, U.S. House, statewide offices and measures by county, the legislature and county races"
+        ],
+        "Improved": [
+          "Oregon, New Mexico, Nebraska, South Dakota and North Dakota results are only stored while each state's site shows tonight's election"
+        ]
+      }
+    },
+    {
       "version": "0.4.3",
       "date": "2026-11-03",
       "title": "Oregon, New Mexico, Nebraska, South Dakota",

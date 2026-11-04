@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { parseResultsAjax, parseCategoryPage, rowsOf, contestName, fusionParty, turnoutHash } from '../src/adapters/resultsajax.js';
+import { parseResultsAjax, parseCategoryPage, rowsOf, contestName, fusionParty, turnoutHash, pageElectionDate } from '../src/adapters/resultsajax.js';
 import adapter from '../src/adapters/resultsajax.js';
 import { enrichRaces } from '../src/contests.js';
 
@@ -24,7 +24,8 @@ function parse(st, files, edit = (c) => c) {
 
 test('targets(): OR, NM, NE, SD from config, OR zeroes the osn', () => {
   const ts = adapter.targets();
-  assert.deepEqual(ts.map((t) => t.state).sort(), ['NE', 'NM', 'OR', 'SD']);
+  assert.deepEqual(ts.map((t) => t.state).sort(), ['ND', 'NE', 'NM', 'OR', 'SD']);
+  assert.ok(ts.every((t) => t.electionDate === '11/3/2026'));
   assert.equal(target('OR').zeroOsn, true);
   assert.equal(target('NM').service, 'https://nmresultswebservice.azurewebsites.us/NMResultsAjax.svc');
   assert.ok(ts.every((t) => t.allContests && t.categories.length && t.detailTypes.length));
@@ -177,7 +178,7 @@ test('polling: turnout is the change check; headline contests every change; othe
       return { text: read(files[id]) };
     },
   };
-  const t = { ...target('NE'), key: 'NE/test', categories: ['CG'], detailTypes: ['SW'], requestGapMs: 0, sweepBatch: 2, sweepSeconds: 3600, discoverSeconds: 3600 };
+  const t = { ...target('NE'), key: 'NE/test', electionDate: null, categories: ['CG'], detailTypes: ['SW'], requestGapMs: 0, sweepBatch: 2, sweepSeconds: 3600, discoverSeconds: 3600 };
   const ctx = { http, log: {}, unmatched: () => {} };
   const poll = async () => {
     calls.length = 0;
@@ -200,4 +201,45 @@ test('polling: turnout is the change check; headline contests every change; othe
   p = await poll(); // counts moved: headline re-read; the sweep waits for sweepSeconds
   assert.deepEqual([p.n, p.maps], [2, 1]);
   assert.equal(p.res.changed, true);
+});
+
+test('ND (2024 general still on the site, fully counted): CreateMap discovery, Democratic-NPL is DEM, real totals', () => {
+  const page = read('nd2024-page-SW.html');
+  assert.deepEqual(parseCategoryPage(page).slice(0, 2), [{ type: 'SW', raceId: '19893', osn: '100', party: '' }, { type: 'SW', raceId: '19847', osn: '110', party: '' }]);
+  const unmatched = [];
+  const r = parseResultsAjax({
+    contests: [{ type: 'SW', raceId: '19847', rows: json('nd2024-SW-19847.json') }, { type: 'SW', raceId: '19794', rows: json('nd2024-SW-19794.json') }],
+    turnout: json('nd2024-turnout.json'),
+  }, { ...target('ND'), electionDate: null }, (...a) => unmatched.push(a));
+  assert.deepEqual(unmatched, []);
+  const sen = r.races.find((x) => x.office === 'senate');
+  assert.deepEqual(sen.choices.map((c) => [c.name, c.party]), [['Kevin Cramer', 'REP'], ['Katrina Christiansen', 'DEM'], ['write-in', 'OTHER']]);
+  assert.deepEqual(sen.units[0].votes, [241569, 121602, 1156]);
+  assert.deepEqual([sen.units[0].precinctsReporting, sen.units[0].precinctsTotal, sen.units[0].pctReporting], [385, 385, 100]);
+  assert.equal(sen.units.filter((u) => u.level === 'county').length, 53);
+  const cass = sen.units.find((u) => u.name === 'Cass');
+  assert.equal(cass.votes.reduce((a, b) => a + b, 0) > 50000, true);
+  const h = r.races.find((x) => x.office === 'house');
+  assert.equal(h.district, 'AL');
+  assert.deepEqual(h.units[0].votes, [249101, 109231, 1455]);
+});
+
+test('electionDate guard: a site still showing another election stores nothing', async () => {
+  assert.equal(pageElectionDate(read('nd2024-page-SW.html')), '11/5/2024');
+  const calls = [];
+  const http = {
+    get: async (url) => {
+      calls.push(url);
+      if (url.includes('GetVoterTurnoutData')) return { text: read('nd2024-turnout.json') };
+      if (url.includes('resultsSW.aspx')) return { text: read('nd2024-page-SW.html') };
+      throw new Error(`unexpected ${url}`);
+    },
+  };
+  const warn = [];
+  const t = { ...target('ND'), key: 'ND/guard-test', requestGapMs: 0 };
+  const res = await adapter.fetch(t, { http, log: { warn: (m) => warn.push(m) }, unmatched: () => {} });
+  assert.equal(res.changed, false);
+  assert.equal(calls.length, 2, 'turnout + the first category page, then stop');
+  assert.match(calls[1], /resultsSW\.aspx\?text=Race&type=SW&map=CTY$/);
+  assert.match(warn[0], /11\/5\/2024/);
 });

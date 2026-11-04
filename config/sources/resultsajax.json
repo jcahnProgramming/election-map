@@ -1,5 +1,5 @@
 {
-  "_howto": "Sites polled by the ResultsAjax.svc ENR adapter (server/src/adapters/resultsajax.js): the ASP.NET results sites OR, NM, NE and SD share. site = the public results site; serviceRoot = the page's `var ServiceRoot` (view source); svc = the service file (NM: NMResultsAjax.svc). categories = the `type` of every resultsSW.aspx?type=...&map=CTY link on the site's home page (each contest on those pages is stored). detailTypes = categories re-read on every turnout change (federal / statewide offices and statewide measures); every other contest is swept at most sweepBatch per poll, a new sweep at most every sweepSeconds. zeroOsn: the site's own BuildCounties.js sends osn=0 for general elections (OR). enabled:false parks a site.",
+  "_howto": "Sites polled by the ResultsAjax.svc ENR adapter (server/src/adapters/resultsajax.js): the ASP.NET results sites OR, NM, NE and SD share. site = the public results site; serviceRoot = the page's `var ServiceRoot` (view source); svc = the service file (NM: NMResultsAjax.svc). categories = the `type` of every resultsSW.aspx?type=...&map=CTY link on the site's home page (each contest on those pages is stored). detailTypes = categories re-read on every turnout change (federal / statewide offices and statewide measures); every other contest is swept at most sweepBatch per poll, a new sweep at most every sweepSeconds. zeroOsn: the site's own BuildCounties.js sends osn=0 for general elections (OR). enabled:false parks a site. electionDate = the site's hidElectionDate field for this election: nothing is stored while the site shows another election.",
   "requestGapMs": 300,
   "sweepBatch": 25,
   "sweepSeconds": 300,
@@ -9,6 +9,7 @@
       "state": "OR",
       "name": "Oregon November 3, 2026 General Election",
       "date": "2026-11-03",
+      "electionDate": "11/3/2026",
       "site": "https://results.oregonvotes.gov",
       "serviceRoot": "https://orresultswebservices.azureedge.us",
       "categories": ["FED", "SWPAR", "SWNON", "SENATE", "HOUSE", "LMEA", "MCR"],
@@ -22,6 +23,7 @@
       "state": "NM",
       "name": "New Mexico 2026 General Election",
       "date": "2026-11-03",
+      "electionDate": "11/3/2026",
       "site": "https://electionresults.sos.nm.gov",
       "serviceRoot": "https://nmresultswebservice.azurewebsites.us",
       "svc": "NMResultsAjax.svc",
@@ -35,6 +37,7 @@
       "state": "NE",
       "name": "Nebraska 2026 General Election",
       "date": "2026-11-03",
+      "electionDate": "11/3/2026",
       "site": "https://electionresults.nebraska.gov",
       "serviceRoot": "https://neresultswebservice.azurewebsites.us",
       "categories": ["SW", "CG", "PA", "PS", "RG", "SE", "LD", "JD", "CC", "ED", "LC", "NR", "PP", "RD", "UT"],
@@ -47,12 +50,27 @@
       "state": "SD",
       "name": "South Dakota 2026 General Election",
       "date": "2026-11-03",
+      "electionDate": "11/3/2026",
       "site": "https://electionresults.sd.gov",
       "serviceRoot": "https://sdresws.azurewebsites.us",
       "categories": ["SWR", "BQ", "LEG"],
       "detailTypes": ["SWR", "BQ"],
       "races": ["senate", "governor", "house"],
       "verified": "2026-11-03",
+      "enabled": true
+    },
+    {
+      "state": "ND",
+      "name": "North Dakota 2026 General Election",
+      "date": "2026-11-03",
+      "electionDate": "11/3/2026",
+      "site": "https://results.sos.nd.gov",
+      "serviceRoot": "https://resultsws.sos.nd.gov",
+      "categories": ["text=Race&type=SW&map=CTY", "text=BQ&type=SW&map=CTY", "text=Race&type=LG&map=DIST", "text=Race&type=CN&map=CTY"],
+      "detailTypes": ["SW"],
+      "races": ["senate", "governor", "house"],
+      "verified": "2026-11-03",
+      "note": "Newer site version: contests from the CreateMap buttons; statewide races are on text=Race&type=SW (not linked from the home page). At 17:00 MT 11/3 the site still showed the 11/5/2024 general; the electionDate guard stores nothing until it shows 11/3/2026 (the SOS says results start at 8:00 pm CT).",
       "enabled": true
     }
   ]
