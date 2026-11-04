@@ -1,0 +1,32 @@
+{
+  "_howto": "Elections polled by the Indiana Election Division ENR adapter (server/src/adapters/inenr.js). data = the site's JSON folder. currentElection = settings.json CurrentElection for this election: nothing is stored while the site shows another one. detailCategories = OFFICECATEGORYIDs (statewideElectionsC) re-read on every new VersionCode (federal and statewide offices); every other category is swept sweepBatch per poll, a new sweep at most every sweepSeconds. Set enabled:false to stop polling.",
+  "data": "https://enr.indianavoters.in.gov/site/data",
+  "requestGapMs": 300,
+  "sweepBatch": 8,
+  "sweepSeconds": 300,
+  "detailCategories": ["1005", "1041", "1047", "1037"],
+  "_categoryHintsHowto": "categoryHints: OFFICECATEGORYID → level + office for contests the name rules don't place (township and school-board titles are just place names). knownOtherParties: Indiana party names (settings.json PolParties) that are third parties, so they aren't logged as unknown.",
+  "categoryHints": {
+    "1002": { "level": "local", "office": "mayor" },
+    "1017": { "level": "local", "office": "school_board" },
+    "1021": { "level": "local", "office": "local_office" },
+    "1023": { "level": "local", "office": "local_office" },
+    "1024": { "level": "county", "office": "county_commission" },
+    "1033": { "level": "local", "office": "city_council" },
+    "1034": { "level": "county", "office": "county_commission" },
+    "1038": { "level": "local", "office": "city_council" },
+    "1044": { "level": "local", "office": "local_office" }
+  },
+  "knownOtherParties": ["Lincoln Party", "National Socialist American Workers'", "Socialist Party of Indiana", "Taxpayer Watchdog", "American Solidarity", "Citizen's Party"],
+  "contestRules": [],
+  "elections": [
+    {
+      "id": "2026G",
+      "name": "Indiana 2026 General Election",
+      "date": "2026-11-03",
+      "currentElection": "11/03/2026",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}
