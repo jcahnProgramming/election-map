@@ -1,0 +1,220 @@
+{
+  "state": "VT",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "note": "Two proposals of amendment to the Vermont Constitution (Proposal 3 and Proposal 4), proclaimed by the Governor on 7/27/2026 for the November 3, 2026 general election. The state results feed (static.electionresults.vermont.gov) had no proposal section in its election index as of 2026-11-03 7:36 PM.",
+  "measures": [
+    {
+      "measure_id": "Proposal 3",
+      "match": [
+        "Proposal 3",
+        "Prop 3",
+        "PR.3",
+        "PR 3"
+      ],
+      "official_source_url": "https://sos.vermont.gov/vsara/learn/constitution/amending-the-constitution/proposals",
+      "official_title": {
+        "value": "Declaration of Rights; right to collectively bargain",
+        "source_url": "https://legislature.vermont.gov/bill/status/2026/PR.3",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "That Article 23 of Chapter I of the Vermont Constitution is added to read:\n\nArticle 23. [Right to collectively bargain] That employees have a right to organize or join a labor organization for the purpose of collectively bargaining with their employer through an exclusive representative of their choosing for the purpose of negotiating wages, hours, and working conditions and to protect their economic welfare and safety in the workplace. Therefore, no law shall be adopted that interferes with, negates, or diminishes the right of employees to collectively bargain with respect to wages, hours, and other terms and conditions of employment and workplace safety, or that prohibits the application or execution of an agreement between an employer and a labor organization representing the employer's employees that requires membership in the labor organization as a condition of employment.",
+        "url": "https://governor.vermont.gov/sites/scott/files/documents/Proclamation%203%20Collective%20Bargaining.pdf",
+        "source_url": "https://governor.vermont.gov/sites/scott/files/documents/Proclamation%203%20Collective%20Bargaining.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "PR.3",
+        "detail": "Proposal of amendment adopted by the General Assembly in two successive bienniums: Senate 4/2/2024 (29-0) and House 4/26/2024 (129-8) in 2023-2024; Senate 3/20/2025 (29-0) and House 5/1/2025 (125-15) in 2025-2026. legislative_vote below is the 2025-2026 (final) passage.",
+        "source_url": "https://legislature.vermont.gov/bill/status/2026/PR.3",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 0,
+            "other": 1,
+            "by_party": {
+              "D": {
+                "yes": 13,
+                "no": 0
+              },
+              "R": {
+                "yes": 12,
+                "no": 0
+              },
+              "D/P": {
+                "yes": 3,
+                "no": 0
+              },
+              "P/D": {
+                "yes": 1,
+                "no": 0
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 125,
+            "no": 15,
+            "other": 10,
+            "by_party": {
+              "D": {
+                "yes": 83,
+                "no": 0
+              },
+              "R": {
+                "yes": 32,
+                "no": 15
+              },
+              "R/D": {
+                "yes": 3,
+                "no": 0
+              },
+              "P/D": {
+                "yes": 3,
+                "no": 0
+              },
+              "I": {
+                "yes": 4,
+                "no": 0
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://legislature.vermont.gov/bill/status/2026/PR.3#status-roll-call",
+        "source_url": "https://legislature.vermont.gov/bill/status/2026/PR.3",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: Vermont publishes no neutral voter summary of constitutional proposals; the ballot carries the proposal text itself. The State Archives (VSARA) proposals page has a legislative-history description of PR.3, but it is an archive note (for PR.4 it repeats the resolution's purpose statement), not a voter summary, so it is not used.",
+        "full_text: the proposal text as published in the Governor's proclamation of 7/27/2026 (Proposal 3 - 2026). The town ballot layout was not checked; the SOS website has no page for the 2026 proposals beyond the VSARA history page.",
+        "legislative_vote: counts and per-member votes from the legislature's roll-call data (bill/loadBillRollCallDetails/2026/21 (Senate), 55 (House)); other = absent + not voting. by_party joins each member's PersonID to the party in the legislature's own 2025-2026 member list (people/loadAll/2026/House and /Senate), using its labels (D, R, I, D/P, P/D, R/D).",
+        "opposition_committee_name: no committee registered in a Vermont campaign-finance filing as opposing this proposal was found (the SOS campaign-finance portal was not searched exhaustively).",
+        "proponent_website: none taken from an official filing.",
+        "party_positions: no position published by a Vermont party on its own website was found."
+      ]
+    },
+    {
+      "measure_id": "Proposal 4",
+      "match": [
+        "Proposal 4",
+        "Prop 4",
+        "PR.4",
+        "PR 4"
+      ],
+      "official_source_url": "https://sos.vermont.gov/vsara/learn/constitution/amending-the-constitution/proposals",
+      "official_title": {
+        "value": "Declaration of rights; government for the people; equality of rights",
+        "source_url": "https://legislature.vermont.gov/bill/status/2026/PR.4",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "That Article 23 of Chapter I of the Vermont Constitution is added to read:\n\nArticle 23. [Equality of rights] That the people are guaranteed equal protection under the law. The State shall not deny equal treatment under the law on account of a person's race, ethnicity, sex, religion, disability, sexual orientation, gender identity, gender expression, or national origin. Nothing in this Article shall be interpreted or applied to prevent the adoption or implementation of measures intended to provide equality of treatment and opportunity for members of groups that have historically been subject to discrimination.",
+        "url": "https://governor.vermont.gov/sites/scott/files/documents/Proclamation%204%20Civil%20Rights.pdf",
+        "source_url": "https://governor.vermont.gov/sites/scott/files/documents/Proclamation%204%20Civil%20Rights.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "PR.4",
+        "detail": "Proposal of amendment adopted by the General Assembly in two successive bienniums: Senate 4/23/2024 (28-0) and House 5/8/2024 (140-4) in 2023-2024; Senate 3/11/2026 (29-0) and House 5/13/2026 (128-14) in 2025-2026. legislative_vote below is the 2025-2026 (final) passage.",
+        "source_url": "https://legislature.vermont.gov/bill/status/2026/PR.4",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 0,
+            "other": 1,
+            "by_party": {
+              "D": {
+                "yes": 13,
+                "no": 0
+              },
+              "R": {
+                "yes": 12,
+                "no": 0
+              },
+              "D/P": {
+                "yes": 3,
+                "no": 0
+              },
+              "P/D": {
+                "yes": 1,
+                "no": 0
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 128,
+            "no": 14,
+            "other": 8,
+            "by_party": {
+              "D": {
+                "yes": 81,
+                "no": 0
+              },
+              "R": {
+                "yes": 38,
+                "no": 13
+              },
+              "R/D": {
+                "yes": 3,
+                "no": 0
+              },
+              "P/D": {
+                "yes": 3,
+                "no": 0
+              },
+              "I": {
+                "yes": 3,
+                "no": 1
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://legislature.vermont.gov/bill/status/2026/PR.4#status-roll-call",
+        "source_url": "https://legislature.vermont.gov/bill/status/2026/PR.4",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: Vermont publishes no neutral voter summary of constitutional proposals; the ballot carries the proposal text itself. The State Archives (VSARA) proposals page has a legislative-history description of PR.4, but it is an archive note (for PR.4 it repeats the resolution's purpose statement), not a voter summary, so it is not used.",
+        "full_text: the proposal text as published in the Governor's proclamation of 7/27/2026 (Proposal 4 - 2026). The town ballot layout was not checked; the SOS website has no page for the 2026 proposals beyond the VSARA history page.",
+        "legislative_vote: counts and per-member votes from the legislature's roll-call data (bill/loadBillRollCallDetails/2026/101 (Senate), 151 (House)); other = absent + not voting. by_party joins each member's PersonID to the party in the legislature's own 2025-2026 member list (people/loadAll/2026/House and /Senate), using its labels (D, R, I, D/P, P/D, R/D).",
+        "opposition_committee_name: no committee registered in a Vermont campaign-finance filing as opposing this proposal was found (the SOS campaign-finance portal was not searched exhaustively).",
+        "proponent_website: none taken from an official filing.",
+        "party_positions: no position published by a Vermont party on its own website was found."
+      ]
+    }
+  ]
+}

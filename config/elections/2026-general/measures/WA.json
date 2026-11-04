@@ -1,0 +1,182 @@
+{
+  "state": "WA",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Initiative Measure No. IP26-645",
+      "match": [
+        "Initiative Measure No. IP26-645",
+        "IP26-645",
+        "I-645",
+        "Initiative 645",
+        "Initiative Measure No. 645",
+        "Initiative Measure IP26-645"
+      ],
+      "official_source_url": "https://www.sos.wa.gov/elections/voters/proposed-ballot-measure-information",
+      "official_title": {
+        "value": "Initiative Measure No. IP26-645 concerns state and local taxes.",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/2026%20Certification%20of%20Measures%20to%20General%20Election.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This measure would repeal a 9.9% tax on annual individual income over $1,000,000; prohibit state and local governments from imposing taxes on individual income or the receipt of individual income and taxes measured by an individual's income; and define income as \"any gain or benefit measured in money derived from an individual's capital, labor, property, or other source.\" It would also define \"individual\" as a natural person for purposes of excise taxes.",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-07/IP26-645%20Ballot%20title%20%26%20Summary.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (ballot measure summary, RCW 29A.72.060)"
+      },
+      "full_text": {
+        "value": "Initiative Measure No. IP26-645 concerns state and local taxes. This measure would repeal a 9.9% tax on annual individual income over $1,000,000; prohibit taxes measured by individual income and taxes on individual income or the receipt of individual income; and define “income.” This measure would decrease funding for public K-12 education, higher education (including universities and community colleges), and human services (primarily healthcare).\nShould this measure be enacted into law? Yes [ ] No [ ]",
+        "url": "https://www.sos.wa.gov/sites/default/files/2026-07/Finaltext_IP26-645_fulltext.pdf",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/2026%20Certification%20of%20Measures%20to%20General%20Election.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Brian Heywood",
+        "bill_number": null,
+        "detail": "Initiative to the People; certified to the November 3, 2026 General Election ballot by the Secretary of State (certification dated August 21, 2026). Sponsor as listed in the Secretary of State's initiative filings.",
+        "source_url": "https://voter.votewa.gov/Initiatives.aspx?y=2026&t=p",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "No on 645",
+        "committee_id": "645-N--960",
+        "source_url": "https://my.pdc.wa.gov/registration/public/-/#/public/registration/69832",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://no645.com/",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-09/IP26-645%20VP%20page%209.17.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "party_positions: no published position found on the Washington State Republican Party site (endorsements page is script-rendered, no measure positions readable); wa-democrats.org returned 403 to our requests",
+        "proponent_website: the Voters' Pamphlet argument for lists only a phone number and e-mail contact (no website)",
+        "opposition_committee_name (note): several PDC-registered committees list this measure as \"against\"; the statewide ballot-measure committee with the largest reported contributions is listed"
+      ]
+    },
+    {
+      "measure_id": "Initiative Measure No. IL26-001",
+      "match": [
+        "Initiative Measure No. IL26-001",
+        "IL26-001",
+        "I-001",
+        "Initiative 001",
+        "Initiative Measure No. 001",
+        "Initiative Measure IL26-001"
+      ],
+      "official_source_url": "https://www.sos.wa.gov/elections/voters/proposed-ballot-measure-information",
+      "official_title": {
+        "value": "Initiative Measure No. IL26-001 concerns parental rights relating to their children in public school.",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/2026%20Certification%20of%20Measures%20to%20General%20Election.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This measure would re-enact RCW 28A.605.005 as it was originally enacted in Initiative to the Legislature 2081. The re-enacted law would list certain rights of parents and guardians of public-school children, including rights to review materials and student records, receive certain notifications and opt students out of certain activities. It would repeal amendments to the statute, which modified school obligations and access to certain student records and added certain parental rights.",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-03/INITIATIVE%20IL26-001%20ballottitleletter.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (ballot measure summary, RCW 29A.72.060)"
+      },
+      "full_text": {
+        "value": "Initiative Measure No. IL26-001 concerns parental rights relating to their children in public school.\nThis measure would repeal amendments to a statute listing certain rights of parents and guardians of public-school children and re-enact the law as it was originally enacted by Initiative to the Legislature 2081.\nShould this measure be enacted into law? Yes [ ] No [ ]",
+        "url": "https://www.sos.wa.gov/sites/default/files/2026-03/INITIATIVE%20IL26-001%20fulltext.pdf",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/2026%20Certification%20of%20Measures%20to%20General%20Election.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Larry Jensen",
+        "bill_number": null,
+        "detail": "Initiative to the Legislature; certified to the November 3, 2026 General Election ballot by the Secretary of State (certification dated August 21, 2026). Sponsor as listed in the Secretary of State's initiative filings.",
+        "source_url": "https://voter.votewa.gov/Initiatives.aspx?y=2025&t=l",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "No Hate in WA State",
+        "committee_id": "FREEW--138",
+        "source_url": "https://my.pdc.wa.gov/registration/public/-/#/public/registration/69996",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://NoHateInWAState.org/About-I-001",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/IL26-001%20VP%20page.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "party_positions: no published position found on the Washington State Republican Party site (endorsements page is script-rendered, no measure positions readable); wa-democrats.org returned 403 to our requests",
+        "proponent_website: the Voters' Pamphlet argument for lists only an e-mail contact (no website)",
+        "opposition_committee_name (note): several PDC-registered committees list this measure as \"against\"; the statewide ballot-measure committee with the largest reported contributions is listed"
+      ]
+    },
+    {
+      "measure_id": "Initiative Measure No. IL26-638",
+      "match": [
+        "Initiative Measure No. IL26-638",
+        "IL26-638",
+        "I-638",
+        "Initiative 638",
+        "Initiative Measure No. 638",
+        "Initiative Measure IL26-638"
+      ],
+      "official_source_url": "https://www.sos.wa.gov/elections/voters/proposed-ballot-measure-information",
+      "official_title": {
+        "value": "Initiative Measure No. IL26-638 concerns participation in athletics at K-12 schools.",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/2026%20Certification%20of%20Measures%20to%20General%20Election.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This measure would require policies prohibiting students it defines as \"biologically male\" from competing with or against female students in certain interschool athletic activities that are intended for female students only. Students who choose to participate in such activities must provide a statement from the student's healthcare provider verifying the student's biological sex, based on reproductive anatomy, genetic makeup, or normal endogenously produced testosterone levels. These requirements would apply to individual or team athletic competitions.",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-03/INITIATIVE%20IL26-638%20ballottitleletter.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (ballot measure summary, RCW 29A.72.060)"
+      },
+      "full_text": {
+        "value": "Initiative Measure No. IL26-638 concerns participation in athletics at K-12 schools.\nThis measure would prohibit students it defines as “biologically male” from competing in certain school athletic activities intended for female students only. It would require verification of biological sex by students’ healthcare providers.\nShould this measure be enacted into law? Yes [ ] No [ ]",
+        "url": "https://www.sos.wa.gov/sites/default/files/2026-03/INITIATIVE%20IL26-638%20fulltext.pdf",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/2026%20Certification%20of%20Measures%20to%20General%20Election.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Brian Heywood",
+        "bill_number": null,
+        "detail": "Initiative to the Legislature; certified to the November 3, 2026 General Election ballot by the Secretary of State (certification dated August 21, 2026). Sponsor as listed in the Secretary of State's initiative filings.",
+        "source_url": "https://voter.votewa.gov/Initiatives.aspx?y=2025&t=l",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://www.di-ag.org",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/IL26-638%20VP%20page.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No Hate in WA State",
+        "committee_id": "FREEW--138",
+        "source_url": "https://my.pdc.wa.gov/registration/public/-/#/public/registration/69996",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://NoHateInWAState.org/About-I-638",
+        "source_url": "https://www.sos.wa.gov/sites/default/files/2026-08/IL26-638%20VP%20page.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "party_positions: no published position found on the Washington State Republican Party site (endorsements page is script-rendered, no measure positions readable); wa-democrats.org returned 403 to our requests",
+        "opposition_committee_name (note): several PDC-registered committees list this measure as \"against\"; the statewide ballot-measure committee with the largest reported contributions is listed"
+      ]
+    }
+  ]
+}

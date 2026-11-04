@@ -1,0 +1,1091 @@
+{
+  "state": "CA",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Proposition 1",
+      "match": [
+        "Proposition 1",
+        "Prop 1",
+        "Prop. 1"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/1/index.htm",
+      "official_title": {
+        "value": "AUTHORIZES BONDS FOR HOUSING AFFORDABILITY PROGRAMS. LEGISLATIVE STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Authorizes $11.25 billion in state general obligation bonds for housing affordability programs, including for California veterans, and to finance housing development projects seeking federal tax credits.\n• Allocates funds:\n• $5.1 billion to build and rehabilitate multifamily rental housing;\n• $2.1 billion to acquire, rehabilitate, or preserve affordable housing units, and provide supportive housing for those experiencing homelessness;\n• $1.25 billion for state-funded mortgages for California veterans;\n• $1.1 billion for homeownership and downpayment assistance;\n• $1 billion for farmworker, tribal, and student housing;\n• $500 million for housing infrastructure; and\n• $200 million to support local housing programs.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Increased state cost of $500 million to $600 million annually for about 25 years to repay the housing bond.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop1-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/1/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SB 417 (Chapter 16, Statutes of 2026)",
+        "detail": "Legislative Statute. Put on the ballot by the Legislature (SB 417, The Veterans and Affordable Housing Bond Act of 2026).",
+        "source_url": "https://elections.cdn.sos.ca.gov/ccrov/2026/june/26179jj.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://yesonprop1ca.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/1/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "no_position",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 2,
+            "other": null,
+            "by_party": null
+          },
+          {
+            "chamber": "Assembly",
+            "yes": 61,
+            "no": 7,
+            "other": null,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202520260SB417",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "legislative_vote.by_party: per-member roll call on leginfo.legislature.ca.gov returned a Cloudflare bot challenge (403), so party breakdown could not be read; chamber totals come from the Voter Information Guide",
+        "legislative_vote.other: the Voter Information Guide prints only ayes and noes; absent/not-voting counts not published there",
+        "opposition_committee_name: no committee registered in opposition per SOS Cal-Access ballot measure contribution totals (through 10/22/2026)",
+        "opposition_website: no argument against was submitted / no opposition contact listed in the Voter Information Guide"
+      ]
+    },
+    {
+      "measure_id": "Proposition 2",
+      "match": [
+        "Proposition 2",
+        "Prop 2",
+        "Prop. 2"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/2/index.htm",
+      "official_title": {
+        "value": "INCREASES STATE'S RAINY DAY FUND. LEGISLATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Increases California's Rainy Day Fund, approved by voters in 2014, to provide funding for education, health care, public safety, and other essential services during economic downturns.\n• Doubles the budget reserve cap from 10% to 20% of General Fund revenues, requiring savings until Fund's balance equals 20% of General Fund.\n• Requires additional savings in years when tax revenues are high.\n• Increases budget reserves available for education, state debts, and pension obligations.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• State budget reserves would be higher.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop2-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/2/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "ACA 20 (Resolution Chapter 130, Statutes of 2026)",
+        "detail": "Legislative Constitutional Amendment. Put on the ballot by the Legislature (ACA 20, Save for California's Future Act).",
+        "source_url": "https://elections.cdn.sos.ca.gov/ccrov/2026/june/26179jj.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://YesonProp2.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/2/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "oppose",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 2,
+            "other": null,
+            "by_party": null
+          },
+          {
+            "chamber": "Assembly",
+            "yes": 59,
+            "no": 8,
+            "other": null,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202520260ACA20",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "legislative_vote.by_party: per-member roll call on leginfo.legislature.ca.gov returned a Cloudflare bot challenge (403), so party breakdown could not be read; chamber totals come from the Voter Information Guide",
+        "legislative_vote.other: the Voter Information Guide prints only ayes and noes; absent/not-voting counts not published there",
+        "opposition_committee_name: no committee registered in opposition per SOS Cal-Access ballot measure contribution totals (through 10/22/2026)",
+        "opposition_website: the Voter Information Guide lists only an e-mail contact for the argument against (no website)"
+      ]
+    },
+    {
+      "measure_id": "Proposition 3",
+      "match": [
+        "Proposition 3",
+        "Prop 3",
+        "Prop. 3"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/3/index.htm",
+      "official_title": {
+        "value": "PROVIDES PERMANENT FUNDING FOR SCHOOLS AND HEALTH CARE BY EXTENDING EXISTING TAX ON HIGH INCOMES. INITIATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Makes permanent the existing 2012 voter-approved tax rates for high-income Californians, currently set to expire in 2031.\n• Rates apply to income over about $371,000 for single filers, $742,000 for joint filers, and $505,000 for heads of household (2025 levels; adjusted annually for inflation).\n• Allocates tax revenues 89% to K-12 schools, 11% to community colleges.\n• Allows local school boards to decide how revenues are spent; bars use for administrative costs.\n• Increases General Fund revenues available for health care, budget reserves, and other programs.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Maintains $5 billion to $15 billion of annual state income tax revenue by making a temporary tax increase on high-income earners permanent instead of letting it expire in 2031.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop3-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/3/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Benjamin Gevercer, David B. Goldberg",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0016; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://YesProp3CA.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/3/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on Proposition 3, Sponsored by California Taxpayers Association",
+        "committee_id": "1492860",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-3-provides-permanent-funding-schools-and-healthcare-extending-existing-tax-high-incomes-initiative-constitutional-am",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://VoteNoProp3.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/3/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "oppose",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law"
+      ]
+    },
+    {
+      "measure_id": "Proposition 4",
+      "match": [
+        "Proposition 4",
+        "Prop 4",
+        "Prop. 4"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/4/index.htm",
+      "official_title": {
+        "value": "REPEALS PROHIBITION AGAINST PUBLIC FUNDING OF ELECTION CAMPAIGNS. LEGISLATIVE STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Current law prohibits state and local governments from using public funds for election campaigns except in charter cities and counties.\n• This measure repeals that prohibition and allows state and local governments to establish public campaign financing programs for candidates who agree to specified spending limits and meet eligibility criteria.\n• Prohibits public funding programs from using funds earmarked for education, transportation, or public safety.\n• Prohibits candidates from using public funds for legal defense costs, fines, or repayment of personal loans to campaigns.\n• Triples maximum fine for campaign contributions by foreign entities.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Ongoing costs to the state of a few hundred thousand dollars each year for the Fair Political Practices Commission to answer questions from state and local governments about public campaign finance programs.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop4-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/4/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SB 42 (Chapter 245, Statutes of 2025)",
+        "detail": "Legislative Statute. Put on the ballot by the Legislature (SB 42, Political Reform Act of 1974: public campaign financing: California Fair Elections Act of 2026).",
+        "source_url": "https://elections.cdn.sos.ca.gov/ccrov/2026/june/26179jj.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://www.CAFairElections.org",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/4/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": null,
+      "opposition_website": {
+        "value": "https://www.caltax.org/prop4",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/4/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "oppose",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 8,
+            "other": null,
+            "by_party": null
+          },
+          {
+            "chamber": "Assembly",
+            "yes": 59,
+            "no": 20,
+            "other": null,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202520260SB42",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "legislative_vote.by_party: per-member roll call on leginfo.legislature.ca.gov returned a Cloudflare bot challenge (403), so party breakdown could not be read; chamber totals come from the Voter Information Guide",
+        "legislative_vote.other: the Voter Information Guide prints only ayes and noes; absent/not-voting counts not published there",
+        "opposition_committee_name: no committee registered in opposition per SOS Cal-Access ballot measure contribution totals (through 10/22/2026)"
+      ]
+    },
+    {
+      "measure_id": "Proposition 5",
+      "match": [
+        "Proposition 5",
+        "Prop 5",
+        "Prop. 5"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/5/index.htm",
+      "official_title": {
+        "value": "CHANGES RECALL ELECTION PROCESS FOR STATEWIDE OFFICERS. LEGISLATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Under current law, voters decide at the same election whether (1) to recall a state officer, and (2) who will replace that officer if recalled.\n• Under this measure:\n• if the Governor is recalled, the Lieutenant Governor becomes Governor for the remainder of the term or until a successor is elected;\n• for all other recalled officers, the office will remain vacant until filled by a subsequent special election or appointment as specified in existing law; and\n• a recalled officer may be a candidate in a special election to fill the office.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Net fiscal effect unknown. Possible state and local government savings or costs of millions of dollars to administer recall elections. These costs or savings would be rare, and depend on the office recalled and how often recalls occur.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop5-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/5/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SCA 1 (Resolution Chapter 204, Statutes of 2024)",
+        "detail": "Legislative Constitutional Amendment. Put on the ballot by the Legislature (SCA 1, Elections: recall of state officers).",
+        "source_url": "https://elections.cdn.sos.ca.gov/ccrov/2026/june/26179jj.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://fixtherecall.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/5/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "oppose",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 8,
+            "other": null,
+            "by_party": null
+          },
+          {
+            "chamber": "Assembly",
+            "yes": 59,
+            "no": 17,
+            "other": null,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202320240SCA1",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "legislative_vote.by_party: per-member roll call on leginfo.legislature.ca.gov returned a Cloudflare bot challenge (403), so party breakdown could not be read; chamber totals come from the Voter Information Guide",
+        "legislative_vote.other: the Voter Information Guide prints only ayes and noes; absent/not-voting counts not published there",
+        "opposition_committee_name: no committee registered in opposition per SOS Cal-Access ballot measure contribution totals (through 10/22/2026)",
+        "opposition_website: no argument against was submitted / no opposition contact listed in the Voter Information Guide"
+      ]
+    },
+    {
+      "measure_id": "Proposition 37",
+      "match": [
+        "Proposition 37",
+        "Prop 37",
+        "Prop. 37"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/37/index.htm",
+      "official_title": {
+        "value": "CREATES LOAN PROGRAM FOR MIDDLE-INCOME BUYERS OF QUALIFIED NEW HOMES. INITIATIVE STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Authorizes up to $25 billion in bonds to offer eligible buyers fixed-rate mortgages for up to 17% of the purchase price of a \"qualified new home\" (new construction or first sale of converted nonresidential property, priced below about $1 million-$1.5 million, depending on county, adjusted annually).\n• Borrowers must be California residents for one year, occupy the home, earn less than twice the area's median income, and pay at least 3% down.\n• Requires that bonds be repaid by homeowners' mortgage payments, not the State.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• No direct state or local costs.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop37-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/37/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Robert M. Hertzberg",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0013A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://voteyeson37.com/",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/37/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "no_position",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_committee_name: no committee registered in opposition per SOS Cal-Access ballot measure contribution totals (through 10/22/2026)",
+        "opposition_website: no argument against was submitted / no opposition contact listed in the Voter Information Guide"
+      ]
+    },
+    {
+      "measure_id": "Proposition 38",
+      "match": [
+        "Proposition 38",
+        "Prop 38",
+        "Prop. 38"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/38/index.htm",
+      "official_title": {
+        "value": "AUTHORIZES BONDS FOR IMMUNOLOGY MEDICAL RESEARCH. INITIATIVE STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Authorizes $8.4 billion in state general obligation bonds for immunology and immunotherapy research (technologies that use body's immune system to treat disease), with half dedicated to cancer, heart disease, and Alzheimer's disease.\n• Allocates funds equally between (1) a single University of California-affiliated nonprofit medical research institute, and (2) research grants for public or nonprofit universities and institutions.\n• Requires funding recipients to sell technology and drugs derived from research in California for 20% below national average price.\n• Appropriates money from General Fund to repay bonds; General Fund receives 10% of licensing royalties until bonds are repaid.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Increased state cost of $500 million to $600 million annually for about 20 years to repay the medical research bond. The state could recover part or all of this cost in subsequent decades if the funded research leads to discoveries that generate revenue.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop38-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/38/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Gary K. Michelson",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0026A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://yeson38.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/38/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on Proposition 38",
+        "committee_id": "1495405",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-38-authorizes-bonds-immunology-research-initiative-statut",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "support",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_website: the Voter Information Guide lists an individual contact (no website) for the argument against"
+      ]
+    },
+    {
+      "measure_id": "Proposition 39",
+      "match": [
+        "Proposition 39",
+        "Prop 39",
+        "Prop. 39"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/39/index.htm",
+      "official_title": {
+        "value": "PROHIBITS CITIZENS FROM VOTING UNLESS THEY PRESENT GOVERNMENT-ISSUED IDENTIFICATION. INITIATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Prohibits voting by mail unless voter designates a government-issued identification number for their voter registration.\n• Invalidates mail ballots if envelope does not include last four digits of a government-issued identification number matching the number designated in the voter's registration (e.g., if voter designates Social Security number for registration, but provides driver's license number on envelope, their ballot would not count).\n• Prohibits voting in person without presenting government-issued identification.\n• Requires elections officials to annually report percentage of each county's voters whose citizenship status they have verified.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• State and local government costs of between tens of millions of dollars and low hundreds of millions of dollars each year to implement new voting requirements. Costs depend on future decisions by the Legislature, state departments, local governments, and voters.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop39-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/39/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Carl DeMaio, Tony Strickland and Donald J. DiConstanzo",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0007A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://www.VoterIDCA.org",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/39/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on 39 - Block Election Rigging Sponsored by Nurses, Teachers, and Nonprofit Labor and Community Health Clinic Organziations",
+        "committee_id": "1493991",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-39-establishes-additional-voter-identification-and-citizenship-verification-requirements-initiative-constitutional-a",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://CAforvotingrights.org",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/39/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "oppose",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "support",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_committee_name (note): 10 committees are registered in opposition on the SOS contribution-totals page; the one with the largest reported contributions through 10/22/2026 is listed"
+      ]
+    },
+    {
+      "measure_id": "Proposition 40",
+      "match": [
+        "Proposition 40",
+        "Prop 40",
+        "Prop. 40"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/40/index.htm",
+      "official_title": {
+        "value": "IMPOSES ONE-TIME TAX ON CERTAIN TAXPAYERS. INITIATIVE CONSTITUTIONAL AMENDMENT AND STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Imposes one-time tax of up to 5% on certain taxpayers with covered assets valued over $1 billion; covered assets include businesses, securities, art, collectibles, and intellectual property, but exclude real property and some pensions and retirement accounts.\n• Allocates 90% of these tax revenues for health care, 10% for food assistance or education-related programs; prohibits using revenues to replace existing funding for these purposes.\n• Exempts such tax revenues from constitutional requirements for school funding, budget reserves, and state spending limit.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Temporary state revenue increase from a new wealth tax on billionaires. These wealth tax revenues probably would add up to tens of billions of dollars spread over several years.\n• Possible ongoing decrease of less than $1 billion per year in state income tax revenue collected from billionaires.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop40-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/40/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Suzanne Jimenez",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0024A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://www.yeson40.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/40/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on Prop 40 - Doctors, Teachers, Small Businesses, Working Families and Public Safety Against the Reckless Wealth Tax Experiment",
+        "committee_id": "1492108",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-40-imposes-one-time-tax-certain-individuals-and-trusts-initiative-constitutional-amendment-and-statute",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://VoteNoOn40.org",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/40/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "support",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "oppose",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_committee_name (note): 4 committees are registered in opposition on the SOS contribution-totals page; the one with the largest reported contributions through 10/22/2026 is listed"
+      ]
+    },
+    {
+      "measure_id": "Proposition 41",
+      "match": [
+        "Proposition 41",
+        "Prop 41",
+        "Prop. 41"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/41/index.htm",
+      "official_title": {
+        "value": "PROHIBITS NEW STATE TAXES THAT EXCLUDE REVENUES FROM STATE SPENDING LIMIT. REQUIRES AUDITS FOR NEW STATE SPECIAL TAXES. INITIATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Prohibits any new state taxes that exclude their revenues from the state spending limit approved by voters in 1979.\n• For statewide special taxes, requires (1) a pre-election audit of programs that would receive funding from a voter-proposed special tax, and (2) recurring audits of programs funded by special taxes enacted after January 1, 2026.\n• States that other voter-approved measures appearing on the same ballot are void if they conflict with this measure and this measure receives more affirmative votes.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Unknown net fiscal effect. Increased costs for the California State Auditor to implement new one-time and ongoing audit requirements of programs funded by special taxes. These costs would be mostly paid from the new revenues collected from the special taxes. Possible savings associated with implementing recommendations from the audits.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop41-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/41/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Kurt R. Oneto",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0040A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://YesonProp41.org",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/41/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "Yes on 40 - Billionaire Tax Now - No on 41 & 42, Sponsored by Service Employees International Union - United Healthcare Workers West",
+        "committee_id": "1484470",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-41-requires-audits-programs-funded-new-state-special-taxes-prohibits-new-state-taxes-are-excluded-existing-voter-app",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://www.yeson40.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/41/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "oppose",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "support",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_committee_name (note): 3 committees are registered in opposition on the SOS contribution-totals page; the one with the largest reported contributions through 10/22/2026 is listed"
+      ]
+    },
+    {
+      "measure_id": "Proposition 42",
+      "match": [
+        "Proposition 42",
+        "Prop 42",
+        "Prop. 42"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/42/index.htm",
+      "official_title": {
+        "value": "PROHIBITS NEW STATE PERSONAL PROPERTY TAXES AND CERTAIN RETROACTIVE STATE TAXES. INITIATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Prohibits new state taxes on personal property, including business interests, intellectual property, and financial assets (including assets in retirement and investment accounts).\n• Prohibits new state taxes that apply retroactively based on the taxpayer's conduct, activities, or a status that occurred before the new tax's effective date.\n• Applies to new taxes that are enacted or take effect on or after January 1, 2026.\n• States that other voter-approved measures appearing on the same ballot are void if they conflict with this measure and this measure receives more affirmative votes.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Possibility that tax revenues will not go up as much in the future.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop42-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/42/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Kurt R. Oneto",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0041A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://YesOnProp42.org",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/42/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "Yes on 40 - Billionaire Tax Now - No on 41 & 42, Sponsored by Service Employees International Union - United Healthcare Workers West",
+        "committee_id": "1484470",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-42-prohibits-new-state-personal-property-taxes-and-certain-retroactive-state-taxes-initiative-constitutional-amendme",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://www.yeson40.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/42/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "oppose",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "support",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_committee_name (note): 3 committees are registered in opposition on the SOS contribution-totals page; the one with the largest reported contributions through 10/22/2026 is listed"
+      ]
+    },
+    {
+      "measure_id": "Proposition 43",
+      "match": [
+        "Proposition 43",
+        "Prop 43",
+        "Prop. 43"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/43/index.htm",
+      "official_title": {
+        "value": "LIMITS VOTERS' ABILITY TO RAISE REVENUES FOR LOCAL GOVERNMENT SERVICES. LEGISLATIVE CONSTITUTIONAL AMENDMENT.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Currently, local governments must obtain two-thirds voter approval to impose, extend, or increase special taxes (taxes dedicated to a specific purpose) that they place on the ballot. However, this two-thirds vote requirement does not currently apply to special taxes put on ballot by voter signature gathering.\n• This measure would limit voters' ability to pass voter-proposed local special taxes by raising the percentage of votes needed to approve such ballot measures from a majority (over 50%) to two-thirds.\n• Applies to voter-proposed ballot measures approved after January 1, 2027.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Possibility that local government tax revenues will not go up as much in the future due to a higher vote threshold for certain taxes.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop43-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/43/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "ACA 22 (Resolution Chapter 132, Statutes of 2026)",
+        "detail": "Legislative Constitutional Amendment. Put on the ballot by the Legislature (ACA 22, Local taxes: limitation).",
+        "source_url": "https://elections.cdn.sos.ca.gov/ccrov/2026/june/26179jj.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://YESon43.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/43/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on Prop 43: Stop the Local Taxpayer Deception Act, Sponsored by Labor Organizations",
+        "committee_id": "1492508",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-43-aca-22-wicks-local-taxes-limitation-res-ch-132-2026",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://Noprop43CA.com",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/43/index.htm",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "oppose",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "support",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 35,
+            "no": 1,
+            "other": null,
+            "by_party": null
+          },
+          {
+            "chamber": "Assembly",
+            "yes": 68,
+            "no": 2,
+            "other": null,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://leginfo.legislature.ca.gov/faces/billVotesClient.xhtml?bill_id=202520260ACA22",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "legislative_vote.by_party: per-member roll call on leginfo.legislature.ca.gov returned a Cloudflare bot challenge (403), so party breakdown could not be read; chamber totals come from the Voter Information Guide",
+        "legislative_vote.other: the Voter Information Guide prints only ayes and noes; absent/not-voting counts not published there",
+        "opposition_committee_name (note): 5 committees are registered in opposition on the SOS contribution-totals page; the one with the largest reported contributions through 10/22/2026 is listed"
+      ]
+    },
+    {
+      "measure_id": "Proposition 44",
+      "match": [
+        "Proposition 44",
+        "Prop 44",
+        "Prop. 44"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/44/index.htm",
+      "official_title": {
+        "value": "REQUIRES COMMUNITY HEALTH CLINICS SPEND 90% OF REVENUE ON PROGRAM SERVICES. INITIATIVE STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Imposes penalties on nonprofit Federally Qualified Health Centers (community clinics providing primary care to medically underserved areas and populations) that spend less than 90% of revenue on \"program services\" advancing their charitable purpose, including but not limited to patient services. Department of Public Health may waive spending requirements in exceptional circumstances.\n• Authorizes Attorney General to publish guidance defining qualifying expenditures.\n• Monetary penalties may be refunded if centers become compliant within five years.\n• Authorizes criminal charges for false reports or artificially increasing spending ratio.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Increased state costs in the low tens of millions of dollars per year to enforce the new requirements on certain private nonprofit health care clinics, covered by fees charged to the affected clinics.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop44-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/44/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Shawna Brown, Sean Fleming",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0008A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://yesonproposition44.com",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on Prop 44 - Stop the Attack on Patients and Community Health Clinics, Sponsored by California Primary Care Association Adovcates",
+        "committee_id": "1484266",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-44-requires-community-health-clinics-spend-90-percent-revenue-program-services-initiative-statute",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://www.NoProp44.com",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "oppose",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "oppose",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law"
+      ]
+    },
+    {
+      "measure_id": "Proposition 45",
+      "match": [
+        "Proposition 45",
+        "Prop 45",
+        "Prop. 45"
+      ],
+      "official_source_url": "https://voterguide.sos.ca.gov/propositions/45/index.htm",
+      "official_title": {
+        "value": "MODIFIES ENVIRONMENTAL REVIEW FOR CERTAIN PROJECTS. INITIATIVE STATUTE.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "• Amends California Environmental Quality Act (CEQA) to expedite environmental review for specified project categories (including most housing, transportation, water, health, wildfire mitigation, educational facility, internet access, and clean energy projects). For these types of projects, this measure:\n• Sets deadlines for public agencies to complete environmental review and take required actions.\n• Allows expedited review of environmental impacts, limiting public agencies' current obligation to consider a range of feasible project alternatives to reduce environmental impacts.\n• Establishes deadlines for filing and resolving lawsuits challenging project approvals; limits evidence courts may consider and relief courts can order.\nSUMMARY OF LEGISLATIVE ANALYST'S ESTIMATE OF NET STATE AND LOCAL GOVERNMENT FISCAL IMPACT:\n• Initial costs for state and local governments, likely in the high tens of millions of dollars annually--potentially exceeding $100 million annually--to implement new project review and court challenge procedures for eligible projects. Fees paid by project applicants and people filing lawsuits would partly cover these costs.\n• In the longer term, uncertain, but potentially more significant positive or negative fiscal effects for state and local governments. The overall effect depends, in part, on how the new procedures change the number of eligible projects that get built and whether those projects have different environmental impacts.",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "by": "Attorney General (Official Title and Summary, Official Voter Information Guide), including the summary of the Legislative Analyst's fiscal estimate"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/prop45-text-proposed-laws.pdf",
+        "source_url": "https://voterguide.sos.ca.gov/propositions/45/index.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Kurt Oneto",
+        "bill_number": null,
+        "detail": "Initiative No. 25-0023A1; proponent(s) as listed by the Attorney General",
+        "source_url": "https://oag.ca.gov/initiatives/active-measures",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://YESonProp45.com",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "No on Prop 45, Sponsored by Labor, Health and Environmental Organizations",
+        "committee_id": "1492264",
+        "source_url": "https://www.sos.ca.gov/campaign-lobbying/helpful-resources/measure-contributions/2026-ballot-measure-contribution-totals/proposition-45-modifies-environmental-review-certain-projects-initiative-statute",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://Noprop45CA.com",
+        "source_url": "https://vig.cdn.sos.ca.gov/2026/general/pdf/complete-vig.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [
+        {
+          "party": "California Democratic Party",
+          "position": "oppose",
+          "source_url": "https://cadem.org/wp-content/uploads/2026/08/FINAL-2026-General-Election-Endorsements.pdf",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "California Republican Party",
+          "position": "support",
+          "source_url": "https://cagop.org/endorsements/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the ballot label as printed on the ballot was not found on an official page available to us (the SOS said final ballot labels would be sent to counties after August 10, 2026); value is null and url points to the official Text of Proposed Law",
+        "opposition_committee_name (note): 5 committees are registered in opposition on the SOS contribution-totals page; the one with the largest reported contributions through 10/22/2026 is listed"
+      ]
+    }
+  ]
+}

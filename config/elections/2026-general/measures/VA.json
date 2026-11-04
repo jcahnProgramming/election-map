@@ -1,0 +1,242 @@
+{
+  "state": "VA",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Question 1",
+      "match": [
+        "Proposed Constitutional Amendment Question 1",
+        "Constitutional Amendment Question 1",
+        "Question 1",
+        "Amendment 1"
+      ],
+      "official_source_url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-1/",
+      "official_title": {
+        "value": "Proposed Constitutional Amendment Question 1",
+        "source_url": "https://www.elections.virginia.gov/casting-a-ballot/candidate-list/november-2026-proposed-constitutional-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Present Law\nCurrently, the Virginia Constitution does not explicitly provide to its citizens a right to reproductive freedom nor does it explicitly protect or prohibit certain kinds of health care procedures or decisions.\n\nProposed Law\nThe proposed amendment would add to the Virginia Constitution's Bill of Rights the fundamental right to make and carry out decisions about a person’s own reproductive care with only certain, specific exceptions. The proposed amendment specifically allows the state government to pass laws to regulate abortion care in the third trimester of pregnancy, but requires any such law to allow for abortion care when it is medically needed to protect the life and health of the pregnant person or because the fetus is not viable.",
+        "source_url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-1/",
+        "as_of": "2026-11-03",
+        "by": "Virginia Department of Elections — Explanation for Voters (approved by the joint Privileges and Elections Committees)"
+      },
+      "full_text": {
+        "value": "Should the Constitution of Virginia be amended to (i) protect the freedom to make personal decisions about prenatal care, childbirth, postpartum care, birth control, abortion, miscarriage management, and fertility care; (ii) protect doctors, nurses, and patients from being punished for these decisions; and (iii) allow for restrictions on access to abortion during the third trimester of pregnancy except when the patient's health is at risk or the pregnancy cannot survive?",
+        "url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-1/",
+        "source_url": "https://www.elections.virginia.gov/casting-a-ballot/candidate-list/november-2026-proposed-constitutional-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJ1 (2026 Regular Session)",
+        "detail": "Referred by the General Assembly: Constitutional amendment (second reference); fundamental right to reproductive freedom. Agreed to on second reference in the 2026 Regular Session (Acts of Assembly Chapter 973); first-reference passage was in the 2025 session.",
+        "source_url": "https://lis.virginia.gov/bill-details/20261/HJ1",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Virginians for Safe Reproductive Policy",
+        "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/0ddfd243-6fdc-4cc6-9513-99047be9fc78/pdf/cfreports",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://www.virginiansforsafereproductivepolicy.com/",
+        "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/0ddfd243-6fdc-4cc6-9513-99047be9fc78/pdf/cfreports",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House of Delegates",
+            "yes": 64,
+            "no": 34,
+            "other": 2,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 21,
+            "no": 18,
+            "other": 1,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://lis.virginia.gov/vote-details/HJ1/20261/SV26",
+        "source_url": "https://lis.virginia.gov/bill-details/20261/HJ1",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_title: the Department of Elections lists the measure only by its referendum title (\"Proposed Constitutional Amendment Question N\"); no separate descriptive title is published, so the designation is used.",
+        "full_text.value is the ballot question as printed; the full amendment text (with insertions/deletions) is at full_text.url.",
+        "legislative_vote: second-reference passage in the 2026 Regular Session (House 1/14/2026, roll call https://lis.virginia.gov/vote-details/HJ1/20261/2619792; Senate 1/16/2026, roll call https://lis.virginia.gov/vote-details/HJ1/20261/SV26). \"other\" = recorded as not voting (House: Austin, Knight — the record notes Knight intended to vote nay; Senate: Pillion). The House roll-call page's own name-list footer counts one fewer yea than its official tally header; the header tally is used. First-reference (2025 session) votes not recorded here.",
+        "legislative_vote.by_party: null — the LIS roll calls list members by surname only, without party.",
+        "party_positions: no position on this amendment was found published by the Democratic Party of Virginia (vademocrats.org) or the Republican Party of Virginia (rpv.org / virginia.gop); none recorded.",
+        "opposition_committee_name: the schema holds one name. Other referendum committees whose Statements of Organization (Dept. of Elections COMET) mark \"Oppose\" for a 11/03/2026 statewide referendum and name this subject: VSHL 2026 Referendum Committee (RC-26-00023, \"Right to Reproductive Freedom Amendment\"), Virginia Medical Professionals for Women's Safety (RC-26-00020, \"Proposed constitutional amendment regarding abortion\"), Virginia Voters For Freedom, Inc (\"Proposed Constitutional Amendments, Question 1, 2 and 3\"), Defend Virginia's Sons and Daughters, Inc. and Virginia Conservative Action Referendum Committee 2026 (both name the reproductive and marriage amendments), and Virginia Catholic Conference, LLC (RC-26-00006, purpose \"Defending Catholic values\", Oppose, no question named).",
+        "proponent_website: the supporting committee Virginians for Reproductive Freedom (RC-26-00004, Support) lists no website on its Statement of Organization; Feminists for Reproductive Freedom also registered in support. No website recorded."
+      ]
+    },
+    {
+      "measure_id": "Question 2",
+      "match": [
+        "Proposed Constitutional Amendment Question 2",
+        "Constitutional Amendment Question 2",
+        "Question 2",
+        "Amendment 2"
+      ],
+      "official_source_url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-2/",
+      "official_title": {
+        "value": "Proposed Constitutional Amendment Question 2",
+        "source_url": "https://www.elections.virginia.gov/casting-a-ballot/candidate-list/november-2026-proposed-constitutional-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Present Law\nMarriages, civil unions, and other legal relationships with the same rights, benefits, and effects of marriage between persons of the same sex or gender are prohibited under Virginia’s Constitution. This prohibition is no longer enforceable as a result of the United States Supreme Court decision in Obergefell v. Hodges in 2015, but the prohibition on marriages between persons of the same sex or gender remains in the state’s Constitution. If the Supreme Court were to overturn its previous decision, that prohibition would be enforceable again.\n\nProposed Law\nThe proposed amendment removes the prohibition on marriages between persons of the same sex or gender from the Virginia Constitution's Bill of Rights. It is replaced with the fundamental right to marry, requiring the state to recognize and treat equally under the law any lawful marriage between two adult persons, regardless of the sex, gender, or race of either person. The proposed amendment prohibits the state from denying a marriage license to two adult persons because of their sex, gender, or race.",
+        "source_url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-2/",
+        "as_of": "2026-11-03",
+        "by": "Virginia Department of Elections — Explanation for Voters (approved by the joint Privileges and Elections Committees)"
+      },
+      "full_text": {
+        "value": "Should the Constitution of Virginia be amended to (i) remove the ban on same-sex marriage; (ii) affirm that two adults may marry regardless of sex, gender, or race; and (iii) require all legally valid marriages to be treated equally under the law?",
+        "url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-2/",
+        "source_url": "https://www.elections.virginia.gov/casting-a-ballot/candidate-list/november-2026-proposed-constitutional-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJ3 (2026 Regular Session)",
+        "detail": "Referred by the General Assembly: Constitutional amendment (second reference); marriage between two adult persons; repeal of same-sex marriage prohibition; affirmative right to marry. Agreed to on second reference in the 2026 Regular Session (Acts of Assembly Chapter 975); first-reference passage was in the 2025 session.",
+        "source_url": "https://lis.virginia.gov/bill-details/20261/HJ3",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://www.vaformarriageequality.com/",
+        "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/3154e39f-6260-4126-9d7d-a906d554334a/pdf/cfreports",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": {
+        "value": "Virginians Against 3",
+        "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/b32038e7-b762-417b-b244-fe5c04c09437/pdf/cfreports",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House of Delegates",
+            "yes": 67,
+            "no": 31,
+            "other": 2,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 26,
+            "no": 13,
+            "other": 1,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://lis.virginia.gov/vote-details/HJ3/20261/SV28",
+        "source_url": "https://lis.virginia.gov/bill-details/20261/HJ3",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_title: the Department of Elections lists the measure only by its referendum title (\"Proposed Constitutional Amendment Question N\"); no separate descriptive title is published, so the designation is used.",
+        "full_text.value is the ballot question as printed; the full amendment text (with insertions/deletions) is at full_text.url.",
+        "legislative_vote: second-reference passage in the 2026 Regular Session (House 1/14/2026, roll call https://lis.virginia.gov/vote-details/HJ3/20261/2619794; Senate 1/16/2026, roll call https://lis.virginia.gov/vote-details/HJ3/20261/SV28). \"other\" = recorded as not voting (House: Austin, Knight — the record notes Knight intended to vote nay; Senate: Pillion). The House roll-call page's own name-list footer counts one fewer yea than its official tally header; the header tally is used. First-reference (2025 session) votes not recorded here.",
+        "legislative_vote.by_party: null — the LIS roll calls list members by surname only, without party.",
+        "party_positions: no position on this amendment was found published by the Democratic Party of Virginia (vademocrats.org) or the Republican Party of Virginia (rpv.org / virginia.gop); none recorded.",
+        "opposition_committee_name: \"Virginians Against 3\" (RC-26-00025) states its purpose as \"Opposing the marriage amendment\" (Oppose, statewide, 11/03/2026) despite the \"3\" in its name; this measure is Question 2. Other committees registered as opposing that name this subject: Virginia Voters For Freedom, Inc (Questions 1, 2 and 3), Defend Virginia's Sons and Daughters, Inc., Virginia Conservative Action Referendum Committee 2026.",
+        "opposition_website: Virginians Against 3 lists no website on its Statement of Organization.",
+        "proponent_website: from the Statement of Organization of Virginians for Marriage Equality (RC-26-00010, Support)."
+      ]
+    },
+    {
+      "measure_id": "Question 3",
+      "match": [
+        "Proposed Constitutional Amendment Question 3",
+        "Constitutional Amendment Question 3",
+        "Question 3",
+        "Amendment 3"
+      ],
+      "official_source_url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-3/",
+      "official_title": {
+        "value": "Proposed Constitutional Amendment Question 3",
+        "source_url": "https://www.elections.virginia.gov/casting-a-ballot/candidate-list/november-2026-proposed-constitutional-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Present Law\nVirginia's Constitution currently provides that a person who is convicted of any felony loses the right to vote for the rest of their life unless the Governor of Virginia takes administrative action to restore that specific person’s right to vote. This is the only means of getting back the right to vote after a felony conviction.\nThe current constitutional provision also imposes a broad restriction, while using outdated terminology, on voting by persons found to be incapacitated. A person who is determined by a court to be incapacitated, regardless of the kind of incapacity, loses the right to vote, and only a court can restore the person’s right to vote later.\n\nProposed Law\nThe proposed amendment enshrines in the Constitution the fundamental right of all qualified persons in the Commonwealth to vote. Two exceptions to this right are for persons who are serving a sentence of incarceration for a felony conviction and persons who are determined by a court to not understand the act of voting. Such right cannot otherwise be restricted by laws.\nUnder the proposed amendment, a person who is convicted of a felony loses the right to vote during their period of incarceration. Once released from incarceration, the person gets back the right to vote without needing to apply for restoration by the Governor.\nThe proposed amendment also requires a specific finding by a court that a person does not understand the act of voting in order for that person’s right to vote to be taken away.\nWith the right to vote, a person also has the right to be a juror, the right to be elected to an office, and the right to be a notary public.",
+        "source_url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-3/",
+        "as_of": "2026-11-03",
+        "by": "Virginia Department of Elections — Explanation for Voters (approved by the joint Privileges and Elections Committees)"
+      },
+      "full_text": {
+        "value": "Should the Constitution of Virginia be amended (i) to provide for the fundamental right to vote in the Commonwealth, (ii) to revise the qualifications of voters so that a person convicted of a felony is not entitled to vote during his period of incarceration but is automatically invested with the right to vote upon release from incarceration, and (iii) to update the existing prohibition on voting by persons found to be mentally incompetent to instead apply to persons who have been found to lack the capacity to understand the act of voting?",
+        "url": "https://www.elections.virginia.gov/election-law/proposed-constitutional-amendment-question-3/",
+        "source_url": "https://www.elections.virginia.gov/casting-a-ballot/candidate-list/november-2026-proposed-constitutional-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJ2 (2026 Regular Session)",
+        "detail": "Referred by the General Assembly: Constitutional amendment; qualifications of voters and the right to vote; persons not entitled to vote. Agreed to on second reference in the 2026 Regular Session (Acts of Assembly Chapter 974); first-reference passage was in the 2025 session.",
+        "source_url": "https://lis.virginia.gov/bill-details/20261/HJ2",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Virginia Voters For Freedom, Inc",
+        "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/2e19b1cf-aef2-4b29-8c7a-ea0a1556b050/pdf/cfreports",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": {
+        "value": "https://www.vvff.info/",
+        "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/2e19b1cf-aef2-4b29-8c7a-ea0a1556b050/pdf/cfreports",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House of Delegates",
+            "yes": 65,
+            "no": 33,
+            "other": 2,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 21,
+            "no": 18,
+            "other": 1,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": "https://lis.virginia.gov/vote-details/HJ2/20261/SV27",
+        "source_url": "https://lis.virginia.gov/bill-details/20261/HJ2",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_title: the Department of Elections lists the measure only by its referendum title (\"Proposed Constitutional Amendment Question N\"); no separate descriptive title is published, so the designation is used.",
+        "full_text.value is the ballot question as printed; the full amendment text (with insertions/deletions) is at full_text.url.",
+        "legislative_vote: second-reference passage in the 2026 Regular Session (House 1/14/2026, roll call https://lis.virginia.gov/vote-details/HJ2/20261/2619793; Senate 1/16/2026, roll call https://lis.virginia.gov/vote-details/HJ2/20261/SV27). \"other\" = recorded as not voting (House: Austin, Knight — the record notes Knight intended to vote nay; Senate: Pillion). The House roll-call page's own name-list footer counts one fewer yea than its official tally header; the header tally is used. First-reference (2025 session) votes not recorded here.",
+        "legislative_vote.by_party: null — the LIS roll calls list members by surname only, without party.",
+        "party_positions: no position on this amendment was found published by the Democratic Party of Virginia (vademocrats.org) or the Republican Party of Virginia (rpv.org / virginia.gop); none recorded.",
+        "opposition_committee_name: Virginia Voters For Freedom, Inc registered as opposing \"Proposed Constitutional Amendments, Question 1, 2 and 3\" (statewide, 11/03/2026); it is the only opposing committee found that names this question.",
+        "proponent_website: the supporting committee Virginians for the Right to Vote (RC-26-00005, Support, \"Restoration of Rights\") lists no website on its Statement of Organization; Feminists for Voting Rights also registered in support."
+      ]
+    }
+  ]
+}

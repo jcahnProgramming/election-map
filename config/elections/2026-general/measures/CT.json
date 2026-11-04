@@ -1,0 +1,7 @@
+{
+  "state": "CT",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "note": "No statewide ballot question in Connecticut on November 3, 2026. Checked against the Secretary of the State's official sample ballots for the November 3, 2026 state election (Avon, Bridgeport, Meriden, North Branford, Danbury): none carries a statewide question; the only question found (Danbury, \"1. Shall the Charter of the City of Danbury be revised...\") is a municipal charter question. The SOTS results feed (ctemspublic.tgstg.net, election 108) likewise lists only town charter questions. Connecticut has no citizen initiative; only the General Assembly can refer a constitutional amendment, and the automatic constitutional convention question next appears in 2028. Sample ballots read 2026-11-03: https://portal.ct.gov/-/media/sots/electionservices/town_ballots/2026/nov-ada-2026/avon_sample_ada.pdf https://portal.ct.gov/-/media/sots/electionservices/town_ballots/2026/nov-ada-2026/bridgeport_sample_ada.pdf https://portal.ct.gov/-/media/sots/electionservices/town_ballots/2026/nov-ada-2026/meriden_sample_ada.pdf https://portal.ct.gov/-/media/sots/electionservices/town_ballots/2026/nov-ada-2026/north_branford_sample_ada.pdf https://portal.ct.gov/-/media/sots/electionservices/town_ballots/2026/nov-ada-2026/danbury_sample_new_ada.pdf",
+  "measures": []
+}

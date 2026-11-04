@@ -1,0 +1,323 @@
+{
+  "state": "ID",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "HJR 4",
+      "match": [
+        "HJR 4",
+        "HJR4",
+        "House Joint Resolution 4",
+        "H.J.R. 4"
+      ],
+      "official_source_url": "https://voteidaho.gov/initiatives-amendments/",
+      "official_title": {
+        "value": "Amendment to Idaho Constitution - House Joint Resolution 4",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This proposed constitutional amendment would give the Legislature exclusive authority to legalize marijuana, narcotics, or other psychoactive substances in the State of Idaho.",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council's Statement of Meaning, Purpose, and Result to Be Accomplished (Idaho Voter Pamphlet)"
+      },
+      "full_text": {
+        "value": "\"Shall Section 26, Article III of the Constitution of the State of Idaho be amended to provide that only the Idaho Legislature shall have power and authority to legalize the growing, producing, manufacturing, transporting, selling, delivering, dispensing, administering, prescribing, distributing, possessing, or using of marijuana, narcotics, or other psychoactive substances?\"",
+        "url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR004/",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJR 4 (2025)",
+        "detail": "Referred by the Idaho Legislature (House Joint Resolution 4, 2025 session, by State Affairs Committee); adopted by the House 03/05/2025 and the Senate 03/11/2025",
+        "source_url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR004/",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 58,
+            "no": 10,
+            "other": 2,
+            "by_party": {
+              "R": {
+                "yes": 58,
+                "no": 1
+              },
+              "D": {
+                "yes": 0,
+                "no": 9
+              }
+            }
+          },
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 6,
+            "other": 0,
+            "by_party": {
+              "R": {
+                "yes": 29,
+                "no": 0
+              },
+              "D": {
+                "yes": 0,
+                "no": 6
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR004/",
+        "source_url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR004/",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "legislative_vote: final adoption votes from the bill status page (House 03/05/2025, 58-10-2; Senate 03/11/2025, 29-6-0). The roll call lists surnames only; party taken from the official 2025 Legislative Mini Directory (https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Mini_Directory.pdf). Votes recorded for substitute legislators (shown as Name(Name): House Church(Caldwell); Senate Markley(Carlson), Goodrich(Rabe)) are counted under the party of the seat holder listed in the directory.",
+        "proponent_website / opposition_website: no official source lists campaign websites.",
+        "opposition_committee_name: no committee registered as opposing this measure could be confirmed from the Idaho campaign-finance portal (Sunshine, https://sunshine.voteidaho.gov/, an interactive application), so none is recorded.",
+        "party_positions: no position on this measure found on the Idaho Republican Party (idgop.org) or Idaho Democratic Party (idahodems.org) websites."
+      ]
+    },
+    {
+      "measure_id": "HJR 6",
+      "match": [
+        "HJR 6",
+        "HJR6",
+        "House Joint Resolution 6",
+        "H.J.R. 6"
+      ],
+      "official_source_url": "https://voteidaho.gov/initiatives-amendments/",
+      "official_title": {
+        "value": "Amendment to Idaho Constitution - House Joint Resolution 6",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This proposed constitutional amendment would designate English as the official state language. All official speeches, meetings, and other proceedings of state and local governments, such as city council meetings and jury trials, would be conducted in English, and instruction in public schools would be provided in English. All documents of state and local government entities would be published in English. However, the amendment would allow languages other than English to be used when required by federal law.",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council's Statement of Meaning, Purpose, and Result to Be Accomplished (Idaho Voter Pamphlet)"
+      },
+      "full_text": {
+        "value": "\"Shall Article X of the Constitution of the State of Idaho be amended by the addition of a new Section 8, to provide that the English language shall be the official language for the state of Idaho, and to further provide that, except as required by federal law, English shall be used in all public proceedings, public documents, public instruction, and any other public acts of any public institution in the state of Idaho?\"",
+        "url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR006/",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJR 6 (2025)",
+        "detail": "Referred by the Idaho Legislature (House Joint Resolution 6, 2025 session, by Ways and Means Committee); adopted by the House 03/13/2025 and the Senate 03/25/2025",
+        "source_url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR006/",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 59,
+            "no": 8,
+            "other": 3,
+            "by_party": {
+              "R": {
+                "yes": 58,
+                "no": 0
+              },
+              "D": {
+                "yes": 1,
+                "no": 8
+              }
+            }
+          },
+          {
+            "chamber": "Senate",
+            "yes": 30,
+            "no": 5,
+            "other": 0,
+            "by_party": {
+              "R": {
+                "yes": 29,
+                "no": 0
+              },
+              "D": {
+                "yes": 1,
+                "no": 5
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR006/",
+        "source_url": "https://legislature.idaho.gov/sessioninfo/2025/legislation/HJR006/",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "legislative_vote: final adoption votes from the bill status page (House 03/13/2025, 59-8-3; Senate 03/25/2025, 30-5-0). The roll call lists surnames only; party taken from the official 2025 Legislative Mini Directory (https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Mini_Directory.pdf). Votes recorded for substitute legislators (House Green(Schubin); Senate Patterson(Ward-Engelking), Woller(Rabe)) are counted under the party of the seat holder listed in the directory.",
+        "proponent_website / opposition_website: no official source lists campaign websites.",
+        "opposition_committee_name: no committee registered as opposing this measure could be confirmed from the Idaho campaign-finance portal (Sunshine, https://sunshine.voteidaho.gov/, an interactive application), so none is recorded.",
+        "party_positions: no position on this measure found on the Idaho Republican Party (idgop.org) or Idaho Democratic Party (idahodems.org) websites."
+      ]
+    },
+    {
+      "measure_id": "Proposition 1",
+      "match": [
+        "Proposition 1",
+        "Proposition One",
+        "Prop 1",
+        "Reproductive Freedom and Privacy Act",
+        "Reproductive Freedom & Privacy Act"
+      ],
+      "official_source_url": "https://voteidaho.gov/initiatives-amendments/",
+      "official_title": {
+        "value": "Proposition One: Reproductive Freedom & Privacy Act",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "The measure seeks to change Idaho's laws by introducing a right to reproductive freedom and privacy including a right to abortion up to the point of the fetus's ability to survive outside the womb. After fetal viability, there would be no general right to abortion except in cases of \"medical emergency.\" The \"medical emergency\" exception would expand Idaho's current life exception and allow abortions when pregnant women face complicating physical conditions that threaten their life or health, \"including serious impairment to a bodily function\" or \"serious dysfunction of any bodily organ or part.\"\n\nThe proposed measure codifies a right to make reproductive decisions, including contraception, fertility treatment, and prenatal and postpartum care. This includes a \"right of privacy\" in making these decisions. The measure seeks to prevent the state from enforcing certain abortion laws protecting the life of the unborn child. It would also impose a requirement that any restrictions on reproductive decisions, including abortion prior to fetus viability, must be \"narrowly tailored to improve or maintain the health of the person seeking reproductive health care.\" The measure would also prevent the state from penalizing patients, healthcare providers, or anyone who assists in exercising the proposed right.",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03",
+        "by": "Long Ballot Title (Idaho Voter Pamphlet)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://archive.sos.idaho.gov/elections/initiatives/2026/RFPA.pdf",
+        "source_url": "https://voteidaho.gov/initiatives-amendments/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Idahoans United for Women & Families",
+        "bill_number": null,
+        "detail": "Citizen initiative (statute). The Voter Pamphlet attributes the funding source statement and the arguments for Proposition One to Idahoans United for Women & Families.",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Idaho Democratic Party",
+          "position": "support",
+          "source_url": "https://idahodems.org/idaho-democratic-party-endorses-reproductive-freedom-and-privacy-act/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        },
+        {
+          "party": "Idaho Republican Party",
+          "position": "oppose",
+          "source_url": "https://idgop.org/the-truth-about-the-radical-abortion-initiative/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "full_text: the full initiative is too long to copy; url points to the Secretary of State PDF (initiative text, ballot titles, fiscal impact). The pamphlet prints a Short Ballot Title and a Long Ballot Title (used as official_summary); the exact wording printed on county ballots was not separately verified.",
+        "proponent_name: the pamphlet does not name the petition sponsors individually; it attributes the funding source statement and pro arguments to Idahoans United for Women & Families.",
+        "opposition_committee_name: the pamphlet attributes the arguments against to the Idaho Family Policy Center, Idaho Chooses Life, Right to Life Idaho, Too Extreme for Idaho, and the Roman Catholic Diocese of Boise, but that is not a campaign-finance registration; no committee registered as opposing this measure could be confirmed from the Idaho campaign-finance portal (Sunshine, https://sunshine.voteidaho.gov/, an interactive application), so none is recorded.",
+        "proponent_website / opposition_website: no official source lists campaign websites."
+      ]
+    },
+    {
+      "measure_id": "Advisory Question - House Bill 932",
+      "match": [
+        "Advisory Question",
+        "State Gun",
+        "HB 932",
+        "House Bill 932"
+      ],
+      "official_source_url": "https://voteidaho.gov/initiatives-amendments/",
+      "official_title": {
+        "value": "Advisory Question - House Bill 932",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This advisory question asks Idahoans to designate which gun they would like to have as the official Idaho State Gun. This is a non-binding measure, and the Legislature would have to take action during a future legislative session to officially designate a gun as the Idaho State Gun.",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03",
+        "by": "Brief Statement of Purpose (Idaho Voter Pamphlet)"
+      },
+      "full_text": {
+        "value": "Which of the following guns should be designated as the state gun of Idaho? Please choose only one answer.\n(a) Winchester Model 1894 (.30-30);\n(b) Winchester Model 1873 \"Gun that Won the West\" (.44-40);\n(c) 1873 Colt Single Action Army Revolver \"Peacemaker\" (.45 Colt);\n(d) M1 Garand rifle (.30-06);\n(e) Colt M1911 .45 automatic Colt pistol (.45 ACP); or\n(f) Remington Model 700 bolt-action rifle (.30-06)",
+        "url": "https://legislature.idaho.gov/sessioninfo/2026/legislation/H0932/",
+        "source_url": "https://archive.voteidaho.gov/download/2026_Voter_Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "H 932 (2026)",
+        "detail": "Non-binding advisory question placed on the ballot by House Bill 932 (2026 session, by Ways and Means Committee); signed by the Governor April 2, 2026 (Session Law Chapter 301)",
+        "source_url": "https://legislature.idaho.gov/sessioninfo/2026/legislation/H0932/",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 68,
+            "no": 0,
+            "other": 2,
+            "by_party": {
+              "R": {
+                "yes": 60,
+                "no": 0
+              },
+              "D": {
+                "yes": 8,
+                "no": 0
+              }
+            }
+          },
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 0,
+            "other": 3,
+            "by_party": {
+              "R": {
+                "yes": 27,
+                "no": 0
+              },
+              "D": {
+                "yes": 5,
+                "no": 0
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://legislature.idaho.gov/sessioninfo/2026/legislation/H0932/",
+        "source_url": "https://legislature.idaho.gov/sessioninfo/2026/legislation/H0932/",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "measure type: a non-binding advisory question with six choices (a)-(f), not a yes/no measure; the live feed will report votes per choice, not yes/no.",
+        "full_text: the six choices are printed in two columns in the pamphlet; reassembled in (a)-(f) order with line breaks.",
+        "legislative_vote: final passage from the bill status page (House 03/20/2026, 68-0-2; Senate 03/31/2026, 32-0-3). Party from the legislature membership pages (https://legislature.idaho.gov/house/membership/, https://legislature.idaho.gov/senate/membership/) read 2026-11-03. The House vote shown as Hall(Stone) (a substitute) is counted under the party listed there.",
+        "proponent_website / opposition_website: no official source lists campaign websites.",
+        "opposition_committee_name: not applicable to an advisory question; none in official sources.",
+        "party_positions: no position on this measure found on the Idaho Republican Party (idgop.org) or Idaho Democratic Party (idahodems.org) websites."
+      ]
+    }
+  ]
+}

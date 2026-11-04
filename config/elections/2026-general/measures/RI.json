@@ -1,0 +1,353 @@
+{
+  "state": "RI",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "note": "Five statewide bond questions (Questions 1-5), all referred by the General Assembly in Article 5 of the FY2027 budget (2026-H 7127Aaa). Questions numbered 6 and up in the results feed are local (town/city) questions, not statewide.",
+  "measures": [
+    {
+      "measure_id": "Question 1",
+      "match": [
+        "Question 1",
+        "1. HIGHER EDUCATION FACILITIES - $275,000,000",
+        "Higher Education Facilities",
+        "1. HIGHER EDUCATION FACILITIES"
+      ],
+      "official_source_url": "https://electionresults.ri.gov/results/public/rhodeisland/elections/2026StatewideGeneralElection",
+      "official_title": {
+        "value": "1. HIGHER EDUCATION FACILITIES - $275,000,000",
+        "source_url": "https://electionresults.ri.gov/results/public/api/elections/rhodeisland/2026StatewideGeneralElection/data",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "\"Shall the action of the general assembly, by an act passed at the January 2026 session, authorizing the issuance of bonds, refunding bonds, and temporary notes of the State of Rhode Island for the capital projects and in the amount with respect to each such project listed below be approved, and the issuance of bonds, refunding bonds, and/or temporary notes authorized in accordance with the provisions of said act?\"\n\n(1) Higher Education Facilities $275,000,000\nApproval of this question will allow the State to issue general obligation bonds, refunding bonds, and/or temporary notes in an amount not to exceed two hundred and seventy-five million dollars ($275,000,000) for capital improvements to higher education facilities, to be allocated as follows:\n(a) University of Rhode Island Integrated Health Building $165,000,000\nProvides one hundred and sixty-five million dollars ($165,000,000) for the construction of the new Integrated Health Building on the University of Rhode Island’s Kingston campus to advance health education, clinical training, and workforce development.\n(b) RIC Adams Library Renovations $50,000,000\nProvides fifty million dollars ($50,000,000) to fund the construction of a student success and career readiness center and renovations located at the Adams Library on the Rhode Island College campus.\n(c) CCRI Workforce Innovation Center $60,000,000\nProvides sixty million dollars ($60,000,000) to fund the construction of a new workforce innovation center located on the Warwick campus of the Community College of Rhode Island. Funds will be used for the construction of a modern career and technical educational facility designed to support workforce readiness and address critical workforce shortages in the State.",
+        "url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "2026-H 7127Aaa (Article 5)",
+        "detail": "Referred by the General Assembly in the FY2027 appropriations act, Article 5 \"Relating to Capital Development Program\", Section 1",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 65,
+            "no": 10,
+            "other": 0,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 6,
+            "other": 0,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": null,
+        "source_url": "https://www.rilegislature.gov/pressrelease/Lists/PressReleases/DispForm.aspx?ID=376663",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: the Secretary of State's Voter Information Handbook (the official explanation of each question) is on vote.sos.ri.gov, which answers with a Cloudflare bot challenge (HTTP 403 \"Just a moment...\"); not worked around. Fill from the handbook when it can be read.",
+        "full_text: copied verbatim from Article 5, Section 1 of the enacted budget (2026-H 7127Aaa): the proposition plus this project's paragraph. Not cross-checked against the printed ballot / SOS handbook (vote.sos.ri.gov blocked).",
+        "legislative_vote: the bond questions were referred inside the FY2027 budget bill (2026-H 7127Aaa, Article 5); the counts are the final passage votes on the whole budget bill (House 65-10, Senate 32-6) as published in General Assembly press releases. other=0 because yes+no equals the full chamber (75 House, 38 Senate). No official per-member roll call page was found on rilegislature.gov, so roll_call_url and by_party are null.",
+        "opposition_committee_name: no Board of Elections campaign-finance filing (CF-8 / BQA-1) registering opposition to this question was found among the filings listed on ricampaignfinance.com/RIPublic on 2026-11-03 (that list shows only the most recent filings; not exhaustive).",
+        "party_positions: no position published by a Rhode Island party on its own website was found.",
+        "proponent_website: no campaign-finance filing naming a campaign website for this question was found."
+      ]
+    },
+    {
+      "measure_id": "Question 2",
+      "match": [
+        "Question 2",
+        "2. HOUSING AND HOMEOWNERSHIP - $120,000,000",
+        "Housing and Homeownership",
+        "2. HOUSING AND HOMEOWNERSHIP"
+      ],
+      "official_source_url": "https://electionresults.ri.gov/results/public/rhodeisland/elections/2026StatewideGeneralElection",
+      "official_title": {
+        "value": "2. HOUSING AND HOMEOWNERSHIP - $120,000,000",
+        "source_url": "https://electionresults.ri.gov/results/public/api/elections/rhodeisland/2026StatewideGeneralElection/data",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "\"Shall the action of the general assembly, by an act passed at the January 2026 session, authorizing the issuance of bonds, refunding bonds, and temporary notes of the State of Rhode Island for the capital projects and in the amount with respect to each such project listed below be approved, and the issuance of bonds, refunding bonds, and/or temporary notes authorized in accordance with the provisions of said act?\"\n\n(2) Housing and Homeownership $120,000,000\nApproval of this question will allow the State to issue general obligation bonds, refunding bonds, and/or temporary notes in an amount not to exceed one hundred and twenty million dollars ($120,000,000) to increase and preserve the availability of affordable and accessible housing to meet the needs of all Rhode Islanders and support community revitalization through the redevelopment of existing structures, new construction, property acquisition, and infrastructure improvements. Of this amount, at least twenty-five million dollars ($25,000,000) shall be allocated towards increasing production of housing intended for homeownership and up to ten million dollars ($10,000,000) may be used to support a program for public housing development.",
+        "url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "2026-H 7127Aaa (Article 5)",
+        "detail": "Referred by the General Assembly in the FY2027 appropriations act, Article 5 \"Relating to Capital Development Program\", Section 1",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 65,
+            "no": 10,
+            "other": 0,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 6,
+            "other": 0,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": null,
+        "source_url": "https://www.rilegislature.gov/pressrelease/Lists/PressReleases/DispForm.aspx?ID=376663",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: the Secretary of State's Voter Information Handbook (the official explanation of each question) is on vote.sos.ri.gov, which answers with a Cloudflare bot challenge (HTTP 403 \"Just a moment...\"); not worked around. Fill from the handbook when it can be read.",
+        "full_text: copied verbatim from Article 5, Section 1 of the enacted budget (2026-H 7127Aaa): the proposition plus this project's paragraph. Not cross-checked against the printed ballot / SOS handbook (vote.sos.ri.gov blocked).",
+        "legislative_vote: the bond questions were referred inside the FY2027 budget bill (2026-H 7127Aaa, Article 5); the counts are the final passage votes on the whole budget bill (House 65-10, Senate 32-6) as published in General Assembly press releases. other=0 because yes+no equals the full chamber (75 House, 38 Senate). No official per-member roll call page was found on rilegislature.gov, so roll_call_url and by_party are null.",
+        "opposition_committee_name: no Board of Elections campaign-finance filing (CF-8 / BQA-1) registering opposition to this question was found among the filings listed on ricampaignfinance.com/RIPublic on 2026-11-03 (that list shows only the most recent filings; not exhaustive).",
+        "party_positions: no position published by a Rhode Island party on its own website was found.",
+        "proponent_website: Housing Network of Rhode Island filed a CF-8 independent expenditure supporting \"Question 2 - Housing and Homeownership\" (https://ricampaignfinance.com/RIPublic/ReportsScanned/Public-REFERENDUM-de734c52-14b1-4d1b-92be-05525f842a30.pdf), but the website it lists (housingnetworkri.org) is the organization's own site, not a campaign site for the question; left null."
+      ]
+    },
+    {
+      "measure_id": "Question 3",
+      "match": [
+        "Question 3",
+        "3. ECONOMIC DEVELOPMENT - $100,000,000",
+        "Economic Development",
+        "3. ECONOMIC DEVELOPMENT"
+      ],
+      "official_source_url": "https://electionresults.ri.gov/results/public/rhodeisland/elections/2026StatewideGeneralElection",
+      "official_title": {
+        "value": "3. ECONOMIC DEVELOPMENT - $100,000,000",
+        "source_url": "https://electionresults.ri.gov/results/public/api/elections/rhodeisland/2026StatewideGeneralElection/data",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "\"Shall the action of the general assembly, by an act passed at the January 2026 session, authorizing the issuance of bonds, refunding bonds, and temporary notes of the State of Rhode Island for the capital projects and in the amount with respect to each such project listed below be approved, and the issuance of bonds, refunding bonds, and/or temporary notes authorized in accordance with the provisions of said act?\"\n\n(3) Economic Development $100,000,000\nApproval of this question will allow the State to issue general obligation bonds, refunding bonds, and/or temporary notes in an amount not to exceed one hundred million dollars ($100,000,000) to fund industrial facilities infrastructure improvements for economic development purposes to fund site development and growth industry infrastructure, to be allocated as follows:\n(a) Site Development $55,000,000\nProvides fifty-five million dollars ($55,000,000) for land acquisition or assembly, environmental remediation, infrastructure and utility installation, site preparation or development, and project investments. Eligible uses include, but are not limited to, large-scale industrial site development to create pad-ready locations and/or facilities, infrastructure improvements and investments within the Quonset Business Park, and land acquisition, preparation, and project investments within the I-195 District.\n(b) Growth Industry Infrastructure $45,000,000\nProvides forty-five million dollars ($45,000,000) for infrastructure, facilities, projects, and investments that support Rhode Island’s ocean, defense, life sciences, data analytics and related industries. Eligible uses include, but are not limited to, water-based test ranges and onshore ocean or defense-related innovation/production facilities, as well as facilities, projects, and investments that advance businesses and job growth in the life sciences.",
+        "url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "2026-H 7127Aaa (Article 5)",
+        "detail": "Referred by the General Assembly in the FY2027 appropriations act, Article 5 \"Relating to Capital Development Program\", Section 1",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": {
+        "value": "https://voteyeson3ri.com",
+        "source_url": "https://ricampaignfinance.com/RIPublic/ReportsScanned/Public-REFERENDUM-3da52383-ffc1-499c-bab9-7086f9ff11c9.pdf",
+        "as_of": "2026-11-03",
+        "reviewed": false
+      },
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 65,
+            "no": 10,
+            "other": 0,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 6,
+            "other": 0,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": null,
+        "source_url": "https://www.rilegislature.gov/pressrelease/Lists/PressReleases/DispForm.aspx?ID=376663",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: the Secretary of State's Voter Information Handbook (the official explanation of each question) is on vote.sos.ri.gov, which answers with a Cloudflare bot challenge (HTTP 403 \"Just a moment...\"); not worked around. Fill from the handbook when it can be read.",
+        "full_text: copied verbatim from Article 5, Section 1 of the enacted budget (2026-H 7127Aaa): the proposition plus this project's paragraph. Not cross-checked against the printed ballot / SOS handbook (vote.sos.ri.gov blocked).",
+        "legislative_vote: the bond questions were referred inside the FY2027 budget bill (2026-H 7127Aaa, Article 5); the counts are the final passage votes on the whole budget bill (House 65-10, Senate 32-6) as published in General Assembly press releases. other=0 because yes+no equals the full chamber (75 House, 38 Senate). No official per-member roll call page was found on rilegislature.gov, so roll_call_url and by_party are null.",
+        "opposition_committee_name: no Board of Elections campaign-finance filing (CF-8 / BQA-1) registering opposition to this question was found among the filings listed on ricampaignfinance.com/RIPublic on 2026-11-03 (that list shows only the most recent filings; not exhaustive).",
+        "party_positions: no position published by a Rhode Island party on its own website was found.",
+        "proponent_website: from RI READY's CF-8 independent-expenditure filing (supports \"Question 3: Economic and Infrastructure Development Bond Measure\", website https://voteyeson3ri.com). RI Ports Coalition also filed a CF-8 supporting Question #3 (website https://riportscoalition.com/): https://ricampaignfinance.com/RIPublic/ReportsScanned/Public-REFERENDUM-beaed9d5-2d62-470e-9104-0b799236ae82.pdf"
+      ]
+    },
+    {
+      "measure_id": "Question 4",
+      "match": [
+        "Question 4",
+        "4. CULTURAL ECONOMY - $50,000,000",
+        "Cultural Economy",
+        "4. CULTURAL ECONOMY"
+      ],
+      "official_source_url": "https://electionresults.ri.gov/results/public/rhodeisland/elections/2026StatewideGeneralElection",
+      "official_title": {
+        "value": "4. CULTURAL ECONOMY - $50,000,000",
+        "source_url": "https://electionresults.ri.gov/results/public/api/elections/rhodeisland/2026StatewideGeneralElection/data",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "\"Shall the action of the general assembly, by an act passed at the January 2026 session, authorizing the issuance of bonds, refunding bonds, and temporary notes of the State of Rhode Island for the capital projects and in the amount with respect to each such project listed below be approved, and the issuance of bonds, refunding bonds, and/or temporary notes authorized in accordance with the provisions of said act?\"\n\n(4) Cultural Economy $50,000,000\nApproval of this question will allow the State to issue general obligation bonds, refunding bonds, and/or temporary notes in an amount not to exceed fifty million dollars ($50,000,000) to provide funding for cultural economy efforts to be allocated as follows:\n(a) State History Center $45,000,000\nProvides forty-five million dollars ($45,000,000) for the construction of a new Rhode Island State History Center.\n(b) State Preservation Grants Program $5,000,000\nProvides five million dollars ($5,000,000) in matching grants administered by the Rhode Island Historical Preservation and Heritage Commission to cities, towns and nonprofit organizations for capital improvements to public historic sites, museums and cultural art centers located in historic structures, and heritage museums throughout the State.",
+        "url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "2026-H 7127Aaa (Article 5)",
+        "detail": "Referred by the General Assembly in the FY2027 appropriations act, Article 5 \"Relating to Capital Development Program\", Section 1",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 65,
+            "no": 10,
+            "other": 0,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 6,
+            "other": 0,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": null,
+        "source_url": "https://www.rilegislature.gov/pressrelease/Lists/PressReleases/DispForm.aspx?ID=376663",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: the Secretary of State's Voter Information Handbook (the official explanation of each question) is on vote.sos.ri.gov, which answers with a Cloudflare bot challenge (HTTP 403 \"Just a moment...\"); not worked around. Fill from the handbook when it can be read.",
+        "full_text: copied verbatim from Article 5, Section 1 of the enacted budget (2026-H 7127Aaa): the proposition plus this project's paragraph. Not cross-checked against the printed ballot / SOS handbook (vote.sos.ri.gov blocked).",
+        "legislative_vote: the bond questions were referred inside the FY2027 budget bill (2026-H 7127Aaa, Article 5); the counts are the final passage votes on the whole budget bill (House 65-10, Senate 32-6) as published in General Assembly press releases. other=0 because yes+no equals the full chamber (75 House, 38 Senate). No official per-member roll call page was found on rilegislature.gov, so roll_call_url and by_party are null.",
+        "opposition_committee_name: no Board of Elections campaign-finance filing (CF-8 / BQA-1) registering opposition to this question was found among the filings listed on ricampaignfinance.com/RIPublic on 2026-11-03 (that list shows only the most recent filings; not exhaustive).",
+        "party_positions: no position published by a Rhode Island party on its own website was found.",
+        "proponent_website: no campaign-finance filing naming a campaign website for this question was found."
+      ]
+    },
+    {
+      "measure_id": "Question 5",
+      "match": [
+        "Question 5",
+        "5. GREEN ECONOMY BONDS - $55,000,000",
+        "Green Economy Bonds",
+        "5. GREEN ECONOMY BONDS"
+      ],
+      "official_source_url": "https://electionresults.ri.gov/results/public/rhodeisland/elections/2026StatewideGeneralElection",
+      "official_title": {
+        "value": "5. GREEN ECONOMY BONDS - $55,000,000",
+        "source_url": "https://electionresults.ri.gov/results/public/api/elections/rhodeisland/2026StatewideGeneralElection/data",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "\"Shall the action of the general assembly, by an act passed at the January 2026 session, authorizing the issuance of bonds, refunding bonds, and temporary notes of the State of Rhode Island for the capital projects and in the amount with respect to each such project listed below be approved, and the issuance of bonds, refunding bonds, and/or temporary notes authorized in accordance with the provisions of said act?\"\n\n(5) Green Economy Bonds $55,000,000\nApproval of this question will allow the State to issue general obligation bonds, refunding bonds, and/or temporary notes in an amount not to exceed fifty-five million dollars ($55,000,000) for environmental and recreational purposes, to be allocated as follows:\n(a) Brownfields Remediation and Economic Development $3,000,000\nProvides three million dollars ($3,000,000) for up to eighty percent (80%) matching grants to public, private, and/or non-profit entities for brownfield remediation projects.\n(b) Facility Improvements $12,000,000\nProvides twelve million dollars ($12,000,000) for the renovation and repair of existing facilities and recreational venues as well as the development and construction of new facilities and parks.\n(c) Local Recreation Projects $1,000,000\nProvides one million dollars ($1,000,000) for up to eighty percent (80%) matching grants for municipalities to acquire, develop, or rehabilitate local recreational facilities to meet the growing needs for active outdoor recreational facilities.\n(d) Marine Infrastructure Development $1,000,000\nProvides one million dollars ($1,000,000) to provide asset protection and emergency repair needs for most facilities, including recreational facilities, marine infrastructure, and more.\n(e) Resilient Rhody Infrastructure Fund $25,000,000\nProvides twenty-five million dollars ($25,000,000) to provide financial assistance to local governmental units for restoring and/or improving resiliency of infrastructure, vulnerable coastal habitats, and restoring rivers and stream floodplains. These funds will be prioritized to leverage significant funds to support local programs to improve community resiliency, stormwater abatement and public safety in the face of increased flooding, major storm events, and environmental degradation.\n(f) Narragansett Bay Watershed Restoration $7,000,000\nProvides seven million dollars ($7,000,000) for activities to restore and protect the water quality and enhance the economic viability and environmental sustainability of Narragansett Bay and the State’s watersheds. Eligible activities include nonpoint source pollution abatement, including stormwater management; nutrient loading abatement; commercial, industrial and agricultural pollution abatement; and riparian buffer and watershed ecosystem restoration.\n(g) Agriculture Land Preservation Commission $3,000,000\nProvides three million dollars ($3,000,000) to the agricultural land preservation commission for farmland protection.\n(h) Open Space Program $3,000,000\nProvides three million dollars ($3,000,000) for the State to acquire fee simple interest or conservation easements to open space, watershed, and recreational lands.",
+        "url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "2026-H 7127Aaa (Article 5)",
+        "detail": "Referred by the General Assembly in the FY2027 appropriations act, Article 5 \"Relating to Capital Development Program\", Section 1",
+        "source_url": "https://webserver.rilegislature.gov/BillText26/HouseText26/H7127Aaa.htm",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 65,
+            "no": 10,
+            "other": 0,
+            "by_party": null
+          },
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 6,
+            "other": 0,
+            "by_party": null
+          }
+        ],
+        "roll_call_url": null,
+        "source_url": "https://www.rilegislature.gov/pressrelease/Lists/PressReleases/DispForm.aspx?ID=376663",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: the Secretary of State's Voter Information Handbook (the official explanation of each question) is on vote.sos.ri.gov, which answers with a Cloudflare bot challenge (HTTP 403 \"Just a moment...\"); not worked around. Fill from the handbook when it can be read.",
+        "full_text: copied verbatim from Article 5, Section 1 of the enacted budget (2026-H 7127Aaa): the proposition plus this project's paragraph. Not cross-checked against the printed ballot / SOS handbook (vote.sos.ri.gov blocked).",
+        "legislative_vote: the bond questions were referred inside the FY2027 budget bill (2026-H 7127Aaa, Article 5); the counts are the final passage votes on the whole budget bill (House 65-10, Senate 32-6) as published in General Assembly press releases. other=0 because yes+no equals the full chamber (75 House, 38 Senate). No official per-member roll call page was found on rilegislature.gov, so roll_call_url and by_party are null.",
+        "opposition_committee_name: no Board of Elections campaign-finance filing (CF-8 / BQA-1) registering opposition to this question was found among the filings listed on ricampaignfinance.com/RIPublic on 2026-11-03 (that list shows only the most recent filings; not exhaustive).",
+        "party_positions: no position published by a Rhode Island party on its own website was found.",
+        "proponent_website: no campaign-finance filing naming a campaign website for this question was found."
+      ]
+    }
+  ]
+}

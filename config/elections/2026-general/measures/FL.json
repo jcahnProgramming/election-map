@@ -1,0 +1,167 @@
+{
+  "state": "FL",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "note": "The Division of Elections Initiatives / Amendments / Revisions Database (https://constitutionalinitiatives.dos.fl.gov/, Year 2026) lists three measures for the 2026 General Election, Ballot Numbers 1-3, all joint resolutions of the Florida Legislature. No citizen initiative is listed for 2026; every initiative in the database targets 2028. In Florida the ballot shows the ballot title and ballot summary: official_title is the ballot title and official_summary is the ballot summary, both as shown by the Division of Elections. Each amendment needs 60% approval (Art. XI, s. 5(e)). Floor roll calls on flsenate.gov do not list member party, so by_party is null.",
+  "measures": [
+    {
+      "measure_id": "Amendment 1",
+      "match": ["Amendment 1", "Amendment No. 1", "No. 1 Constitutional Amendment", "Budget Stabilization Fund"],
+      "official_source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=108",
+      "official_title": {
+        "value": "BUDGET STABILIZATION FUND",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=108",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposing an amendment to the State Constitution to increase the amount of funds that may be retained in the budget stabilization fund from 10% to 25% of general revenue collections, require the legislature to transfer the lesser of $750 million or the amount required to reach 25% of the general revenue collections each year unless certain conditions are met, and allow the legislature to withdraw funds for critical state needs.",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=108",
+        "as_of": "2026-11-03",
+        "by": "Florida Legislature (ballot statement in HJR 5019)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://initiativepetitions.dos.fl.gov/InitiativeForms/FulltextPDF/10-108.pdf",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=108",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJR 5019 (2025)",
+        "detail": "Joint resolution of the Florida Legislature, 2025 Regular Session; amends Article III, Section 19, Florida Constitution. Sponsor listed by the Division of Elections: The Florida Legislature/House.",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=108",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        { "party": "Republican Party of Florida", "position": "support",
+          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": false }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "House", "yes": 100, "no": 1, "other": 19, "by_party": null },
+          { "chamber": "Senate", "yes": 29, "no": 4, "other": 6, "by_party": null }
+        ],
+        "roll_call_url": "https://www.flsenate.gov/Session/Bill/2025/5019/?Tab=VoteHistory",
+        "source_url": "https://www.flsenate.gov/Session/Bill/2025/5019/?Tab=VoteHistory",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the full text of the joint resolution runs 11 pages (well over 4,000 characters) and uses strike/underline coding, so the value is null and url links to the DOS PDF. The text printed on the ballot is the title plus the summary above.",
+        "legislative_vote: House 6/16/2025 (https://www.flsenate.gov/Session/Bill/2025/5019/Vote/HouseVote_h05019__431.PDF) and Senate 6/16/2025 (https://www.flsenate.gov/Session/Bill/2025/5019/Vote/SenateVote_h05019e1013.PDF); 'other' = Not Voting. by_party is null because the official roll calls do not list party.",
+        "opposition_committee_name: Florida DOS committee records do not state which measure a committee supports or opposes (the 'Purpose' field is blank), and no committee named for opposing Amendment 1 was found.",
+        "party_positions: no 2026 Florida Democratic Party position on Amendment 1 found on floridadems.org."
+      ]
+    },
+    {
+      "measure_id": "Amendment 2",
+      "match": ["Amendment 2", "Amendment No. 2", "No. 2 Constitutional Amendment", "Exemption of Tangible Personal Property on Agricultural Land"],
+      "official_source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=109",
+      "official_title": {
+        "value": "EXEMPTION OF TANGIBLE PERSONAL PROPERTY ON AGRICULTURAL LAND FROM TAXATION",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=109",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposing an amendment to the State Constitution to exempt tangible personal property habitually located or typically present on land classified as agricultural, used in the production of agricultural products or for agritourism activities, and owned by the landowner or leaseholder of the agricultural land from ad valorem taxation. If approved this amendment would first apply for tax years beginning January 1, 2027.",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=109",
+        "as_of": "2026-11-03",
+        "by": "Florida Legislature (ballot statement in CS/HJR 1215)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://initiativepetitions.dos.fl.gov/InitiativeForms/FulltextPDF/10-109.pdf",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=109",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "CS/HJR 1215 (2025)",
+        "detail": "Joint resolution of the Florida Legislature, 2025 Regular Session; amends Article VII, s. 3 and Article XII, Florida Constitution. Sponsor listed by the Division of Elections: The Florida Legislature/House.",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=109",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        { "party": "Republican Party of Florida", "position": "support",
+          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": false }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "House", "yes": 110, "no": 1, "other": 8, "by_party": null },
+          { "chamber": "Senate", "yes": 37, "no": 0, "other": 1, "by_party": null }
+        ],
+        "roll_call_url": "https://www.flsenate.gov/Session/Bill/2025/1215/?Tab=VoteHistory",
+        "source_url": "https://www.flsenate.gov/Session/Bill/2025/1215/?Tab=VoteHistory",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the full text of the joint resolution runs 6 pages (over 4,000 characters) and uses strike/underline coding, so the value is null and url links to the DOS PDF. The text printed on the ballot is the title plus the summary above.",
+        "legislative_vote: House 4/25/2025 (https://www.flsenate.gov/Session/Bill/2025/1215/Vote/HouseVote_h01215c1256.PDF) and Senate 5/2/2025 (https://www.flsenate.gov/Session/Bill/2025/1215/Vote/SenateVote_h01215c1005.PDF); 'other' = Not Voting. by_party is null because the official roll calls do not list party.",
+        "opposition_committee_name: Florida DOS committee records do not state which measure a committee supports or opposes (the 'Purpose' field is blank), and no committee named for opposing Amendment 2 was found.",
+        "party_positions: RPOF's State Committee also endorsed this measure by resolution (https://florida.gop/republican-party-of-florida-endorses-proposed-agricultural-tax-cut-amendment/, May 19, 2025). No 2026 Florida Democratic Party position on Amendment 2 found on floridadems.org."
+      ]
+    },
+    {
+      "measure_id": "Amendment 3",
+      "match": ["Amendment 3", "Amendment No. 3", "No. 3 Constitutional Amendment", "Increased Homestead Exemption", "Lower Cap on Increases in Non-Homestead Property Assessments"],
+      "official_source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=110",
+      "official_title": {
+        "value": "INCREASED HOMESTEAD EXEMPTION; LOWER CAP ON INCREASES IN NON-HOMESTEAD PROPERTY ASSESSMENTS",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=110",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This amendment increases the homestead exemption, for all non-school taxes, to $150,000 in 2027 and $250,000 in 2028, and adjusts for inflation thereafter. It requires the Legislature to prescribe a uniform procedure for counties and municipalities, for their respective levies, to increase the homestead exemption up to full assessed value, and allows special districts, subject to referendum approval, to do the same.\nPersons who are not Florida residents on December 31, 2026, will receive the existing homestead exemption upon qualifying for a homestead exemption, with the increased homestead exemption beginning with the fifth year of exemption, to the extent permitted by the U.S. Constitution.\nThis amendment reduces the annual cap on assessment increases for non-homestead properties from 10% to 5%.\nThis amendment requires counties and municipalities to use property taxes solely for public safety, education and schools, infrastructure, natural resources, bond debt service, retirement benefits for employees, and operations and administration. Other expenditures may be approved by county officers or county or municipal governing bodies unless prohibited by general law, notwithstanding Article VII, Section 9(a) of the Florida Constitution, which allows counties and municipalities to levy property taxes for their respective purposes.\nThis amendment takes effect January 1, 2027.",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=110",
+        "as_of": "2026-11-03",
+        "by": "Florida Attorney General (revised ballot statement under s. 101.161(3)(c)2., F.S., letter of August 13, 2026)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://initiativepetitions.dos.fl.gov/InitiativeForms/FulltextPDF/10-110.pdf",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=110",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "CS/HJR 1-F (2026 Special Session F)",
+        "detail": "Joint resolution of the Florida Legislature, 2026F Special Session; amends Article VII, Sections 4, 6, and 9, and Article XII, Florida Constitution. The Legislature's ballot statement ('SAVE OUR HOMES FROM EXCESSIVE PROPERTY TAXES') was found defective in Save Our Voters From Misleading Ballot Language, Inc. v. Byrd, and the Attorney General submitted the revised ballot title and summary used here (AG letter: https://initiativepetitions.dos.fl.gov/InitiativeForms/FulltextPDF/10-110_AG.pdf).",
+        "source_url": "https://constitutionalinitiatives.dos.fl.gov/Home/InitDetail?account=10&seqnum=110",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        { "party": "Republican Party of Florida", "position": "support",
+          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": false },
+        { "party": "Florida Democratic Party", "position": "oppose",
+          "source_url": "https://floridadems.org/2026/07/florida-democrats-vote-to-oppose-amendment-3-warning-it-would-cut-local-services-and-threaten-public-safety/",
+          "as_of": "2026-11-03", "reviewed": false }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "House", "yes": 75, "no": 26, "other": 17, "by_party": null },
+          { "chamber": "Senate", "yes": 30, "no": 9, "other": 1, "by_party": null }
+        ],
+        "roll_call_url": "https://www.flsenate.gov/Session/Bill/2026F/1F/?Tab=VoteHistory",
+        "source_url": "https://www.flsenate.gov/Session/Bill/2026F/1F/?Tab=VoteHistory",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the full text of the joint resolution runs 20 pages and uses strike/underline coding, so the value is null and url links to the DOS PDF. The text printed on the ballot is the AG-revised title plus the summary above.",
+        "legislative_vote: final passage House 6/2/2026 (https://www.flsenate.gov/Session/Bill/2026F/1F/Vote/HouseVote_h00001Fc1900.PDF) and Senate 6/2/2026 (https://www.flsenate.gov/Session/Bill/2026F/1F/Vote/SenateVote_h00001Fc1005.PDF); 'other' = Not Voting. by_party is null because the official roll calls do not list party.",
+        "opposition_committee_name: the DOS committee database has an active PAC named 'Vote No on 3 Florida, Inc.' (https://dos.elections.myflorida.com/committees/ComDetail.asp?account=92021), but its record has a blank 'Purpose' and does not say which election or amendment it concerns (the 2024 ballot also had an Amendment 3). Not recorded without an official filing that ties it to this measure.",
+        "party_positions: the Florida Democratic Party's State Executive Committee vote (July 2026) came before the AG rewrote the ballot statement on August 13, 2026. It concerns the same joint resolution."
+      ]
+    }
+  ]
+}

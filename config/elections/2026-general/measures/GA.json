@@ -1,0 +1,152 @@
+{
+  "state": "GA",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Amendment 1",
+      "match": [
+        "Proposed Constitutional Amendment 1",
+        "Constitutional Amendment 1",
+        "Amendment 1"
+      ],
+      "official_source_url": "https://sos.ga.gov/sites/default/files/2026-09/2026%20Constitutional%20Summaries%20booklet%20FINAL.pdf",
+      "official_title": {
+        "value": "Increases the maximum qualifying acreage for assessment and taxation as bona fide conservation use property.",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This proposal increases the maximum acreage to qualify for assessment and taxation as a bona fide conservation use property from 2,000 acres to 4,000 acres. It amends Article VII, Section I, Paragraph III of the Georgia Constitution, relating to uniformity, classification of property, assessment of agricultural land, and utilities, by revising subparagraph (e)(1).",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03",
+        "by": "Attorney General, Secretary of State and Legislative Counsel (official constitutional amendments booklet)"
+      },
+      "full_text": {
+        "value": "Shall the Constitution of Georgia, for the purpose of protecting family farmland, be amended so as to increase the maximum acreage to qualify for assessment and taxation as a bona fide conservation use property from 2,000 acres to 4,000 acres?",
+        "url": "https://gov.georgia.gov/document/2025-signed-legislation/hr-32/download",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HR 32",
+        "detail": "Referred by the Georgia General Assembly (House Resolution No. 32, Ga. L. 2025, p. 1081)",
+        "source_url": "https://gov.georgia.gov/document/2025-signed-legislation/hr-32/download",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "official_title: Georgia publishes no separate measure title; value is the short ballot caption printed in the official booklet (\"AMENDMENT -1- SUMMARY: ...\").",
+        "match: the Secretary of State results feed (https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data) names this contest \"Proposed Constitutional Amendment 1\" (checked 2026-11-03).",
+        "official_source_url: the Secretary of State's booklet (sos.ga.gov) returned HTTP 403 behind a Cloudflare bot challenge, so it was not read; title, summary and ballot question were copied from the same booklet (\"Proposed Constitutional Amendments, General Election November 3, 2026\") as posted by Banks County, GA (official county government site).",
+        "legislative_vote: legis.ga.gov serves roll calls only through an API that requires a client-generated access token (obscured key in the site's JavaScript); we did not work around it, and no official PDF journal or roll call for this resolution was found. Left null.",
+        "opposition_committee_name: no committee registered as opposing this amendment was found in an official campaign-finance filing (Georgia Government Transparency and Campaign Finance Commission); none recorded.",
+        "proponent_website / opposition_website: none found on an official source.",
+        "party_positions: no position on this amendment found on the Democratic Party of Georgia (georgiademocrat.org) or Georgia Republican Party (gagop.org) websites."
+      ]
+    },
+    {
+      "measure_id": "Amendment 2",
+      "match": [
+        "Proposed Constitutional Amendment 2",
+        "Constitutional Amendment 2",
+        "Amendment 2"
+      ],
+      "official_source_url": "https://sos.ga.gov/sites/default/files/2026-09/2026%20Constitutional%20Summaries%20booklet%20FINAL.pdf",
+      "official_title": {
+        "value": "Provides for the nonpartisan election of all probate court judges.",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This proposal provides that all probate judges shall be elected in nonpartisan elections. It amends Article VI, Section VII, Paragraph I of the Georgia Constitution, relating to selection and term of office of judges, by revising subparagraph (a).",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03",
+        "by": "Attorney General, Secretary of State and Legislative Counsel (official constitutional amendments booklet)"
+      },
+      "full_text": {
+        "value": "Shall the Constitution of Georgia be amended so as to require that all probate court judges be elected in nonpartisan elections?",
+        "url": "https://gov.georgia.gov/document/2026-signed-legislation/hr-251/download",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HR 251",
+        "detail": "Referred by the Georgia General Assembly (House Resolution No. 251, Ga. L. 2026, p. 1110)",
+        "source_url": "https://gov.georgia.gov/document/2026-signed-legislation/hr-251/download",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "official_title: Georgia publishes no separate measure title; value is the short ballot caption printed in the official booklet (\"AMENDMENT -2- SUMMARY: ...\").",
+        "match: the Secretary of State results feed (https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data) names this contest \"Proposed Constitutional Amendment 2\" (checked 2026-11-03).",
+        "official_source_url: the Secretary of State's booklet (sos.ga.gov) returned HTTP 403 behind a Cloudflare bot challenge, so it was not read; title, summary and ballot question were copied from the same booklet (\"Proposed Constitutional Amendments, General Election November 3, 2026\") as posted by Banks County, GA (official county government site).",
+        "legislative_vote: legis.ga.gov serves roll calls only through an API that requires a client-generated access token (obscured key in the site's JavaScript); we did not work around it, and no official PDF journal or roll call for this resolution was found. Left null.",
+        "opposition_committee_name: no committee registered as opposing this amendment was found in an official campaign-finance filing (Georgia Government Transparency and Campaign Finance Commission); none recorded.",
+        "proponent_website / opposition_website: none found on an official source.",
+        "party_positions: no position on this amendment found on the Democratic Party of Georgia (georgiademocrat.org) or Georgia Republican Party (gagop.org) websites."
+      ]
+    },
+    {
+      "measure_id": "Amendment 3",
+      "match": [
+        "Proposed Constitutional Amendment 3",
+        "Constitutional Amendment 3",
+        "Amendment 3"
+      ],
+      "official_source_url": "https://sos.ga.gov/sites/default/files/2026-09/2026%20Constitutional%20Summaries%20booklet%20FINAL.pdf",
+      "official_title": {
+        "value": "Authorizes creation of Georgia Next Generation 9-1-1 Fund for 9-1-1 systems expansion, maintenance, and operation.",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This proposal authorizes the General Assembly to provide by general law for the creation of the Georgia Next Generation 9-1-1 Fund. It amends Article III, Section IX, Paragraph VI of the Georgia Constitution, relating to appropriations to be for specific sums, by adding a new subparagraph (s).",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03",
+        "by": "Attorney General, Secretary of State and Legislative Counsel (official constitutional amendments booklet)"
+      },
+      "full_text": {
+        "value": "Shall the Constitution of Georgia be amended so as to authorize the General Assembly to dedicate certain existing revenues, including revenues reallocated by law, to a non-lapsing fund to be used exclusively for the expansion, maintenance, and operation of emergency 9-1-1 systems in this state?",
+        "url": "https://gov.georgia.gov/document/2026-signed-legislation/hr-1243/download",
+        "source_url": "https://www.bankscountyga.org/DocumentCenter/View/1219/PROPOSED-CONSTITUTIONAL-AMENDMENTS-BOOKLET",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HR 1243",
+        "detail": "Referred by the Georgia General Assembly (House Resolution No. 1243, Ga. L. 2026, p. 1109)",
+        "source_url": "https://gov.georgia.gov/document/2026-signed-legislation/hr-1243/download",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "official_title: Georgia publishes no separate measure title; value is the short ballot caption printed in the official booklet (\"AMENDMENT -3- SUMMARY: ...\").",
+        "match: the Secretary of State results feed (https://results.sos.ga.gov/results/public/api/elections/Georgia/11032026GeneralAndSpecialElection/data) names this contest \"Proposed Constitutional Amendment 3\" (checked 2026-11-03).",
+        "full_text: the ballot question is copied as printed in the official booklet, which spells \"non-lapsing\"; the enrolled resolution HR 1243 (Section 2) spells it \"nonlapsing\".",
+        "official_source_url: the Secretary of State's booklet (sos.ga.gov) returned HTTP 403 behind a Cloudflare bot challenge, so it was not read; title, summary and ballot question were copied from the same booklet (\"Proposed Constitutional Amendments, General Election November 3, 2026\") as posted by Banks County, GA (official county government site).",
+        "legislative_vote: legis.ga.gov serves roll calls only through an API that requires a client-generated access token (obscured key in the site's JavaScript); we did not work around it, and no official PDF journal or roll call for this resolution was found. Left null.",
+        "opposition_committee_name: no committee registered as opposing this amendment was found in an official campaign-finance filing (Georgia Government Transparency and Campaign Finance Commission); none recorded.",
+        "proponent_website / opposition_website: none found on an official source.",
+        "party_positions: no position on this amendment found on the Democratic Party of Georgia (georgiademocrat.org) or Georgia Republican Party (gagop.org) websites."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "state": "UT",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Constitutional Amendment A",
+      "match": [
+        "Constitutional Amendment A",
+        "Amendment A",
+        "H.J.R. 10",
+        "HJR 10"
+      ],
+      "official_source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+      "official_title": {
+        "value": "Proposal to Amend Utah Constitution - Publication Amendments",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Current Provisions of the Utah Constitution\nUnder the Utah Constitution, the Legislature may propose a constitutional amendment with a two-thirds vote in each house. The proposed amendment is then submitted to voters at a general election for approval or rejection.\nBefore the election, the Constitution requires the Legislature to publish the proposed amendment in a newspaper in each county for two months.\nEffect of Constitutional Amendment A\nConstitutional Amendment A would require publication of a proposed constitutional amendment for 60 calendar days immediately before the general election in a manner set by state law rather than requiring publication in newspapers for two months immediately before the general election.\nConstitutional Amendment A would not change how constitutional amendments are proposed or approved by voters.\nImplementing Legislation\nIf voters approve Constitutional Amendment A, H.B. 481, Ballot Proposition Requirements, enacted during the 2025 General Session, will take effect. H.B. 481 requires the Lieutenant Governor to publish the full text of all proposed constitutional amendments and other ballot questions from the Legislature, on the Utah Public Notice Website and on the Lieutenant Governor's website for 60 calendar days immediately before the general election.\nFiscal Effects\nIf approved, Constitutional Amendment A, together with H.B. 481, could reduce state costs by up to $1.4 million every two years, based on recent estimates. The savings from changing the publication requirement for proposed constitutional amendments from newspapers to publicly operated websites would vary depending on the length of each proposed constitutional amendment and newspaper publication rates.",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03",
+        "by": "Impartial Analysis printed in the Utah Voter Information Pamphlet (Lieutenant Governor's Office); the pamphlet states the analysis of each measure is written by the presiding officers of the Legislature"
+      },
+      "full_text": {
+        "value": "Shall the Utah Constitution be amended to change how proposed constitutional amendments are published, requiring publication for 60 days immediately before the general election in a manner established by state law instead of in newspapers?\nIf voters approve Constitutional Amendment A, state statute would change to require the Lieutenant Governor to publish the full text of all proposed constitutional amendments and other ballot questions from the Legislature, on the Utah Public Notice Website and on the Lieutenant Governor's website for 60 days immediately before the general election.",
+        "url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "H.J.R. 10 (2025 General Session)",
+        "detail": "Referred by the Utah Legislature (two-thirds of each house), Proposal to Amend Utah Constitution - Publication Amendments",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 29,
+            "no": 0,
+            "other": 0,
+            "roll_call_url": "https://le.utah.gov/DynaBill/svotes.jsp?sessionid=2025GS&voteid=2101&house=S",
+            "by_party": {
+              "R": {
+                "yes": 22,
+                "no": 0,
+                "other": 0
+              },
+              "D": {
+                "yes": 6,
+                "no": 0,
+                "other": 0
+              },
+              "Forward": {
+                "yes": 1,
+                "no": 0,
+                "other": 0
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 70,
+            "no": 0,
+            "other": 5,
+            "roll_call_url": "https://le.utah.gov/DynaBill/svotes.jsp?sessionid=2025GS&voteid=852&house=H",
+            "by_party": {
+              "R": {
+                "yes": 56,
+                "no": 0,
+                "other": 5
+              },
+              "D": {
+                "yes": 14,
+                "no": 0,
+                "other": 0
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://le.utah.gov/~2025/bills/static/HJR010.html",
+        "by_party_source_url": "https://le.utah.gov/asp/roster/roster.asp?year=2025",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "proponent_website: the Voter Information Pamphlet lists no website for the argument in favor",
+        "opposition_committee_name: no political issues committee registered against Amendment A found in Lieutenant Governor disclosures (disclosures.utah.gov)",
+        "opposition_website: no argument against was submitted (pamphlet: adopted unanimously by the Legislature)",
+        "party_positions: no published position on Amendment A found on the Utah Republican Party or Utah Democratic Party websites",
+        "legislative_vote.by_party (note): computed by matching each name on the official floor roll calls to the Legislature's 2025 member roster (party per roster; Sen. Daniel W. Thatcher listed as Forward)"
+      ]
+    },
+    {
+      "measure_id": "Constitutional Amendment B",
+      "match": [
+        "Constitutional Amendment B",
+        "Amendment B",
+        "S.J.R. 2",
+        "SJR 2"
+      ],
+      "official_source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+      "official_title": {
+        "value": "Proposal to Amend Utah Constitution - Statewide Initiatives",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Current Constitutional Provision\nThe Utah Constitution allows voters to propose and pass a state law through a statewide initiative. Statewide initiatives are voted on by the people, and most are approved if a majority (more than half) of voters approve the measure; however, statewide initiatives related to the taking of wildlife require approval by two-thirds of voters.\nEffect of Constitutional Amendment B\nConstitutional Amendment B would increase the voter approval required for statewide initiatives that increase taxes compared to existing law.\nStatewide initiatives voted on after November 1, 2026, would require approval by at least 60% of voters if the statewide initiative:\n• Creates a new tax;\n• Expands an existing tax to cover additional items or transactions;\n• Increases an existing tax rate; or\n• Changes a property tax rate in a way that results in a smaller decrease in the property tax rate than would occur under existing law.\nConstitutional Amendment B would not change the vote required to approve any other type of statewide initiative.\nFiscal Effects\nEnactment of Constitutional Amendment B likely would not materially impact current state revenues or expenditures.",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03",
+        "by": "Impartial Analysis printed in the Utah Voter Information Pamphlet (Lieutenant Governor's Office); the pamphlet states the analysis of each measure is written by the presiding officers of the Legislature"
+      },
+      "full_text": {
+        "value": "Shall the Utah Constitution be amended to require that citizen-proposed laws that increase taxes compared to existing law be approved by at least 60% of voters, instead of a simple majority?",
+        "url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "S.J.R. 2 (2025 General Session)",
+        "detail": "Referred by the Utah Legislature (two-thirds of each house), Proposal to Amend Utah Constitution - Statewide Initiatives",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Utahns Protecting Our Constitution",
+        "source_url": "https://disclosures.utah.gov/Registration/EntityDetails/1422925",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Utah Republican Party",
+          "position": "support",
+          "source_url": "https://utgop.org/utahns_support_lower_taxes_vote_yes_on_amendment_b",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 21,
+            "no": 8,
+            "other": 0,
+            "roll_call_url": "https://le.utah.gov/DynaBill/svotes.jsp?sessionid=2025GS&voteid=234&house=S",
+            "by_party": {
+              "R": {
+                "yes": 21,
+                "no": 1,
+                "other": 0
+              },
+              "D": {
+                "yes": 0,
+                "no": 6,
+                "other": 0
+              },
+              "Forward": {
+                "yes": 0,
+                "no": 1,
+                "other": 0
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 55,
+            "no": 17,
+            "other": 3,
+            "roll_call_url": "https://le.utah.gov/DynaBill/svotes.jsp?sessionid=2025GS&voteid=1322&house=H",
+            "by_party": {
+              "R": {
+                "yes": 55,
+                "no": 4,
+                "other": 2
+              },
+              "D": {
+                "yes": 0,
+                "no": 13,
+                "other": 1
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://le.utah.gov/~2025/bills/static/SJR002.html",
+        "by_party_source_url": "https://le.utah.gov/asp/roster/roster.asp?year=2025",
+        "source_url": "https://vote.utah.gov/wp-content/uploads/2026/09/2026-Voter-Information-Pamphlet.pdf",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "proponent_website: the Voter Information Pamphlet lists no website for the argument in favor",
+        "opposition_website: the Voter Information Pamphlet lists no website for the argument against; none taken from the committee filing",
+        "party_positions: no published position on Amendment B found on the Utah Democratic Party website",
+        "legislative_vote.by_party (note): computed by matching each name on the official floor roll calls to the Legislature's 2025 member roster (party per roster; Sen. Daniel W. Thatcher listed as Forward)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,823 @@
+{
+  "state": "CO",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Amendment 81",
+      "match": [
+        "Amendment 81",
+        "Amend 81",
+        "Amdt 81"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Law Enforcement Communication with Federal Immigration Authorities",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 81 proposes amending the Colorado Constitution to:\n• require state and local law enforcement to make a reasonable effort to determine whether an individual charged with a crime is lawfully present, if the charge is a crime of violence or the individual has a prior felony conviction; and\n• notify federal immigration authorities within 72 hours of filing charges if law enforcement cannot determine that the charged individual is lawfully present in the United States.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be an amendment to the Colorado Constitution requiring law enforcement to notify the department of homeland security when a person is charged with either a violent crime or any crime if the person has a prior felony conviction if law enforcement cannot determine that the person is lawfully present in the United States?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Suzanne Taheri and Michael Fields (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #95 - Law Enforcement Reporting Requirements to Federal Authorities (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Colorado Communities First; The People’s No; Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Amendment 82",
+      "match": [
+        "Amendment 82",
+        "Amend 82",
+        "Amdt 82"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Constitutional Right to Purchase and Sell Natural Gas",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 82 proposes amending the Colorado Constitution to:\n• establish a constitutional right for consumers to purchase natural gas for cooking or heating; and\n• establish a constitutional right for distributors and utilities to sell natural gas for use in homes and businesses.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be an amendment to the Colorado Constitution creating new law granting the right for consumers to purchase natural gas for cooking or heating in homes or businesses and for distributors and utilities to sell natural gas to consumers?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Steven Ward and Michael Fields (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #177 - Right to Natural Gas (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "No Pollution in the Constitution; Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Amendment 83",
+      "match": [
+        "Amendment 83",
+        "Amend 83",
+        "Amdt 83"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Constitutional Right to Hunt and Fish",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 83 proposes amending the Colorado Constitution to:\n• establish a constitutional right to fish and hunt certain wildlife; and\n• create a policy that states hunting and fishing are the preferred means of managing fish and wildlife populations in Colorado.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be an amendment to the Colorado Constitution creating a constitutional right to hunt, fish, and harvest fish and wildlife by traditional methods, including all species of fish and wildlife managed by the state except non-game species, endangered species, or any species that is illegal to hunt under federal law, and, in connection therewith, establishing hunting and fishing as the preferred means of managing fish and wildlife populations; and preserving the right of the state to regulate hunting, fishing, and wildlife management if necessary for sound scientific wildlife conservation and management, public safety, or to preserve the future of hunting and fishing opportunities for all species?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Steven Ward and Suzanne Taheri (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #302 - Constitutional Right to Hunt and Fish (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Protect Colorado’s Constitution; Stop the Constitutional Power Grab; Colorado Hunters and Anglers for Sensible Wildlife Conservation; Vote No 83; People for a Fair Colorado; Make Good Change",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Democratic Party 2026 ballot page lists no position on Amendment 83; the Colorado Republican Party website (colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Amendment 84",
+      "match": [
+        "Amendment 84",
+        "Amend 84",
+        "Amdt 84"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Mail Ballot Voter Identification",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 84 proposes amending the Colorado Constitution to:\nrequire voters to provide identification information, in addition to their signature, for their mail ballots to be counted.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be an amendment to the Colorado Constitution requiring a voter to sign and include the last four digits of their social security number or their Colorado driver’s license or identification card number on the outside of their mail ballot for any federal or state election, and, in connection therewith, allowing the voter to correct missing or incorrect information, including with alternative forms of identification; and prohibiting a county clerk and recorder from counting the mail ballot unless the problem is fixed?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Chuck Broerman and Suzanne Taheri (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #362 - Mail Ballot Voter Identification (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Defend our Ballots Issue Committee; Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Amendment 85",
+      "match": [
+        "Amendment 85",
+        "Amend 85",
+        "Amdt 85"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Plain Language Ballot Titles",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 85 proposes amending the Colorado Constitution to:\n• require that ballot titles be in plain language, written at no more than an eighth-grade reading level; and\n• prohibit laws that require specific language in initiative ballot titles, if the laws interfere with plain language in the ballot title.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be an amendment to the Colorado Constitution concerning ballot question language, and, in connection therewith, requiring all state and local ballot questions to be written in plain language and at no more than an 8th grade reading level and prohibiting a state statute from requiring language that conflicts with these requirements in ballot questions for citizen-initiated measures?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Suzanne Taheri and Michael Fields (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #234 - Plain Language Ballot Questions (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Amendment 86",
+      "match": [
+        "Amendment 86",
+        "Amend 86",
+        "Amdt 86"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Requirements for Off-Cycle Congressional Redistricting",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 86 proposes amending the Colorado Constitution to:\n• require the Colorado Independent Congressional Redistricting Commission and the Colorado Supreme Court to review and approve any proposed changes to congressional districts outside of a scheduled redistricting year; and\n• prohibit off-cycle changes to congressional districts that intentionally favor any political party or unnecessarily divide communities.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be an amendment to the Colorado Constitution concerning congressional redistricting, and, in connection therewith, reenacting the current process for congressional redistricting in the Colorado Constitution and prohibiting modifications to a final map unless at least three public meetings are held, the modifications do not have the effect of dividing communities of interest or purposefully favoring one political party, and are approved by the congressional redistricting commission and the Colorado Supreme Court?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Suzanne Taheri and Elizabeth Caven (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #256 - Congressional Redistricting (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "People for a Fair Colorado; Make Good Change",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found.",
+        "official_title: the Blue Book PDF text layer drops the hyphen in \"Off-Cycle\"; restored."
+      ]
+    },
+    {
+      "measure_id": "Amendment 87",
+      "match": [
+        "Amendment 87",
+        "Amend 87",
+        "Amdt 87"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Graduated Income Tax",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Amendment 87 proposes amending the Colorado Constitution and Colorado statutes to:\n• remove the constitutional requirement that the state income tax be set at a single flat rate;\n• replace the current flat income tax with a graduated state income tax that sets lower rates for lower incomes and higher rates for higher incomes;\n• spend the additional revenue collected from these income tax rate changes on K-12 education, health care, and early childhood care and education; and\n• exempt additional revenue collected under the measure from the state's constitutional revenue limit.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "SHALL STATE TAXES BE INCREASED $2.7 BILLION ANNUALLY, IN ORDER TO INCREASE OR IMPROVE LEVELS OF PUBLIC SERVICES, INCLUDING K-12 PUBLIC SCHOOL EDUCATION, HEALTH CARE, AND EARLY CHILD CARE AND EDUCATION SERVICES, BY AN AMENDMENT TO THE COLORADO CONSTITUTION AND A CHANGE TO THE COLORADO REVISED STATUTES REPEALING EXISTING LAW AND CREATING NEW LAW TO REPLACE THE UNIFORM STATE INCOME TAX RATE WITH A GRADUATED INCOME TAX STRUCTURE, AND, IN CONNECTION THEREWITH, AMENDING THE TAXPAYER’S BILL OF RIGHTS TO ELIMINATE THE CONSTITUTIONAL REQUIREMENT FOR ALL TAXABLE NET INCOME TO BE TAXED AT ONE RATE WITH NO ADDED TAX ON INCOME; ESTABLISHING VARIOUS INCOME TAX RATES BASED ON THE AMOUNT OF TAXABLE INCOME EARNED BY INDIVIDUALS, ESTATES, TRUSTS, AND CORPORATIONS, WHILE MAINTAINING THE CURRENT 4.4% TAX ON INCOME FROM THE SALE OF A PRINCIPAL RESIDENCE, WHICH WILL RESULT IN THE ESTIMATED CHANGE IN INCOME TAXES OWED BY INDIVIDUALS AS IDENTIFIED IN THE FOLLOWING TABLE; AND AUTHORIZING THE STATE TO RETAIN AND SPEND ANY INCREASED REVENUE FROM THE NEW TAX STRUCTURE, AS A VOTER-APPROVED REVENUE CHANGE, TO SUPPLEMENT CURRENT LEVELS OF FUNDING FOR K-12 PUBLIC SCHOOL EDUCATION, HEALTH CARE, AND EARLY CHILD CARE AND EDUCATION PROGRAMS?\n\nInitiative 195 Change in Income Taxes Owed by Income Category\n\nIncome Categories | Current Average Income Tax Owed | Proposed Average Income Tax Owed | Proposed Change in Average Income Tax Owed if Passed + or -\n$25,000 or less | $59 | $50 | -$9\n$25,001 - $50,000 | $751 | $632 | -$119\n$50,001 - $100,000 | $1,877 | $1,666 | -$210\n$100,001 - $200,000 | $4,126 | $3,828 | -$298\n$200,001 - $500,000 | $9,344 | $9,019 | -$325\n$500,001 - $1,000,000 | $19,288 | $18,963 | -$325\n$1,000,001 - $2,000,000 | $29,432 | $34,196 | +$4,764\n$2,000,001 - $5,000,000 | $41,196 | $55,110 | +$13,914\nIncome categories use adjusted gross income reported to the federal Internal Revenue Service.",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Chris deGruy Kennedy and Kiyana Newell (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #195 - Graduated Income Tax (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Americans For Prosperity Colorado Issue Committee; Your Family's Future Alliance; No on 87, Yes on 136; Brighter Colorado; Affordable Colorado; Let’s Go Colorado; Don’t Price Us Out; Colorado Union of Taxpayers",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "support",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found.",
+        "full_text: the ballot title includes a table; it is reproduced as text rows with \" | \" between columns, from the Secretary of State page."
+      ]
+    },
+    {
+      "measure_id": "Proposition NN",
+      "match": [
+        "Proposition NN",
+        "Prop NN"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Keep and Spend Money for Education and Other Purposes",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition NN proposes amending the Colorado statutes to\n• allow the state to keep some or all of the revenue that the state's constitutional revenue limit, also known as the Taxpayer's Bill of Rights (TABOR), would otherwise require to be refunded to taxpayers, up to the amount the state spends on public education; and\n• spend the retained revenue to increase funding for K-12 education and programs that support children, and, after ten years, K-12 education and any other purposes to be determined by the state legislature.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall state investment in K-12 public education increase two percent each year for the next ten years, with investments used to increase teacher pay, improve teacher retention, lower class sizes, and increase access to career and technical courses, without raising taxes but instead funded by raising the annual limit on state fiscal year spending only by the amount spent on public K-12 education as a voter-approved revenue change, and requiring an annual publicly released, independent audit to show how the new investments are spent?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SB 26-135",
+        "detail": "Referred to the voters by the state legislature (Senate Bill 26-135, State Public K-12 Education Funding)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Brighter Colorado; Affordable Colorado; Let’s Go Colorado; Keep Colorado Affordable; Don’t Price Us Out; Colorado Union of Taxpayers",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "support",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 23,
+            "no": 12,
+            "other": 0,
+            "by_party": {
+              "D": {
+                "yes": 23,
+                "no": 0
+              },
+              "R": {
+                "yes": 0,
+                "no": 12
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 42,
+            "no": 21,
+            "other": 2,
+            "by_party": {
+              "D": {
+                "yes": 42,
+                "no": 1
+              },
+              "R": {
+                "yes": 0,
+                "no": 20
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://leg.colorado.gov/bills/SB26-135#bill-activity-votes",
+        "source_url": "https://leg.colorado.gov/bills/SB26-135",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "legislative_vote: Senate = final vote to repass with House amendments, 05/12/2026 (https://leg.colorado.gov/bill_votes/29870); House = Third Reading, BILL, 05/09/2026 (https://leg.colorado.gov/bill_votes/29806), the 2 \"other\" were excused (both Republicans). Roll calls list members by surname only; party taken from the legislature roster https://leg.colorado.gov/legislators read 2026-11-03, and for Rep. Manny Rutinel (resigned 9/4/26, not on the roster) from https://leg.colorado.gov/legislators/manny-rutinel. The Senate roll call lists \"President\" in addition to Coleman; counted once.",
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Proposition 132",
+      "match": [
+        "Proposition 132",
+        "Prop 132"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Increase Penalties for Fentanyl Crimes",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition 132 proposes amending the Colorado statutes to:\n• increase penalties for possession and distribution, including the selling, transfer or sharing, of any amount of certain synthetic opioids, commonly known as fentanyl; and\n• eliminate the possibility of reduced penalties for certain possession and distribution offenses with mitigating circumstances.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be a change to the Colorado Revised Statutes concerning criminal penalties for fentanyl and certain synthetic opioids, and, in connection therewith, increasing the felony classifications of drug-related crimes for distribution, manufacturing, dispensing, sale, or possession of fentanyl and certain synthetic opioids; creating mandated treatment for certain drug felony violations based on possession amount; and changing sentencing provisions to narrow or eliminate exemptions for crimes related to fentanyl and certain synthetic opioids and drug-related deaths?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Suzanne Taheri and Michael Fields (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #85 - Penalties for Fentanyl Crimes (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "The People’s No; Coloradans For Real Safety Solutions; Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Proposition 133",
+      "match": [
+        "Proposition 133",
+        "Prop 133"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Penalties for Human Trafficking of a Minor",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition 133 proposes amending the Colorado statutes to:\n• mandate a sentence of life in prison without parole for child sex trafficking convictions; and\n• expand child sex trafficking to include buying sexual activity with a minor.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be a change to the Colorado Revised Statutes modifying existing law concerning human trafficking of a minor for sexual servitude, and, in connection therewith, creating new law expanding human trafficking of a minor for sexual servitude to include knowingly trading anything of monetary value to buy or sell sexual activity with a minor and increasing the penalty to be life in prison without parole or release?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Erin Lee and Michelle Austin (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #108 - Penalties for Human Trafficking of a Minor (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Vote Common Sense; People for a Fair Colorado; Make Good Change; Victim Services Groups Oppose Proposition 133",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Democratic Party 2026 ballot page lists no position on Proposition 133; the Colorado Republican Party website (colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Proposition 134",
+      "match": [
+        "Proposition 134",
+        "Prop 134"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Male and Female Participation in School and Collegiate Sports",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition 134 proposes amending the Colorado statutes to:\n• require that all elementary through collegiate school-based athletic teams and sports be designated as male-only or female-only based on biological sex, unless the team or sport is designated as open to participation by individuals of any sex or gender;\n• require schools and school districts to implement policies to ensure that students are assigned to gender-designated teams that align with their biological sex; and\n• prohibit investigations of, or penalties for, a school that designates a team or sport as female-only.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be a change to the Colorado Revised Statutes creating new law restricting participation in all K-12 and collegiate school sports based on the participant’s sex as determined by certain aspects of their biological reproductive system, and, in connection therewith, requiring a school, institution of higher education, or athletic association to designate each school or intramural athletic team or sport as male, female, or coeducational; only allowing participants to compete on the team or sport of their designated sex or to compete on a coeducational team; creating an exception to allow a female to participate on a male-designated team or sport if there is no female team available; prohibiting a government entity, licensing or accrediting organization, or athletic association from entertaining a complaint, opening an investigation, or taking other adverse action against a school for maintaining separate teams or sports for females; and providing the commissioner of education with the authority to enforce the proposed initiative for K-12 school districts?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Erin Lee and Michelle Austin (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #109 - Male and Female Participation in School Sports (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "The People’s No; Families not Politics; No on 134 and 135; Protect Trans Kids; Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Proposition 135",
+      "match": [
+        "Proposition 135",
+        "Prop 135"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Prohibit Surgery on Minors in Response to Perception of Sex or Gender",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition 135 proposes amending the Colorado statutes to:\n• prohibit surgeries on minors that alter their biological sex characteristics as a treatment in response to a minor's perception of sex or gender, with certain exceptions; and\n• prohibit the use of state or federal funds or insurance coverage to pay for these surgeries.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be a change to the Colorado Revised Statutes modifying existing law by prohibiting surgery on a minor for the purpose of altering the minor’s biological sex characteristics, and, in connection therewith, prohibiting any health-care professional or other person from knowingly performing, prescribing, administering, or providing any surgery to a minor for the purpose of altering the minor’s biological sex characteristics and prohibiting the use of state or federal funds, Medicaid reimbursement, or insurance coverage to pay for this type of surgery?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Erin Lee and Michelle Austin (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #110 - Prohibit Certain Surgeries on Minors (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "The People’s No; Families not Politics; No on 134 and 135; Protect Trans Kids; Vote Common Sense; People for a Fair Colorado; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Proposition 136",
+      "match": [
+        "Proposition 136",
+        "Prop 136"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Income Tax Rate Limit",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition 136 proposes amending the Colorado statutes to:\nset a 4.4 percent limit on the state income tax rate for individual and corporate taxpayers.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be a change to the Colorado Revised Statutes capping the state income tax rate at 4.4% of federal taxable income for individuals and corporations?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Suzanne Taheri and Michael Fields (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #232 - Income Tax Rate Cap (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Vote Common Sense; People for a Fair Colorado; Protect Colorado’s Future Coalition; Make Good Change; Watchdog for the People",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    },
+    {
+      "measure_id": "Proposition 137",
+      "match": [
+        "Proposition 137",
+        "Prop 137"
+      ],
+      "official_source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+      "official_title": {
+        "value": "Direct Sporting Goods Sales Tax Revenue for Conservation",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Proposition 137 proposes amending the Colorado statutes to:\n• direct a portion of existing sales tax revenues from purchases and rentals of sporting goods to be used for certain conservation, wildfire risk mitigation, and outdoor recreation programs; and\n• exempt that money from the state's constitutional revenue limit, reducing the amount of money collected above the limit that is returned to taxpayers.",
+        "source_url": "https://content.leg.colorado.gov/sites/default/files/2026-blue-book-en-accessible.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Council Staff (Blue Book)"
+      },
+      "full_text": {
+        "value": "Shall there be a change to the Colorado Revised Statutes creating new law to increase water and land conservation funding without raising taxes, and, in connection therewith, through a voter-approved revenue change, allowing the state to keep and spend a portion of revenue from the state sales tax on sporting goods and equipment to conserve and protect Colorado’s water, land, and forests, prevent wildfires, support outdoor recreation training and activities, and reduce revenue spent on these conservation purposes if necessary to preserve funding for certain tax credits?",
+        "url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "proponent_name": "Brendan Witt and Aaron Citron (designated representatives)",
+        "bill_number": null,
+        "detail": "Initiative #308 - Designate Sporting Goods Sales Tax Revenue for Conservation (citizen initiative)",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Protect Colorado's Land, Communities, and Tax Dollars; Colorado Union of Taxpayers",
+        "source_url": "https://www.coloradosos.gov/pubs/elections/Initiatives/ballot/contacts/2026.html",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Colorado Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.coloradodems.org/2026-ballot-initiatives",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": null,
+      "unsourced": [
+        "proponent_website: neither the Secretary of State measure list nor the Blue Book gives a campaign website; none recorded.",
+        "opposition_website: no official source lists one.",
+        "opposition_committee_name: all issue committees registered as \"Oppose\" on the Secretary of State 2026 measure list (compiled from TRACER registrations), joined with \"; \". The SOS notes the list is not final; TRACER itself is the authoritative filing system.",
+        "party_positions: the Colorado Republican Party website (colorado.gop, vote.colorado.gop) publishes no ballot-measure positions that could be found."
+      ]
+    }
+  ]
+}

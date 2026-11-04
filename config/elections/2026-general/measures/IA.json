@@ -1,0 +1,96 @@
+{
+  "state": "IA",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Constitutional Amendment (SJR 11)",
+      "match": [
+        "Constitutional Amendment",
+        "Amendment 1",
+        "Public Measure 1",
+        "SJR 11",
+        "Senate Joint Resolution 11",
+        "HJR 2006",
+        "Taxation Limitations"
+      ],
+      "official_source_url": "https://www.legis.iowa.gov/legislation/BillBook?ga=91&ba=SJR11",
+      "official_title": {
+        "value": "A joint resolution proposing an amendment to the Constitution of the State of Iowa relating to requirements for certain state tax law changes.",
+        "source_url": "https://www.legis.iowa.gov/docs/publications/SJNL/20250415_SJNL.pdf#page=17",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "Provides that any bill to increase the individual income tax rate or the corporate income tax rate, or the rate of any other type of tax based upon income or legal and special reserves, shall require the affirmative votes of at least two-thirds of the members elected to each house of the legislature for passage. Further, the two-thirds majority vote requirement applies to the passage of a bill to establish a new tax on any type of income or legal and special reserves imposed by the state. The requirement excludes taxes imposed at the option of a local government. A lawsuit challenging the proper enactment of a bill under this section must be filed no later than one year following the enactment.",
+        "source_url": "https://www.legis.iowa.gov/docs/aco/bulletincontent/06-24-2026.Regulatory%20Analysis_1780517797265.pdf",
+        "as_of": "2026-11-03",
+        "by": "Iowa Secretary of State (ballot summary as proposed in Regulatory Analysis RA 26-93, Iowa Administrative Bulletin)"
+      },
+      "full_text": {
+        "value": "ARTICLE XIII.\nTAXATION LIMITATIONS.\nSection 1. Two-thirds majority vote for state tax law changes. Passage of a bill that increases the individual income tax rate or the corporate income tax rate, or the rate of any other type of tax based upon income or legal and special reserves, shall require the affirmative votes of at least two-thirds of the members elected to each house of the general assembly. This requirement does not apply to taxes imposed at the option of a local government.\nPassage of a bill that establishes a new tax on any type of income or legal and special reserves imposed by the state shall require the affirmative votes of at least two-thirds of the members elected to each house of the general assembly.\nA lawsuit challenging the proper enactment of a bill under this section must be filed no later than one year following the enactment. If such a lawsuit is not filed within the one-year limit, the bill shall be considered properly enacted under this section.\nEach bill to which this section applies must include a separate provision describing the requirements for enactment prescribed by this section. The general assembly shall enact laws to implement this section.",
+        "url": "https://www.legis.iowa.gov/docs/publications/LGE/91/attachments/SJR11.html",
+        "source_url": "https://www.legis.iowa.gov/docs/publications/LGE/91/attachments/SJR11.html",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SJR 11 (91st GA); HJR 2006 (90th GA)",
+        "detail": "Referred by the General Assembly: passed by the Ninetieth General Assembly as House Joint Resolution 2006 and by the Ninety-First General Assembly as Senate Joint Resolution 11, as required for a constitutional amendment",
+        "source_url": "https://www.legis.iowa.gov/docs/aco/bulletincontent/06-24-2026.Regulatory%20Analysis_1780517797265.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 32,
+            "no": 15,
+            "other": 3,
+            "by_party": {
+              "R": {
+                "yes": 32,
+                "no": 0
+              },
+              "D": {
+                "yes": 0,
+                "no": 15
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 57,
+            "no": 21,
+            "other": 22,
+            "by_party": {
+              "R": {
+                "yes": 57,
+                "no": 0
+              },
+              "D": {
+                "yes": 0,
+                "no": 21
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://www.legis.iowa.gov/legislation/billTracking/billHistory?billName=SJR%2011&ga=91",
+        "source_url": "https://www.legis.iowa.gov/legislation/billTracking/billHistory?billName=SJR%2011&ga=91",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary / full_text: the Secretary of State website (sos.iowa.gov) returned HTTP 403 to our client, so the final ballot wording could not be read there. official_summary is the summary the Secretary of State proposed for the ballot in Regulatory Analysis RA 26-93 (published on legis.iowa.gov); the RA says the rulemaking ends without adopting a rule, so the wording printed on ballots may differ if it was changed after the July 15, 2026 comment hearing. full_text is the amendment text (new Article XIII) from the enrolled SJR 11; the ballot layout was not verified.",
+        "measure_id / match: the label used on ballots and in the results feed (e.g. \"Constitutional Amendment\" or \"Amendment 1\") could not be confirmed from the Secretary of State site (403); match lists likely variants.",
+        "legislative_vote: final passage of SJR 11 in the 91st General Assembly. Senate: Senate Journal 04/15/2025 p. 798 (https://www.legis.iowa.gov/docs/publications/SJNL/20250415_SJNL.pdf#page=17), 32-15, 3 absent. House: House Journal 05/02/2026 p. 1151 (https://www.legis.iowa.gov/docs/publications/HJNL/20260502_HJNL.pdf#page=66), 57-21, 22 absent or not voting. Party taken from the legislature member lists (https://www.legis.iowa.gov/legislators/senate, https://www.legis.iowa.gov/legislators/house) read 2026-11-03, which include former members with their service dates. The 90th General Assembly votes on HJR 2006 are not recorded here.",
+        "opposition_committee_name: the Iowa Ethics & Campaign Disclosure Board search (webapp.iecdb.iowa.gov) is an interactive application and the state data portal did not return the committee dataset; no registered opposing committee could be confirmed, so none is recorded.",
+        "proponent_website / opposition_website: no official source lists campaign websites.",
+        "party_positions: no published position found on the Iowa Democratic Party or Republican Party of Iowa websites."
+      ]
+    }
+  ]
+}

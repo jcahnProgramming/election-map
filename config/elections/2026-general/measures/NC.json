@@ -1,0 +1,295 @@
+{
+  "state": "NC",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "CONSTITUTIONAL AMENDMENT - REQUIRE PHOTO ID FOR VOTING",
+      "match": [
+        "CONSTITUTIONAL AMENDMENT - REQUIRE PHOTO ID FOR VOTING",
+        "Require Photo ID for All Voters"
+      ],
+      "official_source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+      "official_title": {
+        "value": "CONSTITUTIONAL AMENDMENT - REQUIRE PHOTO ID FOR VOTING",
+        "source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This amendment to the North Carolina Constitution would require presentation of photographic identification for voters in all instances in North Carolina elections.",
+        "source_url": "https://co.forsyth.nc.us/elections/assets/documents/Summary_Explanation_of_2026_Constitutional_Amendments.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Services Officer, N.C. General Assembly (G.S. 147-54.10), adopted August 20, 2026"
+      },
+      "full_text": {
+        "value": "Constitutional amendment to require all voters, not just those presenting to vote in person, to present photo identification before voting.",
+        "url": "https://www.ncleg.gov/Sessions/2023/Bills/Senate/PDF/S921v3.pdf",
+        "source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SB 921 (2023 Session)",
+        "detail": "Referred by the North Carolina General Assembly (Session Law 2024-58)",
+        "source_url": "https://www.ncleg.gov/BillLookUp/2023/S921",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "North Carolina Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.ncdp.org/content/102126/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 30,
+            "no": 19,
+            "other": 1,
+            "by_party": {
+              "D": {
+                "yes": 0,
+                "no": 19
+              },
+              "R": {
+                "yes": 30,
+                "no": 0
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 73,
+            "no": 45,
+            "other": 2,
+            "by_party": {
+              "D": {
+                "yes": 1,
+                "no": 45
+              },
+              "R": {
+                "yes": 73,
+                "no": 0
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2023/H/810",
+        "source_url": "https://www.ncleg.gov/BillLookUp/2023/S921",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_title: NC does not number amendments; value is the contest name in the State Board of Elections referendum list, identical to the contest name in the live results feed (er.ncsbe.gov). The Legislative Services Officer's caption is \"Require Photo ID for All Voters\".",
+        "legislative_vote: third-reading roll calls (Senate roll call #677 on 12/2/2024 (https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2023/S/677); House roll call #810 on 12/11/2024 (https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2023/H/810)).",
+        "official_summary: the Legislative Services Officer's summary explanation was read from the copy posted by the Forsyth County Board of Elections (official county election office); no copy was found on ncleg.gov or ncsbe.gov.",
+        "opposition_committee_name: no referendum committee registered with the NC State Board of Elections as opposing this amendment was found; the NCSBE committee lookup (cf.ncsbe.gov) is a name search only and cannot list committees by ballot measure. None recorded.",
+        "proponent_website / opposition_website: none found on an official source.",
+        "party_positions: no position from the North Carolina Republican Party found on nc.gop.",
+        "legislative_vote.by_party: counted from the party-grouped member lists on the ncleg.gov roll call transcripts. In the House the Republican \"Ayes\" list includes the Speaker, so the per-party ayes add up to one more than the official \"Ayes\" total; yes/no/other use the official totals."
+      ]
+    },
+    {
+      "measure_id": "CONSTITUTIONAL AMENDMENT - MAXIMUM INCOME TAX RATE OF 3.5%",
+      "match": [
+        "CONSTITUTIONAL AMENDMENT - MAXIMUM INCOME TAX RATE OF 3.5%",
+        "Lower Taxes for All NC",
+        "MAXIMUM INCOME TAX RATE"
+      ],
+      "official_source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+      "official_title": {
+        "value": "CONSTITUTIONAL AMENDMENT - MAXIMUM INCOME TAX RATE OF 3.5%",
+        "source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This amendment to the North Carolina Constitution would lower the State income tax rate from a maximum of 7% to a maximum of 3.5% beginning January 1, 2027.",
+        "source_url": "https://co.forsyth.nc.us/elections/assets/documents/Summary_Explanation_of_2026_Constitutional_Amendments.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Services Officer, N.C. General Assembly (G.S. 147-54.10), adopted August 20, 2026"
+      },
+      "full_text": {
+        "value": "Constitutional amendment to keep the State income tax rate from being raised higher than three and one-half percent (3.5%).",
+        "url": "https://www.ncleg.gov/Sessions/2025/Bills/Senate/PDF/S1080v3.pdf",
+        "source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SB 1080 (2025 Session)",
+        "detail": "Referred by the North Carolina General Assembly (Session Law 2026-4)",
+        "source_url": "https://www.ncleg.gov/BillLookUp/2025/S1080",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "North Carolina Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.ncdp.org/content/102126/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 30,
+            "no": 18,
+            "other": 1,
+            "by_party": {
+              "D": {
+                "yes": 0,
+                "no": 18
+              },
+              "R": {
+                "yes": 30,
+                "no": 0
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 73,
+            "no": 46,
+            "other": 1,
+            "by_party": {
+              "D": {
+                "yes": 0,
+                "no": 46
+              },
+              "R": {
+                "yes": 72,
+                "no": 0
+              },
+              "U": {
+                "yes": 2,
+                "no": 0
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2025/H/664",
+        "source_url": "https://www.ncleg.gov/BillLookUp/2025/S1080",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_title: NC does not number amendments; value is the contest name in the State Board of Elections referendum list, identical to the contest name in the live results feed (er.ncsbe.gov). The Legislative Services Officer's caption is \"Lower Taxes for All NC\".",
+        "legislative_vote: third-reading roll calls (Senate roll call #535 on 5/19/2026 (https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2025/S/535); House roll call #664 on 5/20/2026 (https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2025/H/664)).",
+        "official_summary: the Legislative Services Officer's summary explanation was read from the copy posted by the Forsyth County Board of Elections (official county election office); no copy was found on ncleg.gov or ncsbe.gov.",
+        "opposition_committee_name: no referendum committee registered with the NC State Board of Elections as opposing this amendment was found; the NCSBE committee lookup (cf.ncsbe.gov) is a name search only and cannot list committees by ballot measure. None recorded.",
+        "proponent_website / opposition_website: none found on an official source.",
+        "party_positions: no position from the North Carolina Republican Party found on nc.gop.",
+        "legislative_vote.by_party: counted from the party-grouped member lists on the ncleg.gov roll call transcripts. In the House the Republican \"Ayes\" list includes the Speaker, so the per-party ayes add up to one more than the official \"Ayes\" total; yes/no/other use the official totals."
+      ]
+    },
+    {
+      "measure_id": "CONSTITUTIONAL AMENDMENT - PROPERTY TAX LEVY LIMIT",
+      "match": [
+        "CONSTITUTIONAL AMENDMENT - PROPERTY TAX LEVY LIMIT",
+        "Property Tax Levy Limit"
+      ],
+      "official_source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+      "official_title": {
+        "value": "CONSTITUTIONAL AMENDMENT - PROPERTY TAX LEVY LIMIT",
+        "source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "This amendment to the North Carolina Constitution would require the General Assembly to set limits on property tax increases by local governments.",
+        "source_url": "https://co.forsyth.nc.us/elections/assets/documents/Summary_Explanation_of_2026_Constitutional_Amendments.pdf",
+        "as_of": "2026-11-03",
+        "by": "Legislative Services Officer, N.C. General Assembly (G.S. 147-54.10), adopted August 20, 2026"
+      },
+      "full_text": {
+        "value": "Constitutional amendment requiring limits on property tax increases by local governments.",
+        "url": "https://www.ncleg.gov/Sessions/2025/Bills/House/PDF/H1089v3.pdf",
+        "source_url": "https://s3.amazonaws.com/dl.ncsbe.gov/Elections/2026/Candidate%20Filing/statewide_referendums_20261103.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HB 1089 (2025 Session)",
+        "detail": "Referred by the North Carolina General Assembly (Session Law 2026-5)",
+        "source_url": "https://www.ncleg.gov/BillLookUp/2025/H1089",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "North Carolina Democratic Party",
+          "position": "oppose",
+          "source_url": "https://www.ncdp.org/content/102126/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "House",
+            "yes": 73,
+            "no": 46,
+            "other": 1,
+            "by_party": {
+              "D": {
+                "yes": 0,
+                "no": 46
+              },
+              "R": {
+                "yes": 72,
+                "no": 0
+              },
+              "U": {
+                "yes": 2,
+                "no": 0
+              }
+            }
+          },
+          {
+            "chamber": "Senate",
+            "yes": 31,
+            "no": 15,
+            "other": 3,
+            "by_party": {
+              "D": {
+                "yes": 1,
+                "no": 15
+              },
+              "R": {
+                "yes": 30,
+                "no": 0
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2025/S/548",
+        "source_url": "https://www.ncleg.gov/BillLookUp/2025/H1089",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_title: NC does not number amendments; value is the contest name in the State Board of Elections referendum list, identical to the contest name in the live results feed (er.ncsbe.gov). The Legislative Services Officer's caption is \"Property Tax Levy Limit\".",
+        "legislative_vote: third-reading roll calls (House roll call #662 on 5/20/2026 (https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2025/H/662); Senate roll call #548 on 5/20/2026 (https://www.ncleg.gov/Legislation/Votes/RollCallVoteTranscript/2025/S/548)).",
+        "official_summary: the Legislative Services Officer's summary explanation was read from the copy posted by the Forsyth County Board of Elections (official county election office); no copy was found on ncleg.gov or ncsbe.gov.",
+        "opposition_committee_name: no referendum committee registered with the NC State Board of Elections as opposing this amendment was found; the NCSBE committee lookup (cf.ncsbe.gov) is a name search only and cannot list committees by ballot measure. None recorded.",
+        "proponent_website / opposition_website: none found on an official source.",
+        "party_positions: no position from the North Carolina Republican Party found on nc.gop.",
+        "legislative_vote.by_party: counted from the party-grouped member lists on the ncleg.gov roll call transcripts. In the House the Republican \"Ayes\" list includes the Speaker, so the per-party ayes add up to one more than the official \"Ayes\" total; yes/no/other use the official totals."
+      ]
+    }
+  ]
+}

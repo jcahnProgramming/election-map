@@ -1,0 +1,217 @@
+{
+  "state": "AR",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "note": "The Secretary of State's Initiatives and Referenda page (https://www.sos.arkansas.gov/elections/initiatives-and-referenda/) lists four measures for the 2026 General Election, all referred by the General Assembly (Issues 1-4). It lists 'None for the 2026 General Election' under initiatives certified by the Attorney General. For Issues 1-3, official_title is the Popular Name and official_summary is the Ballot Title printed in the joint resolution, both as published by the SOS. Party for by_party comes from each member's page on arkleg.state.ar.us (2025 Regular Session), read 2026-11-03. 'other' = Non Voting + Present + Excused on the official roll call.",
+  "measures": [
+    {
+      "measure_id": "Issue 1",
+      "match": ["Issue 1", "Issue No. 1", "Issue Number 1", "Citizens Only Voting Amendment", "HJR 1018", "HJR1018"],
+      "official_source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._1_HJR_1018_of_2026_.pdf_.pdf",
+      "official_title": {
+        "value": "A Constitutional Amendment to be Known as \"The Citizens Only Voting Amendment\" and Providing That Only a Citizen of the United States Meeting the Qualifications of an Elector Under the Arkansas Constitution May Vote in an Election in this State.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._1_HJR_1018_of_2026_.pdf_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "AN AMENDMENT TO THE ARKANSAS CONSTITUTION TO CREATE \"THE CITIZENS ONLY VOTING AMENDMENT\"; TO PROVIDE THAT ONLY A CITIZEN OF THE UNITED STATES MEETING THE QUALIFICATIONS OF AN ELECTOR UNDER THE ARKANSAS CONSTITUTION MAY VOTE IN AN ELECTION IN THIS STATE; AND PROVIDING THAT A PERSON WHO DOES NOT MEET THE QUALIFICATIONS OF AN ELECTOR UNDER THE ARKANSAS CONSTITUTION SHALL NOT BE PERMITTED TO VOTE IN ANY STATE OR LOCAL ELECTION HELD IN THIS STATE.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._1_HJR_1018_of_2026_.pdf_.pdf",
+        "as_of": "2026-11-03",
+        "by": "Arkansas General Assembly (Ballot Title in HJR 1018, published by the Secretary of State)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._1_HJR_1018_of_2026_.pdf_.pdf",
+        "source_url": "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "HJR 1018 (2025)",
+        "detail": "Referred to the people by the 95th General Assembly under Article 19, Section 22 of the Arkansas Constitution; proposed in the Regular 2025 Session by Representative Ray and filed as HJR 1018.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._1_HJR_1018_of_2026_.pdf_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "House", "yes": 82, "no": 6, "other": 12,
+            "by_party": { "R": { "yes": 79, "no": 0 }, "D": { "yes": 3, "no": 6 } } },
+          { "chamber": "Senate", "yes": 27, "no": 0, "other": 8,
+            "by_party": { "R": { "yes": 27, "no": 0 }, "D": { "yes": 0, "no": 0 } } }
+        ],
+        "roll_call_url": "https://arkleg.state.ar.us/Bills/Detail?id=HJR1018&ddBienniumSession=2025%2F2025R",
+        "source_url": "https://arkleg.state.ar.us/Bills/Votes?id=HJR1018&rcs=948&chamber=House&ddBienniumSession=2025%2F2025R",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the official text marks additions with underlining and deletions with strikethrough. Plain text cannot show that markup, so the value is null and url links to the SOS PDF.",
+        "legislative_vote: House roll call 4/7/2025 (rcs 948) and Senate roll call 4/14/2025 (https://arkleg.state.ar.us/Bills/Votes?id=HJR1018&rcs=1187&chamber=Senate&ddBienniumSession=2025%2F2025R). Party for by_party is taken from each member's arkleg.state.ar.us page because the roll call does not list party.",
+        "opposition_committee_name: no ballot question committee registered as opposing Issue 1 appears on the Arkansas Ethics Commission's list of new statements of organization (https://www.arkansasethics.com/new-lo-bqcs-bqcs-and-lqcs/).",
+        "party_positions: no measure-specific position found on arkansasgop.org (only a general platform page). arkdems.org returned HTTP 403."
+      ]
+    },
+    {
+      "measure_id": "Issue 2",
+      "match": ["Issue 2", "Issue No. 2", "Issue Number 2", "Right to Keep and Bear Arms", "SJR 11", "SJR11"],
+      "official_source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._2_SJR_11_of_2026_.pdf",
+      "official_title": {
+        "value": "A Constitutional Amendment to Amend Arkansas Constitution, Article 2, § 5, to Protect the Right to Keep and Bear Arms.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._2_SJR_11_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "AN AMENDMENT TO THE ARKANSAS CONSTITUTION TO PROVIDE THAT THE CITIZENS OF THE STATE OF ARKANSAS SHALL HAVE THE RIGHT TO KEEP AND BEAR ARMS FOR THEIR COMMON DEFENSE, FOR LAWFUL HUNTING AND RECREATIONAL USE, AND FOR ANY OTHER LAWFUL PURPOSE; PROVIDING THAT THE RIGHT TO KEEP AND BEAR ARMS INCLUDES WITHOUT LIMITATION THE POSSESSION AND USE OF AMMUNITION, FIREARM ACCESSORIES, AND FIREARM COMPONENTS; AND PROVIDING THAT THE RIGHT TO KEEP AND BEAR ARMS IS A NATURAL, FUNDAMENTAL, AND INDIVIDUAL RIGHT THAT SHALL NOT BE INFRINGED.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._2_SJR_11_of_2026_.pdf",
+        "as_of": "2026-11-03",
+        "by": "Arkansas General Assembly (Ballot Title in SJR 11, published by the Secretary of State)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._2_SJR_11_of_2026_.pdf",
+        "source_url": "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SJR 11 (2025)",
+        "detail": "Referred to the people by the 95th General Assembly under Article 19, Section 22 of the Arkansas Constitution; proposed in the Regular 2025 Session by Senator J. Payton and filed as SJR 11.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._2_SJR_11_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "Senate", "yes": 28, "no": 7, "other": 0,
+            "by_party": { "R": { "yes": 28, "no": 1 }, "D": { "yes": 0, "no": 6 } } },
+          { "chamber": "House", "yes": 86, "no": 10, "other": 4,
+            "by_party": { "R": { "yes": 81, "no": 0 }, "D": { "yes": 5, "no": 10 } } }
+        ],
+        "roll_call_url": "https://arkleg.state.ar.us/Bills/Detail?id=SJR11&ddBienniumSession=2025%2F2025R",
+        "source_url": "https://arkleg.state.ar.us/Bills/Votes?id=SJR11&rcs=1306&chamber=House&ddBienniumSession=2025%2F2025R",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the official text marks additions with underlining and deletions with strikethrough. Plain text cannot show that markup, so the value is null and url links to the SOS PDF.",
+        "legislative_vote: Senate roll call 4/10/2025 (https://arkleg.state.ar.us/Bills/Votes?id=SJR11&rcs=1139&chamber=Senate&ddBienniumSession=2025%2F2025R) and House roll call 4/15/2025 (rcs 1306). Party for by_party is taken from each member's arkleg.state.ar.us page because the roll call does not list party.",
+        "opposition_committee_name: no ballot question committee registered as opposing Issue 2 appears on the Arkansas Ethics Commission list (https://www.arkansasethics.com/new-lo-bqcs-bqcs-and-lqcs/). The list does show 'GO-AR for Issue 2' (filed 09/26/2026, 'Right to Bear Arms – Statewide'), but the schema has no field for a supporting committee.",
+        "party_positions: no measure-specific position found on arkansasgop.org (only a general platform page). arkdems.org returned HTTP 403."
+      ]
+    },
+    {
+      "measure_id": "Issue 3",
+      "match": ["Issue 3", "Issue No. 3", "Issue Number 3", "Economic Development", "SJR 15", "SJR15"],
+      "official_source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._3_SJR_15_of_2026_.pdf",
+      "official_title": {
+        "value": "A Constitutional Amendment Concerning Economic Development in the State of Arkansas; and Authorizing the General Assembly to Provide for the Creation of Economic Development Districts Within Cities, Counties, or Cooperative Areas to Promote Economic Development Within the Economic Development District.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._3_SJR_15_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": "AN AMENDMENT TO THE ARKANSAS CONSTITUTION CONCERNING ECONOMIC DEVELOPMENT IN THE STATE OF ARKANSAS; AND AUTHORIZING THE GENERAL ASSEMBLY TO PROVIDE FOR THE CREATION OF ECONOMIC DEVELOPMENT DISTRICTS WITHIN CITIES, COUNTIES, OR COOPERATIVE AREAS TO PROMOTE ECONOMIC DEVELOPMENT WITHIN THE ECONOMIC DEVELOPMENT DISTRICT.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._3_SJR_15_of_2026_.pdf",
+        "as_of": "2026-11-03",
+        "by": "Arkansas General Assembly (Ballot Title in SJR 15, published by the Secretary of State)"
+      },
+      "full_text": {
+        "value": null,
+        "url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._3_SJR_15_of_2026_.pdf",
+        "source_url": "https://www.sos.arkansas.gov/elections/initiatives-and-referenda/",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SJR 15 (2025)",
+        "detail": "Referred to the people by the 95th General Assembly under Article 19, Section 22 of the Arkansas Constitution; proposed in the Regular 2025 Session by Senator J. Dismang and filed as SJR 15.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._3_SJR_15_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": {
+        "value": "Truth in Politics Against Issue 3",
+        "source_url": "https://www.arkansasethics.com/new-lo-bqcs-bqcs-and-lqcs/",
+        "as_of": "2026-11-03"
+      },
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "Senate", "yes": 28, "no": 6, "other": 1,
+            "by_party": { "R": { "yes": 22, "no": 6 }, "D": { "yes": 6, "no": 0 } } },
+          { "chamber": "House", "yes": 74, "no": 21, "other": 5,
+            "by_party": { "R": { "yes": 56, "no": 21 }, "D": { "yes": 18, "no": 0 } } }
+        ],
+        "roll_call_url": "https://arkleg.state.ar.us/Bills/Detail?id=SJR15&ddBienniumSession=2025%2F2025R",
+        "source_url": "https://arkleg.state.ar.us/Bills/Votes?id=SJR15&rcs=1362&chamber=House&ddBienniumSession=2025%2F2025R",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "full_text: the official text is about 12,000 characters long and marks additions with underlining and deletions with strikethrough, so the value is null and url links to the SOS PDF.",
+        "legislative_vote: Senate roll call 4/14/2025 (https://arkleg.state.ar.us/Bills/Votes?id=SJR15&rcs=1242&chamber=Senate&ddBienniumSession=2025%2F2025R) and House roll call 4/16/2025 (rcs 1362). Party for by_party is taken from each member's arkleg.state.ar.us page because the roll call does not list party.",
+        "opposition_committee_name: the Arkansas Ethics Commission's list of new statements of organization records 'Truth in Politics Against Issue 3 – Statement of Organization filed on 10/12/2026 – Against Issue 3-Economic Development District- Statewide'. The page has no link to the filing itself. The same list shows 'Arkansans for Strong Communities' (filed 07/02/2025, 'Economic Development Amendment – Statewide') but does not state which side it takes.",
+        "opposition_website: no website is given in the official filing listing.",
+        "party_positions: no measure-specific position found on arkansasgop.org. arkdems.org returned HTTP 403. The Ethics list shows a 'Scott County Republican Party Committee' filing about an 'Economic Development District – Local', which is a local measure, not Issue 3, and is not recorded."
+      ]
+    },
+    {
+      "measure_id": "Issue 4",
+      "match": ["Issue 4", "Issue No. 4", "Issue Number 4", "Water, Waste Disposal, and Pollution Abatement", "Act 578"],
+      "official_source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._4_Act_578_of_2026_.pdf",
+      "official_title": {
+        "value": "Arkansas Water, Waste Disposal, and Pollution Abatement Facilities Financing Act of 2025.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._4_Act_578_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "Shall the Arkansas Natural Resources Commission be authorized to issue general obligation bonds under the authority of the Arkansas Water, Waste Disposal, and Pollution Abatement Facilities Financing Act of 2025, for the financing and refinancing of the development of water, waste disposal, water pollution control, abatement and prevention, drainage, irrigation, flood control, and wetlands and aquatic resources projects to serve the citizens of the State of Arkansas, in total principal amount not to exceed five hundred million dollars ($500,000,000), with no more than one hundred sixty-five million dollars ($165,000,000) in total principal amount of such bonds to be issued to finance and refinance the development of irrigation facilities, in series from time to time in principal amounts not to exceed, without prior approval of the General Assembly, sixty million dollars ($60,000,000) in any two-year period beginning on July 1 of each odd-numbered year, which bonds shall be secured by a pledge of the full faith and credit of the State of Arkansas?\n\n___ FOR Issuance of State of Arkansas Water, Waste Disposal, and Pollution Abatement Facilities general obligation bonds.\n\n___ AGAINST Issuance of State of Arkansas Water, Waste Disposal, and Pollution Abatement Facilities general obligation bonds.",
+        "url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._4_Act_578_of_2026_.pdf",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._4_Act_578_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "SB 421 (Act 578 of 2025)",
+        "detail": "Bond question referred to the people by the 95th General Assembly; Act 578 of the Regular 2025 Session by Senator Hester.",
+        "source_url": "https://www.sos.arkansas.gov/uploads/elections/Issue_No._4_Act_578_of_2026_.pdf",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [],
+      "legislative_vote": {
+        "chambers": [
+          { "chamber": "Senate", "yes": 24, "no": 3, "other": 8,
+            "by_party": { "R": { "yes": 21, "no": 3 }, "D": { "yes": 3, "no": 0 } } },
+          { "chamber": "House", "yes": 86, "no": 3, "other": 11,
+            "by_party": { "R": { "yes": 68, "no": 3 }, "D": { "yes": 18, "no": 0 } } }
+        ],
+        "roll_call_url": "https://arkleg.state.ar.us/Bills/Detail?id=SB421&ddBienniumSession=2025%2F2025R",
+        "source_url": "https://arkleg.state.ar.us/Bills/Votes?id=SB421&rcs=998&chamber=House&ddBienniumSession=2025%2F2025R",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "official_summary: the SOS publication of Issue 4 gives only a Ballot Title (the act's name) and the Ballot Question, with no separate summary. The Ballot Question is stored as full_text.",
+        "legislative_vote: these are the passage votes on SB421 (Act 578): Senate 3/19/2025 (https://arkleg.state.ar.us/Bills/Votes?id=SB421&rcs=636&chamber=Senate&ddBienniumSession=2025%2F2025R) and House 4/7/2025 (rcs 998). Party for by_party is taken from each member's arkleg.state.ar.us page because the roll call does not list party.",
+        "opposition_committee_name: no ballot question committee registered as opposing Issue 4 appears on the Arkansas Ethics Commission list (https://www.arkansasethics.com/new-lo-bqcs-bqcs-and-lqcs/). The list does show 'Water Infrastructure For AR' (filed 10/15/2026, 'Passage for Issue 4'), but the schema has no field for a supporting committee.",
+        "party_positions: no measure-specific position found on arkansasgop.org. arkdems.org returned HTTP 403."
+      ]
+    }
+  ]
+}

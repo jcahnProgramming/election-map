@@ -1,0 +1,104 @@
+{
+  "state": "OH",
+  "election": "2026-general",
+  "as_of": "2026-11-03",
+  "measures": [
+    {
+      "measure_id": "Issue 3",
+      "match": [
+        "State Issue 3",
+        "Statewide Issue 3",
+        "Ohio Issue 3",
+        "Issue 3",
+        "Photo Identification"
+      ],
+      "official_source_url": "https://www.ohiosos.gov/assets/2026-11-statewide-issue-3-report.pdf",
+      "official_title": {
+        "value": "TO REQUIRE VOTERS TO PRESENT PHOTO IDENTIFICATION IN ORDER TO VOTE",
+        "source_url": "https://wpassets.lakecountyohio.gov/wp-content/uploads/sites/12/2026/08/25154554/Issues-for-11-3-26-2.pdf",
+        "as_of": "2026-11-03"
+      },
+      "official_summary": {
+        "value": null,
+        "source_url": null,
+        "as_of": "2026-11-03",
+        "by": null
+      },
+      "full_text": {
+        "value": "Proposed Constitutional Amendment\nTO REQUIRE VOTERS TO PRESENT PHOTO IDENTIFICATION IN ORDER TO VOTE\nProposed by Joint Resolution of the General Assembly\nTo enact Section 5 of Article V of the Constitution of the State of Ohio\nA majority yes vote is required for the adoption of Section 5.\nThis proposed amendment would:\n• Require voters to present an approved form of government-issued photo identification in order to vote.\n• Allow state law to provide for an alternative method of verifying a voter's identity for a voter who has a sincere religious objection to being photographed and, therefore, does not possess an approved form of government-issued photo identification.\n• Require that voters who do not vote in person provide an approved form of government-issued photo identification, unless the law authorizes those persons to vote by providing a signature and at least one other specified unique identifier.\n• Define approved forms of government-issued photo identification as an unexpired Ohio driver license or state identification card; a United States passport or passport card; or a United States military identification card, Ohio National Guard identification card, or United States Department of Veterans Affairs identification card.\nIf approved, the amendment shall take effect immediately.\nA \"YES\" vote means approval of the amendment.\nA \"NO\" vote means disapproval of the amendment.\nSHALL THE AMENDMENT BE APPROVED?",
+        "url": "https://search-prod.lis.state.oh.us/api/v2/general_assembly_136/legislation/sjr10/05_EN/pdf/",
+        "source_url": "https://wpassets.lakecountyohio.gov/wp-content/uploads/sites/12/2026/08/25154554/Issues-for-11-3-26-2.pdf",
+        "as_of": "2026-11-03"
+      },
+      "placed_by": {
+        "type": "legislative_referral",
+        "proponent_name": null,
+        "bill_number": "Sub. S.J.R. 10 (136th General Assembly)",
+        "detail": "Proposed by Joint Resolution of the General Assembly (Substitute Senate Joint Resolution 10, 136th General Assembly); adopted by the Senate 6-3-2026 and by the House 6-10-2026",
+        "source_url": "https://www.legislature.ohio.gov/legislation/136/sjr10/status",
+        "as_of": "2026-11-03"
+      },
+      "proponent_website": null,
+      "opposition_committee_name": null,
+      "opposition_website": null,
+      "party_positions": [
+        {
+          "party": "Ohio Republican Party",
+          "position": "support",
+          "source_url": "https://ohiogop.org/initiatives/vote-yes-on-issue-3/",
+          "as_of": "2026-11-03",
+          "reviewed": false
+        }
+      ],
+      "legislative_vote": {
+        "chambers": [
+          {
+            "chamber": "Senate",
+            "yes": 22,
+            "no": 9,
+            "other": 2,
+            "by_party": {
+              "R": {
+                "yes": 22,
+                "no": 1
+              },
+              "D": {
+                "yes": 0,
+                "no": 8
+              }
+            }
+          },
+          {
+            "chamber": "House",
+            "yes": 62,
+            "no": 30,
+            "other": 7,
+            "by_party": {
+              "R": {
+                "yes": 62,
+                "no": 0
+              },
+              "D": {
+                "yes": 0,
+                "no": 30
+              }
+            }
+          }
+        ],
+        "roll_call_url": "https://www.legislature.ohio.gov/legislation/136/sjr10/votes",
+        "source_url": "https://www.legislature.ohio.gov/legislation/136/sjr10/votes",
+        "as_of": "2026-11-03"
+      },
+      "unsourced": [
+        "BLOCKED: www.ohiosos.gov returns HTTP 403 to our requests (statewide issues page, the certified Issue 3 report PDF at https://www.ohiosos.gov/assets/2026-11-statewide-issue-3-report.pdf, the Ballot Board agenda PDF, press releases, and the campaign-finance search). Not worked around. official_source_url points at the SOS report URL found by search but not read by us.",
+        "official_title / full_text: copied from the Lake County Board of Elections certified issues list (an official election office), because the Secretary of State copy is blocked. That county document carries the header \"Please note that the language below is only a summary\" for the whole list; the State Issue 3 block matches the Ballot Board ballot-language structure, but a human should check it against the SOS certified ballot language once reachable. Line breaks and bullet characters are reflowed from the PDF layout.",
+        "official_summary: the Ballot Board also adopts an \"explanation\" of the amendment, published in the SOS Issue 3 report, which is blocked (403). The ballot language is the ballot text and the official arguments for/against are not neutral, so the summary is left null. (The Legislative Service Commission bill analysis of Sub. S.J.R. 10 exists on the legislature site but is a bill analysis, not a voter summary.)",
+        "full_text.url: the enrolled text of Sub. S.J.R. 10 on the Ohio Legislature site (the full amendment text).",
+        "opposition_committee_name / opposition_website: Ohio campaign-finance filings are on ohiosos.gov, which is blocked (403); no committee could be verified from an official filing.",
+        "proponent_website: no official filing reachable (ohiosos.gov blocked).",
+        "party_positions: the Ohio Democratic Party site (ohiodems.org) has an op-ed by the party chair criticising the amendment as unnecessary, but no explicit published position (e.g. \"vote no\") was found, so no Democratic Party entry is recorded. No other party position was found.",
+        "legislative_vote: Senate adoption 6-3-2026 (22-9) and House adoption 6-10-2026 (62-30) from the Ohio Legislature votes page, which lists each member with party. \"other\" = members not recorded (Senate 33 seats, House 99 seats; vacancies not checked). One Republican (Sen. Al Cutrona) voted no in the Senate."
+      ]
+    }
+  ]
+}
