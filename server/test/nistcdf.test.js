@@ -36,7 +36,7 @@ test('OH: candidates and parties (ticket = first candidate; raw label kept)', ()
   // Ohio's own abbreviations we don't know yet are logged, never dropped.
   const sen = r.races.find((x) => x.office === 'senate');
   assert.equal(sen.choices.find((c) => c.name === 'Greg Levy').partyRaw, 'Other-part');
-  assert.ok(unmatched.some(([kind, v]) => kind === 'party' && v === 'Other-part'));
+  assert.ok(!unmatched.some(([kind, v]) => kind === 'party' && v === 'Other-part'));
   assert.ok(!unmatched.some(([kind]) => kind === 'county'));
 });
 

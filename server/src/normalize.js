@@ -8,7 +8,7 @@ const KNOWN_OTHER = new Set([
   '', 'lbr', 'lib', 'libertarian', 'grn', 'green', 'uni', 'unity', 'uaf', 'unaffiliated', 'apv', 'approval voting',
   'fwd', 'forward', 'acn', 'american constitution', 'con', 'constitution', 'ind', 'independent', 'np', 'nonpartisan',
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
-  'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'w', 'l', 'npp', 'peace and justice', 'freedom and unity', 'progressive', 'epic', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
+  'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'w', 'l', 'npp', 'peace and justice', 'freedom and unity', 'progressive', 'epic', 'independent american', 'labor democrat', 'no kings', 'cascade', 'fan', 'for all neighbors', 'no party preference', 'g', 'i', 'other-part', 'indep', 'nonprtycan', 'non-partis', 'none', 'wf', 'working families', 'lpf', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
 ]);
 
 /** @returns {{party:'DEM'|'REP'|'OTHER', known:boolean}} */
@@ -108,9 +108,9 @@ export function splitPartyPrefix(label) {
  * @returns {'mail_early'|'election_day'|'provisional'|'other'}
  */
 export function methodBucket(label) {
-  const k = String(label ?? '').toLowerCase();
+  const k = String(label ?? '').toLowerCase().replace(/[-_]/g, ' '); // NIST CDF uses "election-day", "absentee-mail"
   if (/provision|provionsal/.test(k)) return 'provisional';
-  if (/election ?day|in[- ]person on|polling place|precinct|e-?day|vote center.*election|machine|^election$/.test(k)) return 'election_day';
+  if (/election ?day|in[- ]person on|polling place|precinct|e ?day|vote center.*election|machine|^election$/.test(k)) return 'election_day';
   if (/mail|absentee|early|advance|by ?mail|one[- ]stop|pre[- ]?election|in[- ]person absentee|ballot drop|drop ?box/.test(k)) return 'mail_early';
   return 'other';
 }

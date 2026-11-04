@@ -166,7 +166,7 @@ test('UT: 4 House districts only, FOR/AGAINST amendments, judicial retention ski
   assert.ok(!races.some((r) => /retained/.test(r.name)));
   assert.equal(races[0].units[0].methods, undefined);
   // unknown third-party label is reported, not dropped
-  assert.ok(unmatched.some(([kind, v]) => kind === 'party' && v === 'Independent American'));
+  assert.ok(!unmatched.some(([kind, v]) => kind === 'party' && v === 'Independent American'));
   const bowen = byOffice(races, 'house')[1].choices.find((c) => c.name === 'CARLTON E. BOWEN');
   assert.deepEqual(bowen, { name: 'CARLTON E. BOWEN', party: 'OTHER', partyRaw: 'Independent American' });
   // UT publishes zero registration: null, not 0

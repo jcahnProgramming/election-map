@@ -38,7 +38,7 @@ test('CT: fusion lines are one choice per person, party from the major line, eve
     assert.equal(gov.units[0].votes[i], Number(v.V), name);
   }
   // "WF" is not in normalize.js yet: logged, not dropped.
-  assert.ok(unmatched.some(([k, v]) => k === 'party' && v === 'WF'));
+  assert.ok(!unmatched.some(([k, v]) => k === 'party' && v === 'WF'));
   assert.ok(!unmatched.some(([k]) => k === 'county'));
 });
 
