@@ -222,3 +222,21 @@ test('measures: official info merged; unreviewed websites and party positions ne
   assert.equal(a8.live, false);
   assert.equal(a8.yes, null);
 });
+
+test('contests: a partly-read source (allContests:false, e.g. Alabama page 1) says so even with offices beyond the top races', () => {
+  const db = openDb(':memory:');
+  writeSnapshot(db, {
+    source: 'fake', fetchedAt: '2026-11-04T02:00:00Z', version: '1',
+    election: { sourceKey: 'CA/1', state: 'CA', scope: 'state', name: 'CA' },
+    races: [
+      { office: 'governor', key: 'g', name: 'Governor', choices: [cand('G1', 'DEM'), cand('G2', 'REP')], units: [st([10, 5])] },
+      { key: 'lg', name: 'Lieutenant Governor', choices: [cand('L1', 'DEM'), cand('L2', 'REP')], units: [st([9, 6])] },
+    ],
+  });
+  const r = createResults(db, [adapter]);
+  assert.match(r.contests('CA').note, /only the top races we read from it/);
+  // An office the partial source doesn't carry is "no source" with the partial note, never "no race".
+  const ag = r.national('attorney_general').states.find((s) => s.state === 'CA');
+  assert.equal(ag.status, 'no-source');
+  assert.match(ag.sourceNote, /only carries some contests/);
+});
