@@ -77,3 +77,25 @@ test('VT helpers', () => {
   assert.equal(parseUpdated('06/11/2026 03:31 PM'), '2026-06-11T19:31:00.000Z'); // EDT
   assert.equal(parseUpdated('nope'), null);
 });
+
+test('VT 2026 live, 7 of 247 towns in: reporting counts every town (7 of 282 districts), not just towns with rows', () => {
+  const { r } = parse('2026-partial');
+  const gov = r.races.find((x) => x.office === 'governor');
+  const st = gov.units[0];
+  // The section file has rows only for the 7 reported towns ("1/1" ×6, "1/2" ×1); the turnout file lists all 247.
+  assert.deepEqual([st.precinctsReporting, st.precinctsTotal, st.pctReporting], [7, 282, 2.5]);
+  assert.equal(st.votes[gov.choices.findIndex((c) => c.name === 'PHIL SCOTT')], 5080);
+  assert.equal(st.votes[gov.choices.findIndex((c) => c.name === 'AMANDA JANOO')], 4431);
+  const house = r.races.find((x) => x.office === 'house');
+  assert.deepEqual([house.units[0].precinctsReporting, house.units[0].precinctsTotal], [7, 282]);
+  for (const u of gov.units.slice(1)) {
+    assert.ok(u.pctReporting < 100, `${u.name} county is not fully in: ${u.precinctsReporting}/${u.precinctsTotal}`);
+  }
+  assert.deepEqual([r.turnout[0].precinctsReporting, r.turnout[0].precinctsTotal], [7, 282]);
+});
+
+test('VT without a turnout file: a partial results file gives no precinct numbers rather than a false 100%', () => {
+  const { r } = parse('2026-partial', (f) => ({ ...f, turnout: null }));
+  const st = r.races.find((x) => x.office === 'governor').units[0];
+  assert.deepEqual([st.precinctsReporting, st.precinctsTotal, st.pctReporting], [null, null, null]);
+});
