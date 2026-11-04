@@ -5,6 +5,7 @@ const DEM = new Set(['dem', 'd', 'democrat', 'democratic', 'democratic party', '
 const REP = new Set(['rep', 'r', 'gop', 'republican', 'republican party']);
 // Labels we have seen and know are third parties / unaffiliated, so we don't log them as unknown.
 const KNOWN_OTHER = new Set([
+  'pacific green', 'legal marijuana now', 'nebraska working people', 'america first', 'by petition', // OR, NE (ResultsAjax)
   '', 'lbr', 'lib', 'libertarian', 'grn', 'green', 'uni', 'unity', 'uaf', 'unaffiliated', 'apv', 'approval voting',
   'fwd', 'forward', 'acn', 'american constitution', 'con', 'constitution', 'ind', 'independent', 'np', 'nonpartisan',
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
