@@ -19,7 +19,10 @@ const log = logger('server');
 const db = openDb();
 const adapters = await loadAdapters();
 const photos = createPhotos();
-const results = createResults(db, adapters, { photos, sourceStatus: (id, key) => health.get(id)?.targets?.[key] ?? null });
+const results = createResults(db, adapters, {
+  photos,
+  sourceStatus: (id, key) => health.get(id)?.targets?.[key] ?? null,
+});
 
 const app = express();
 app.disable('x-powered-by');

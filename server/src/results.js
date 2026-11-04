@@ -296,15 +296,23 @@ export function createResults(db, adapters, opts = {}) {
     sourceUpdatedAt: r?.source_updated_at ?? null,
     fetchedAt: r?.fetched_at ?? null,
     checkedAt: r?.checked_at ?? null,
-    ...responding(r?.source ?? t?.source, r?.election_source_key ?? t?.key),
+    ...responding(r?.source ?? t?.source, r?.election_source_key ?? t?.key, r?.checked_at),
   });
   /**
    * The official source has failed its last polls (down, or refusing us): the numbers shown are its last update, frozen.
    * Two failures in a row, so one blip doesn't flash a warning. Omitted (not false) while the source answers.
    */
-  function responding(source, key) {
+  function responding(source, key, checkedAt) {
     const h = source && key ? opts.sourceStatus?.(source, key) : null;
-    if (!h || !(h.failures >= 2)) return {};
+    if (!h) return {};
+    // The failure count lives in memory and restarts at 0 with every deploy. The last successful check is in the DB
+    // (latest_snapshot.checked_at), so after a restart one failure is enough when that check is already stale. "Stale"
+    // is longer than the slow poll (a blocked source is retried every 10 min): a success followed by one refusal must
+    // not show "not responding" while the data on screen is only minutes old.
+    const staleMs = opts.staleAfterMs ?? 15 * 60_000;
+    const lastOk = Date.parse(checkedAt ?? '');
+    const stale = h.failures >= 1 && Number.isFinite(lastOk) && (opts.now?.() ?? Date.now()) - lastOk > staleMs;
+    if (!(h.failures >= 2) && !stale) return {};
     return { sourceResponding: false, sourceBlocked: !!h.blocked };
   }
 
