@@ -72,8 +72,7 @@
       "reason": "no statewide live results"
     },
     "MD": {
-      "status": "planned",
-      "reason": "static HTML pages"
+      "status": "live"
     },
     "ME": {
       "status": "no_feed",
