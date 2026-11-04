@@ -209,3 +209,8 @@ test('reportingText words county counts the way the source does ("reported" for 
   assert.equal(reportingText({ countiesComplete: 5, countiesTotal: 64, countiesLabel: 'complete' }), '5 of 64 counties complete');
   assert.equal(reportingText({ countiesComplete: 5, countiesTotal: 64 }), '5 of 64 counties complete');
 });
+
+test('reportingText: Indiana\'s published precincts N of M read as "precincts reported", with no %', async () => {
+  const { reportingText } = await import('../src/format.js');
+  assert.equal(reportingText({ countiesComplete: 4020, countiesTotal: 5067, countiesLabel: 'precincts reported' }), '4,020 of 5,067 precincts reported');
+});

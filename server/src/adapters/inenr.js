@@ -125,6 +125,10 @@ export function parseWriteTime(s, offset = '-05:00') {
 
 /** Pure parse into the adapter result (without `version`). */
 export function parseInEnr({ settings, categories, turnout, files }, t, unmatched = () => {}) {
+  // Indiana publishes election-wide "precincts reporting N of M" (JurisdictionsReporting), both numbers, no %.
+  const jrAll = root(categories)?.JurisdictionsReporting;
+  const precN = num(jrAll?.TOTAL_ALLPRECINCTSREPORTING);
+  const precM = num(jrAll?.TOTAL_ALLPRECINCTS);
   const st = 'IN';
   const parties = new Map(arr(settings?.PolParties?.PolParty).map((p) => [String(p.POLITICALPARTYID), String(p.PARTY_NAME ?? '').trim()]));
   const countyCache = new Map();
@@ -192,7 +196,11 @@ export function parseInEnr({ settings, categories, turnout, files }, t, unmatche
         title: null,
         choices,
         units: [
-          { level: 'state', name: statewide ? st : name, votes: cands.map((c) => num(c.TOTAL) ?? 0), precinctsReporting: null, precinctsTotal: null, pctReporting: null },
+          {
+            level: 'state', name: statewide ? st : name, votes: cands.map((c) => num(c.TOTAL) ?? 0), precinctsReporting: null, precinctsTotal: null, pctReporting: null,
+            // Statewide offices only (every precinct votes on them): the published N of M, served as "precincts reported", never as a %.
+            ...(statewide && precM ? { countiesComplete: precN ?? 0, countiesTotal: precM } : {}),
+          },
           ...countyUnits,
         ],
       });

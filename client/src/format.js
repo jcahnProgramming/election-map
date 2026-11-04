@@ -11,7 +11,8 @@ export const fmtReporting = (n) => (isNum(n) ? `${Number(n) > 0 && Number(n) < 1
 export function reportingText(e, word = 'in') {
   if (isNum(e?.pctReporting)) return `${fmtReporting(e.pctReporting)} ${word}`;
   if (isNum(e?.countiesTotal) && Number(e.countiesTotal) > 0) {
-    return `${fmtVotes(e.countiesComplete ?? 0)} of ${fmtVotes(e.countiesTotal)} counties ${e.countiesLabel === 'reported' ? 'reported' : 'complete'}`;
+    const label = e.countiesLabel === 'reported' ? 'counties reported' : e.countiesLabel === 'precincts reported' ? 'precincts reported' : 'counties complete';
+    return `${fmtVotes(e.countiesComplete ?? 0)} of ${fmtVotes(e.countiesTotal)} ${label}`;
   }
   return null;
 }

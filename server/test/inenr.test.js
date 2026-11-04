@@ -86,3 +86,22 @@ test('polling: settings is the change check; the buffer letter picks the files; 
   assert.equal((await adapter.fetch(tt, { ...ctx, log: { warn: (m) => warn.push(m) } })).changed, false);
   assert.match(warn[0], /05\/05\/2026/);
 });
+
+test('IN publishes precincts N of M (1579 of 5067): statewide offices and the House sum show it as "precincts reported", districts don\'t, never a %', async () => {
+  const r = parseInEnr(data(), t);
+  const sos = r.races.find((x) => /Secretary Of State/i.test(x.name));
+  assert.deepEqual([sos.units[0].countiesComplete, sos.units[0].countiesTotal, sos.units[0].pctReporting], [1579, 5067, null]);
+  const d1 = r.races.find((x) => x.office === 'house' && x.district === '1');
+  assert.equal(d1.units[0].countiesTotal, undefined); // a statewide count is not a district's count
+
+  const { openDb, writeSnapshot } = await import('../src/db.js');
+  const { createResults } = await import('../src/results.js');
+  const db = openDb(':memory:');
+  writeSnapshot(db, { ...r, version: '1', source: 'inenr', fetchedAt: '2026-11-04T01:46:00Z' });
+  const res = createResults(db, [{ id: 'inenr', name: 'Indiana ENR', targets: () => [] }]);
+  const house = res.state('IN', 'house').statewide;
+  assert.deepEqual([house.countiesComplete, house.countiesTotal, house.countiesLabel, house.pctReporting], [1579, 5067, 'precincts reported', null]);
+  const seat = res.contests('IN').groups.flatMap((g) => g.contests ?? g.rows ?? []).find((c) => c.district === '1' && c.office === 'house');
+  assert.ok(seat, "district 1 row present");
+  assert.equal(seat.countiesTotal, undefined);
+});

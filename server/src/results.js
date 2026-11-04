@@ -162,7 +162,7 @@ export function createResults(db, adapters, opts = {}) {
    * County counts as the source words them: Clarity's state pages count counties "complete" (Election Night Reporting
    * Complete); Alabama's page says "Counties Reported" (which can include partly counted counties).
    */
-  const COUNTY_WORD = { alsos: 'reported' };
+  const COUNTY_WORD = { alsos: 'reported', inenr: 'precincts reported' }; // Indiana publishes precincts N of M, election-wide
   const countiesOut = (cc, ct, source) => (ct ? { countiesComplete: cc ?? 0, countiesTotal: ct, countiesLabel: COUNTY_WORD[source] ?? 'complete' } : {});
 
   /** Election-wide turnout per unit key for one snapshot. */
@@ -418,7 +418,10 @@ export function createResults(db, adapters, opts = {}) {
       precinctsReporting: sw?.pr ?? null,
       precinctsTotal: sw?.pt ?? null,
       // Sources that publish counties complete instead of a % (Clarity statewide sites): never turned into a %.
-      ...countiesOut(sw?.cc, sw?.ct, races[0].source),
+      // House popular vote (all districts = every precinct): a source's election-wide published precinct count applies.
+      ...(houseSum && COUNTY_WORD[races[0].source] === 'precincts reported'
+        ? countiesOut(turnout.get('state')?.precinctsReporting, turnout.get('state')?.precinctsTotal, races[0].source)
+        : countiesOut(sw?.cc, sw?.ct, races[0].source)),
       ballotsCast: turnout.get('state')?.ballotsCast ?? null,
       ...sourceFields(races[0]),
     };

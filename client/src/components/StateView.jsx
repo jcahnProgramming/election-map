@@ -60,7 +60,7 @@ export function TotalsStrip({ entry, race, stateName, compact = false }) {
   }
   // A source that publishes counties complete instead of a % (Clarity statewide sites) gets that, never a derived %.
   const counties = pct == null && entry.countiesTotal > 0;
-  const reportingCard = card('', counties ? (entry.countiesLabel === 'reported' ? 'Counties reported' : 'Counties complete') : 'Reporting',
+  const reportingCard = card('', counties ? (entry.countiesLabel === 'reported' ? 'Counties reported' : entry.countiesLabel === 'precincts reported' ? 'Precincts reported' : 'Counties complete') : 'Reporting',
     pct != null ? fmtReporting(pct) : counties ? `${fmtVotes(entry.countiesComplete ?? 0)} of ${fmtVotes(entry.countiesTotal)}` : '—',
     status === 'reporting' ? leadText(entry) : pct == null ? 'Not published by this source' : 'No votes counted yet');
   if (hasCandidates(entry)) {

@@ -2,6 +2,16 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.5.7",
+      "date": "2026-11-03",
+      "title": "Indiana precincts reported",
+      "sections": {
+        "Fixed": [
+          "Indiana's statewide races and House popular vote show the Election Division's own \"4,020 of 5,067 precincts reported\" instead of no reporting figure (never turned into a %)"
+        ]
+      }
+    },
+    {
       "version": "0.5.6",
       "date": "2026-11-03",
       "title": "Alabama counties reported",
