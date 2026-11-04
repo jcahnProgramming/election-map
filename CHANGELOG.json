@@ -1,14 +1,28 @@
 {
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
-  "next": {
-    "version": "0.2.0",
-    "title": "Up next",
-    "items": [
-      "The real UI from the design",
-      "More state sources"
-    ]
-  },
   "releases": [
+    {
+      "version": "0.2.0",
+      "date": "2026-11-03",
+      "title": "The real design, more states",
+      "sections": {
+        "New": [
+          "The new dark design: national map shaded by margin, state drill-down with a county map for every state whose source has counties, and a details panel",
+          "Details for each state and county: turnout so far, precincts reporting, ballots left to count (where published) and the vote split by method (mail/early, election day, provisional)",
+          "Ballot measures sidebar with the source's own titles; \"too early\" until enough is reported, then which side leads",
+          "This changelog, inside the app",
+          "New official sources: Georgia, Virginia, Utah, Washington, Rhode Island, Idaho, Texas, North Carolina, Ohio, California, Arkansas, Connecticut, Vermont and Delaware"
+        ],
+        "Improved": [
+          "Every source now records registered voters, ballots cast, precincts and its own \"last updated\" time when it publishes them",
+          "Faster under heavy traffic: responses are cached briefly and shared through Cloudflare",
+          "Live updates fall back to polling if WebSockets are blocked"
+        ],
+        "Fixed": [
+          "The site address is election.jamiecahn.com"
+        ]
+      }
+    },
     {
       "version": "0.1.0",
       "date": "2026-11-03",

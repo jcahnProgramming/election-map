@@ -45,17 +45,24 @@ confidential and nothing in it ever needs a secret.
 ## Layout
 - `server/src/index.js` Express + Socket.io + poller wiring. `results.js` builds API responses from the latest
   snapshots. `db.js` schema + snapshot writer. `poller.js` per-target loops with backoff. `http.js` shared
-  client (UA, timeouts, ETag/Last-Modified). `normalize.js` party + contest classification. `geo.js` FIPS.
-- `server/src/adapters/clarity.js` Clarity/Civix ENR (file layout documented at the top of the file).
-- `config/sources/clarity.json` the Clarity elections polled. `config/races-2026.json` which states hold which
+  client (UA, timeouts, ETag/Last-Modified; get/getJson/getBuffer/post). `normalize.js` party + contest
+  classification, `splitPartyPrefix`, `methodBucket`. `geo.js` FIPS. `elections.js` election keys (current from
+  `config/elections.json`). `apicache.js` / `ratelimit.js` public-traffic hardening.
+- `server/src/adapters/*.js` one file per source: clarity (CO/IA/SC + county sites), enhancedvoting (GA/VA/UT/WA/RI/ID),
+  txivis, casos, vtsos, ncsbe, tallyenr (AR), deenr, nistcdf (OH; generic parser in `_nist-cdf.js`), pccct, fldos.
+  Files starting with `_` are helpers the registry skips. An adapter's `sourceKey` must be unique per election.
+- `config/sources/<id>.json` what each adapter polls (`enabled:false` parks a target). `config/races-2026.json` which states hold which
   races (only used for states with no source). `config/clarity-county-candidates.json` research output.
-- `client/` the temporary shell UI. **The real UI design will live in `design/` once exported from Claude
-  Design**; build it against the same API and `shading.js`.
+- `design/election-map-design.dc.html` the Claude Design export: the spec. `client/` is its React port
+  (tokens in `client/src/tokens.css`, pure calculations in `client/src/calc.js`, shading in `shading.js`).
+- `docs/data-contract.md` adapter result → DB → API shape. `null` = not published; never show 0 for missing data.
 - `docs/source-roadmap.md` what every uncovered state publishes: the to-do list for new adapters.
 
 ## API
-`GET /api/health`, `/api/national?race=`, `/api/state/:abbr?race=`, `/api/measures[?state=]`, `/api/coverage`.
-Socket.io: `results:update` {sourceId, states, fetchedAt} when new numbers land (clients refetch);
+`GET /api/health`, `/api/national?race=`, `/api/state/:abbr?race=`, `/api/measures[?state=]`, `/api/coverage`,
+`/api/elections`, `/api/changelog`. Every read takes `?election=` (default: current); nothing may assume one election.
+Reads are cached in memory between polls and sent with `Cache-Control: public, max-age=15`; health is no-store;
+/api/* is rate-limited per IP. Socket.io: `results:update` {sourceId, election, states, fetchedAt} when new numbers land (clients refetch);
 `source:checked` after every successful poll (heartbeat).
 
 ## Versioning
