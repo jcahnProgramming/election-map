@@ -7,6 +7,7 @@ const REP = new Set(['rep', 'r', 'gop', 'republican', 'republican party']);
 const KNOWN_OTHER = new Set([
   '', 'lbr', 'lib', 'libertarian', 'grn', 'green', 'uni', 'unity', 'uaf', 'unaffiliated', 'apv', 'approval voting',
   'fwd', 'forward', 'acn', 'american constitution', 'con', 'constitution', 'ind', 'independent', 'np', 'nonpartisan',
+  'und', 'undeclared', // AK
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
   'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'w', 'l', 'npp', 'peace and justice', 'freedom and unity', 'progressive', 'epic', 'independent american', 'labor democrat', 'no kings', 'cascade', 'fan', 'for all neighbors', 'no party preference', 'g', 'i', 'other-part', 'indep', 'nonprtycan', 'non-partis', 'none', 'wf', 'working families', 'lpf', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
   'p&f', 'peace and freedom', 'nonp', 'non partisan', 'pc', 'petitioning candidate',
