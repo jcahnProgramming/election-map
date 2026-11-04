@@ -1,0 +1,22 @@
+{
+  "_howto": "Florida Division of Elections results extract (tab-separated), polled by server/src/adapters/fldos.js. extractUrl = the ResultsExtract.Asp download for one election date (OfficialResults=N: unofficial, PartyRaces=N: general-election races). One row per county x candidate; the statewide number is the sum of the 67 counties' rows for one race. Until the first rows appear the file is a header line only: the adapter then writes nothing. Set enabled:false to stop polling one without deleting it.",
+  "elections": [
+    {
+      "state": "FL",
+      "id": "FL-2026-general",
+      "name": "Florida 2026 General (Division of Elections)",
+      "extractUrl": "https://results.elections.myflorida.com/ResultsExtract.Asp?ElectionDate=11/3/2026&OfficialResults=N&PartyRaces=N&DATAMODE=",
+      "url": "https://results.elections.myflorida.com/",
+      "date": "2026-11-03",
+      "races": [
+        "senate",
+        "governor",
+        "house"
+      ],
+      "measures": true,
+      "enabled": false,
+      "verified": "2026-11-03",
+      "note": "Disabled at ship time: endpoint verified live 2026-11-03 but it returned only the header row through 00:03 UTC, so the row parser has not been checked against real data rows. Enable once a real extract has been parsed (node script against the adapter) and checked."
+    }
+  ]
+}
