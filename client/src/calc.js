@@ -206,8 +206,10 @@ export const POSITION_DISPLAY = {
   oppose: { label: 'Oppose', color: '#FCD34D' },
   no_position: { label: 'Neutral', color: '#C9D1DB' },
   none: { label: 'No published position', color: '#9AA4B2' },
+  pending: { label: 'Not yet verified', color: '#9AA4B2' },
 };
-export const positionDisplay = (position) => POSITION_DISPLAY[position] ?? POSITION_DISPLAY.none;
+/** Display for a served party position: `pending` (an entry exists, not reviewed yet) wins over a missing position. */
+export const positionDisplay = (position, pending = false) => (pending ? POSITION_DISPLAY.pending : POSITION_DISPLAY[position] ?? POSITION_DISPLAY.none);
 
 /** The label in front of a reviewed campaign website: by side, or a plain "Campaign website" when the side isn't clear. */
 export const websiteLabel = (w) => (w?.side === 'support' ? 'Yes campaign' : w?.side === 'oppose' ? 'No campaign' : 'Campaign website');

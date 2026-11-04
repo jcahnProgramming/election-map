@@ -8,6 +8,10 @@ test('party positions: Support / Oppose / Neutral, and "No published position" w
   assert.equal(positionDisplay('no_position').label, 'Neutral');
   assert.equal(positionDisplay(null).label, 'No published position');
   assert.equal(positionDisplay(undefined).label, 'No published position');
+  // An entry that exists but isn't reviewed yet: "Not yet verified", neutral grey, whatever the (withheld) position.
+  assert.equal(positionDisplay(null, true).label, 'Not yet verified');
+  assert.equal(positionDisplay('support', true).label, 'Not yet verified');
+  assert.equal(positionDisplay(null, true).color, positionDisplay(null).color);
   // Neutral position colours, never party blue / red.
   for (const p of ['support', 'oppose', 'no_position', null]) assert.ok(!['#4F86F7', '#EF5B5B'].includes(positionDisplay(p).color));
 });

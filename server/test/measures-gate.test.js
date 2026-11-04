@@ -50,11 +50,17 @@ test('reviewed elsewhere: CO Democrats (12), FL, ID Prop 1, NC, OH Issue 3, VA Q
   assert.match(info('VA', 'Question 1').opposition.website, /virginiansforsafereproductivepolicy\.com/);
 });
 
-test('still unreviewed: never served, shown as "No published position" / no link', () => {
-  // UT Amendment B: the Utah Republican Party entry exists but is unreviewed → listed with no position.
+test('still unreviewed: positions "Not yet verified" (no position, no link), websites omitted', () => {
+  // UT Amendment B: the Utah Republican Party entry exists but is unreviewed → pending; Democrats have no entry at all.
   const ub = info('UT', 'Constitutional Amendment B');
-  assert.equal(pos(ub).REP, null);
-  assert.equal(pos(ub).DEM, null);
+  const rep = ub.partyPositions.find((p) => p.major === 'REP');
+  assert.deepEqual([rep.party, rep.position, rep.pending, rep.sourceUrl], ['Utah Republican Party', null, true, null]);
+  const dem = ub.partyPositions.find((p) => p.major === 'DEM');
+  assert.deepEqual([dem.position, dem.pending], [null, false]);
+  // Unreviewed websites are omitted, not placeholdered.
+  for (const [st, id] of [['VA', 'Question 2'], ['VA', 'Question 3'], ['RI', 'Question 3']]) {
+    assert.deepEqual(info(st, id).campaignWebsites, [], `${st} ${id}`);
+  }
   const leaked = JSON.stringify([
     ub, info('VA', 'Question 2'), info('VA', 'Question 3'), info('RI', 'Question 3'),
     ...measureInfoList(EK, 'WA').map((m) => publicInfo(m)),
@@ -64,7 +70,7 @@ test('still unreviewed: never served, shown as "No published position" / no link
   }
 });
 
-test('partyPositionsOf: majors always, others only when reviewed; neutral; unreviewed = absent', () => {
+test('partyPositionsOf: majors always (unreviewed = pending, no position or source), others only when reviewed', () => {
   const m = {
     party_positions: [
       { party: 'Green Party', position: 'support', source_url: 'https://g', reviewed: true },
@@ -74,11 +80,14 @@ test('partyPositionsOf: majors always, others only when reviewed; neutral; unrev
     ],
   };
   assert.deepEqual(partyPositionsOf(m, ['Example Democratic Party']), [
-    { party: 'Example Democratic Party', major: 'DEM', position: null, sourceUrl: null },
-    { party: 'Example Republican Party', major: 'REP', position: 'no_position', sourceUrl: 'https://r' },
-    { party: 'Green Party', major: null, position: 'support', sourceUrl: 'https://g' },
+    { party: 'Example Democratic Party', major: 'DEM', position: null, pending: true, sourceUrl: null }, // "Not yet verified"
+    { party: 'Example Republican Party', major: 'REP', position: 'no_position', pending: false, sourceUrl: 'https://r' },
+    { party: 'Green Party', major: null, position: 'support', pending: false, sourceUrl: 'https://g' },
   ]);
-  assert.deepEqual(partyPositionsOf({}).map((p) => p.party), ['Democratic Party', 'Republican Party']);
+  assert.ok(!JSON.stringify(partyPositionsOf(m)).includes('https://d'), 'an unreviewed source never leaves the server');
+  // No entry at all: "No published position" (pending false).
+  assert.deepEqual(partyPositionsOf({}).map((p) => [p.party, p.position, p.pending]),
+    [['Democratic Party', null, false], ['Republican Party', null, false]]);
 });
 
 test('campaignWebsitesOf: side "unclear" → plain campaign website, no side label; unreviewed never', () => {

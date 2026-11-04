@@ -72,20 +72,23 @@ const majorOf = (party) => MAJOR.find((p) => p.re.test(String(party ?? '')))?.ke
 
 /**
  * Party positions as shown on a measure card: always both major parties (Democratic, then Republican) with their
- * reviewed position or `position: null` ("No published position"), then any other party that has a reviewed position.
- * The parties' names come from the state's own file (any measure), so the card says "Colorado Democratic Party".
- * Unreviewed positions never leave the server: an unreviewed entry shows exactly like no entry.
+ * reviewed position, then any other party that has a reviewed position. A major party with an entry on this measure that
+ * isn't reviewed yet gets `pending: true` ("Not yet verified") and no position or link; one with no entry at all gets
+ * `position: null, pending: false` ("No published position"). Unreviewed positions and their sources never leave the
+ * server. The parties' names come from the state's own file (any measure), so the card says "Colorado Democratic Party".
  */
 export function partyPositionsOf(m, stateParties = []) {
-  const ok = (m?.party_positions ?? []).filter((p) => p && p.reviewed === true && p.party && POSITIONS.includes(p.position));
+  const valid = (m?.party_positions ?? []).filter((p) => p && p.party && POSITIONS.includes(p.position));
+  const ok = valid.filter((p) => p.reviewed === true);
   const out = [];
   for (const maj of MAJOR) {
     const p = ok.find((x) => majorOf(x.party) === maj.key);
-    const name = p?.party ?? stateParties.find((x) => majorOf(x) === maj.key) ?? maj.fallback;
-    out.push({ party: name, major: maj.key, position: p?.position ?? null, sourceUrl: p?.source_url ?? null });
+    const unrev = p ? null : valid.find((x) => majorOf(x.party) === maj.key);
+    const name = p?.party ?? unrev?.party ?? stateParties.find((x) => majorOf(x) === maj.key) ?? maj.fallback;
+    out.push({ party: name, major: maj.key, position: p?.position ?? null, pending: !!unrev, sourceUrl: p?.source_url ?? null });
   }
   const others = ok.filter((x) => !majorOf(x.party)).sort((a, b) => a.party.localeCompare(b.party))
-    .map((p) => ({ party: p.party, major: null, position: p.position, sourceUrl: p.source_url ?? null }));
+    .map((p) => ({ party: p.party, major: null, position: p.position, pending: false, sourceUrl: p.source_url ?? null }));
   return [...out, ...others];
 }
 

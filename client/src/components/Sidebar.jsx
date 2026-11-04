@@ -91,11 +91,11 @@ function Measure({ m, highlight }) {
           <span className="m-k">Party positions</span>
           <ul className="m-parties">
             {info.partyPositions.map((p) => {
-              const d = positionDisplay(p.position);
+              const d = positionDisplay(p.position, p.pending);
               return (
                 <li key={p.party}>
                   <span className="pp-party">{p.party}</span>
-                  {p.position && p.sourceUrl
+                  {!p.pending && p.position && p.sourceUrl
                     ? <a href={p.sourceUrl} {...ext} style={{ color: d.color }} className="pp-pos">{d.label} ↗</a>
                     : <span style={{ color: d.color }} className={`pp-pos${p.position ? '' : ' none'}`}>{d.label}</span>}
                 </li>

@@ -8,7 +8,7 @@
       "sections": {
         "New": [
           "Every candidate row has a small circle with their initials, tinted by party. Official or openly licensed photos will appear once each is checked by hand, and only in contests where every major candidate has one, so no candidate gets a face while an opponent gets initials. Each photo shows its credit and license",
-          "Ballot measures always list both major parties' positions: Support, Oppose, Neutral or \"No published position\"",
+          "Ballot measures always list both major parties: Support, Oppose or Neutral once a position is checked against the party's own source, \"Not yet verified\" while it is being checked, or \"No published position\"",
           "Campaign websites for both sides of a measure, as listed in the official voter guide or filings (including measures the Legislature referred)",
           "States without live results now say why: the results site doesn't allow automated access, the state doesn't publish live statewide results we can read, or we haven't connected it yet, always next to the official results link"
         ],
