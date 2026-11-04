@@ -1,0 +1,17 @@
+{
+  "_howto": "Elections polled by the Alabama SOS election-night adapter (server/src/adapters/alsos.js). ecode = the election code in statewideResultsByContest.aspx?ecode= (linked from https://www.sos.alabama.gov/alabama-votes). electionTitle = the page's '2026 GENERAL ELECTION' heading: nothing is stored while the ecode shows another election. Only page 1 of the statewide and county pages is read (later pages are ASP.NET postbacks), so allContests is false. Set enabled:false to stop polling.",
+  "base": "https://www2.alabamavotes.gov/electionNight",
+  "requestGapMs": 500,
+  "sweepBatch": 10,
+  "contestRules": [],
+  "elections": [
+    {
+      "ecode": 1001305,
+      "name": "Alabama 2026 General Election",
+      "electionTitle": "2026 GENERAL ELECTION",
+      "date": "2026-11-03",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}

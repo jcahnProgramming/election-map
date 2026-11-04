@@ -5,8 +5,7 @@
       "status": "live"
     },
     "AL": {
-      "status": "planned",
-      "reason": "ASP.NET export (needs a scraper)"
+      "status": "live"
     },
     "AR": {
       "status": "live"
