@@ -27,7 +27,7 @@
     },
     "DC": {
       "status": "planned",
-      "reason": "React + SignalR app, data API not found yet"
+      "reason": "JSON API found (cityWide/getCityWide/{id}); the 2026 general isn't published in it yet"
     },
     "DE": {
       "status": "live"
