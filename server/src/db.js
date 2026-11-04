@@ -207,23 +207,30 @@ export function writeSnapshot(db, r) {
         int(t.precinctsReporting), int(t.precinctsTotal), r.source, now);
     }
 
-    for (const race of r.races) {
+    for (const race of r.races ?? []) {
+      if (race?.key == null || !race.office || !race.name) continue; // malformed contest: skip it, keep the rest
       st.upsertRace.run({
         election_id: electionId, state: e.state, office: race.office, district: race.district ?? null,
         name: race.name, source_key: race.key, vote_for: race.voteFor ?? null, statewide: race.statewide === false ? 0 : 1,
         title: race.title ?? null,
       });
       const raceId = st.raceId.get(electionId, race.key).id;
-      const candIds = race.choices.map((c, position) => {
+      const candIds = (race.choices ?? []).map((c, position) => {
         st.upsertCandidate.run({ race_id: raceId, name: c.name, party: c.party, party_raw: c.partyRaw ?? '', position });
         return st.candidateId.get(raceId, position).id;
       });
-      for (const u of race.units) {
+      const unitsSeen = new Set();
+      for (const u of race.units ?? []) {
+        if (!u) continue;
         const unitId = unitIdOf(u);
+        if (unitsSeen.has(unitId)) continue; // a unit listed twice is an adapter bug: keep the first, never lose the snapshot
+        unitsSeen.add(unitId);
         if (race.office === 'measure') {
-          st.insertMeasure.run(snapshotId, raceId, unitId, u.yes ?? 0, u.no ?? 0, r.source, now);
+          st.insertMeasure.run(snapshotId, raceId, unitId, int(u.yes) ?? 0, int(u.no) ?? 0, r.source, now);
         } else {
-          u.votes.forEach((v, i) => st.insertVotes.run(snapshotId, raceId, unitId, candIds[i], v ?? 0, r.source, now));
+          // Sources going from empty to populated send null / missing / string counts: tolerate all of them.
+          (Array.isArray(u.votes) ? u.votes : []).slice(0, candIds.length)
+            .forEach((v, i) => st.insertVotes.run(snapshotId, raceId, unitId, candIds[i], int(v) ?? 0, r.source, now));
         }
         st.insertReporting.run(snapshotId, raceId, unitId, int(u.precinctsReporting), int(u.precinctsTotal),
           num(u.pctReporting), r.source, now);
@@ -231,7 +238,7 @@ export function writeSnapshot(db, r) {
           if (m?.label == null) return;
           const label = String(m.label);
           const bucket = m.bucket ?? methodBucket(label);
-          const n = race.office === 'measure' ? 2 : race.choices.length;
+          const n = race.office === 'measure' ? 2 : candIds.length;
           for (let pos = 0; pos < n; pos++) {
             st.insertMethod.run(snapshotId, raceId, unitId, pos, label, bucket, order, int(m.votes?.[pos]), r.source, now);
           }

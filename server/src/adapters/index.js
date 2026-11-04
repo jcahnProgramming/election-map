@@ -23,13 +23,19 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 export async function loadAdapters() {
   const files = readdirSync(dir).filter((f) => f.endsWith('.js') && f !== 'index.js' && !f.startsWith('_'));
   const adapters = [];
+  // One broken adapter file or config must never take the whole site down on election night: log it, skip it.
   for (const f of files.sort()) {
-    const mod = (await import(pathToFileURL(path.join(dir, f)).href)).default;
-    for (const k of ['id', 'name', 'targets', 'fetch']) {
-      if (!mod?.[k]) throw new Error(`Adapter ${f} is missing "${k}"`);
+    try {
+      const mod = (await import(pathToFileURL(path.join(dir, f)).href)).default;
+      for (const k of ['id', 'name', 'targets', 'fetch']) {
+        if (!mod?.[k]) throw new Error(`missing "${k}"`);
+      }
+      if (adapters.some((a) => a.id === mod.id)) throw new Error(`duplicate adapter id "${mod.id}"`);
+      mod.targets(); // a malformed config file fails here, at startup, not inside the poller
+      adapters.push(mod);
+    } catch (err) {
+      console.error(`[adapters] skipping ${f}: ${err.message}`);
     }
-    if (adapters.some((a) => a.id === mod.id)) throw new Error(`Duplicate adapter id "${mod.id}" (${f})`);
-    adapters.push(mod);
   }
   return adapters;
 }
