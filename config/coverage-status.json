@@ -180,8 +180,7 @@
       "reason": "WEC publishes no election-night totals (site also 403)"
     },
     "WV": {
-      "status": "planned",
-      "reason": "Clarity, general EID not found yet"
+      "status": "live"
     },
     "WY": {
       "status": "no_feed",
