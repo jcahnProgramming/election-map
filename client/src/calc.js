@@ -325,3 +325,13 @@ export function districtLine(seat, tossup = TOSSUP_MARGIN) {
 
 /** "1 county publishes its own results" / "3 counties publish their own results". */
 export const countWord = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+
+/**
+ * The official source stopped answering (down, or refusing us): the numbers on screen are its last update, frozen.
+ * null while the source answers (the API omits sourceResponding then).
+ */
+export function staleSourceText(entry) {
+  if (!entry || entry.sourceResponding !== false) return null;
+  const at = fmtMT(entry.sourceUpdatedAt || entry.fetchedAt);
+  return `Official source not responding — showing last update${at ? ` at ${at}` : ''}`;
+}

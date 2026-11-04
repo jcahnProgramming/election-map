@@ -63,3 +63,14 @@ test('retry delay: 429 / 4xx and non-HTTP errors keep the long exponential backo
   assert.equal(retryDelayMs(1, new Error('Unexpected payload'), i, 600_000), 120_000);
   assert.equal(retryDelayMs(6, new Error('timeout'), i, 600_000), 600_000);
 });
+
+test('retry delay: a bot-protection refusal (WAF captcha) goes straight to the slow poll, whatever the status', async () => {
+  const { retryDelayMs } = await import('../src/poller.js');
+  const { HttpError } = await import('../src/http.js');
+  const captcha = new HttpError('https://results.enr.clarityelections.com/CO/127407/current_ver.txt', 405, 'captcha');
+  assert.equal(captcha.blocked, true);
+  assert.match(captcha.message, /HTTP 405 .*\(bot protection: captcha\)/);
+  assert.deepEqual([1, 2, 5].map((f) => retryDelayMs(f, captcha, 60_000, 600_000)), [600_000, 600_000, 600_000]);
+  assert.equal(new HttpError('u', 405).blocked, false); // a plain 405 keeps the ordinary 4xx backoff
+  assert.equal(retryDelayMs(1, new HttpError('u', 405), 60_000, 600_000), 120_000);
+});

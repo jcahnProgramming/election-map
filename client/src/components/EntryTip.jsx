@@ -1,6 +1,6 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
-import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel } from '../calc.js';
+import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel, staleSourceText } from '../calc.js';
 import { isTossupMargin, fmtMargin } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
 import { photoCredits } from '../avatar.js';
@@ -213,7 +213,7 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
         ? <a className="official-link" href={entry.official.url} target="_blank" rel="noopener noreferrer">{OFFICIAL_LINK_TEXT} <span className="host">{hostOf(entry.official.url)}</span></a>
         : <span className="foot">Official results page not on file yet.</span>)}
       {kind === 'state' && entry?.sourceName && (status === 'reporting' || status === 'awaiting') && (
-        <span className="foot src">Source: {entry.sourceName}{fmtMT(entry.sourceUpdatedAt || entry.fetchedAt) ? ` · updated ${fmtMT(entry.sourceUpdatedAt || entry.fetchedAt)}` : ''}</span>
+        <span className="foot src">Source: {entry.sourceName}{staleSourceText(entry) ? ` · ${staleSourceText(entry)}` : fmtMT(entry.sourceUpdatedAt || entry.fetchedAt) ? ` · updated ${fmtMT(entry.sourceUpdatedAt || entry.fetchedAt)}` : ''}</span>
       )}
       {status === 'no-race' && <span className="foot">No {shortLabel(race)} race on the ballot here this year.</span>}
       {status === 'no-data' && <span className="foot">No results from this source for this county.</span>}

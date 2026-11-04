@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import MapSvg from './MapSvg.jsx';
 import EntryTip from './EntryTip.jsx';
 import { stateFeatures, path, FIPS_TO_ABBR } from '../geo.js';
-import { tallyStates, fmtMT, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
+import { tallyStates, fmtMT, coverageCopy, OFFICIAL_LINK_TEXT, staleSourceText } from '../calc.js';
 import { TOSSUP_MARGIN } from '../shading.js';
 import { longLabel } from '../format.js';
 
@@ -22,7 +22,7 @@ export function SourceBar({ entry, name }) {
       {covered && entry.sourceName ? (
         <span>
           Source: {entry.sourceUrl ? <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">{entry.sourceName}</a> : entry.sourceName}
-          {updated ? ` · updated ${updated}` : ''}
+          {staleSourceText(entry) ? <> · <strong className="stale">{staleSourceText(entry)}</strong></> : updated ? ` · updated ${updated}` : ''}
         </span>
       ) : (
         <span>{entry.status === 'no-race' ? 'No race for this office in our sources'

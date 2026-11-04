@@ -57,8 +57,11 @@ try {
 }
 
 export class HttpError extends Error {
-  constructor(url, status) {
-    super(`HTTP ${status} for ${url}`);
+  constructor(url, status, wafAction = null) {
+    // A bot-protection challenge (AWS WAF "x-amzn-waf-action: captcha|challenge|block") is a refusal, not an error to
+    // retry: we never work around it (CLAUDE.md rule 5). Flag it so the poller slows down and health says so.
+    super(`HTTP ${status} for ${url}${wafAction ? ` (bot protection: ${wafAction})` : ''}`);
+    this.blocked = !!wafAction;
     this.status = status;
     this.url = url;
   }
@@ -77,7 +80,7 @@ export async function get(url, { conditional = false, timeoutMs = 20000, accept 
 
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(timeoutMs), redirect: 'follow' });
   if (res.status === 304 && prev) return { status: 304, notModified: true, text: prev.body, headers: res.headers };
-  if (!res.ok) throw new HttpError(url, res.status);
+  if (!res.ok) throw new HttpError(url, res.status, res.headers.get('x-amzn-waf-action'));
   const text = await res.text();
   if (conditional) {
     validators.set(url, { etag: res.headers.get('etag'), lastModified: res.headers.get('last-modified'), body: text });
@@ -91,7 +94,7 @@ export async function head(url, { timeoutMs = 20000 } = {}) {
     method: 'HEAD', redirect: 'follow', signal: AbortSignal.timeout(timeoutMs),
     headers: { 'User-Agent': config.userAgent, Accept: '*/*' },
   });
-  if (!res.ok) throw new HttpError(url, res.status);
+  if (!res.ok) throw new HttpError(url, res.status, res.headers.get('x-amzn-waf-action'));
   return { status: res.status, headers: res.headers };
 }
 
@@ -108,7 +111,7 @@ export async function getBuffer(url, { conditional = false, timeoutMs = 60000, a
   if (prev?.lastModified) headers['If-Modified-Since'] = prev.lastModified;
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(timeoutMs), redirect: 'follow' });
   if (res.status === 304 && prev) return { status: 304, notModified: true, body: prev.body, headers: res.headers };
-  if (!res.ok) throw new HttpError(url, res.status);
+  if (!res.ok) throw new HttpError(url, res.status, res.headers.get('x-amzn-waf-action'));
   const body = new Uint8Array(await res.arrayBuffer());
   if (conditional) validators.set(url, { etag: res.headers.get('etag'), lastModified: res.headers.get('last-modified'), body });
   return { status: res.status, notModified: false, body, headers: res.headers };
@@ -120,7 +123,7 @@ export async function post(url, body, { timeoutMs = 20000, contentType = 'applic
     method: 'POST', body, redirect: 'follow', signal: AbortSignal.timeout(timeoutMs),
     headers: { 'User-Agent': config.userAgent, Accept: accept, 'Content-Type': contentType, 'Accept-Encoding': 'gzip, deflate, br' },
   });
-  if (!res.ok) throw new HttpError(url, res.status);
+  if (!res.ok) throw new HttpError(url, res.status, res.headers.get('x-amzn-waf-action'));
   const text = await res.text();
   return { status: res.status, text, headers: res.headers };
 }

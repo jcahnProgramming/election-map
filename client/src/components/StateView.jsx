@@ -6,7 +6,7 @@ import { loadCounties, fitPath, ABBR_TO_FIPS } from '../geo.js';
 import { effectiveStatus } from '../shading.js';
 import { partyShares, leadText, candidateList, hasCandidates } from '../calc.js';
 import { fmtVotes, fmtPct, fmtReporting, shortLabel, longLabel, hostOf } from '../format.js';
-import { fmtMT, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
+import { fmtMT, coverageCopy, OFFICIAL_LINK_TEXT, staleSourceText } from '../calc.js';
 import AllRaces from './AllRaces.jsx';
 import { SeatRows, PartyTag, RunningMate, DistrictRows } from './EntryTip.jsx';
 import Avatar from './Avatar.jsx';
@@ -97,10 +97,11 @@ function SourceLine({ entry }) {
   if (!name) return null;
   const url = entry?.sourceUrl;
   const updated = fmtMT(entry?.sourceUpdatedAt || entry?.fetchedAt);
+  const stale = staleSourceText(entry);
   return (
     <span className="s">
       Source: {url ? <a href={url} target="_blank" rel="noopener noreferrer">{name}{entry?.sourceName ? '' : ` (${hostOf(url)})`}</a> : name}
-      {updated ? ` · updated ${updated}` : ''}
+      {stale ? <> · <strong className="stale">{stale}</strong></> : updated ? ` · updated ${updated}` : ''}
     </span>
   );
 }

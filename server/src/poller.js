@@ -18,6 +18,7 @@ const SERVER_ERROR_MAX_MS = 2 * 60 * 1000;
  * "slow down" or blocking, plus non-HTTP errors) keeps the long exponential backoff up to config.maxBackoffMs.
  */
 export function retryDelayMs(failures, err, intervalMs, maxBackoffMs = config.maxBackoffMs) {
+  if (err?.blocked) return maxBackoffMs; // bot protection: slow poll straight away, never faster
   const status = Number(err?.status);
   if (status >= 500 && status <= 599) {
     if (failures <= 2) return intervalMs;
@@ -72,11 +73,13 @@ export function startPolling({ db, adapters, onUpdate, intervalMs = config.pollI
           th.version = r.version ?? r.result?.version ?? th.version;
           th.failures = 0;
           th.lastError = null;
+          th.blocked = false;
           const election = r.result?.election?.electionKey ?? t.election ?? currentElectionKey();
           onUpdate?.({ sourceId: adapter.id, target: t.key, election, states: [t.state], fetchedAt: at, changed: r.changed });
           schedule(intervalMs);
         } catch (err) {
           th.failures += 1;
+          th.blocked = !!err?.blocked;
           th.lastError = h.lastError = `${err.message}`;
           h.lastErrorAt = started;
           const backoff = retryDelayMs(th.failures, err, intervalMs);

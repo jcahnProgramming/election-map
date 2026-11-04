@@ -166,3 +166,12 @@ test('newestTime and fmtMT', () => {
   assert.equal(fmtMT('2026-11-04T02:30:00Z'), '19:30 MT'); // MST = UTC-7 on Nov 4
   assert.equal(fmtMT(null), null);
 });
+
+test('staleSourceText: only when the source stopped responding; names the time of the last update', async () => {
+  const { staleSourceText, fmtMT } = await import('../src/calc.js');
+  const e = { sourceResponding: false, sourceUpdatedAt: '2026-11-04T02:51:30Z', fetchedAt: '2026-11-04T02:52:05Z' };
+  assert.equal(staleSourceText(e), `Official source not responding — showing last update at ${fmtMT('2026-11-04T02:51:30Z')}`);
+  assert.equal(staleSourceText({ ...e, sourceResponding: undefined }), null);
+  assert.equal(staleSourceText(null), null);
+  assert.equal(staleSourceText({ sourceResponding: false }), 'Official source not responding — showing last update');
+});

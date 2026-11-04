@@ -74,7 +74,7 @@ export function createResults(db, adapters, opts = {}) {
   };
 
   const RACE_COLS = `r.id, r.name, r.title, r.district, r.source_key, r.office, r.level, r.kind, r.vote_for, r.jurisdiction, r.statewide,
-        e.id AS election_id, e.source, e.scope, e.state,
+        e.id AS election_id, e.source, e.source_key AS election_source_key, e.scope, e.state,
         e.county_fips, e.url, l.snapshot_id, l.fetched_at, l.checked_at, s.source_updated_at`;
   const RACE_FROM = `FROM races r JOIN elections e ON e.id = r.election_id JOIN latest_snapshot l ON l.election_id = e.id
       JOIN snapshots s ON s.id = l.snapshot_id`;
@@ -296,7 +296,17 @@ export function createResults(db, adapters, opts = {}) {
     sourceUpdatedAt: r?.source_updated_at ?? null,
     fetchedAt: r?.fetched_at ?? null,
     checkedAt: r?.checked_at ?? null,
+    ...responding(r?.source ?? t?.source, r?.election_source_key ?? t?.key),
   });
+  /**
+   * The official source has failed its last polls (down, or refusing us): the numbers shown are its last update, frozen.
+   * Two failures in a row, so one blip doesn't flash a warning. Omitted (not false) while the source answers.
+   */
+  function responding(source, key) {
+    const h = source && key ? opts.sourceStatus?.(source, key) : null;
+    if (!h || !(h.failures >= 2)) return {};
+    return { sourceResponding: false, sourceBlocked: !!h.blocked };
+  }
 
   /**
    * One state's view of a race: statewide entry + county units + election-wide turnout.

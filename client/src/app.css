@@ -443,3 +443,6 @@ button { cursor: pointer; }
   .closest-row .cm { grid-column: 2; grid-row: 2; }
   .view-switch { order: 2; }
 }
+
+/* Official source not responding: the numbers shown are its last update (0.5.1) */
+.stale { color: var(--text); font-weight: 600; }
