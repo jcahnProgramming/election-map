@@ -1,0 +1,613 @@
+<?xml version="1.0"?>
+<!--Election result snapshot imported from Tabulation System
+-->
+<ElectionResult>
+    <Timestamp>11/3/2026 8:00:19 PM EST</Timestamp>
+    <ElectionName>2026 General</ElectionName>
+    <ElectionDate>11/3/2026</ElectionDate>
+    <Region>WV</Region>
+    <ElectionVoterTurnout totalVoters="1210307" ballotsCast="37091" voterTurnout="3.06">
+        <Counties>
+            <County name="Barbour" totalVoters="9649" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Berkeley" totalVoters="103283" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="80" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Boone" totalVoters="13670" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="26" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Braxton" totalVoters="7838" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="18" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Brooke" totalVoters="15159" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="21" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Cabell" totalVoters="56536" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="68" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Calhoun" totalVoters="4563" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Clay" totalVoters="5113" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="11" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Doddridge" totalVoters="4229" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Fayette" totalVoters="25852" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="41" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Gilmer" totalVoters="3817" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Grant" totalVoters="7516" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Greenbrier" totalVoters="23940" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hampshire" totalVoters="15442" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="25" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hancock" totalVoters="18945" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hardy" totalVoters="9289" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Harrison" totalVoters="43835" ballotsCast="6105" voterTurnout="13.93" precinctsParticipating="65" precinctsReported="65" precinctsReportingPercent="100.00" />
+            <County name="Jackson" totalVoters="18547" ballotsCast="156" voterTurnout="0.84" precinctsParticipating="30" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Jefferson" totalVoters="49411" ballotsCast="8841" voterTurnout="17.89" precinctsParticipating="34" precinctsReported="2" precinctsReportingPercent="5.88" />
+            <County name="Kanawha" totalVoters="121002" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="183" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Lewis" totalVoters="10353" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="23" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Lincoln" totalVoters="11782" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Logan" totalVoters="21571" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="34" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marion" totalVoters="37668" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="66" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marshall" totalVoters="19926" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mason" totalVoters="15650" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="30" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="McDowell" totalVoters="11729" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="33" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mercer" totalVoters="38974" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mineral" totalVoters="19666" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mingo" totalVoters="17034" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monongalia" totalVoters="67328" ballotsCast="14005" voterTurnout="20.80" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monroe" totalVoters="9854" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="11" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Morgan" totalVoters="14298" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Nicholas" totalVoters="15567" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ohio" totalVoters="27418" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pendleton" totalVoters="4890" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pleasants" totalVoters="4807" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pocahontas" totalVoters="5585" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="16" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Preston" totalVoters="19962" ballotsCast="2628" voterTurnout="13.17" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Putnam" totalVoters="39299" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="39" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Raleigh" totalVoters="50116" ballotsCast="4093" voterTurnout="8.17" precinctsParticipating="59" precinctsReported="57" precinctsReportingPercent="96.61" />
+            <County name="Randolph" totalVoters="17456" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="27" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ritchie" totalVoters="5829" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Roane" totalVoters="8572" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Summers" totalVoters="8135" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Taylor" totalVoters="10671" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tucker" totalVoters="5187" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tyler" totalVoters="5617" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Upshur" totalVoters="14453" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wayne" totalVoters="26253" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="38" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Webster" totalVoters="5053" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wetzel" totalVoters="9915" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wirt" totalVoters="3483" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wood" totalVoters="55979" ballotsCast="0" voterTurnout="0.00" precinctsParticipating="69" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wyoming" totalVoters="12591" ballotsCast="1263" voterTurnout="10.03" precinctsParticipating="26" precinctsReported="0" precinctsReportingPercent="0.00" />
+        </Counties>
+    </ElectionVoterTurnout>
+    <Contest key="100" text="U.S. SENATOR" voteFor="1" isQuestion="false" countiesParticipating="55" countiesReported="1" precinctsParticipating="1642" precinctsReported="124" precinctsReportingPercent="7.55">
+        <ParticipatingCounties>
+            <County name="Barbour" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Berkeley" precinctsParticipating="80" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Boone" precinctsParticipating="26" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Braxton" precinctsParticipating="18" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Brooke" precinctsParticipating="21" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Cabell" precinctsParticipating="68" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Calhoun" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Clay" precinctsParticipating="11" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Doddridge" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Fayette" precinctsParticipating="41" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Gilmer" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Grant" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Greenbrier" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hampshire" precinctsParticipating="25" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hancock" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hardy" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Harrison" precinctsParticipating="65" precinctsReported="65" precinctsReportingPercent="100.00" />
+            <County name="Jackson" precinctsParticipating="30" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Jefferson" precinctsParticipating="34" precinctsReported="2" precinctsReportingPercent="5.88" />
+            <County name="Kanawha" precinctsParticipating="183" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Lewis" precinctsParticipating="23" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Lincoln" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Logan" precinctsParticipating="34" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marion" precinctsParticipating="66" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marshall" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mason" precinctsParticipating="30" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="McDowell" precinctsParticipating="33" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mercer" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mineral" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mingo" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monongalia" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monroe" precinctsParticipating="11" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Morgan" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Nicholas" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ohio" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pendleton" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pleasants" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pocahontas" precinctsParticipating="16" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Preston" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Putnam" precinctsParticipating="39" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Raleigh" precinctsParticipating="59" precinctsReported="57" precinctsReportingPercent="96.61" />
+            <County name="Randolph" precinctsParticipating="27" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ritchie" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Roane" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Summers" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Taylor" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tucker" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tyler" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Upshur" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wayne" precinctsParticipating="38" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Webster" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wetzel" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wirt" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wood" precinctsParticipating="69" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wyoming" precinctsParticipating="26" precinctsReported="0" precinctsReportingPercent="0.00" />
+        </ParticipatingCounties>
+        <Choice key="002" text="RACHEL FETTY ANDERSON" party="DEM" totalVotes="19690">
+            <VoteType name="Election Day" votes="19690">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Boone" votes="0" />
+                <County name="Braxton" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Cabell" votes="0" />
+                <County name="Calhoun" votes="0" />
+                <County name="Clay" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Fayette" votes="0" />
+                <County name="Gilmer" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Greenbrier" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="2877" />
+                <County name="Jackson" votes="39" />
+                <County name="Jefferson" votes="5263" />
+                <County name="Kanawha" votes="0" />
+                <County name="Lewis" votes="0" />
+                <County name="Lincoln" votes="0" />
+                <County name="Logan" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mason" votes="0" />
+                <County name="McDowell" votes="0" />
+                <County name="Mercer" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Mingo" votes="0" />
+                <County name="Monongalia" votes="8480" />
+                <County name="Monroe" votes="0" />
+                <County name="Morgan" votes="0" />
+                <County name="Nicholas" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pendleton" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Pocahontas" votes="0" />
+                <County name="Preston" votes="983" />
+                <County name="Putnam" votes="0" />
+                <County name="Raleigh" votes="1708" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Roane" votes="0" />
+                <County name="Summers" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wayne" votes="0" />
+                <County name="Webster" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wirt" votes="0" />
+                <County name="Wood" votes="0" />
+                <County name="Wyoming" votes="340" />
+            </VoteType>
+        </Choice>
+        <Choice key="001" text="SHELLEY MOORE CAPITO" party="REP" totalVotes="16105">
+            <VoteType name="Election Day" votes="16105">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Boone" votes="0" />
+                <County name="Braxton" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Cabell" votes="0" />
+                <County name="Calhoun" votes="0" />
+                <County name="Clay" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Fayette" votes="0" />
+                <County name="Gilmer" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Greenbrier" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="2997" />
+                <County name="Jackson" votes="98" />
+                <County name="Jefferson" votes="3234" />
+                <County name="Kanawha" votes="0" />
+                <County name="Lewis" votes="0" />
+                <County name="Lincoln" votes="0" />
+                <County name="Logan" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mason" votes="0" />
+                <County name="McDowell" votes="0" />
+                <County name="Mercer" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Mingo" votes="0" />
+                <County name="Monongalia" votes="5208" />
+                <County name="Monroe" votes="0" />
+                <County name="Morgan" votes="0" />
+                <County name="Nicholas" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pendleton" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Pocahontas" votes="0" />
+                <County name="Preston" votes="1501" />
+                <County name="Putnam" votes="0" />
+                <County name="Raleigh" votes="2213" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Roane" votes="0" />
+                <County name="Summers" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wayne" votes="0" />
+                <County name="Webster" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wirt" votes="0" />
+                <County name="Wood" votes="0" />
+                <County name="Wyoming" votes="854" />
+            </VoteType>
+        </Choice>
+        <Choice key="005" text="S. MARSHALL WILSON" party="CST" totalVotes="898">
+            <VoteType name="Election Day" votes="898">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Boone" votes="0" />
+                <County name="Braxton" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Cabell" votes="0" />
+                <County name="Calhoun" votes="0" />
+                <County name="Clay" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Fayette" votes="0" />
+                <County name="Gilmer" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Greenbrier" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="146" />
+                <County name="Jackson" votes="14" />
+                <County name="Jefferson" votes="275" />
+                <County name="Kanawha" votes="0" />
+                <County name="Lewis" votes="0" />
+                <County name="Lincoln" votes="0" />
+                <County name="Logan" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mason" votes="0" />
+                <County name="McDowell" votes="0" />
+                <County name="Mercer" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Mingo" votes="0" />
+                <County name="Monongalia" votes="206" />
+                <County name="Monroe" votes="0" />
+                <County name="Morgan" votes="0" />
+                <County name="Nicholas" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pendleton" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Pocahontas" votes="0" />
+                <County name="Preston" votes="102" />
+                <County name="Putnam" votes="0" />
+                <County name="Raleigh" votes="108" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Roane" votes="0" />
+                <County name="Summers" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wayne" votes="0" />
+                <County name="Webster" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wirt" votes="0" />
+                <County name="Wood" votes="0" />
+                <County name="Wyoming" votes="47" />
+            </VoteType>
+        </Choice>
+    </Contest>
+    <Contest key="200" text="U.S. HOUSE OF REPRESENTATIVES, 2nd Congressional District" voteFor="1" isQuestion="false" countiesParticipating="27" countiesReported="1" precinctsParticipating="760" precinctsReported="67" precinctsReportingPercent="8.82">
+        <ParticipatingCounties>
+            <County name="Barbour" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Berkeley" precinctsParticipating="80" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Brooke" precinctsParticipating="21" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Doddridge" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Grant" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hampshire" precinctsParticipating="25" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hancock" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hardy" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Harrison" precinctsParticipating="65" precinctsReported="65" precinctsReportingPercent="100.00" />
+            <County name="Jefferson" precinctsParticipating="34" precinctsReported="2" precinctsReportingPercent="5.88" />
+            <County name="Lewis" precinctsParticipating="23" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marion" precinctsParticipating="66" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marshall" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mineral" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monongalia" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Morgan" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ohio" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pleasants" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Preston" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Randolph" precinctsParticipating="27" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ritchie" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Taylor" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tucker" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tyler" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Upshur" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wetzel" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wood" precinctsParticipating="69" precinctsReported="0" precinctsReportingPercent="0.00" />
+        </ParticipatingCounties>
+        <Choice key="002" text="ACE PARSI" party="DEM" totalVotes="17965">
+            <VoteType name="Election Day" votes="17965">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="2927" />
+                <County name="Jefferson" votes="5302" />
+                <County name="Lewis" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Monongalia" votes="8722" />
+                <County name="Morgan" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Preston" votes="1014" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wood" votes="0" />
+            </VoteType>
+        </Choice>
+        <Choice key="001" text="RILEY MOORE" party="REP" totalVotes="12982">
+            <VoteType name="Election Day" votes="12982">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="3015" />
+                <County name="Jefferson" votes="3436" />
+                <County name="Lewis" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Monongalia" votes="4998" />
+                <County name="Morgan" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Preston" votes="1533" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wood" votes="0" />
+            </VoteType>
+        </Choice>
+    </Contest>
+    <Contest key="900" text="STATE SENATOR, 13th Senatorial District" voteFor="1" isQuestion="false" countiesParticipating="2" countiesReported="0" precinctsParticipating="58" precinctsReported="0" precinctsReportingPercent="0.00">
+        <ParticipatingCounties>
+            <County name="Marion" precinctsParticipating="31" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monongalia" precinctsParticipating="27" precinctsReported="0" precinctsReportingPercent="0.00" />
+        </ParticipatingCounties>
+        <Choice key="002" text="JOHN WILLIAMS" party="DEM" totalVotes="5746">
+            <VoteType name="Election Day" votes="5746">
+                <County name="Marion" votes="0" />
+                <County name="Monongalia" votes="5746" />
+            </VoteType>
+        </Choice>
+        <Choice key="001" text="MIKE OLIVERIO" party="REP" totalVotes="2978">
+            <VoteType name="Election Day" votes="2978">
+                <County name="Marion" votes="0" />
+                <County name="Monongalia" votes="2978" />
+            </VoteType>
+        </Choice>
+        <Choice key="003" text="TAYLOR RICHMOND" party="LBN" totalVotes="225">
+            <VoteType name="Election Day" votes="225">
+                <County name="Marion" votes="0" />
+                <County name="Monongalia" votes="225" />
+            </VoteType>
+        </Choice>
+    </Contest>
+    <Contest key="5100" text="HOUSE OF DELEGATES, 79th District" voteFor="1" isQuestion="false" countiesParticipating="1" countiesReported="0" precinctsParticipating="5" precinctsReported="0" precinctsReportingPercent="0.00">
+        <ParticipatingCounties>
+            <County name="Monongalia" precinctsParticipating="5" precinctsReported="0" precinctsReportingPercent="0.00" />
+        </ParticipatingCounties>
+        <Choice key="002" text="EVAN HANSEN" party="DEM" totalVotes="1618">
+            <VoteType name="Election Day" votes="1618">
+                <County name="Monongalia" votes="1618" />
+            </VoteType>
+        </Choice>
+        <Choice key="004" text="PAIGE REIRING" party="MTN" totalVotes="386">
+            <VoteType name="Election Day" votes="386">
+                <County name="Monongalia" votes="386" />
+            </VoteType>
+        </Choice>
+    </Contest>
+    <Contest key="6350" text="AMENDMENT NO 1: CITIZENSHIP REQUIREMENT TO VOTE IN WEST VIRGINIA ELECTIONS AMENDMENT" voteFor="1" isQuestion="false" countiesParticipating="55" countiesReported="1" precinctsParticipating="1642" precinctsReported="124" precinctsReportingPercent="7.55">
+        <ParticipatingCounties>
+            <County name="Barbour" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Berkeley" precinctsParticipating="80" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Boone" precinctsParticipating="26" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Braxton" precinctsParticipating="18" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Brooke" precinctsParticipating="21" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Cabell" precinctsParticipating="68" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Calhoun" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Clay" precinctsParticipating="11" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Doddridge" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Fayette" precinctsParticipating="41" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Gilmer" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Grant" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Greenbrier" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hampshire" precinctsParticipating="25" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hancock" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Hardy" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Harrison" precinctsParticipating="65" precinctsReported="65" precinctsReportingPercent="100.00" />
+            <County name="Jackson" precinctsParticipating="30" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Jefferson" precinctsParticipating="34" precinctsReported="2" precinctsReportingPercent="5.88" />
+            <County name="Kanawha" precinctsParticipating="183" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Lewis" precinctsParticipating="23" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Lincoln" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Logan" precinctsParticipating="34" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marion" precinctsParticipating="66" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Marshall" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mason" precinctsParticipating="30" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="McDowell" precinctsParticipating="33" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mercer" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mineral" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Mingo" precinctsParticipating="24" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monongalia" precinctsParticipating="43" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Monroe" precinctsParticipating="11" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Morgan" precinctsParticipating="13" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Nicholas" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ohio" precinctsParticipating="35" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pendleton" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pleasants" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Pocahontas" precinctsParticipating="16" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Preston" precinctsParticipating="28" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Putnam" precinctsParticipating="39" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Raleigh" precinctsParticipating="59" precinctsReported="57" precinctsReportingPercent="96.61" />
+            <County name="Randolph" precinctsParticipating="27" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Ritchie" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Roane" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Summers" precinctsParticipating="14" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Taylor" precinctsParticipating="17" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tucker" precinctsParticipating="9" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Tyler" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Upshur" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wayne" precinctsParticipating="38" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Webster" precinctsParticipating="12" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wetzel" precinctsParticipating="20" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wirt" precinctsParticipating="10" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wood" precinctsParticipating="69" precinctsReported="0" precinctsReportingPercent="0.00" />
+            <County name="Wyoming" precinctsParticipating="26" precinctsReported="0" precinctsReportingPercent="0.00" />
+        </ParticipatingCounties>
+        <Choice key="001" text="FOR" totalVotes="23137">
+            <VoteType name="Election Day" votes="23137">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Boone" votes="0" />
+                <County name="Braxton" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Cabell" votes="0" />
+                <County name="Calhoun" votes="0" />
+                <County name="Clay" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Fayette" votes="0" />
+                <County name="Gilmer" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Greenbrier" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="4020" />
+                <County name="Jackson" votes="120" />
+                <County name="Jefferson" votes="5500" />
+                <County name="Kanawha" votes="0" />
+                <County name="Lewis" votes="0" />
+                <County name="Lincoln" votes="0" />
+                <County name="Logan" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mason" votes="0" />
+                <County name="McDowell" votes="0" />
+                <County name="Mercer" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Mingo" votes="0" />
+                <County name="Monongalia" votes="8091" />
+                <County name="Monroe" votes="0" />
+                <County name="Morgan" votes="0" />
+                <County name="Nicholas" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pendleton" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Pocahontas" votes="0" />
+                <County name="Preston" votes="1885" />
+                <County name="Putnam" votes="0" />
+                <County name="Raleigh" votes="2611" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Roane" votes="0" />
+                <County name="Summers" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wayne" votes="0" />
+                <County name="Webster" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wirt" votes="0" />
+                <County name="Wood" votes="0" />
+                <County name="Wyoming" votes="910" />
+            </VoteType>
+        </Choice>
+        <Choice key="002" text="AGAINST" totalVotes="10858">
+            <VoteType name="Election Day" votes="10858">
+                <County name="Barbour" votes="0" />
+                <County name="Berkeley" votes="0" />
+                <County name="Boone" votes="0" />
+                <County name="Braxton" votes="0" />
+                <County name="Brooke" votes="0" />
+                <County name="Cabell" votes="0" />
+                <County name="Calhoun" votes="0" />
+                <County name="Clay" votes="0" />
+                <County name="Doddridge" votes="0" />
+                <County name="Fayette" votes="0" />
+                <County name="Gilmer" votes="0" />
+                <County name="Grant" votes="0" />
+                <County name="Greenbrier" votes="0" />
+                <County name="Hampshire" votes="0" />
+                <County name="Hancock" votes="0" />
+                <County name="Hardy" votes="0" />
+                <County name="Harrison" votes="1305" />
+                <County name="Jackson" votes="30" />
+                <County name="Jefferson" votes="2892" />
+                <County name="Kanawha" votes="0" />
+                <County name="Lewis" votes="0" />
+                <County name="Lincoln" votes="0" />
+                <County name="Logan" votes="0" />
+                <County name="Marion" votes="0" />
+                <County name="Marshall" votes="0" />
+                <County name="Mason" votes="0" />
+                <County name="McDowell" votes="0" />
+                <County name="Mercer" votes="0" />
+                <County name="Mineral" votes="0" />
+                <County name="Mingo" votes="0" />
+                <County name="Monongalia" votes="5327" />
+                <County name="Monroe" votes="0" />
+                <County name="Morgan" votes="0" />
+                <County name="Nicholas" votes="0" />
+                <County name="Ohio" votes="0" />
+                <County name="Pendleton" votes="0" />
+                <County name="Pleasants" votes="0" />
+                <County name="Pocahontas" votes="0" />
+                <County name="Preston" votes="478" />
+                <County name="Putnam" votes="0" />
+                <County name="Raleigh" votes="699" />
+                <County name="Randolph" votes="0" />
+                <County name="Ritchie" votes="0" />
+                <County name="Roane" votes="0" />
+                <County name="Summers" votes="0" />
+                <County name="Taylor" votes="0" />
+                <County name="Tucker" votes="0" />
+                <County name="Tyler" votes="0" />
+                <County name="Upshur" votes="0" />
+                <County name="Wayne" votes="0" />
+                <County name="Webster" votes="0" />
+                <County name="Wetzel" votes="0" />
+                <County name="Wirt" votes="0" />
+                <County name="Wood" votes="0" />
+                <County name="Wyoming" votes="127" />
+            </VoteType>
+        </Choice>
+    </Contest>
+</ElectionResult>

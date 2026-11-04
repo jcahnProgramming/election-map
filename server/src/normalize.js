@@ -10,6 +10,7 @@ const KNOWN_OTHER = new Set([
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
   'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'w', 'l', 'npp', 'peace and justice', 'freedom and unity', 'progressive', 'epic', 'independent american', 'labor democrat', 'no kings', 'cascade', 'fan', 'for all neighbors', 'no party preference', 'g', 'i', 'other-part', 'indep', 'nonprtycan', 'non-partis', 'none', 'wf', 'working families', 'lpf', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
   'p&f', 'peace and freedom', 'nonp', 'non partisan', 'pc', 'petitioning candidate',
+  'lbn', 'mtn', 'mountain', // WV Clarity: Libertarian, Mountain Party
 ]);
 
 /** @returns {{party:'DEM'|'REP'|'OTHER', known:boolean}} */
