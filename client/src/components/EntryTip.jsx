@@ -1,7 +1,7 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
 import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel } from '../calc.js';
-import { TOSSUP_MARGIN } from '../shading.js';
+import { isTossupMargin, fmtMargin } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
 import { photoCredits } from '../avatar.js';
 import Avatar from './Avatar.jsx';
@@ -101,11 +101,11 @@ export function OtherRaces({ races }) {
   const line = (r) => {
     if (r.status !== 'reporting' || !r.totalVotes) return 'No votes counted yet';
     if (r.multiSeat) return `Vote for ${r.seats}`;
-    const m = r.marginPts != null ? Math.abs(Number(r.marginPts)) : null;
-    if (r.tied || !r.leader || (m != null && m < TOSSUP_MARGIN)) return 'Toss-up';
+    const m = r.marginPts != null ? fmtMargin(r.marginPts) : null;
+    if (r.tied || !r.leader || isTossupMargin(r.marginPts)) return 'Toss-up';
     const who = r.partySum ? `${r.leader === 'DEM' ? 'Democrats' : r.leader === 'REP' ? 'Republicans' : 'Other parties'} lead`
       : `${r.leadName}${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw }) ? ` (${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw })})` : ''}`;
-    return `${who} +${m?.toFixed(1)}`;
+    return `${who} +${m}`;
   };
   return (
     <div className="other-races">

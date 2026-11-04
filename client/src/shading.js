@@ -45,10 +45,21 @@ export const NO_SOURCE_PATTERN = {
   line: PALETTE.noSourceLine,
 };
 
+/**
+ * A margin as it is displayed: absolute points, rounded to one decimal. Every toss-up and band decision uses this same
+ * number, so a race shown as "2.0 pts" is never labelled a toss-up and one shown as "1.9 pts" always is.
+ */
+export const displayMargin = (marginPts) => Math.round(Math.abs(Number(marginPts)) * 10) / 10;
+/** "2.0" — the displayed margin text (pair with " pts" or a leading "+"). */
+export const fmtMargin = (marginPts) => displayMargin(marginPts).toFixed(1);
+/** True when a known margin is a toss-up (its displayed value is under the threshold). */
+export const isTossupMargin = (marginPts, tossup = TOSSUP_MARGIN) =>
+  marginPts != null && Number.isFinite(Number(marginPts)) && displayMargin(marginPts) < tossup;
+
 /** Band index (0..2) for a margin in points, or -1 for toss-up (also for an unknown margin). */
 export function marginBandIndex(marginPts, tossup = TOSSUP_MARGIN) {
   if (marginPts == null || !Number.isFinite(Number(marginPts))) return -1;
-  const m = Math.abs(Number(marginPts));
+  const m = displayMargin(marginPts);
   if (m < tossup) return -1;
   for (let i = MARGIN_BANDS.length - 1; i >= 0; i--) if (m >= MARGIN_BANDS[i].min) return i;
   return 0;

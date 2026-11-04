@@ -11,9 +11,12 @@ const rep = (leader, marginPts, extra = {}) => ({ status: 'reporting', leader, m
 test('TOSSUP_MARGIN defaults to 2', () => assert.equal(TOSSUP_MARGIN, 2));
 
 test('margin bands: <5, 5–12, 12+, toss-up below threshold', () => {
-  assert.equal(marginBandIndex(1.99), -1);
+  // Bands use the displayed (one-decimal) margin: 1.99 shows as "2.0 pts" so it isn't a toss-up; 4.99 shows as "5.0".
+  assert.equal(marginBandIndex(1.94), -1);
+  assert.equal(marginBandIndex(1.99), 0);
   assert.equal(marginBandIndex(2), 0);
-  assert.equal(marginBandIndex(4.99), 0);
+  assert.equal(marginBandIndex(4.94), 0);
+  assert.equal(marginBandIndex(4.99), 1);
   assert.equal(marginBandIndex(5), 1);
   assert.equal(marginBandIndex(11.9), 1);
   assert.equal(marginBandIndex(12), 2);

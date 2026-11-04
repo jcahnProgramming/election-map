@@ -14,6 +14,9 @@
         "Improved": [
           "Running mates are shown next to their candidate (\"with …\"), e.g. Florida's governor tickets",
           "A search in the All races tab can be shared as a link"
+        ],
+        "Fixed": [
+          "A race is a toss-up exactly when its margin, as shown to one decimal, is under 2 points: a race shown as \"2.0 pts\" is never labelled a toss-up, on the map, in tooltips, in All races and in the Congress view"
         ]
       }
     },

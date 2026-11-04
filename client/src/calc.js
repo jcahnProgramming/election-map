@@ -1,6 +1,6 @@
 // Pure display calculations (no React / DOM). Tested in client/test/.
 // Rule: `null` means "this source doesn't publish it". Never turn missing data into 0.
-import { TOSSUP_MARGIN, leadCategory } from './shading.js';
+import { TOSSUP_MARGIN, leadCategory, fmtMargin, isTossupMargin } from './shading.js';
 
 /** Measures with % reporting below this (or unknown) show TOO EARLY. */
 export const MEASURE_TOO_EARLY_PCT = 10;
@@ -169,7 +169,7 @@ export function leadText(entry, tossup = TOSSUP_MARGIN) {
     const top = (entry.candidates || []).filter((x) => !isWriteIn(x)).slice(0, entry.seats || 2).map(nameWithTag).filter(Boolean);
     return `Vote for ${entry.seats || 2} · most votes so far: ${top.join(', ') || '—'}`;
   }
-  const m = isNum(entry.marginPts) ? Math.abs(Number(entry.marginPts)).toFixed(1) : null;
+  const m = isNum(entry.marginPts) ? fmtMargin(entry.marginPts) : null;
   const first = hasCandidates(entry) ? [...entry.candidates].sort((a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0))[0] : null;
   if (c === 'tossup') {
     if (entry.tied || !entry.leader) return 'Tied · toss-up';
@@ -238,7 +238,7 @@ export function seatStatus(seat, tossup = TOSSUP_MARGIN) {
   const sameParty = party && seat.runnerUpParty && seat.runnerUpParty === party && party !== 'OTHER';
   if (!sameParty) {
     if (seat.tied || !seat.leader) return 'toss';
-    if (isNum(seat.marginPts) && Math.abs(Number(seat.marginPts)) < tossup) return 'toss';
+    if (isTossupMargin(seat.marginPts, tossup)) return 'toss';
   }
   return party === 'DEM' ? 'dLead' : party === 'REP' ? 'rLead' : 'oLead';
 }
@@ -320,7 +320,7 @@ export function districtLine(seat, tossup = TOSSUP_MARGIN) {
   const st = seatStatus({ live: true, ...seat }, tossup);
   if (st === 'none') return { status: st, text: 'No votes yet' };
   if (st === 'toss') return { status: st, text: 'Toss-up' };
-  return { status: st, text: isNum(seat.marginPts) ? `+${Math.abs(Number(seat.marginPts)).toFixed(1)}` : '' };
+  return { status: st, text: isNum(seat.marginPts) ? `+${fmtMargin(seat.marginPts)}` : '' };
 }
 
 /** "1 county publishes its own results" / "3 counties publish their own results". */

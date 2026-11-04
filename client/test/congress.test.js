@@ -13,7 +13,7 @@ const seat = (o) => ({ live: true, totalVotes: 100, leader: 'DEM', tied: false, 
 test('seatStatus: leading party, toss-up under the map threshold, no votes / no live data', () => {
   assert.equal(seatStatus(seat()), 'dLead');
   assert.equal(seatStatus(seat({ leader: 'REP', lead: { party: 'REP' }, runnerUpParty: 'DEM' })), 'rLead');
-  assert.equal(seatStatus(seat({ marginPts: TOSSUP_MARGIN - 0.01 })), 'toss');
+  assert.equal(seatStatus(seat({ marginPts: TOSSUP_MARGIN - 0.06 })), 'toss'); // shows "1.9 pts"
   assert.equal(seatStatus(seat({ marginPts: TOSSUP_MARGIN })), 'dLead');
   assert.equal(seatStatus(seat({ tied: true, leader: null, marginPts: 0 })), 'toss');
   assert.equal(seatStatus(seat({ totalVotes: 0 })), 'none');

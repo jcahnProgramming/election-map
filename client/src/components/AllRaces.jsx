@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { TOSSUP_MARGIN, PARTY_COLOR } from '../shading.js';
+import { PARTY_COLOR, isTossupMargin, fmtMargin } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth } from '../format.js';
 import { candidateList, partyTag, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import { PartyTag, RunningMate } from './EntryTip.jsx';
@@ -82,7 +82,7 @@ function leadChip(c) {
   if (c.tied || c.lead == null) return { text: 'TIED', colors: CHIP.TOSS };
   if (c.lead === 'YES' || c.lead === 'NO') return { text: c.lead, colors: CHIP[c.lead] };
   if (c.kind === 'partisan') {
-    if (c.marginPts != null && Math.abs(c.marginPts) < TOSSUP_MARGIN) return { text: 'TOSS-UP', colors: CHIP.TOSS };
+    if (isTossupMargin(c.marginPts)) return { text: 'TOSS-UP', colors: CHIP.TOSS };
     if (c.lead === 'DEM' || c.lead === 'REP') return { text: c.lead, colors: CHIP[c.lead] };
     return { text: partyTag({ party: 'OTHER', partyRaw: c.leadPartyRaw }) || 'OTHER PARTY', colors: CHIP.OTHER };
   }
@@ -112,7 +112,7 @@ function Row({ c, open, onToggle, onOpenMeasure }) {
         </span>
         <span className="rg-lead">
           <span className="chip" style={{ background: chip.colors[0], color: chip.colors[1] }} title={chip.title}>{chip.text}</span>
-          <span className="rg-margin">{showMargin ? `${Math.abs(c.marginPts).toFixed(1)} pts` : ''}</span>
+          <span className="rg-margin">{showMargin ? `${fmtMargin(c.marginPts)} pts` : ''}</span>
         </span>
         <span className="rg-rep">{c.pctReporting != null ? `${fmtReporting(c.pctReporting)} in` : '% in n/a'}</span>
       </button>
