@@ -40,7 +40,7 @@
     },
     "HI": {
       "status": "planned",
-      "reason": "TSV media.txt after first release"
+      "reason": "Adapter built (hioe, summary.txt TSV), parked until the first general release is checked"
     },
     "IA": {
       "status": "live"
