@@ -1,0 +1,49 @@
+/* Dev-only photo review page. */
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: var(--font-ui); background: var(--ground); color: var(--text); }
+a { color: var(--link); }
+.page { max-width: 1400px; margin: 0 auto; padding: 16px; }
+.top { position: sticky; top: 0; z-index: 5; background: var(--ground); padding: 8px 0 12px; border-bottom: 1px solid var(--border); }
+.top h1 { margin: 0 0 4px; font-size: 18px; }
+.progress { margin: 0 0 8px; font-family: var(--font-num); }
+.progress .ok { color: var(--yes-text); } .progress .no { color: var(--no-text); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 14px; }
+.controls select, .controls button { font: inherit; background: var(--panel); color: var(--text); border: 1px solid var(--border-2); border-radius: 6px; padding: 4px 8px; }
+.export { font-weight: 600; cursor: pointer; }
+.export:disabled { opacity: .5; cursor: default; }
+.help { margin: 8px 0 0; font-size: 12px; color: var(--muted); line-height: 1.6; }
+kbd { font-family: var(--font-num); font-size: 11px; border: 1px solid var(--border-2); border-radius: 3px; padding: 0 4px; background: var(--panel); }
+code { font-family: var(--font-num); font-size: 12px; color: var(--text-2); }
+.empty { color: var(--muted); padding: 24px 0; }
+.state h2 { margin: 24px 0 8px; font-size: 20px; }
+.contest { margin: 0 0 16px; }
+.contest-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 8px; }
+.contest-head h3 { margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); }
+.fair { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; }
+.fair.show { background: var(--yes-pill); color: var(--yes-text); }
+.fair.init { background: var(--border); color: var(--muted); font-weight: 500; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+.card { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 12px; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 12px; outline: none; }
+.card.focused { border-color: var(--link); box-shadow: 0 0 0 2px rgba(147, 180, 250, .35); }
+.card.approve { border-left: 4px solid var(--yes); }
+.card.reject { border-left: 4px solid var(--no); opacity: .7; }
+.pics { position: relative; }
+.sizes { display: flex; align-items: center; gap: 8px; }
+.av { position: relative; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid; overflow: hidden; font-weight: 700; flex: none; }
+.av img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.preview { display: none; position: absolute; left: 0; top: 48px; z-index: 10; width: 240px; padding: 6px; background: var(--raised); border: 1px solid var(--border-2); border-radius: 10px; box-shadow: var(--shadow-pop); }
+.preview img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.card:hover .preview { display: block; }
+.meta { display: flex; flex-direction: column; gap: 3px; font-size: 13px; min-width: 0; overflow-wrap: anywhere; }
+.meta .name { font-size: 15px; }
+.meta .party { font-family: var(--font-num); font-size: 12px; color: var(--text-2); }
+.meta .muted { color: var(--muted); font-size: 12px; }
+.meta .k { color: var(--muted-2); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.meta .note { font-size: 12px; color: var(--muted); font-style: italic; }
+.flags { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.flags li, .flag { color: var(--no-text); font-size: 12px; }
+.actions { grid-column: 1 / -1; display: flex; gap: 8px; }
+.actions button { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 6px; padding: 6px 12px; border: 1px solid var(--border-2); background: transparent; color: var(--text); }
+.actions .ok.on { background: var(--yes-pill); border-color: var(--yes); color: var(--yes-text); }
+.actions .no.on { background: var(--no-pill); border-color: var(--no); color: var(--no-text); }
+.actions .undo { margin-left: auto; color: var(--muted); }
