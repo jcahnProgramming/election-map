@@ -23,5 +23,8 @@ test('buckets vote methods', () => {
   assert.equal(methodBucket('Provisional'), 'provisional');
   assert.equal(methodBucket('Absentee Provisional'), 'provisional');
   assert.equal(methodBucket('Machine Votes'), 'election_day');
+  assert.equal(methodBucket('Election'), 'election_day');
+  assert.equal(methodBucket('Provionsal'), 'provisional');
+  assert.equal(methodBucket('Failsafe'), 'other');
   assert.equal(methodBucket('Overseas'), 'other');
 });

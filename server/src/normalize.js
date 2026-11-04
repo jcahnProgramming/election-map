@@ -82,7 +82,7 @@ function isYesNo(choices) {
 
 // Party-prefixed candidate labels: "REP Darline Graham", "(DEM) Jane Doe", "Jane Doe (R)", "Libertarian - Joe Smith".
 // Only strips a prefix/suffix we recognise as a party label; anything else is returned untouched.
-const PARTY_TOKEN = /^(dem|rep|gop|lib|lbt|grn|green|ind|npa|np|con|cst|dfl|uni|uaf|wri|wi|oth|nom|soc|ust|d|r|l|g|i|democratic|democrat|republican|libertarian|independent|nonpartisan|constitution)$/i;
+const PARTY_TOKEN = /^(dem|rep|gop|lib|lbt|grn|green|ind|npa|np|con|cst|dfl|uni|uaf|wri|wi|oth|nom|soc|ust|unc|wrk|d|r|l|g|i|democratic|democrat|republican|libertarian|independent|nonpartisan|constitution)$/i;
 
 /**
  * Split a party-prefixed candidate name into a clean name and the raw party label.
@@ -109,8 +109,8 @@ export function splitPartyPrefix(label) {
  */
 export function methodBucket(label) {
   const k = String(label ?? '').toLowerCase();
-  if (/provision/.test(k)) return 'provisional';
-  if (/election ?day|in[- ]person on|polling place|precinct|e-?day|vote center.*election|machine/.test(k)) return 'election_day';
+  if (/provision|provionsal/.test(k)) return 'provisional';
+  if (/election ?day|in[- ]person on|polling place|precinct|e-?day|vote center.*election|machine|^election$/.test(k)) return 'election_day';
   if (/mail|absentee|early|advance|by ?mail|one[- ]stop|pre[- ]?election|in[- ]person absentee|ballot drop|drop ?box/.test(k)) return 'mail_early';
   return 'other';
 }
