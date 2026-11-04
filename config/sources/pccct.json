@@ -1,0 +1,18 @@
+{
+  "_howto": "PCC Technology public election reporting sites, polled by server/src/adapters/pccct.js. base = the site's ng-app/data folder; electionId from {base}/Elections.json. Files: {base}/election/{id}/Version.json, then {base}/election/{id}/{Version}/Electiondata.json + Lookupdata.json. Reporting is by town; county units are built only because Lookupdata.json itself maps every town to its county (countyTowns). Set enabled:false to stop polling one without deleting it.",
+  "elections": [
+    {
+      "state": "CT",
+      "base": "https://ctemspublic.tgstg.net/ng-app/data",
+      "electionId": "108",
+      "name": "Connecticut 2026 State Election (Secretary of the State)",
+      "url": "https://ctemspublic.tgstg.net/",
+      "date": "2026-11-03",
+      "races": ["senate", "governor", "house"],
+      "measures": true,
+      "enabled": true,
+      "verified": "2026-11-03",
+      "note": "No U.S. Senate race in CT in 2026. The only ballot questions are town charter questions (no statewide measure). Fusion voting: a candidate's party lines are summed into one choice (the source's own candidateGrouping does the same statewide)."
+    }
+  ]
+}
