@@ -178,7 +178,8 @@
         "value": "https://voteyeson3ri.com",
         "source_url": "https://ricampaignfinance.com/RIPublic/ReportsScanned/Public-REFERENDUM-3da52383-ffc1-499c-bab9-7086f9ff11c9.pdf",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": false,
+        "note": "Not reviewed: the source filing (ricampaignfinance.com …/Public-REFERENDUM-3da52383-….pdf) now returns 404, and it was an independent-expenditure filing (CF-8, RI READY), not a ballot-question committee's filing. Left unpublished until an official question-committee source names a website."
       },
       "opposition_committee_name": null,
       "opposition_website": null,
