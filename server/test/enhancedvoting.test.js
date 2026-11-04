@@ -4,7 +4,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import adapter, { parseElection, selectItems, resolveLocality, measureSide } from '../src/adapters/enhancedvoting.js';
+import adapter, { parseElection, selectItems, resolveLocality, measureSide, parseVoteFor } from '../src/adapters/enhancedvoting.js';
+import { enrichRaces } from '../src/contests.js';
 
 const load = (st) => JSON.parse(readFileSync(new URL(`./fixtures/enhancedvoting/${st}.json`, import.meta.url), 'utf8'));
 const bdMap = (fx) => new Map(fx._breakdown ? [[fx._breakdown.id, fx._breakdown]] : []);
@@ -41,15 +42,30 @@ function withCounts(fx, base = 100) {
   return c;
 }
 
-test('GA: Senate, Governor, 14 House districts and 3 amendments; state legislature and Lt. Gov skipped', () => {
-  const { races, unmatched } = parse('ga');
+test('GA: Senate, Governor, 14 House districts, 3 amendments, and every other contest (Lt. Gov) too', () => {
+  const { races, unmatched, fx } = parse('ga');
+  assert.equal(races.length, fx.ballotItems.length, 'every ballot item is emitted');
   assert.equal(byOffice(races, 'senate').length, 1);
   assert.equal(byOffice(races, 'governor').length, 1);
   const house = byOffice(races, 'house');
   assert.deepEqual(house.map((r) => r.district), Array.from({ length: 14 }, (_, i) => String(i + 1)));
   assert.equal(byOffice(races, 'measure').length, 3);
-  assert.ok(!races.some((r) => /Lieutenant|State House/.test(r.name)));
+  const lg = races.find((r) => r.name === 'Lieutenant Governor');
+  assert.equal(lg.office, null, 'not a headline office: left for enrichRaces');
+  assert.equal(lg.voteFor, 1);
+  assert.deepEqual(lg.choices.map((c) => c.party).sort(), ['DEM', 'REP']);
   assert.deepEqual(unmatched, []);
+  enrichRaces({ election: { scope: 'state' }, races }, 'enhancedvoting');
+  assert.deepEqual([lg.level, lg.office, lg.kind], ['statewide', 'lieutenant_governor', 'partisan']);
+});
+
+test('GA with counts: a non-headline contest keeps its statewide votes and methods, no county breakdown', () => {
+  const fx = withCounts(load('ga'));
+  const { races } = parseElection(fx, bdMap(fx), { state: 'GA', counties: true, unmatched: () => {} });
+  const lg = races.find((r) => r.name === 'Lieutenant Governor');
+  assert.deepEqual(lg.units.map((u) => u.level), ['state']);
+  assert.deepEqual(lg.units[0].votes, [1000, 2000]);
+  assert.equal(lg.units[0].methods.length, 4);
 });
 
 test('GA: party from the party object, clean names (no "(Rep)" suffix, no incumbent "(I)")', () => {
@@ -158,12 +174,13 @@ test('VA: five vote methods incl. Post-Election (bucket other)', () => {
     ['Early Voting:mail_early', 'Election Day:election_day', 'Mailed Absentee:mail_early', 'Provisional:provisional', 'Post-Election:other']);
 });
 
-test('UT: 4 House districts only, FOR/AGAINST amendments, judicial retention skipped, no methods', () => {
+test('UT: 4 House districts, FOR/AGAINST amendments, state senate and judicial retention as contests, no methods', () => {
   const { races, unmatched, turnout } = parse('ut');
-  assert.deepEqual(races.filter((r) => r.office !== 'measure').map((r) => `${r.office}${r.district}`), ['house1', 'house2', 'house3', 'house4']);
+  assert.deepEqual(byOffice(races, 'house').map((r) => `${r.office}${r.district}`), ['house1', 'house2', 'house3', 'house4']);
   const measures = byOffice(races, 'measure');
   assert.deepEqual(measures.map((r) => r.name), ['Constitutional Amendment A', 'Constitutional Amendment B']);
-  assert.ok(!races.some((r) => /retained/.test(r.name)));
+  assert.equal(races.length, 14, '15 items, one listed twice under the same id');
+  assert.equal(new Set(races.map((r) => r.key)).size, races.length);
   assert.equal(races[0].units[0].methods, undefined);
   // unknown third-party label is reported, not dropped
   assert.ok(!unmatched.some(([kind, v]) => kind === 'party' && v === 'Independent American'));
@@ -196,7 +213,7 @@ test('WA: ballots left to count is null before counting, then statewide and per 
 
 test('RI: statewide only (towns have no county), Approve/Reject bonds, town questions local', () => {
   const { races, turnout, fx } = parse('ri', { counties: false });
-  assert.deepEqual(races.filter((r) => r.office !== 'measure').map((r) => r.office + (r.district ?? '')), ['senate', 'house1', 'house2', 'governor']);
+  assert.deepEqual(races.filter((r) => r.office !== 'measure').map((r) => r.office + (r.district ?? '')), ['senate', 'house1', 'house2', 'governor', 'null']);
   assert.ok(races.every((r) => r.units.every((u) => u.level === 'state')));
   assert.ok(turnout.every((t) => t.level === 'state'));
   const reed = byOffice(races, 'senate')[0].choices.find((c) => c.party === 'DEM');
@@ -210,13 +227,17 @@ test('RI: statewide only (towns have no county), Approve/Reject bonds, town ques
   assert.deepEqual([b1.units[0].yes, b1.units[0].no], [1000, 2000]);
 });
 
-test('ID: Senate, Governor, 2 House, 3 statewide measures; multiple-choice advisory question skipped', () => {
+test('ID: Senate, Governor, 2 House, 3 statewide measures; multiple-choice advisory question kept as a contest', () => {
   const { races } = parse('id');
-  assert.deepEqual(races.filter((r) => r.office !== 'measure').map((r) => r.office + (r.district ?? '')), ['senate', 'house1', 'house2', 'governor']);
+  assert.deepEqual(races.filter((r) => r.office !== 'measure').map((r) => r.office + (r.district ?? '')), ['senate', 'house1', 'house2', 'governor', 'null', 'null']);
   const sw = byOffice(races, 'measure').filter((r) => r.statewide);
   assert.equal(sw.length, 3);
   assert.ok(sw.every((r) => r.title && r.title.length > 20));
-  assert.ok(!races.some((r) => /Advisory/.test(r.name)));
+  assert.ok(sw.every((r) => r.voteFor === null), '"Requires 50% + 1 vote to pass" is not a vote-for count');
+  const adv = races.filter((r) => /Advisory/.test(r.name));
+  assert.equal(adv.length, 1, 'listed twice in the feed under one id, stored once');
+  assert.equal(adv[0].office, null);
+  assert.equal(adv[0].choices.length, 6);
   // the levy questions' choices are long "IN FAVOR OF ..." / "AGAINST ..." sentences
   const levy = byOffice(races, 'measure').find((r) => !r.statewide);
   assert.ok(levy);
@@ -228,10 +249,55 @@ test('measureSide understands every label seen tonight', () => {
   assert.equal(measureSide('Winchester Model 1894 (.30-30)'), null);
 });
 
-test('selectItems honours the target race list', () => {
+test('selectItems keeps every item; the target race list only picks the headline (county-breakdown) contests', () => {
   const fx = load('ga');
   const onlySenate = selectItems(fx, { races: ['senate'], measures: false });
-  assert.deepEqual(onlySenate.map((x) => x.office), ['senate']);
+  assert.equal(onlySenate.length, fx.ballotItems.length);
+  assert.deepEqual(onlySenate.filter((x) => x.headline).map((x) => x.office), ['senate']);
+  const all = selectItems(fx, adapter.targets().find((t) => t.state === 'GA'));
+  assert.equal(all.filter((x) => x.headline).length, 1 + 1 + 14 + 3);
+  assert.ok(!all.find((x) => x.item.name[0].text === 'Lieutenant Governor').headline);
+});
+
+test('UT: judicial retention is a Yes/No contest, not a measure; enrichRaces makes it judicial / retention', () => {
+  const fx = withCounts(load('ut'));
+  const { races } = parseElection(fx, new Map(), { state: 'UT', counties: true, unmatched: () => {} });
+  const ret = races.filter((r) => /retained/.test(r.name));
+  assert.equal(ret.length, 7);
+  for (const r of ret) {
+    assert.equal(r.office, null);
+    assert.deepEqual(r.choices.map((c) => c.name).sort(), ['NO', 'YES']);
+    assert.ok(r.choices.every((c) => c.party === 'OTHER' && c.partyRaw === ''));
+    assert.equal(r.units[0].yes, undefined, 'per-choice votes, no yes/no fields');
+    assert.deepEqual(r.units[0].votes, [1000, 2000]); // in the feed's own choice order
+  }
+  const senate = races.find((r) => /^State Senate/.test(r.name));
+  assert.equal(senate.office, null);
+  assert.equal(senate.units[0].votes.length, senate.choices.length);
+  const unclassified = enrichRaces({ election: { scope: 'state' }, races }, 'enhancedvoting');
+  assert.deepEqual(unclassified, []);
+  for (const r of ret) assert.deepEqual([r.level, r.kind], ['judicial', 'retention']);
+  assert.ok(ret.some((r) => r.office === 'supreme_court') && ret.some((r) => r.office === 'appeals_court'));
+  assert.deepEqual([senate.level, senate.office, senate.district], ['legislative', 'state_senate', '1']);
+});
+
+test('WA: state legislative position kept; voteFor text that is not a count is null', () => {
+  const { races } = parse('wa');
+  const leg = races.find((r) => /^Legislative District 1/.test(r.name));
+  assert.equal(leg.office, null);
+  assert.equal(leg.voteFor, null, 'WA puts the contest group ("LEGISLATIVE") in voteFor');
+  enrichRaces({ election: { scope: 'state' }, races }, 'enhancedvoting');
+  assert.deepEqual([leg.level, leg.office], ['legislative', 'state_house']);
+});
+
+test('parseVoteFor: counts in words or digits, nothing from unrelated text', () => {
+  assert.equal(parseVoteFor([{ languageId: 'en', text: 'Vote for 1' }]), 1);
+  assert.equal(parseVoteFor([{ languageId: 'en', text: 'Vote for only one' }]), 1);
+  assert.equal(parseVoteFor([{ languageId: 'en', text: 'Vote for up to 3' }]), 3);
+  assert.equal(parseVoteFor([{ languageId: 'en', text: 'Vote for no more than two' }]), 2);
+  assert.equal(parseVoteFor([{ languageId: 'en', text: 'Requires 50% + 1 vote to pass' }]), null);
+  assert.equal(parseVoteFor([{ languageId: 'en', text: 'Congressional' }]), null);
+  assert.equal(parseVoteFor([]), null);
 });
 
 test('fetch(): cheap metadata check, change detection by content, breakdowns only once votes exist', async () => {
@@ -280,4 +346,5 @@ test('targets(): one per enabled config entry, each with the human results URL',
   assert.deepEqual(ts.map((t) => t.state).sort(), ['GA', 'ID', 'RI', 'UT', 'VA', 'WA']);
   for (const t of ts) assert.match(t.url, /^https:\/\/[^/]+\/results\/public\/[^/]+\/elections\//);
   assert.equal(ts.find((t) => t.state === 'RI').counties, false);
+  assert.ok(ts.every((t) => t.allContests === true));
 });

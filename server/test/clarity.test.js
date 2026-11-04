@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { zipSync, unzipSync, strToU8, strFromU8 } from 'fflate';
 import { parseClarity, parseClarityTime } from '../src/adapters/clarity.js';
+import { enrichRaces } from '../src/contests.js';
 
 const dir = new URL('./fixtures/clarity/', import.meta.url);
 const read = (f) => readFileSync(new URL(f, dir), 'utf8');
@@ -15,13 +16,13 @@ const TARGETS = {
   denton: { key: 'TX/Denton/127398', path: 'TX/Denton', eid: '127398', state: 'TX', scope: 'county', countyFips: '48121', label: 'Denton County, TX', version: '382120' },
 };
 
-function parse(s, { xml = (x) => x } = {}) {
+function parse(s, { xml = (x) => x, summary = (x) => x, details = (x) => x } = {}) {
   const t = { ...TARGETS[s], races: ['senate', 'governor', 'house'], measures: TARGETS[s].scope === 'state', url: `https://example/${s}/` };
   const unmatched = [];
   const r = parseClarity({
     target: t, version: t.version,
-    summary: JSON.parse(read(`${s}-summary.json`)),
-    details: JSON.parse(read(`${s}-details.json`)),
+    summary: summary(JSON.parse(read(`${s}-summary.json`))),
+    details: details(JSON.parse(read(`${s}-details.json`))),
     settings: JSON.parse(read(`${s}-electionsettings.json`)),
     detailXml: xml(read(`${s}-detail.xml`)),
   }, { unmatched: (...a) => unmatched.push(a) });
@@ -118,4 +119,103 @@ test('detail.xml survives a zip round trip (what fetch() does)', () => {
   const xml = read('sc-detail.xml');
   const files = unzipSync(zipSync({ 'detail.xml': strToU8(xml) }));
   assert.equal(strFromU8(files['detail.xml']), xml);
+});
+
+// The trimmed fixtures carry only headline contests, so these add real-shaped non-headline contests (copied from the
+// structure of the CO Senate contest) to check that every contest a feed publishes is emitted.
+function addContests(list) {
+  return {
+    summary: (s) => [...s, ...list.map((x) => ({ ...s[0], C: x.C, K: x.K, VF: x.VF, CH: x.CH, P: x.P, V: x.CH.map((_, i) => (i + 1) * 100), W: x.CH.map(() => 1) }))],
+    details: (d) => ({
+      Contests: [...d.Contests, ...list.filter((x) => !x.noDetail).map((x) => ({
+        ...d.Contests[0], K: x.K, V: d.Contests[0].P.map((_, ci) => x.CH.map((__, i) => (ci === 0 ? (i + 1) * 10 : 0))),
+      }))],
+    }),
+  };
+}
+const EXTRA = [
+  { C: 'State Representative - District 5', K: '9001', VF: 1, CH: ['Jane Doe', 'John Roe'], P: ['DEM', 'REP'] },
+  { C: 'Shall Justice Maria E. Berkenkotter of the Colorado Supreme Court be retained in office?', K: '9002', VF: 1, CH: ['Yes', 'No'], P: ['', ''] },
+  { C: 'Board of Education Director District 3', K: '9003', VF: 3, CH: ['Ann A', 'Bob B', 'Cy C', 'Di D'], P: ['', '', '', ''] },
+  { C: 'Zebra Mussel Inspection Warden', K: '9004', VF: 1, CH: ['Pat P', 'Lee L'], P: ['', ''] },
+];
+
+test('CO: every contest is emitted with units, votes and voteFor; non-headline ones carry office null', () => {
+  const { r, unmatched } = parse('co', addContests(EXTRA));
+  assert.deepEqual(unmatched, []);
+  assert.equal(r.races.length, 6 + EXTRA.length);
+  const [rep, ret, board, odd] = EXTRA.map((x) => r.races.find((race) => race.key === x.K));
+  for (const race of [rep, ret, board, odd]) {
+    assert.equal(race.office, null);
+    assert.equal(race.units.length, 65, 'state + 64 counties');
+    assert.deepEqual(race.units[0].votes, race.choices.map((_, i) => (i + 1) * 100));
+    assert.deepEqual(race.units.find((u) => u.countyFips === '08001').votes, race.choices.map((_, i) => (i + 1) * 10));
+    assert.ok(!('W' in race) && race.choices.every((c) => !('winner' in c)));
+  }
+  assert.equal(board.voteFor, 3);
+  assert.equal(rep.voteFor, 1);
+  assert.deepEqual(rep.choices.map((c) => c.party), ['DEM', 'REP']);
+  // retention: a Yes/No contest with per-choice votes, never a measure
+  assert.deepEqual(ret.choices.map((c) => c.name), ['Yes', 'No']);
+  assert.equal(ret.units[0].yes, undefined);
+  assert.equal(r.races.filter((x) => x.office === 'measure').length, 2);
+});
+
+test('CO: enrichRaces classifies the extra contests; an unknown office is unclassified, not dropped', () => {
+  const { r } = parse('co', addContests(EXTRA));
+  const unclassified = enrichRaces(r, 'clarity');
+  assert.deepEqual(unclassified.map((u) => u.key), ['9004']);
+  const by = (k) => r.races.find((x) => x.key === k);
+  assert.deepEqual([by('9001').level, by('9001').office, by('9001').district], ['legislative', 'state_house', '5']);
+  assert.deepEqual([by('9002').level, by('9002').office, by('9002').kind], ['judicial', 'supreme_court', 'retention']);
+  assert.deepEqual([by('9003').level, by('9003').office], ['local', 'school_board']);
+  assert.deepEqual([by('9004').level, by('9004').office], ['unclassified', 'unclassified']);
+  // headline contests keep the office the adapter gave them
+  assert.deepEqual(r.races.filter((x) => x.level === 'federal').map((x) => x.office), ['senate', 'house', 'house']);
+});
+
+test('county site (Denton, TX): local questions and local offices are stored, measures never statewide', () => {
+  const { r } = parse('denton', addContests([
+    { C: 'City of Denton Proposition A', K: '9101', VF: 1, CH: ['For', 'Against'], P: ['', ''] },
+    { C: 'Justice of the Peace, Precinct 1', K: '9102', VF: 1, CH: ['Al A', 'Bo B'], P: ['REP', 'DEM'] },
+  ]));
+  assert.equal(r.races.length, 4);
+  const prop = r.races.find((x) => x.key === '9101');
+  assert.equal(prop.office, 'measure');
+  assert.equal(prop.statewide, false);
+  assert.deepEqual([prop.units[0].level, prop.units[0].yes, prop.units[0].no], ['county', 100, 200]);
+  const jp = r.races.find((x) => x.key === '9102');
+  assert.equal(jp.office, null);
+  assert.deepEqual(jp.units.map((u) => u.level), ['county']);
+  enrichRaces(r, 'clarity');
+  assert.deepEqual([jp.level, jp.office, jp.jurisdiction], ['judicial', 'trial_court', 'Denton County, TX']);
+});
+
+test('a contest key listed twice is stored once', () => {
+  const { r } = parse('co', { summary: (s) => [...s, s[0]] });
+  assert.equal(r.races.length, 6);
+});
+
+test('targets(): allContests true for statewide sites, false for county-run sites', async () => {
+  const { default: adapter } = await import('../src/adapters/clarity.js');
+  const ts = adapter.targets();
+  assert.ok(ts.filter((t) => t.scope === 'state').every((t) => t.allContests === true));
+  assert.ok(ts.filter((t) => t.scope === 'county').every((t) => t.allContests === false));
+});
+
+test('AZ-style "BOND APPROVAL, YES / ..." choices make a measure, with yes/no in the right order', () => {
+  const { r } = parse('denton', addContests([
+    { C: 'PROPOSITION 427 - PIMA JTED', K: '9201', VF: 1, CH: ['BOND APPROVAL, YES / APROBACIÓN DE BONO, SÍ', 'BOND APPROVAL, NO / APROBACIÓN DE BONO, NO'], P: ['', ''] },
+  ]));
+  const prop = r.races.find((x) => x.key === '9201');
+  assert.equal(prop.office, 'measure');
+  assert.deepEqual([prop.units[0].yes, prop.units[0].no], [100, 200]);
+});
+
+test('per-adapter contestRules (config/sources/clarity.json) cover Clarity abbreviations', () => {
+  const names = { 'JOP Pct 1': 'trial_court', 'REP. IN THE G.A. D112': 'state_house', 'Mem of Leg Dist 14': 'state_senate',
+    'Solicitor, Circuit  3': 'district_attorney', 'CO. BD. MEMBER D3': 'county_commission', 'Anderson County Board of Education District 5': 'school_board' };
+  const races = Object.keys(names).map((name, i) => ({ office: null, name, key: String(i), choices: [{ name: 'A', party: 'OTHER' }, { name: 'B', party: 'OTHER' }], units: [] }));
+  assert.deepEqual(enrichRaces({ election: { scope: 'state' }, races }, 'clarity'), []);
+  assert.deepEqual(Object.fromEntries(races.map((r) => [r.name, r.office])), names);
 });

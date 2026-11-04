@@ -1,4 +1,4 @@
-# Data contract (v0.2)
+# Data contract (v0.2, extended in v0.3 — see section 5)
 
 The shared shape between adapters → DB → API → UI. Agreed before the v0.2 work started so the UI, the data
 layer and the adapters could be built in parallel. **`null` always means "this source doesn't publish it"**:
@@ -92,3 +92,44 @@ Socket.io events unchanged: `results:update` `{ sourceId, election, states, fetc
 - Measures status: `TOO EARLY` when pctReporting is null or < `MEASURE_TOO_EARLY_PCT` (config constant), else
   `YES LEADS` / `NO LEADS`. Never "passed" / "failed".
 - Est. reporting (header) = Σ(pctReporting × totalVotes) / Σ(totalVotes) over states with pctReporting != null.
+
+## 5. v0.3: every contest, offices, measure information, official links
+
+### Adapter result additions
+- Adapters emit **every contest** their feed publishes, not just the headline races. `office` stays
+  `senate|house|governor|measure` when the built-in rules identify those; any other contest has `office: null`.
+- `writeSnapshot()` runs `enrichRaces()` (`server/src/contests.js`), which fills per race:
+  `level` (`federal|statewide|legislative|county|local|judicial|measure|unclassified`), `office` (a normalized key such as
+  `attorney_general`, `state_senate`, `school_board`; labels in `config/contest-rules.json`), `kind`
+  (`partisan|nonpartisan|yes_no|retention`), `district`, `jurisdiction`. An adapter may set `level` + `office` itself when
+  its feed carries reliable office codes. Rule order: the adapter's `contestRules` (`config/sources/<id>.json`), the
+  built-in headline rules, then the shared `config/contest-rules.json`. Unmatched contests are stored as `unclassified`
+  and recorded in `unmatched` (kind `contest`): never dropped.
+- A "statewide" office that only one county votes on (a county's own Treasurer in a statewide feed) becomes `county`.
+- Judicial retention questions are candidate-style races (choices Yes/No), not measures.
+- `voteFor` (vote for N) is carried wherever published; `voteFor > 1` = multi-seat.
+- Targets carry `allContests` (default true): false when the feed is only part of the ballot (per-race endpoints, county
+  sites). A missing office is reported as "no race" only for headline offices or feeds with `allContests`.
+
+### Storage
+`races` lost its `office` CHECK (rebuilt once, in a transaction, ids preserved) and gained `level`, `kind`,
+`jurisdiction`. 0.2 rows get `level`/`kind` from their office.
+
+### API
+- `GET /api/offices` → `{ election, levels: { federal: [{ office, label, states:[ST], multiSeat }], state: [...] } }`.
+  Federal = president (when present), senate, house; State = governor + every whole-state office (no district, or
+  at-large) that at least one covered state's feed carries.
+- `GET /api/national?office=&level=` (and `/api/state/:abbr?office=`): any office key; `race=` still works. With only
+  `level=`, that level's first office. Entries add `official: { url, office }`, `officeLabel`, `voteFor`, and for
+  multi-seat contests `multiSeat: true, seats` with `leader`/`marginPts` null (never shaded as a two-way margin).
+  `sourceNote` explains a `no-source` status for a covered state whose feed doesn't carry that office.
+- `GET /api/state/:abbr/contests?q=` → `{ election, state, name, total, matched, q, note, sources[], official,
+  groups: [{ level, title, contests: [{ id, name, title, level, office, officeLabel, district, jurisdiction, kind, voteFor,
+  multiSeat, seats, scope, candidates:[{ name, party, partyRaw, votes, pct }], totalVotes, lead, leadPartyRaw, leader, tied,
+  marginPts, pctReporting, precinctsReporting, precinctsTotal, measureId }] }] }`. `lead` is a party (partisan), a
+  candidate name (nonpartisan), `YES`/`NO` (questions, retention), or null (no votes / tied / multi-seat). `note` is the
+  honest empty state (no source / top races only). Search matches office, district, county, city and candidate names.
+- `GET /api/measures` entries add `live` (false = researched but no feed carries it; counts null), `official`, and
+  `info` (static, official measure information — `docs/measures-data.md`). Unreviewed proponent/opposition websites and
+  party positions are removed on the server, never sent.
+- Every state's official results page: `config/official-results.json`.

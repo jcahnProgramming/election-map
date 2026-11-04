@@ -7,6 +7,7 @@ import path from 'node:path';
 import { config } from './config.js';
 import { currentElectionKey } from './elections.js';
 import { methodBucket } from './normalize.js';
+import { enrichRaces } from './contests.js';
 
 const SCHEMA = `
 CREATE TABLE IF NOT EXISTS elections (
@@ -26,12 +27,16 @@ CREATE TABLE IF NOT EXISTS races (
   id          INTEGER PRIMARY KEY,
   election_id INTEGER NOT NULL REFERENCES elections(id),
   state       TEXT NOT NULL,
-  office      TEXT NOT NULL CHECK (office IN ('senate','governor','house','measure')),
-  district    TEXT,                        -- house district number, 'AL' for at-large
+  office      TEXT NOT NULL,               -- normalized office key: senate, house, governor, attorney_general, state_senate, measure, ...
+  district    TEXT,                        -- district number, 'AL' for at-large
   name        TEXT NOT NULL,               -- contest name as the source gives it
   source_key  TEXT NOT NULL,               -- source's contest id
   vote_for    INTEGER,
   statewide   INTEGER NOT NULL DEFAULT 1,  -- 0 for local measures that appear in a statewide feed
+  title       TEXT,
+  level       TEXT,                        -- federal|statewide|legislative|county|local|judicial|measure|unclassified
+  kind        TEXT,                        -- partisan|nonpartisan|yes_no|retention
+  jurisdiction TEXT,                       -- county / city the contest belongs to, when known
   UNIQUE (election_id, source_key)
 );
 CREATE TABLE IF NOT EXISTS reporting_units (
@@ -141,9 +146,62 @@ const COLUMNS = [
   ['elections', 'election_key', 'TEXT'],
   ['snapshots', 'source_updated_at', 'TEXT'],
   ['races', 'title', 'TEXT'],
+  ['races', 'level', 'TEXT'],
+  ['races', 'kind', 'TEXT'],
+  ['races', 'jurisdiction', 'TEXT'],
 ];
 
+const RACES_V03 = `CREATE TABLE races_v03 (
+  id          INTEGER PRIMARY KEY,
+  election_id INTEGER NOT NULL REFERENCES elections(id),
+  state       TEXT NOT NULL,
+  office      TEXT NOT NULL,
+  district    TEXT,
+  name        TEXT NOT NULL,
+  source_key  TEXT NOT NULL,
+  vote_for    INTEGER,
+  statewide   INTEGER NOT NULL DEFAULT 1,
+  title       TEXT,
+  level       TEXT,
+  kind        TEXT,
+  jurisdiction TEXT,
+  UNIQUE (election_id, source_key)
+)`;
+
+/**
+ * 0.3: `races.office` held only senate/governor/house/measure behind a CHECK constraint; every contest now gets its own
+ * office key. SQLite can't drop a CHECK, so the table is rebuilt the documented way (sqlite.org/lang_altertable.html,
+ * "making other kinds of table schema changes"): new table, copy every row with its id, drop, rename, verify foreign
+ * keys, all in one transaction. Contest metadata only; no result row is touched, and the ids every result row points
+ * at are preserved.
+ */
+export function rebuildRacesWithoutOfficeCheck(db) {
+  const sql = db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'races'").get()?.sql ?? '';
+  if (!/CHECK\s*\(\s*office\s+IN/i.test(sql)) return false;
+  db.pragma('foreign_keys = OFF');
+  try {
+    db.transaction(() => {
+      const have = db.prepare('PRAGMA table_info(races)').all().map((c) => c.name);
+      const cols = ['id', 'election_id', 'state', 'office', 'district', 'name', 'source_key', 'vote_for', 'statewide', 'title', 'level', 'kind', 'jurisdiction']
+        .filter((c) => have.includes(c));
+      db.exec(RACES_V03);
+      db.exec(`INSERT INTO races_v03 (${cols.join(', ')}) SELECT ${cols.join(', ')} FROM races`);
+      const before = db.prepare('SELECT COUNT(*) n FROM races').get().n;
+      const after = db.prepare('SELECT COUNT(*) n FROM races_v03').get().n;
+      if (before !== after) throw new Error(`races rebuild copied ${after} of ${before} rows`);
+      db.exec('DROP TABLE races');
+      db.exec('ALTER TABLE races_v03 RENAME TO races');
+      const bad = db.prepare('PRAGMA foreign_key_check').all();
+      if (bad.length) throw new Error(`foreign key check failed after races rebuild: ${JSON.stringify(bad.slice(0, 3))}`);
+    })();
+  } finally {
+    db.pragma('foreign_keys = ON');
+  }
+  return true;
+}
+
 function migrate(db) {
+  rebuildRacesWithoutOfficeCheck(db);
   for (const [table, col, type] of COLUMNS) {
     const have = db.prepare(`PRAGMA table_info(${table})`).all().some((c) => c.name === col);
     if (!have) db.exec(`ALTER TABLE ${table} ADD COLUMN ${col} ${type}`);
@@ -152,6 +210,11 @@ function migrate(db) {
   // This fills a NULL once (election metadata, not result rows) so a later change of `current` can't move them.
   db.prepare('UPDATE elections SET election_key = ? WHERE election_key IS NULL').run(currentElectionKey());
   db.exec('CREATE INDEX IF NOT EXISTS elections_by_key ON elections (election_key, state, scope)');
+  // Contests stored before 0.3 were only ever the four headline offices: their level follows from the office.
+  db.exec(`UPDATE races SET level = CASE office WHEN 'measure' THEN 'measure' WHEN 'governor' THEN 'statewide' ELSE 'federal' END,
+    kind = CASE office WHEN 'measure' THEN 'yes_no' ELSE 'partisan' END
+    WHERE level IS NULL AND office IN ('senate','house','governor','measure')`);
+  db.exec('CREATE INDEX IF NOT EXISTS races_by_office ON races (election_id, office)');
 }
 
 export function openDb(file = path.join(config.dataDir, 'election-map.db')) {
@@ -177,6 +240,10 @@ const int = (x) => (num(x) == null ? null : Math.round(Number(x)));
  */
 export function writeSnapshot(db, r) {
   const st = prepared(db);
+  // Every contest gets a level / office key / kind (server/src/contests.js). Unclassified ones are stored, not dropped,
+  // and recorded in `unmatched` so they show up for review.
+  const unclassified = enrichRaces(r, r.source);
+  for (const u of unclassified) recordUnmatched(db, { source: r.source, kind: 'contest', value: u.name, context: r.election?.state ?? '' });
   return db.transaction(() => {
     const now = r.fetchedAt;
     const e = r.election;
@@ -212,7 +279,7 @@ export function writeSnapshot(db, r) {
       st.upsertRace.run({
         election_id: electionId, state: e.state, office: race.office, district: race.district ?? null,
         name: race.name, source_key: race.key, vote_for: race.voteFor ?? null, statewide: race.statewide === false ? 0 : 1,
-        title: race.title ?? null,
+        title: race.title ?? null, level: race.level ?? null, kind: race.kind ?? null, jurisdiction: race.jurisdiction ?? null,
       });
       const raceId = st.raceId.get(electionId, race.key).id;
       const candIds = (race.choices ?? []).map((c, position) => {
@@ -272,11 +339,13 @@ function prepared(db) {
       ON CONFLICT (source, source_key) DO UPDATE SET name = excluded.name, date = excluded.date, url = excluded.url`),
     electionId: db.prepare('SELECT id, election_key FROM elections WHERE source = ? AND source_key = ?'),
     insertSnapshot: db.prepare('INSERT INTO snapshots (election_id, source, source_version, fetched_at, source_updated_at) VALUES (?,?,?,?,?)'),
-    upsertRace: db.prepare(`INSERT INTO races (election_id, state, office, district, name, source_key, vote_for, statewide, title)
-      VALUES (@election_id, @state, @office, @district, @name, @source_key, @vote_for, @statewide, @title)
+    upsertRace: db.prepare(`INSERT INTO races (election_id, state, office, district, name, source_key, vote_for, statewide, title,
+        level, kind, jurisdiction)
+      VALUES (@election_id, @state, @office, @district, @name, @source_key, @vote_for, @statewide, @title, @level, @kind, @jurisdiction)
       ON CONFLICT (election_id, source_key) DO UPDATE SET name = excluded.name, office = excluded.office,
         district = excluded.district, vote_for = excluded.vote_for, statewide = excluded.statewide,
-        title = COALESCE(excluded.title, races.title)`),
+        title = COALESCE(excluded.title, races.title), level = excluded.level, kind = excluded.kind,
+        jurisdiction = COALESCE(excluded.jurisdiction, races.jurisdiction)`),
     raceId: db.prepare('SELECT id FROM races WHERE election_id = ? AND source_key = ?'),
     upsertCandidate: db.prepare(`INSERT INTO candidates (race_id, name, party, party_raw, position)
       VALUES (@race_id, @name, @party, @party_raw, @position)

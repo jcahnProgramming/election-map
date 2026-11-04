@@ -1,5 +1,13 @@
 {
   "_howto": "Elections polled by the Enhanced Voting adapter (server/src/adapters/enhancedvoting.js). host = the results site's host, slug = the jurisdiction slug in /results/public/{slug}, publicElectionId = elections[].publicElectionId from GET https://{host}/results/public/api/jurisdictions/{slug}. counties:false = emit statewide units only (RI reports by town and the source doesn't say which county a town is in). Set enabled:false to stop polling one without deleting it.",
+  "_contestRulesHowto": "Contest-name rules for this source's own naming, tried before the shared config/contest-rules.json (server/src/contests.js). match = case-insensitive regex on the folded name (lower case, commas and parentheses turned into spaces). Found in the 2026-11-03 live /data payloads.",
+  "contestRules": [
+    {"match": "^district attorney\\b", "level": "county", "office": "district_attorney", "note": "GA: District Attorney - Columbia Judicial Circuit (the word judicial would otherwise make it a judge)"},
+    {"match": "^senator in (the )?general assembly\\b", "level": "legislative", "office": "state_senate", "note": "RI: Senator in General Assembly District 1"},
+    {"match": "^state school board\\b", "level": "statewide", "office": "state_board_of_education", "note": "UT: State School Board District 1"},
+    {"match": "^psc\\b", "level": "statewide", "office": "public_service_commission", "note": "GA: PSC - District 3"},
+    {"match": "^[a-z .'-]+: (non-partisan )?(assistant )?(town (moderator|sergeant|administrator)|(first |second )?warden|zoning inspector|(fire|budget) committee|(charter review|planning) commission)\\b", "level": "local", "office": "local_office", "note": "RI towns: \"Exeter: Town Moderator\", \"Cumberland: Non-Partisan Fire Committee District 1\""}
+  ],
   "elections": [
     {
       "state": "GA",

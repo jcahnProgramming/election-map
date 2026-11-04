@@ -48,7 +48,11 @@ function targets() {
       label: e.name,
       levels: e.scope === 'county' ? ['county'] : ['state', 'county'],
       races: e.races ?? ['senate', 'governor', 'house'],
+      // `races` / `measures` say what this site is expected to carry (coverage); they no longer filter what is stored.
       measures: e.scope !== 'county',
+      // A statewide site lists every contest on its ballot; a county-run site only that county's, so it can't speak
+      // for the whole state's ballot.
+      allContests: e.allContests ?? (e.scope ?? (e.path.includes('/') ? 'county' : 'state')) === 'state',
       url: `${BASE}/${e.path}/${e.eid}/`,
       ...(e.election ? { election: e.election } : {}),
     }));
@@ -167,12 +171,17 @@ export function parseClarity({ target: t, version, summary, details = null, sett
     : { level: 'county', countyFips: t.countyFips, name: t.label };
 
   const races = [];
+  const seenKeys = new Set();
   for (const c of contestsIn) {
+    // Every contest is stored. The built-in classifier names the headline offices and yes/no measures; anything else
+    // (legislature, judges, retention, county and local offices) goes out with office null and is classified by
+    // contests.enrichRaces from config rules when the snapshot is written.
+    if (c?.C == null || c.K == null) continue; // not a contest (no name / key): nothing to store it under
+    if (seenKeys.has(String(c.K))) continue; // a repeated contest key would overwrite the first in the snapshot
+    seenKeys.add(String(c.K));
     const choices = c.CH ?? [];
-    const cls = classifyContest(c.C, choices);
-    if (!cls) continue;
-    if (cls.office !== 'measure' && !t.races.includes(cls.office)) continue;
-    if (cls.office === 'measure' && !t.measures) continue;
+    let cls = classifyContest(c.C, choices);
+    if (!cls && isYesNoQuestion(c.C, choices)) cls = { office: 'measure', district: null };
 
     const parties = choices.map((label, i) => {
       const raw = c.P?.[i] ?? '';
@@ -210,7 +219,7 @@ export function parseClarity({ target: t, version, summary, details = null, sett
 
     // County breakdown, when this is a statewide site that publishes it.
     if (t.scope === 'state' && det) {
-      det.P.forEach((countyName, i) => {
+      (det.P ?? []).forEach((countyName, i) => {
         const m = county(countyName, `${t.state} ${c.C}`);
         if (!m) return;
         units.push({
@@ -227,10 +236,10 @@ export function parseClarity({ target: t, version, summary, details = null, sett
     const xc = xml?.contests.get(String(c.K));
     if (xc) attachMethods(units, choices, xc);
 
-    const isMeasure = cls.office === 'measure';
+    const isMeasure = cls?.office === 'measure';
     if (isMeasure) {
-      const yesIdx = choices.findIndex((ch) => yesNoSide(ch) === 'yes');
-      const noIdx = choices.findIndex((ch) => yesNoSide(ch) === 'no');
+      const yesIdx = choices.findIndex((ch) => choiceSide(ch) === 'yes');
+      const noIdx = choices.findIndex((ch) => choiceSide(ch) === 'no');
       for (const u of units) {
         u.yes = u.votes[yesIdx] ?? 0;
         u.no = u.votes[noIdx] ?? 0;
@@ -239,10 +248,11 @@ export function parseClarity({ target: t, version, summary, details = null, sett
     }
     for (const u of units) delete u.clarityName;
 
-    // A measure on a statewide feed that only some counties vote on is local (a city question, say).
-    const statewide = !isMeasure || !det || det.P.length >= allCounties.size;
+    // A measure on a statewide feed that only some counties vote on is local (a city question, say); every measure on
+    // a county-run site is local.
+    const statewide = !isMeasure || (t.scope === 'state' && (!det || (det.P ?? []).length >= allCounties.size));
     races.push({
-      office: cls.office, district: cls.district, name: c.C, key: String(c.K), voteFor: c.VF ?? null,
+      office: cls?.office ?? null, district: cls?.district ?? null, name: c.C, key: String(c.K), voteFor: num(c.VF),
       title: null, // Clarity publishes nothing beyond the contest name
       statewide, choices: parties, units,
     });
@@ -261,6 +271,26 @@ export function parseClarity({ target: t, version, summary, details = null, sett
     turnout,
     races,
   };
+}
+
+/**
+ * Measure choice → 'yes' | 'no' | null. Besides Yes/No/For/Against (shared yesNoSide), AZ county sites word bond and
+ * budget-override questions "BOND APPROVAL, YES / APROBACIÓN DE BONO, SÍ" (English before the slash).
+ */
+export function choiceSide(label) {
+  const s = String(label ?? '').trim();
+  const yn = yesNoSide(s);
+  if (yn) return yn;
+  const m = s.split('/')[0].match(/,\s*(yes|no)\s*$/i);
+  return m ? m[1].toLowerCase() : null;
+}
+
+// A yes/no about keeping a judge is a retention contest, not a measure (same test as normalize.classifyContest).
+const JUDICIAL = /\b(retain|retention|justice|judge|court)\b/i;
+function isYesNoQuestion(name, choices) {
+  if (choices.length !== 2 || JUDICIAL.test(String(name))) return false;
+  const sides = choices.map(choiceSide);
+  return sides.includes('yes') && sides.includes('no');
 }
 
 // Labels some Clarity sites use that the shared methodBucket() doesn't recognise on its own.

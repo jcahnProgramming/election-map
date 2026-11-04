@@ -17,7 +17,7 @@
 //   /results/public/api/elections/{slug}/{publicElectionId}/data/ballot-item/{ballotItemId}
 //        the same payload plus ballotItemWithBreakdown.breakdownResults[]: one row per locality with ballotOptions
 //        (incl. groupResults) and precinctReportingStatus {reportingUnits,totalUnits} = PRECINCTS in that locality.
-//        This is the only county source and it is big (0.3-2 MB each), so it is fetched only for contests we show,
+//        This is the only county source and it is big (0.3-2 MB each), so it is fetched only for headline contests,
 //        only once votes are counted, only when that contest's statewide numbers changed, and at most every few minutes.
 //   /turnout, /stats, /localities, /vr also exist; /turnout and /stats were empty tonight and /data already carries the rest.
 // The source's own isWinner flags are deliberately ignored (we never call races).
@@ -147,28 +147,62 @@ function cleanName(raw) {
   return name.trim();
 }
 
+const HEADLINE = ['senate', 'governor', 'house'];
+const NUMBER_WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+
 /**
- * Which ballot items we track, with their classification. Exported so fetch() knows which breakdowns to fetch.
- * @returns {Array<{ item, office, district, statewide }>}
+ * Seats a voter may fill, from the item's voteFor text: "Vote for 1", "Vote for only one", "Vote for up to 3".
+ * Some states put other text in that field (WA: the contest group, "Congressional"; ID measures: "Requires 50% + 1
+ * vote to pass"): that is not a vote-for count → null.
  */
-export function selectItems(data, { races = ['senate', 'governor', 'house'], measures = true } = {}) {
+export function parseVoteFor(raw) {
+  const m = txt(raw).match(/\bvote for\s+(?:up to\s+|only\s+|no more than\s+|not more than\s+)?(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\b/i);
+  if (!m) return null;
+  return /^\d+$/.test(m[1]) ? Number(m[1]) : NUMBER_WORDS[m[1].toLowerCase()];
+}
+
+/** Two options, one yes-side and one no-side ("Yes"/"No", "For"/"Against", "Approve"/"Reject", "Levy Yes"/…). */
+export function isYesNoItem(item) {
+  const opts = item?.summaryResults?.ballotOptions ?? [];
+  if (opts.length !== 2) return false;
+  const sides = opts.map((o) => measureSide(txt(o.name)));
+  return sides.includes('yes') && sides.includes('no');
+}
+
+/**
+ * Every ballot item the feed publishes, with its classification. Nothing is dropped here (only an exact repeat of an
+ * item id, which the feed sometimes lists twice):
+ * - office 'senate' | 'governor' | 'house' when the built-in classifier knows the contest;
+ * - office 'measure' for a real yes/no question; statewide:false when only part of the state votes on it;
+ * - office null for everything else (state legislature, judges, judicial retention, county and local offices,
+ *   multiple-choice advisory questions …): db.writeSnapshot → contests.enrichRaces classifies those from config rules.
+ * `headline` marks the contests fetch() reads county breakdowns for: the target's `races` plus statewide measures.
+ * @returns {Array<{ item, office, district, statewide, headline }>}
+ */
+export function selectItems(data, { races = HEADLINE, measures = true } = {}) {
   const items = data?.ballotItems ?? [];
-  const maxUnits = Math.max(1, ...items.map((b) => b.reportingStatus?.totalUnits ?? 0));
+  let maxUnits = 1;
+  for (const b of items) maxUnits = Math.max(maxUnits, b?.reportingStatus?.totalUnits ?? 0);
+  const seen = new Set();
   const out = [];
   for (const item of items) {
+    if (!item || item.id == null || seen.has(item.id)) continue;
+    seen.add(item.id);
     const name = txt(item.name);
-    const opts = item.summaryResults?.ballotOptions ?? [];
-    if (item.contestType === 'BallotMeasure' || (opts.length === 2 && opts.every((o) => measureSide(txt(o.name))))) {
-      if (!measures || JUDICIAL.test(name)) continue;
-      const sides = opts.map((o) => measureSide(txt(o.name)));
-      if (opts.length !== 2 || !sides.includes('yes') || !sides.includes('no')) continue; // e.g. ID's multiple-choice advisory question
+    const yesNo = isYesNoItem(item);
+    if (yesNo && !JUDICIAL.test(name)) {
       const units = item.reportingStatus?.totalUnits ?? 0;
-      out.push({ item, office: 'measure', district: null, statewide: maxUnits > 1 && units >= 0.9 * maxUnits });
+      const statewide = maxUnits > 1 && units >= 0.9 * maxUnits;
+      out.push({ item, office: 'measure', district: null, statewide, headline: measures && statewide });
       continue;
     }
-    const cls = classifyContest(canonicalContestName(name), opts.map((o) => txt(o.name)));
-    if (!cls || cls.office === 'measure' || !races.includes(cls.office)) continue;
-    out.push({ item, office: cls.office, district: cls.district, statewide: true });
+    // Judicial retention ("Shall X be retained …") is a yes/no about a person, not a measure: it stays a
+    // candidate-style contest with choices Yes / No (enrichRaces makes it judicial / retention).
+    const cls = item.contestType === 'BallotMeasure' || yesNo
+      ? null
+      : classifyContest(canonicalContestName(name), (item.summaryResults?.ballotOptions ?? []).map((o) => txt(o.name)));
+    const office = cls && cls.office !== 'measure' ? cls.office : null;
+    out.push({ item, office, district: office ? cls.district : null, statewide: true, headline: !!office && races.includes(office) });
   }
   return out;
 }
@@ -218,9 +252,10 @@ export function parseElection(data, breakdowns = new Map(), opts = {}) {
     const name = txt(item.name);
     const options = item.summaryResults?.ballotOptions ?? [];
     const optIndex = new Map(options.map((o, i) => [o.id, i]));
+    const yesNoChoices = office === 'measure' || isYesNoItem(item); // measures and judicial retention: Yes / No
     const choices = options.map((o) => {
       const raw = txt(o.name).trim();
-      if (office === 'measure') return { name: raw, party: 'OTHER', partyRaw: '' };
+      if (yesNoChoices) return { name: raw, party: 'OTHER', partyRaw: '' };
       return { name: cleanName(raw), ...partyOf(o, unmatched, `${state} ${name} / ${raw}`) };
     });
     const sides = office === 'measure' ? options.map((o) => measureSide(txt(o.name))) : null;
@@ -275,9 +310,8 @@ export function parseElection(data, breakdowns = new Map(), opts = {}) {
       methods: methodsFor(options, groupOrder, toVotes),
     });
 
-    const vf = txt(item.voteFor).match(/\d+/);
     const race = {
-      office, district, name, key: String(item.id), voteFor: vf ? Number(vf[0]) : null, statewide,
+      office, district, name, key: String(item.id), voteFor: parseVoteFor(item.voteFor), statewide,
       choices, units: [top, ...countyUnits],
     };
     if (office === 'measure') {
@@ -361,6 +395,8 @@ function targets() {
       counties: e.counties !== false,
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: e.measures !== false,
+      // /data lists every contest on the ballot and every one is stored (county breakdowns only for headline ones).
+      allContests: e.allContests ?? true,
       url: e.url ?? `https://${e.host}/results/public/${e.slug}/elections/${e.publicElectionId}`,
     }));
 }
@@ -385,12 +421,14 @@ async function fetchTarget(t, { http, log, unmatched }) {
   const data = (await http.getJson(`${base}/data`)).json;
   if (!Array.isArray(data?.ballotItems)) throw new Error(`Unexpected /data payload from ${t.host} (no ballotItems)`);
 
-  // County breakdowns: only for tracked contests with votes, only when their numbers moved, at most every few minutes.
+  // County breakdowns cost one 0.3-2 MB request per contest, so they are read only for the headline contests (the
+  // target's races + statewide measures), only once votes are counted, only when that contest's statewide numbers
+  // moved, and at most every few minutes. Every other contest is stored from /data alone, as a statewide unit.
   let stale = false;
   const tracked = selectItems(data, t);
   const keep = new Set();
-  for (const { item, statewide } of tracked) {
-    if (!statewide || item.hasBreakdownResults === false || !((item.voteTotal ?? 0) > 0)) continue;
+  for (const { item, headline } of tracked) {
+    if (!headline || item.hasBreakdownResults === false || !((item.voteTotal ?? 0) > 0)) continue;
     keep.add(item.id);
     const fp = fingerprint(item);
     const prev = m.bd.get(item.id);

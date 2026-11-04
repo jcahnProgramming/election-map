@@ -1,5 +1,24 @@
 {
   "_howto": "Elections polled by the Clarity adapter (server/src/adapters/clarity.js). path = the URL segment(s) before the election id: 'CO' for a statewide site, 'PA/Allegheny' for a county site. Find ids at https://results.enr.clarityelections.com/{path}/elections.json. Set enabled:false to stop polling one without deleting it. County sites need countyFips (5 digits) and scope 'county'. Optional `election` = a key from config/elections.json (default: its `current`).",
+  "_contestRulesHowto": "Contest-name rules for this source's own abbreviations, tried before the shared config/contest-rules.json (server/src/contests.js). match = case-insensitive regex on the folded name (lower case, commas and parentheses turned into spaces). Found in the 2026-11-03 live summaries.",
+  "contestRules": [
+    {"match": "^district attorney\\b", "level": "county", "office": "district_attorney", "note": "GA-style \"District Attorney - X Judicial Circuit\": the word judicial would otherwise make it a judge"},
+    {"match": "\\bcounty (board of education|school (board|trustee))\\b", "level": "local", "office": "school_board", "note": "SC: Anderson County Board of Education District 5, Lexington County School Trustee District 3"},
+    {"match": "\\bcouncil wd\\b", "level": "local", "office": "city_council", "note": "NE: Bellevue Council Wd 2"},
+    {"match": "^rep\\.? in the g\\.? ?a\\.?", "level": "legislative", "office": "state_house", "note": "IL: REP. IN THE G.A. D112"},
+    {"match": "^mem(ber)?\\.? of (the )?leg(islature)?\\b", "level": "legislative", "office": "state_senate", "note": "NE unicameral: Mem of Leg Dist 14"},
+    {"match": "^co\\.? (bd\\.?|board) member|^co\\.? comm(issioner)?\\.? dist", "level": "county", "office": "county_commission", "note": "IL: CO. BD. MEMBER D3; NE: Co Comm Dist 2"},
+    {"match": "^jop\\b", "level": "judicial", "office": "trial_court", "note": "TX: JOP Pct 1 (justice of the peace)"},
+    {"match": "^solicitor\\b(?! general)", "level": "county", "office": "district_attorney", "note": "SC: Solicitor, Circuit 3 (the circuit prosecutor)"},
+    {"match": "^psc\\b", "level": "statewide", "office": "public_service_commission", "note": "NE: PSC - District 2"},
+    {"match": "\\bstate boe\\b", "level": "statewide", "office": "state_board_of_education", "note": "TX/NE: Member, State BoE, Dist 9"},
+    {"match": "^sec\\.? of state\\b", "level": "statewide", "office": "secretary_of_state", "note": "NE: Sec. of State"},
+    {"match": "^state mine inspector\\b", "level": "statewide", "office": "mine_inspector", "note": "AZ"},
+    {"match": "^governor of .*\\buniversity\\b", "level": "statewide", "office": "university_regent", "note": "MI: Governor of Wayne State University"},
+    {"match": "\\b(school bd|sch\\.? dist|school dist|esu \\d+ member|lccc subcouncil|metro cc)\\b|^(bps|ops|pls) (bd|subd|dist)\\b|platteview bd", "level": "local", "office": "school_board", "note": "NE (Sarpy) school boards and ESUs; Metro Community College"},
+    {"match": "^esr superintendent|regional superintendent", "level": "county", "office": "county_office", "note": "IL: ESR SUPERINTENDENT (regional superintendent of schools)"},
+    {"match": "\\bnrd\\b|^dir (oppd|mud) subd|\\bwater (dist|cid)\\b|\\bmud no\\b|\\bsan\\.? district\\b", "level": "local", "office": "special_district", "note": "NE natural-resources / utility districts; TX water and MUD boards; IL sanitary districts"}
+  ],
   "elections": [
     {
       "state": "CO",
