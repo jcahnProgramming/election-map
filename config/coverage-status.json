@@ -108,8 +108,7 @@
       "reason": "ResultsAjax.svc CSV/XML export"
     },
     "NE": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "NH": {
       "status": "no_feed",
@@ -120,8 +119,7 @@
       "reason": "no statewide live results (county clerks)"
     },
     "NM": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "NV": {
       "status": "blocked",
@@ -139,8 +137,7 @@
       "reason": "AWS WAF 403"
     },
     "OR": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "PA": {
       "status": "blocked",
@@ -153,8 +150,7 @@
       "status": "live"
     },
     "SD": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "TN": {
       "status": "blocked",
