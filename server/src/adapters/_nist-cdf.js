@@ -16,7 +16,11 @@
 // we never call races.
 //
 // parseCdf(xml, { state, unmatched }) → { generatedDate, status, electionName, electionDate, turnout, races }
-// races are the full set of contests we track (senate/governor/house/measure); the adapter filters by target.
+// races = every contest in the report (v0.3): U.S. Senate / House / Governor and ballot measures carry their built-in
+// office; anything else has office null (State Senate / House / school districts get level + office from the type of
+// the contest's electoral-district GpUnit) and is classified by server/src/contests.js when the snapshot is written.
+// Retention contests (RetentionContest, or a yes/no "retain" question) are NOT measures: they come out as candidate-style
+// races with choices Yes / No and kind 'retention'. Party / straight-ticket contests are not offices and are skipped.
 import { createHash } from 'node:crypto';
 import { XMLParser } from 'fast-xml-parser';
 import { classifyContest, methodBucket, normalizeParty, splitPartyPrefix, yesNoSide } from '../normalize.js';
@@ -98,6 +102,12 @@ export function fixGeneratedDate(iso, { hour12 = false, now = new Date() } = {})
   return new Date(pick).toISOString();
 }
 
+// ReportingUnitType of a contest's electoral district → level + office (V1 "StateSenate", V2 "state-senate").
+const DISTRICT_HINT = {
+  statesenate: { level: 'legislative', office: 'state_senate' },
+  statehouse: { level: 'legislative', office: 'state_house' },
+  school: { level: 'local', office: 'school_board' },
+};
 const COUNTY_TYPES = /^(county|parish|borough)$/i;
 const SUBCOUNTY_TYPES = /^(precinct|split-?precinct|ward|town|township|city|municipality|village|polling-?place|vote-?center|drop-?box)$/i;
 
@@ -202,13 +212,14 @@ export function parseCdf(xml, { state, unmatched = () => {} } = {}) {
   const races = [];
   for (const c of election?.ContestCollection?.Contest ?? election?.Contest ?? []) {
     const kind = xsiType(c);
-    if (/Retention|Party|Straight/i.test(kind)) continue;
-    const isMeasure = /BallotMeasure/i.test(kind);
+    if (/Party|Straight/i.test(kind)) continue;
     const name = text(field(c, 'Name')) ?? text(c.Name) ?? '';
     const abbr = text(field(c, 'Abbreviation'));
+    const isRetention = /Retention/i.test(kind) || (/BallotMeasure/i.test(kind) && /\bretain(ed)?\b|\bretention\b/i.test(name));
+    const isMeasure = /BallotMeasure/i.test(kind) && !isRetention;
 
     const sels = (c.BallotSelection ?? []).map((s) => {
-      if (isMeasure) {
+      if (isMeasure || isRetention) {
         const label = text(field(s, 'Selection')) ?? text(s.Selection) ?? '';
         return { s, label, side: yesNoSide(label) };
       }
@@ -218,8 +229,7 @@ export function parseCdf(xml, { state, unmatched = () => {} } = {}) {
       const label = cand.name ?? (writeIn ? 'Write-in' : '');
       return { s, label, partyId: cand.partyId, writeIn };
     });
-    const cls = isMeasure ? { office: 'measure', district: null } : classifyContest(name, sels.map((x) => x.label));
-    if (!cls) continue;
+    const cls = isMeasure ? { office: 'measure', district: null } : isRetention ? null : classifyContest(name, sels.map((x) => x.label));
 
     // Top unit: the contest's electoral district (V2), else the state unit, else the first non-county/precinct unit counted.
     const counted = new Set();
@@ -234,7 +244,7 @@ export function parseCdf(xml, { state, unmatched = () => {} } = {}) {
     const statewide = topId != null && topId === stateUnit?.id;
 
     const choices = sels.map((x) => {
-      if (isMeasure) return { name: x.label, party: 'OTHER', partyRaw: '' };
+      if (isMeasure || isRetention) return { name: x.label, party: 'OTHER', partyRaw: '' };
       if (x.partyId) {
         const { party, partyRaw } = partyFor(x.partyId, `${state} ${name} / ${x.label}`);
         return { name: x.label, party, partyRaw };
@@ -297,17 +307,22 @@ export function parseCdf(xml, { state, unmatched = () => {} } = {}) {
     }
 
     const fullText = text(c.FullText) ?? text(c.SummaryText) ?? text(c.BallotTitle);
-    races.push({
-      office: cls.office,
-      district: cls.district,
+    const race = {
+      office: cls?.office ?? null,
+      district: cls?.district ?? null,
       name: isMeasure ? (abbr || name) : name,
       key: c['@ObjectId'],
-      voteFor: num(field(c, 'VotesAllowed')),
+      voteFor: num(field(c, 'VotesAllowed')) ?? num(field(c, 'NumberElected')),
       statewide,
       title: isMeasure ? (fullText ?? (abbr && name !== abbr ? name : null)) : null,
       choices,
       units: out,
-    });
+    };
+    if (isRetention) race.kind = 'retention';
+    // The electoral district's own type pins the legislature down better than the contest name does.
+    const hint = !cls && topId ? DISTRICT_HINT[String(units.get(topId)?.type ?? '').toLowerCase().replace(/[^a-z]/g, '')] : null;
+    if (hint) Object.assign(race, hint);
+    races.push(race);
   }
 
   return {

@@ -1,6 +1,56 @@
 {
-  "_howto": "Elections polled by the Tally ENR / TotalResults adapter (server/src/adapters/tallyenr.js). cid = the client slug (https://{cid}.tally-enr.com); electionId from {base}/Election/GetElectionList?cid={cid}. contestTypes = which Tally contest types to read (each contest's contestTypeCode); measures are statewide only when their type is in statewideTypes. Set enabled:false to stop polling. Never use the multi-MB FullDataFile.json.",
+  "_howto": "Elections polled by the Tally ENR / TotalResults adapter (server/src/adapters/tallyenr.js). cid = the client slug (https://{cid}.tally-enr.com); electionId from {base}/Election/GetElectionList?cid={cid}. Every contest of every contest type the election lists is stored: headline contests (U.S. Senate / House / Governor / yes-no measures) of detailTypes are read one by one (GetSingleContestResults, the only call with the vote-type split); everything else comes from one GetContestResults call per contest type, at most once every sweepSeconds. contestTypes (optional) narrows the swept types, and allContests then defaults to false. Measures are statewide only when their type is in statewideTypes. typeHints map a Tally contest type to a level + office key (config/contest-rules.json labels) for contests the built-in rules don't place. contestRules: name rules for this source, tried before the shared ones. Set enabled:false to stop polling. Never use the multi-MB FullDataFile.json.",
   "base": "https://enr-results-api.totalresults.com",
+  "sweepSeconds": 300,
+  "typeHints": {
+    "State Senate": {
+      "level": "legislative",
+      "office": "state_senate"
+    },
+    "State Representative": {
+      "level": "legislative",
+      "office": "state_house"
+    },
+    "Council": {
+      "level": "local",
+      "office": "city_council"
+    },
+    "School": {
+      "level": "local",
+      "office": "school_board"
+    }
+  },
+  "contestRules": [
+    {
+      "match": "\\bcounty judge\\b",
+      "level": "county",
+      "office": "county_executive",
+      "_why": "an Arkansas County Judge is the county's chief executive, not a judicial office"
+    },
+    {
+      "match": "\\bjustice of the peace\\b",
+      "level": "county",
+      "office": "county_commission",
+      "_why": "Arkansas JPs are the members of the Quorum Court (the county legislature)"
+    },
+    {
+      "match": "\\bcity attorney\\b",
+      "level": "local",
+      "office": "city_attorney"
+    },
+    {
+      "match": "\\bngcwd\\b",
+      "level": "local",
+      "office": "special_district",
+      "_why": "North Garland County Water District"
+    },
+    {
+      "match": "^(?!.*school)[a-z .'-]+ (w\\d+ p\\d+|position \\d+)$",
+      "level": "local",
+      "office": "city_council",
+      "_why": "City-type council seats named only \"<City> W2 P1\" / \"<City> Position 2\""
+    }
+  ],
   "elections": [
     {
       "state": "AR",
@@ -9,8 +59,14 @@
       "name": "Arkansas 2026 General Election & Judicial Runoff",
       "date": "2026-11-03",
       "url": "https://arkansas.tally-enr.com/",
-      "contestTypes": ["Federal", "Statewide"],
-      "statewideTypes": ["Federal", "Statewide"],
+      "detailTypes": [
+        "Federal",
+        "Statewide"
+      ],
+      "statewideTypes": [
+        "Federal",
+        "Statewide"
+      ],
       "verified": "2026-11-03",
       "enabled": true
     }

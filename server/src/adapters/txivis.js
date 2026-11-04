@@ -7,18 +7,30 @@
 //       Federal     { Races:[{ id, N:"U. S. SENATOR ", Candidates:[{ ID, N, P, V, EV, PE, O }], T }] }  US Senate + US House
 //       StateWide   same shape: Governor and the other statewide offices
 //       StateWideQ  same shape: statewide propositions (candidates "FOR" / "AGAINST", ID null)
-//       Lookups     { County:[{ ID, CN }] } (MID is NOT a FIPS code)
+//       Districted  same shape: "DISTRICT OFFICES" (~530 in 2026): State Senate / House, State Board of Education,
+//                   courts of appeals, district judges, criminal district attorneys, multicounty courts
+//       Lookups     { County:[{ ID, CN }] } (MID is NOT a FIPS code); also OfficeSummary, Race, ReportList (unused)
 //   {base}/election/countyInfo/{id}       { upload: base64(JSON) }  ~4 MB decoded
 //       { "<county ID>": { N:"TRAVIS", Summary:{ PRR, PRP, RV, VC, VT, ... },
 //                          Races:{ "<race id>": { OID, N, PR, TP, C:{ "<cand id>": { id, N, P, V, EV } } } } } }
 // Field meanings: V total votes, EV early votes (early in person + mail), PR/TP precincts reporting/total,
 // RV registered voters, VC ballots cast, VT turnout %. Candidate names carry an incumbent marker "(I)", not a party.
 // Version changes with every new publish, so the 4 MB county file is only fetched when it changes.
+//
+// Every race in every section is emitted (v0.3), with the county breakdown from the county file we already fetch (it
+// carries every race, district ones included): no extra requests. U.S. Senate / House / Governor and propositions keep
+// their built-in office; anything else goes out with office null and is classified by server/src/contests.js.
+// The SOS file does NOT carry county or municipal offices (those are on each county's own site), so allContests is
+// false: a Texas office missing here is "not in this feed", not "no race".
 import { readConfig } from '../config.js';
 import { classifyContest, normalizeParty, yesNoSide, methodBucket } from '../normalize.js';
 import { matchCounty } from '../geo.js';
 
 const lastVersion = new Map(); // target key → Version
+// Race sections of the election file, and the sections that are something else (never decoded).
+const KNOWN_SECTIONS = ['Federal', 'StateWide', 'StateWideQ', 'Districted'];
+const NOT_RACES = new Set(['Version', 'Home', 'Lookups', 'OfficeSummary', 'Race', 'ReportList', 'ElementControl']);
+const STATEWIDE_SECTIONS = new Set(['Federal', 'StateWide', 'StateWideQ']); // Districted = a district's voters only
 
 function targets() {
   const cfg = readConfig('sources/txivis.json', { elections: [] });
@@ -35,6 +47,7 @@ function targets() {
       levels: ['state', 'county'],
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: e.measures !== false,
+      allContests: e.allContests ?? false,
       url: e.url,
       timeZone: e.timeZone ?? 'America/Chicago',
       countyAliases: e.countyAliases ?? {},
@@ -85,21 +98,32 @@ export function parseIvis(election, countyInfo, t, unmatched = () => {}) {
     countyById.set(id, m);
   }
 
-  const sections = [
-    ...(decodeSection(election.Federal)?.Races ?? []),
-    ...(decodeSection(election.StateWide)?.Races ?? []),
-    ...(t.measures ? (decodeSection(election.StateWideQ)?.Races ?? []).map((r) => ({ ...r, isQ: true })) : []),
-  ];
+  // Every section with a Races list: the known ones first, then any section IVIS adds later (the big lookup sections
+  // are skipped without decoding).
+  const sectionNames = [...KNOWN_SECTIONS, ...Object.keys(election).filter((k) => !KNOWN_SECTIONS.includes(k) && !NOT_RACES.has(k))];
+  const sections = [];
+  const seen = new Set();
+  for (const s of sectionNames) {
+    let dec = null;
+    try {
+      dec = decodeSection(election[s]);
+    } catch {
+      continue; // not a base64 JSON section
+    }
+    for (const r of Array.isArray(dec?.Races) ? dec.Races : []) {
+      if (r?.id == null || seen.has(String(r.id))) continue;
+      seen.add(String(r.id));
+      sections.push({ ...r, section: s });
+    }
+  }
 
   const races = [];
   for (const r of sections) {
     const cands = [...(r.Candidates ?? [])].sort((a, b) => (a.O ?? 0) - (b.O ?? 0));
     const names = cands.map((c) => cleanName(c.N));
     const cls = classifyContest(r.N, names);
-    if (!cls) continue;
-    if (cls.office === 'measure' ? !t.measures : !t.races.includes(cls.office)) continue;
-    const isMeasure = cls.office === 'measure';
-    const name = String(r.N).replace(/\s+/g, ' ').trim();
+    const isMeasure = cls?.office === 'measure';
+    const name = String(r.N ?? '').replace(/\s+/g, ' ').trim();
 
     const choices = cands.map((c, i) => {
       if (isMeasure) return { name: names[i], party: 'OTHER', partyRaw: '' };
@@ -162,10 +186,13 @@ export function parseIvis(election, countyInfo, t, unmatched = () => {}) {
       for (const u of units) { u.yes = u.votes[yi] ?? 0; u.no = u.votes[ni] ?? 0; }
     }
 
-    races.push({
-      office: cls.office, district: cls.district, name, key: String(r.id), voteFor: 1, statewide: true,
+    // IVIS publishes no vote-for count; Texas general-election offices are all single-seat.
+    const race = {
+      office: cls?.office ?? null, district: cls?.district ?? null, name, key: String(r.id), voteFor: 1,
+      statewide: !!cls || STATEWIDE_SECTIONS.has(r.section),
       title: isMeasure ? name : null, choices, units,
-    });
+    };
+    races.push(race);
   }
 
   // Election-wide turnout per county (Summary), and the statewide sum of what the counties publish.

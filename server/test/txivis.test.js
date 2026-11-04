@@ -25,9 +25,11 @@ test('TX 2026 general (election night, before first votes): races, levels, versi
   assert.equal(r.version, 'enr/53815/5/');
   assert.equal(r.sourceUpdatedAt, '2026-10-30T03:13:17.000Z'); // "Oct 29, 2026 22:13:17" CDT
   assert.equal(r.election.date, '2026-11-03');
-  const offices = r.races.map((x) => `${x.office}:${x.district ?? ''}`).sort();
+  const offices = r.races.filter((x) => x.office).map((x) => `${x.office}:${x.district ?? ''}`).sort();
   assert.deepEqual(offices, ['governor:', 'house:10', 'house:28', 'house:35', 'senate:']);
-  assert.ok(!r.races.some((x) => /LIEUTENANT/.test(x.name)), 'Lt. Governor is not tracked');
+  // Every other race is emitted too, office left for contests.js: Lt. Gov, AG and the 6 district races in the fixture.
+  assert.equal(r.races.length, 5 + 2 + 6);
+  assert.ok(r.races.some((x) => /LIEUTENANT/.test(x.name) && x.office === null && x.statewide));
 
   const sen = r.races.find((x) => x.office === 'senate');
   assert.deepEqual(sen.choices.slice(0, 3).map((c) => [c.name, c.party, c.partyRaw]),
@@ -82,9 +84,29 @@ test('TX propositions (finished 2025 election): yes/no, early vs election day, t
   assert.deepEqual(travis.methods[0].votes, [64680, 50622]);
 });
 
-test('TX: measures off and an unknown county are handled honestly', () => {
+test('TX: district races (Districted section) with their county slices', () => {
+  const { r } = parse('');
+  const sd21 = r.races.find((x) => x.key === '5019');
+  assert.equal(sd21.name, 'STATE SENATOR, DISTRICT 21');
+  assert.equal(sd21.office, null);
+  assert.equal(sd21.statewide, false, 'a district race is not statewide');
+  assert.equal(sd21.voteFor, 1);
+  assert.deepEqual(sd21.units.map((u) => u.name).sort(), ['La Salle', 'TX', 'Travis', 'Bexar'].sort());
+  assert.ok(sd21.choices.every((c) => c.party === 'DEM' || c.party === 'REP' || c.party === 'OTHER'));
+  for (const u of sd21.units) assert.equal(u.votes.length, sd21.choices.length);
+  const bexar = sd21.units.find((u) => u.name === 'Bexar');
+  assert.ok(bexar.precinctsTotal > 0 && bexar.precinctsTotal < 807, 'the district slice of the county, not the whole county');
+  assert.equal(sd21.units[0].precinctsTotal, sd21.units.slice(1).reduce((s, u) => s + u.precinctsTotal, 0));
+  // Judicial and county-attorney races come through as candidate races.
+  const coa = r.races.find((x) => x.key === '12');
+  assert.match(coa.name, /COURT OF APPEALS/);
+  assert.deepEqual(coa.units.slice(1).map((u) => u.name).sort(), ['Bexar', 'La Salle']);
+  assert.ok(r.races.find((x) => x.key === '2749' && /CRIMINAL DISTRICT ATTORNEY BEXAR/.test(x.name)));
+});
+
+test('TX: the measures flag no longer filters what is stored; an unknown county is handled honestly', () => {
   const { r } = parse('2025', { ...target, measures: false });
-  assert.equal(r.races.length, 0);
+  assert.equal(r.races.length, 2);
   const { seen } = parse('', { ...target, countyAliases: {} });
   assert.ok(seen.some(([k, v]) => k === 'county' && v === 'LASALLE'));
 });

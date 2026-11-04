@@ -4,7 +4,7 @@
 // The parsing lives in _nist-cdf.js (generic, V1 + V2 schema). This file only does the polling:
 //   1. conditional GET of the feed (If-None-Match / If-Modified-Since); a 304 is "no change"
 //   2. a content hash that ignores GeneratedDate, so a re-export with identical numbers is "no change" too
-//   3. parse, keep the offices this target asks for, report the source's own GeneratedDate
+//   3. parse every contest in the feed (v0.3: nothing is filtered by office), report the source's own GeneratedDate
 // Which feeds to poll is config, not code: config/sources/nistcdf.json.
 import { readConfig } from '../config.js';
 import { cdfVersion, fixGeneratedDate, parseCdf } from './_nist-cdf.js';
@@ -24,6 +24,9 @@ function targets() {
       levels: ['state', 'county'],
       races: f.races ?? ['senate', 'governor', 'house'],
       measures: f.measures !== false,
+      // Ohio's SOS feed has federal, statewide, legislative, appeals-court and state-issue contests but no county or
+      // municipal ones, so a feed is not the whole ballot unless its config says so.
+      allContests: f.allContests ?? false,
       feedUrl: f.feedUrl,
       url: f.url,
       date: f.date ?? null,
@@ -34,7 +37,6 @@ function targets() {
 /** Pure: XML text → contract result (minus change detection). */
 export function buildResult(xml, t, { unmatched = () => {}, now = new Date() } = {}) {
   const parsed = parseCdf(xml, { state: t.state, unmatched });
-  const races = parsed.races.filter((r) => (r.office === 'measure' ? t.measures && r.statewide : t.races.includes(r.office)));
   const version = cdfVersion(xml);
   return {
     election: {
@@ -44,7 +46,7 @@ export function buildResult(xml, t, { unmatched = () => {}, now = new Date() } =
     version,
     sourceUpdatedAt: fixGeneratedDate(parsed.generatedDate, { hour12: t.hour12, now }),
     turnout: parsed.turnout,
-    races,
+    races: parsed.races,
   };
 }
 

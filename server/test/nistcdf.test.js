@@ -5,7 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { cdfVersion, fixGeneratedDate, parseCdf } from '../src/adapters/_nist-cdf.js';
 import { buildResult } from '../src/adapters/nistcdf.js';
 
-// Trimmed from the live Ohio SOS feed on election night (state, 5 counties, Gov / Senate / House 1 + 13 / Issue 3).
+// Trimmed from the live Ohio SOS feed on election night (state, 5 counties, Gov / Senate / House 1 + 13 / Issue 3, plus
+// Attorney General, a Supreme Court seat, Court of Appeals District 1, State Senate 7 and State House 24).
 const xml = readFileSync(fileURLToPath(new URL('./fixtures/nistcdf/oh-2026-general-trimmed.xml', import.meta.url)), 'utf8');
 const target = { key: 'OH-2026-general', state: 'OH', label: 'Ohio 2026 General', races: ['senate', 'governor', 'house'], measures: true, url: 'https://liveresults.ohiosos.gov/', date: '2026-11-03', hour12: true };
 
@@ -110,11 +111,32 @@ test('OH: version ignores GeneratedDate; GeneratedDate 12-hour clock is correcte
   assert.equal(fixGeneratedDate('2026-11-03T11:51:35Z', { hour12: false, now }), '2026-11-03T11:51:35.000Z');
 });
 
-test('OH: target filters races and drops non-statewide measures', () => {
+test('OH: every contest is emitted; target.races no longer filters what is stored', () => {
   const r = buildResult(xml, { ...target, races: ['senate'], measures: false }, { now: new Date('2026-11-04T03:00:00Z') });
-  assert.deepEqual(r.races.map((x) => x.office), ['senate']);
+  assert.equal(r.races.length, 5 + 5);
   assert.equal(r.election.sourceKey, 'OH-2026-general');
   assert.equal(r.election.date, '2026-11-03');
+  const by = (re) => r.races.find((x) => re.test(x.name));
+
+  const ag = by(/^Attorney General$/);
+  assert.equal(ag.office, null, 'left for contests.js');
+  assert.equal(ag.statewide, true);
+  assert.equal(ag.voteFor, 1);
+  assert.deepEqual(ag.units.map((u) => u.name), ['OH', 'Adams', 'Franklin', 'Hamilton', 'Summit', 'Warren']);
+  assert.ok(ag.units.find((u) => u.name === 'Adams').precinctsTotal > 0);
+
+  const sd7 = by(/^State Senator - District 07$/);
+  assert.deepEqual([sd7.level, sd7.office, sd7.statewide], ['legislative', 'state_senate', false]); // from GpUnit Type="StateSenate"
+  assert.equal(sd7.units[0].name, 'Senate District 7');
+  assert.equal(sd7.units.filter((u) => u.level === 'county').length, 2);
+  const hd24 = by(/^State Representative - District 24$/);
+  assert.deepEqual([hd24.level, hd24.office], ['legislative', 'state_house']);
+
+  const coa = by(/Court of Appeals - District 01/);
+  assert.equal(coa.office, null);
+  assert.equal(coa.statewide, false);
+  assert.equal(coa.units[0].name, 'Appeals Court District 1');
+  assert.ok(by(/Justice of the Supreme Court/).statewide);
 });
 
 // The V2 schema (itl.nist.gov/ns/voting/1500-100/v2): element-style fields, BallotCounts, per-type VoteCounts,
@@ -200,4 +222,60 @@ test('generic CDF: empty counts, missing attributes and collections do not throw
   assert.ok(r.races.every((x) => x.units.length === 0));
   assert.equal(r.turnout[0].registered, null);
   assert.throws(() => parseCdf('<html></html>', { state: 'OH' }));
+});
+
+test('generic CDF: retention is a Yes/No candidate-style race, not a measure; local measures are kept', () => {
+  const doc = V2
+    .replace('<Name><Text language="en">Test General</Text></Name>', `
+    <Contest ObjectId="r1" xsi:type="RetentionContest">
+      <BallotSelection ObjectId="ry" xsi:type="BallotMeasureSelection"><Selection><Text language="en">Yes</Text></Selection>
+        <VoteCounts><GpUnitId>st</GpUnitId><Type>total</Type><Count>60</Count></VoteCounts></BallotSelection>
+      <BallotSelection ObjectId="rn" xsi:type="BallotMeasureSelection"><Selection><Text language="en">No</Text></Selection>
+        <VoteCounts><GpUnitId>st</GpUnitId><Type>total</Type><Count>40</Count></VoteCounts></BallotSelection>
+      <CandidateId>c1</CandidateId>
+      <ElectoralDistrictId>st</ElectoralDistrictId>
+      <Name>Supreme Court Justice Jane Doe</Name>
+    </Contest>
+    <Contest ObjectId="r2" xsi:type="BallotMeasureContest">
+      <BallotSelection ObjectId="r2y" xsi:type="BallotMeasureSelection"><Selection><Text language="en">Yes</Text></Selection>
+        <VoteCounts><GpUnitId>st</GpUnitId><Type>total</Type><Count>5</Count></VoteCounts></BallotSelection>
+      <BallotSelection ObjectId="r2n" xsi:type="BallotMeasureSelection"><Selection><Text language="en">No</Text></Selection>
+        <VoteCounts><GpUnitId>st</GpUnitId><Type>total</Type><Count>4</Count></VoteCounts></BallotSelection>
+      <ElectoralDistrictId>st</ElectoralDistrictId>
+      <Name>Shall Judge John Roe be retained in office?</Name>
+    </Contest>
+    <Contest ObjectId="lm" xsi:type="BallotMeasureContest">
+      <BallotSelection ObjectId="ly" xsi:type="BallotMeasureSelection"><Selection><Text language="en">For the Levy</Text></Selection>
+        <VoteCounts><GpUnitId>cy</GpUnitId><Type>total</Type><Count>9</Count></VoteCounts></BallotSelection>
+      <BallotSelection ObjectId="ln" xsi:type="BallotMeasureSelection"><Selection><Text language="en">Against the Levy</Text></Selection>
+        <VoteCounts><GpUnitId>cy</GpUnitId><Type>total</Type><Count>1</Count></VoteCounts></BallotSelection>
+      <ElectoralDistrictId>sd</ElectoralDistrictId>
+      <Name>Cuyahoga County Library Levy</Name>
+    </Contest>
+    <Contest ObjectId="sb" xsi:type="CandidateContest">
+      <BallotSelection ObjectId="sb1" xsi:type="CandidateSelection"><CandidateId>c1</CandidateId>
+        <VoteCounts><GpUnitId>sd</GpUnitId><Type>total</Type><Count>3</Count></VoteCounts></BallotSelection>
+      <BallotSelection ObjectId="sb2" xsi:type="CandidateSelection"><CandidateId>c2</CandidateId>
+        <VoteCounts><GpUnitId>sd</GpUnitId><Type>total</Type><Count>2</Count></VoteCounts></BallotSelection>
+      <ElectoralDistrictId>sd</ElectoralDistrictId>
+      <Name>Board Member, Euclid City Schools</Name>
+      <NumberElected>3</NumberElected>
+      <VotesAllowed>3</VotesAllowed>
+    </Contest>
+    <Name><Text language="en">Test General</Text></Name>`)
+    .replace('<Party ObjectId="pD">', '<GpUnit ObjectId="sd" xsi:type="ReportingUnit"><Name>Euclid City School District</Name><Type>school</Type></GpUnit>\n  <Party ObjectId="pD">');
+  const p = parseCdf(doc, { state: 'OH' });
+  for (const key of ['r1', 'r2']) {
+    const ret = p.races.find((r) => r.key === key);
+    assert.equal(ret.office, null, `${key} is not a measure`);
+    assert.equal(ret.kind, 'retention');
+    assert.deepEqual(ret.choices.map((c) => c.name), ['Yes', 'No']);
+    assert.equal(ret.units[0].yes, undefined);
+  }
+  assert.deepEqual(p.races.find((r) => r.key === 'r1').units[0].votes, [60, 40]);
+  const levy = p.races.find((r) => r.key === 'lm');
+  assert.deepEqual([levy.office, levy.statewide], ['measure', false]);
+  assert.deepEqual([levy.units[0].yes, levy.units[0].no], [9, 1]);
+  const board = p.races.find((r) => r.key === 'sb');
+  assert.deepEqual([board.level, board.office, board.voteFor, board.statewide], ['local', 'school_board', 3, false]);
 });

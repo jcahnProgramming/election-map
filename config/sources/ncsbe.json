@@ -1,5 +1,5 @@
 {
-  "_howto": "Elections polled by the NCSBE adapter (server/src/adapters/ncsbe.js). folder = the YYYYMMDD folder under https://er.ncsbe.gov/enr/ (listed in /enr/elections.txt as edt MM/DD/YYYY). Statewide totals: /enr/{folder}/data/results_0.txt; per county: results_{cid}.txt (cid from county.txt, 1-100), re-downloaded only when that county's 'imp' (last updated) stamp changes. Set enabled:false to stop polling.",
+  "_howto": "Elections polled by the NCSBE adapter (server/src/adapters/ncsbe.js). folder = the YYYYMMDD folder under https://er.ncsbe.gov/enr/ (listed in /enr/elections.txt as edt MM/DD/YYYY). Statewide totals: /enr/{folder}/data/results_0.txt; per county: results_{cid}.txt (cid from county.txt, 1-100), re-downloaded only when that county's 'imp' (last updated) stamp changes. Set enabled:false to stop polling. Every contest is stored (statewide file + county files, including county-only contests). allContests (default true): the feed is the whole ballot. contestRules: optional name rules for this source, tried before config/contest-rules.json.",
   "base": "https://er.ncsbe.gov/enr",
   "timeZone": "America/New_York",
   "countyConcurrency": 4,

@@ -21,7 +21,6 @@ test('NC: races, districts, measures and skipped offices', () => {
   assert.equal(senate[0].name, 'US SENATE');
   const house = r.races.filter((x) => x.office === 'house');
   assert.deepEqual(house.map((h) => h.district), ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14']);
-  assert.ok(!r.races.some((x) => /COURT/.test(x.name)), 'judicial contests are not tracked');
   const measures = r.races.filter((x) => x.office === 'measure');
   assert.equal(measures.filter((m) => m.statewide).length, 3);
   assert.ok(measures.find((m) => m.name === 'CITY OF RALEIGH HOUSING BONDS REFERENDUM').statewide === false);
@@ -83,4 +82,65 @@ test('NC: Eastern timestamps to ISO', () => {
   assert.equal(zonedToIso('October 15, 2026 12:05 pm'), '2026-10-15T16:05:00.000Z');
   assert.equal(zonedToIso('November 4, 2026 12:10 am'), '2026-11-04T05:10:00.000Z');
   assert.equal(zonedToIso(''), null);
+});
+
+test('NC: every contest is emitted, not only the headline races', () => {
+  const r = parseNcsbe(load(), target);
+  // Statewide file: 1 Senate + 14 House + 1 judicial + 3 amendments + 4 local referenda; county-only contests from the
+  // three county files: Cabarrus 2 bonds, Wake 3 (Knightdale, school, community college).
+  assert.equal(r.races.length, 23 + 2 + 3);
+  const court = r.races.find((x) => x.key === '1368');
+  assert.equal(court.name, 'NC SUPREME COURT ASSOCIATE JUSTICE SEAT 01');
+  assert.equal(court.office, null, 'left for contests.js to classify');
+  assert.equal(court.voteFor, 1);
+  assert.equal(court.statewide, true);
+  assert.deepEqual(court.choices.map((c) => [c.name, c.party]), [['Anita Earls', 'DEM'], ['Sarah Stevens', 'REP']]);
+  assert.deepEqual(court.units.map((u) => u.name), ['NC', 'Alamance', 'Cabarrus', 'Wake']);
+  assert.ok(court.units.every((u) => u.methods?.length === 4));
+
+  // A county-only referendum: only in Wake's file, keyed per county, total = the county, never statewide.
+  const school = r.races.find((x) => x.name === 'WAKE COUNTY SCHOOL BONDS REFERENDUM');
+  assert.equal(school.key, '92-23');
+  assert.equal(school.office, 'measure');
+  assert.equal(school.statewide, false);
+  assert.deepEqual(school.units.map((u) => [u.level, u.name]), [['state', 'NC'], ['county', 'Wake']]);
+  assert.equal(school.units[0].precinctsTotal, school.units[1].precinctsTotal);
+  // Same small id in two counties stays two contests.
+  assert.ok(r.races.find((x) => x.key === '13-9' && /CABARRUS COUNTY SCHOOL/.test(x.name)));
+  // A local referendum that IS in the statewide file is not duplicated by its county copy.
+  assert.equal(r.races.filter((x) => x.key === '800012').length, 1);
+  assert.deepEqual(r.races.find((x) => x.key === '800012').units.map((u) => u.name), ['NC', 'Cabarrus']);
+  assert.equal(new Set(r.races.map((x) => x.key)).size, r.races.length, 'keys are unique');
+});
+
+test('NC: legislature from the office group, multi-seat voteFor, retention-style yes/no is not a measure', () => {
+  const d = load();
+  const row = (gid, cnm, bnm, ogl, extra = {}) => ({
+    cid: '0', cnm, vfr: '', gid, lid: gid, bnm, dtx: '', pty: '', vct: '5', pct: '0', prt: '1', ptl: '40',
+    evc: '1', ovc: '2', avc: '1', pvc: '1', col: '', ogl, ref: '0', ...extra,
+  });
+  d.statewide.push(
+    row('1500', 'NC HOUSE OF REPRESENTATIVES DISTRICT 040 (VOTE FOR 1)', 'Joe John', 'NCH', { pty: 'DEM', vfr: '1' }),
+    row('1500', 'NC HOUSE OF REPRESENTATIVES DISTRICT 040 (VOTE FOR 1)', 'Jane Roe', 'NCH', { pty: 'REP', vfr: '1' }),
+    row('1600', 'WAKE COUNTY BOARD OF EDUCATION AT-LARGE (VOTE FOR 3)', 'A', 'LOC'),
+    row('1600', 'WAKE COUNTY BOARD OF EDUCATION AT-LARGE (VOTE FOR 3)', 'B', 'LOC'),
+    row('1600', 'WAKE COUNTY BOARD OF EDUCATION AT-LARGE (VOTE FOR 3)', 'C', 'LOC'),
+    row('1600', 'WAKE COUNTY BOARD OF EDUCATION AT-LARGE (VOTE FOR 3)', 'D', 'LOC'),
+    row('1700', 'SHALL JUSTICE X OF THE SUPREME COURT BE RETAINED', 'Yes', 'JUD'),
+    row('1700', 'SHALL JUSTICE X OF THE SUPREME COURT BE RETAINED', 'No', 'JUD'),
+  );
+  const un = [];
+  const r = parseNcsbe(d, target, (...a) => un.push(a));
+  const h = r.races.find((x) => x.key === '1500');
+  assert.deepEqual([h.level, h.office, h.statewide, h.voteFor], ['legislative', 'state_house', false, 1]);
+  assert.deepEqual(h.units[0].votes, [5, 5]);
+  const board = r.races.find((x) => x.key === '1600');
+  assert.equal(board.voteFor, 3, 'from the "(VOTE FOR 3)" suffix when vfr is empty');
+  assert.equal(board.choices.length, 4);
+  const ret = r.races.find((x) => x.key === '1700');
+  assert.equal(ret.office, null, 'a judicial yes/no is not a ballot measure');
+  assert.deepEqual(ret.choices.map((c) => c.name), ['Yes', 'No']);
+  assert.deepEqual(ret.units[0].votes, [5, 5]);
+  assert.equal(ret.units[0].yes, undefined);
+  assert.ok(!un.some(([k, v]) => k === 'party' && v === ''), 'an empty party label is not an unknown party');
 });

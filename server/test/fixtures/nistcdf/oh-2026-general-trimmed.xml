@@ -63,6 +63,9 @@
     <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA511F09A3E0633390EE0AE290" Name="Congressional District 13" IsElectoralDistrict="true" Type="Congressional"/>
     <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA50B509A3E0633390EE0AE290" Name="Statewide" IsElectoralDistrict="true" Type="State"/>
     <!--Begin precincts-->
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA50CD09A3E0633390EE0AE290" Name="Appeals Court District 1" IsElectoralDistrict="true" Type="Judicial"/>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA516E09A3E0633390EE0AE290" Name="Senate District 7" IsElectoralDistrict="true" Type="StateSenate"/>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA50DC09A3E0633390EE0AE290" Name="House District 24" IsElectoralDistrict="true" Type="StateHouse"/>
   </GpUnitCollection>
   <PartyCollection>
     <Party ObjectId="_9BCCB0C4CCBE7EF8E0533390EE0A422D" Abbreviation="None" Color="877f87">
@@ -279,6 +282,49 @@
       <LastName>Weise</LastName>
       <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
     </Person>
+    <Person ObjectId="_292AAD2AF4123313E0530E90EE0A8400">
+      <FirstName>Keith</FirstName>
+      <LastName>Faber</LastName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_4AA3EE46DB37B0DBE0633390EE0A58CE">
+      <FirstName>John </FirstName>
+      <LastName>Kulewicz</LastName>
+      <MiddleName>J.</MiddleName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_0E267F492A6A44B6E0633390EE0A99FA">
+      <FirstName>Daniel</FirstName>
+      <LastName>Hawkins</LastName>
+      <MiddleName>R.</MiddleName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_292A5F1C02F44F63E0530A90EE0A14E6">
+      <FirstName>Marilyn</FirstName>
+      <LastName>Zayas</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_666184E7774E0AFDE0530C90EE0AED29">
+      <FirstName>Ginger</FirstName>
+      <LastName>Bock</LastName>
+      <MiddleName>S.</MiddleName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_4B1C81999C7255EEE0633390EE0A79BB">
+      <FirstName>Zac</FirstName>
+      <LastName>Haines</LastName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_4B1C81999C7355EEE0633390EE0A79BB">
+      <FirstName>Cara</FirstName>
+      <LastName>Jacob</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_E079D40B2F403F8CE0533390EE0A26C1">
+      <FirstName>Dani</FirstName>
+      <LastName>Isaacsohn</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
   </PersonCollection>
   <OfficeCollection>
     <OfficeGroup Name="ROOT">
@@ -467,6 +513,62 @@
         </BallotName>
         <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
         <PersonId>_5A1D2856A2CBD7BEE0633390EE0A2FBB</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA548609A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Keith Faber</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_292AAD2AF4123313E0530E90EE0A8400</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA5FD309A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">John  Kulewicz</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_4AA3EE46DB37B0DBE0633390EE0A58CE</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA55F209A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Daniel Hawkins</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_0E267F492A6A44B6E0633390EE0A99FA</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA613B09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Marilyn Zayas</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_292A5F1C02F44F63E0530A90EE0A14E6</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA62DD09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Ginger Bock</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_666184E7774E0AFDE0530C90EE0AED29</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA586D09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Zac Haines</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_4B1C81999C7255EEE0633390EE0A79BB</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA633209A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Cara Jacob</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_4B1C81999C7355EEE0633390EE0A79BB</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA636A09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Dani Isaacsohn</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_E079D40B2F403F8CE0533390EE0A26C1</PersonId>
       </Candidate>
     </CandidateCollection>
     <ContestCollection>
@@ -964,6 +1066,178 @@
           </VoteCountsCollection>
         </BallotSelection>
         <JurisdictionalScopeId>_55A742EA50B509A3E0633390EE0AE290</JurisdictionalScopeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA548509A3E0633390EE0AE290" Abbreviation="Attorney General" Name="Attorney General" SequenceOrder="02000000" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="Attorney General" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA548609A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="59148">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="37040">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA548609A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA5FD309A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="155264">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="125764">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA5FD309A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50B509A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA548509A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA55F109A3E0633390EE0AE290" Abbreviation="Justice of the Supreme Court" Name="Justice of the Supreme Court" SequenceOrder="05500000" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="Justice of the Supreme Court" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA55F209A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="58269">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="36434">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA55F209A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA613B09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="154887">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="125169">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA613B09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50B509A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA55F109A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA62DC09A3E0633390EE0AE290" Abbreviation="Judge of the Court of Appeals - District 01" Name="Judge of the Court of Appeals - District 01" SequenceOrder="10600001" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="Judge of the Court of Appeals" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA62DD09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50CD09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA62DD09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50CD09A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA62DC09A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA586C09A3E0633390EE0AE290" Abbreviation="State Senator - District 07" Name="State Senator - District 07" SequenceOrder="14500007" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="State Senator" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA586D09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA516E09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA586D09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA633209A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA516E09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA633209A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA516E09A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA586C09A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA598A09A3E0633390EE0AE290" Abbreviation="State Representative - District 24" Name="State Representative - District 24" SequenceOrder="15000024" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="State Representative" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA636A09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50DC09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA636A09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50DC09A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA598A09A3E0633390EE0AE290</OfficeId>
       </Contest>
     </ContestCollection>
   </Election>

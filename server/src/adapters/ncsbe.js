@@ -12,11 +12,19 @@
 //                                              ("One Stop") / Absentee by Mail / Provisional), prt/ptl (precincts for this
 //                                              contest), ogl (office group FED/JUD/NCS/NCH/CCL, "" for statewide referenda),
 //                                              ref ("1" = referendum) }. Also carries some local referenda (ogl CCL).
-//   /enr/{folder}/data/results_{cid}.txt     the same rows for one county (cid 1..100), every contest on its ballots.
+//   /enr/{folder}/data/results_{cid}.txt     the same rows for one county (cid 1..100), every contest on its ballots,
+//                                            including county-only contests that are NOT in results_0 (county bonds,
+//                                            county commission, school board). Their gid is per county (Wake "20" is not
+//                                            another county's "20"), except the cid*10000+n form, which can span counties.
 //   /enr/{folder}/data/contest.txt           contest list (not needed).
 // The vote-method labels are NCSBE's own column headings from its precinct export
 // (results_pct_{folder}.zip): "Election Day", "Early Voting", "Absentee by Mail", "Provisional".
 // No winner flags are published; nothing here calls a race.
+//
+// Every contest is emitted (v0.3). U.S. Senate / House / Governor and yes/no referenda keep their built-in office; any
+// other contest goes out with office null (NC House / Senate get level + office from ogl NCH / NCS) and is classified
+// by server/src/contests.js when the snapshot is written. A county-only contest's state unit is the sum of its
+// counties and it is flagged statewide:false. No extra requests: the county files were already being fetched.
 //
 // Change detection: county.txt and results_0.txt are fetched with ETag/If-Modified-Since, and a county's file is
 // only re-downloaded when its `imp` stamp in county.txt changes. The version is a hash of everything parsed.
@@ -50,6 +58,8 @@ function targets() {
       levels: ['state', 'county'],
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: true,
+      // results_0 + every county file = the whole ballot, down to county and municipal contests.
+      allContests: e.allContests ?? true,
       url: e.url,
       dataUrl: `${e.base ?? c.base}/${e.folder}/data`,
       timeZone: e.timeZone ?? c.timeZone ?? 'America/New_York',
@@ -137,41 +147,74 @@ export function parseNcsbe({ statewide, counties, countyResults = new Map() }, t
     }
   }
 
-  // Group rows by contest id, keeping source order.
-  const contests = groupBy(statewide, (r) => String(r.gid));
-  const countyContests = new Map(); // cid → Map(gid → rows)
-  for (const [cid, rows] of countyResults) countyContests.set(String(cid), groupBy(rows, (r) => String(r.gid)));
+  // Group rows by contest id + name, keeping source order. County files reuse small per-county ids (Wake's "20" is a
+  // Knightdale referendum, another county's "20" is something else), so the name is part of the key.
+  const ckey = (r) => `${r.gid}|${cleanContestName(r.cnm).toUpperCase()}`;
+  const contests = groupBy(statewide, ckey);
+  const countyContests = new Map(); // cid → Map(gid|name → rows)
+  for (const [cid, rows] of countyResults) countyContests.set(String(cid), groupBy(rows, ckey));
+
+  // Contests only in county files (county commission, school board, county bond referenda, ...): one contest per
+  // county, except NCSBE's county-namespaced ids (cid × 10000 + n, e.g. 800012), which may span counties.
+  const localOnly = new Map(); // grouping key → { key, rowsByCid }
+  for (const [cid, m] of countyById) {
+    const groups = countyContests.get(cid);
+    if (!groups || !m) continue; // no file yet, or a county logged as unmatched: its contests can't be placed
+    for (const [k, rows] of groups) {
+      if (contests.has(k)) continue;
+      const gid = String(rows[0].gid);
+      const shared = Number(gid) >= 10000;
+      const g = shared ? k : `${cid}-${gid}`;
+      if (!localOnly.has(g)) localOnly.set(g, { key: shared ? gid : `${cid}-${gid}`, rowsByCid: new Map() });
+      localOnly.get(g).rowsByCid.set(cid, rows);
+    }
+  }
 
   const races = [];
-  for (const [gid, rows] of contests) {
-    const first = rows[0];
+  const pushRace = ({ key, first, stateRows, countyRows, local }) => {
     const name = cleanContestName(first.cnm);
-    const labels = rows.map((r) => String(r.bnm ?? '').trim());
+    const all = stateRows.length ? stateRows : countyRows.flatMap(([, rows]) => rows);
+    const labels = [];
+    const firstRow = new Map();
+    for (const r of [...all, ...(stateRows.length ? countyRows.flatMap(([, rows]) => rows) : [])]) {
+      const l = String(r.bnm ?? '').trim();
+      if (!firstRow.has(l)) { firstRow.set(l, r); labels.push(l); }
+    }
     const cls = classifyContest(name, labels);
-    if (!cls) continue;
-    if (cls.office !== 'measure' && !(t.races ?? ['senate', 'governor', 'house']).includes(cls.office)) continue;
-    const isMeasure = cls.office === 'measure';
+    const isMeasure = cls?.office === 'measure';
 
-    const choices = rows.map((r, i) => {
-      const split = splitPartyPrefix(labels[i]);
-      const raw = String(r.pty ?? '').trim() || split.partyRaw || '';
+    const choices = labels.map((l) => {
+      const split = splitPartyPrefix(l);
+      const raw = String(firstRow.get(l).pty ?? '').trim() || split.partyRaw || '';
       if (isMeasure) return { name: split.name, party: 'OTHER', partyRaw: raw };
       const { party, known } = normalizeParty(raw);
-      if (!known) unmatched('party', raw, `${state} ${name} / ${labels[i]}`);
+      // An empty label is "no party" (nonpartisan contests, retention, write-ins), not an unknown party.
+      if (!known && raw) unmatched('party', raw, `${state} ${name} / ${l}`);
       return { name: split.name, party, partyRaw: raw };
     });
     const yesIdx = isMeasure ? labels.findIndex((l) => yesNoSide(l) === 'yes') : -1;
     const noIdx = isMeasure ? labels.findIndex((l) => yesNoSide(l) === 'no') : -1;
 
+    // One unit from the rows of one file, or of several county files (a county-only contest's total is their sum).
     const makeUnit = (base, unitRows) => {
-      const byName = new Map(unitRows.map((r) => [String(r.bnm ?? '').trim(), r]));
-      const ordered = labels.map((l) => byName.get(l) ?? null);
-      const any = unitRows[0];
-      const pr = num(any?.prt);
-      const pt = num(any?.ptl);
-      const votes = ordered.map((r) => (r ? num(r.vct) ?? 0 : 0));
-      const methods = METHODS.filter(([f]) => ordered.some((r) => r && r[f] != null)).map(([f, label]) => {
-        const v = ordered.map((r) => (r ? num(r[f]) ?? 0 : 0));
+      const sums = new Map(); // label → { vct, m: { evc: n, ... } }
+      const perFile = new Map(); // cid → first row: precinct counts are per contest per file
+      for (const r of unitRows) {
+        const l = String(r.bnm ?? '').trim();
+        if (!sums.has(l)) sums.set(l, { vct: 0, m: {} });
+        const s = sums.get(l);
+        s.vct += num(r.vct) ?? 0;
+        for (const [f] of METHODS) if (r[f] != null) s.m[f] = (s.m[f] ?? 0) + (num(r[f]) ?? 0);
+        if (!perFile.has(String(r.cid))) perFile.set(String(r.cid), r);
+      }
+      const ordered = labels.map((l) => sums.get(l) ?? null);
+      const files = [...perFile.values()];
+      const sumField = (f) => (files.some((r) => num(r[f]) != null) ? files.reduce((a, r) => a + (num(r[f]) ?? 0), 0) : null);
+      const pr = sumField('prt');
+      const pt = sumField('ptl');
+      const votes = ordered.map((x) => (x ? x.vct : 0));
+      const methods = METHODS.filter(([f]) => ordered.some((x) => x && x.m[f] != null)).map(([f, label]) => {
+        const v = ordered.map((x) => (x ? x.m[f] ?? 0 : 0));
         return { label, bucket: methodBucket(label), votes: isMeasure ? [v[yesIdx] ?? 0, v[noIdx] ?? 0] : v };
       });
       const u = {
@@ -189,26 +232,44 @@ export function parseNcsbe({ statewide, counties, countyResults = new Map() }, t
       return u;
     };
 
-    const units = [makeUnit({ level: 'state', name: state }, rows)];
-    for (const [cid, m] of countyById) {
-      const cr = countyContests.get(cid)?.get(gid);
-      if (!cr || !m) continue; // county doesn't vote on this contest (or was logged as unmatched)
-      units.push(makeUnit({ level: 'county', countyFips: m.fips, name: m.name }, cr));
+    const units = [makeUnit({ level: 'state', name: state }, all)];
+    for (const [cid, rows] of countyRows) {
+      const m = countyById.get(cid);
+      units.push(makeUnit({ level: 'county', countyFips: m.fips, name: m.name }, rows));
     }
 
-    // A referendum in the statewide file that isn't on every precinct's ballot is local (city bonds, etc.).
-    const statewideContest = !isMeasure || (statePrecincts != null && num(first.ptl) === statePrecincts);
-    races.push({
-      office: cls.office,
-      district: cls.district,
+    // Headline offices keep their meaning (part of the statewide picture). Anything else is statewide only when it is
+    // on every precinct's ballot: the statewide file also carries city referenda, legislative and judicial districts.
+    const headline = cls && !isMeasure;
+    const statewideContest = !local && (headline || (statePrecincts != null && num(first.ptl) === statePrecincts));
+    const race = {
+      office: cls?.office ?? null,
+      district: cls?.district ?? null,
       name,
-      key: gid,
-      voteFor: num(first.vfr),
+      key,
+      voteFor: num(first.vfr) ?? voteForFromName(first.cnm),
       statewide: statewideContest,
       title: isMeasure ? name : null,
       choices,
       units,
-    });
+    };
+    // NCSBE's office group pins the legislature down better than the contest name does.
+    const hint = OGL_HINT[String(first.ogl ?? '').trim().toUpperCase()];
+    if (!cls && hint) Object.assign(race, hint);
+    races.push(race);
+  };
+
+  for (const [k, rows] of contests) {
+    const countyRows = [];
+    for (const [cid, m] of countyById) {
+      const cr = m && countyContests.get(cid)?.get(k);
+      if (cr) countyRows.push([cid, cr]); // counties that don't vote on it have no rows (or were logged as unmatched)
+    }
+    pushRace({ key: String(rows[0].gid), first: rows[0], stateRows: rows, countyRows, local: false });
+  }
+  for (const { key, rowsByCid } of localOnly.values()) {
+    const countyRows = [...rowsByCid];
+    pushRace({ key, first: countyRows[0][1][0], stateRows: [], countyRows, local: true });
   }
 
   return {
@@ -230,6 +291,16 @@ function turnoutOf(r) {
 }
 
 const cleanContestName = (s) => String(s ?? '').replace(/\s*\(VOTE FOR \d+\)\s*$/i, '').trim();
+const voteForFromName = (s) => {
+  const m = String(s ?? '').match(/\(VOTE FOR (\d+)\)\s*$/i);
+  return m ? Number(m[1]) : null;
+};
+// NCSBE office groups (ogl) that pin the office down better than the contest name. The rest (FED, JUD, COS, CCL,
+// LOC, ...) are left to the name rules: config/sources/ncsbe.json contestRules, then config/contest-rules.json.
+const OGL_HINT = {
+  NCS: { level: 'legislative', office: 'state_senate' },
+  NCH: { level: 'legislative', office: 'state_house' },
+};
 
 function groupBy(rows, keyFn) {
   const m = new Map();
