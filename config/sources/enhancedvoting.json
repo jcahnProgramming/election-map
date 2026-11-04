@@ -1,0 +1,75 @@
+{
+  "_howto": "Elections polled by the Enhanced Voting adapter (server/src/adapters/enhancedvoting.js). host = the results site's host, slug = the jurisdiction slug in /results/public/{slug}, publicElectionId = elections[].publicElectionId from GET https://{host}/results/public/api/jurisdictions/{slug}. counties:false = emit statewide units only (RI reports by town and the source doesn't say which county a town is in). Set enabled:false to stop polling one without deleting it.",
+  "elections": [
+    {
+      "state": "GA",
+      "host": "results.sos.ga.gov",
+      "slug": "Georgia",
+      "publicElectionId": "11032026GeneralAndSpecialElection",
+      "name": "Georgia November 3, 2026 General & Special Elections",
+      "url": "https://results.sos.ga.gov/results/public/Georgia/elections/11032026GeneralAndSpecialElection",
+      "counties": true,
+      "verified": "2026-11-03",
+      "enabled": true
+    },
+    {
+      "state": "VA",
+      "host": "enr.elections.virginia.gov",
+      "slug": "virginia",
+      "publicElectionId": "2026-November-General",
+      "name": "Virginia 2026 November General",
+      "url": "https://enr.elections.virginia.gov/results/public/virginia/elections/2026-November-General",
+      "counties": true,
+      "verified": "2026-11-03",
+      "enabled": true,
+      "note": "133 localities = 95 counties + 38 independent cities; the cities map to their own FIPS (510-840)."
+    },
+    {
+      "state": "UT",
+      "host": "electionresults.utah.gov",
+      "slug": "Utah",
+      "publicElectionId": "General11032026",
+      "name": "Utah 2026 General Election",
+      "url": "https://electionresults.utah.gov/results/public/Utah/elections/General11032026",
+      "counties": true,
+      "verified": "2026-11-03",
+      "enabled": true,
+      "note": "No U.S. Senate or Governor race in 2026; 4 House districts. No vote-method split."
+    },
+    {
+      "state": "WA",
+      "host": "results.votewa.gov",
+      "slug": "washington",
+      "publicElectionId": "20261103",
+      "name": "Washington 2026 General",
+      "url": "https://results.votewa.gov/results/public/washington/elections/20261103",
+      "counties": true,
+      "verified": "2026-11-03",
+      "enabled": true,
+      "note": "No U.S. Senate or Governor race in 2026; 10 House districts. All-mail state: publishes 'Estimated Ballots Left to Count' by county."
+    },
+    {
+      "state": "RI",
+      "host": "electionresults.ri.gov",
+      "slug": "rhodeisland",
+      "publicElectionId": "2026StatewideGeneralElection",
+      "name": "Rhode Island 2026 Statewide General Election",
+      "url": "https://electionresults.ri.gov/results/public/rhodeisland/elections/2026StatewideGeneralElection",
+      "counties": false,
+      "verified": "2026-11-03",
+      "enabled": true,
+      "note": "Reports by town (39 towns + a 'Federal' UOCAVA unit) with no town-to-county mapping, so statewide only. Town breakdowns are still read to sum precincts reporting."
+    },
+    {
+      "state": "ID",
+      "host": "results.voteidaho.gov",
+      "slug": "ID",
+      "publicElectionId": "nov2026",
+      "name": "Idaho General Election - November 3, 2026",
+      "url": "https://results.voteidaho.gov/results/public/ID/elections/nov2026",
+      "counties": true,
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}
