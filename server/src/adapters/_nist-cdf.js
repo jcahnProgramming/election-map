@@ -158,13 +158,31 @@ export function parseCdf(xml, { state, unmatched = () => {} } = {}) {
   const stateUnit = [...units.values()].find((u) => /^state$/i.test(u.type));
   const reportingCounties = [...units.values()].filter((u) => countyOf.has(u.id) && u.hasData);
 
+  // Units with any vote counted, in any contest. Ohio's exporter writes <SummaryCounts Type="Total" BallotsCast="0"/>
+  // (and VotersParticipated="0") until the count is complete, while votes are already flowing: a 0 there next to
+  // counted votes is "not filled in yet", so it becomes null, never "0 ballots cast".
+  const voted = new Set();
+  for (const c of election?.ContestCollection?.Contest ?? election?.Contest ?? []) {
+    for (const s of c.BallotSelection ?? []) {
+      for (const vc of s.VoteCountsCollection?.VoteCounts ?? s.VoteCounts ?? []) {
+        if ((num(field(vc, 'Count')) ?? 0) > 0) voted.add(text(vc.GpUnitId));
+      }
+    }
+  }
+  const castOf = (u, tot) => {
+    const cast = tot?.ballotsCast ?? u.participated ?? null;
+    // The state unit covers everything (its vote counts may sit on a separate statewide district unit).
+    const anyVotes = /^state$/i.test(u.type) ? voted.size > 0 : voted.has(u.id);
+    return cast === 0 && anyVotes ? null : cast;
+  };
+
   // ---- turnout (election-wide, per county; state = the state unit's own numbers, else the county sum)
   const turnoutOf = (u) => {
     const tot = u.summary.find((s) => isTotal(s.label));
     const outs = u.summary.filter((s) => !isTotal(s.label) && s.outstanding != null).map((s) => s.outstanding);
     return {
       registered: u.registered,
-      ballotsCast: tot?.ballotsCast ?? u.participated ?? null,
+      ballotsCast: castOf(u, tot),
       turnoutPct: null, // not published as a percentage
       ballotsOutstanding: tot?.outstanding ?? (outs.length ? outs.reduce((a, b) => a + b, 0) : null),
       precinctsReporting: u.reported,
@@ -176,9 +194,12 @@ export function parseCdf(xml, { state, unmatched = () => {} } = {}) {
   if (stateUnit || countyTurnout.length) {
     const own = stateUnit?.hasData ? turnoutOf(stateUnit) : null;
     const agg = (k) => own?.[k] ?? (countyTurnout.length ? sumOrNull(countyTurnout.map((c) => c[k])) : null);
+    // Ballots cast: a sum over only the counties that published one is not a statewide number.
+    const aggCast = () => (own?.ballotsCast != null ? own.ballotsCast
+      : countyTurnout.length && countyTurnout.every((c) => c.ballotsCast != null) ? agg('ballotsCast') : null);
     turnout.push({
       level: 'state', name: state,
-      registered: agg('registered'), ballotsCast: agg('ballotsCast'), turnoutPct: null,
+      registered: agg('registered'), ballotsCast: aggCast(), turnoutPct: null,
       ballotsOutstanding: agg('ballotsOutstanding'), precinctsReporting: agg('precinctsReporting'), precinctsTotal: agg('precinctsTotal'),
     });
     turnout.push(...countyTurnout);

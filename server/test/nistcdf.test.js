@@ -94,9 +94,14 @@ test('OH: turnout (registered, ballots cast, outstanding absentee, precincts), s
   assert.equal(adams.registered, 17079);
   assert.equal(adams.precinctsTotal, 21);
   assert.equal(adams.turnoutPct, null);
-  for (const k of ['registered', 'ballotsCast', 'ballotsOutstanding', 'precinctsReporting', 'precinctsTotal']) {
+  for (const k of ['registered', 'ballotsOutstanding', 'precinctsReporting', 'precinctsTotal']) {
     assert.equal(st[k], cty.reduce((s, c) => s + c[k], 0), k);
   }
+  // Ballots cast: the feed says 0 everywhere, but Franklin already has votes counted (Attorney General 162,804), so
+  // its 0 is "not filled in yet" → null, and a statewide sum missing Franklin is no statewide number → null.
+  assert.equal(cty.find((c) => c.name === 'Franklin').ballotsCast, null);
+  assert.equal(adams.ballotsCast, 0); // nothing counted in Adams yet: the 0 stands
+  assert.equal(st.ballotsCast, null);
 });
 
 test('OH: version ignores GeneratedDate; GeneratedDate 12-hour clock is corrected', () => {
@@ -278,4 +283,30 @@ test('generic CDF: retention is a Yes/No candidate-style race, not a measure; lo
   assert.deepEqual([levy.units[0].yes, levy.units[0].no], [9, 1]);
   const board = p.races.find((r) => r.key === 'sb');
   assert.deepEqual([board.level, board.office, board.voteFor, board.statewide], ['local', 'school_board', 3, false]);
+});
+
+// Live Ohio feed at 01:06Z (GeneratedDate written as 12:48/01:06 on a 12-hour clock): 1.3M votes counted, but every
+// county's <SummaryCounts Type="Total" BallotsCast="0"/> and VotersParticipated="0" are not filled in yet.
+const live = readFileSync(fileURLToPath(new URL('./fixtures/nistcdf/oh-2026-general-live-0106z.xml', import.meta.url)), 'utf8');
+
+test('OH live: a 0 "ballots cast" next to counted votes is not published yet (null), never 0', () => {
+  const r = buildResult(live, target, { now: new Date('2026-11-04T01:10:00Z') });
+  const sen = r.races.find((x) => x.office === 'senate');
+  const st = sen.units.find((u) => u.level === 'state');
+  assert.equal(st.votes.reduce((a, b) => a + b, 0), 1337268); // matches the feed's own statewide Senate total
+  const stT = r.turnout.find((t) => t.level === 'state');
+  assert.equal(stT.ballotsCast, null);
+  assert.equal(stT.registered, 8018054);
+  const votedCounties = new Set(sen.units.filter((u) => u.level === 'county' && u.votes.some((v) => v > 0)).map((u) => u.countyFips));
+  assert.ok(votedCounties.size > 10);
+  for (const t of r.turnout.filter((x) => x.level === 'county')) {
+    if (votedCounties.has(t.countyFips)) assert.equal(t.ballotsCast, null, `${t.name}: votes counted, ballots cast not published`);
+    else assert.ok(t.ballotsCast === 0 || t.ballotsCast === null, `${t.name}: ${t.ballotsCast}`);
+  }
+});
+
+test('OH: a 0 "ballots cast" with no votes counted yet stays 0 (pre-results)', () => {
+  const p = parseCdf(live.replace(/Count="\d+"/g, 'Count="0"'), { state: 'OH' });
+  const tc = p.turnout.find((t) => t.level === 'county');
+  assert.equal(tc.ballotsCast, 0);
 });
