@@ -1,12 +1,11 @@
 {
-  "_howto": "Florida Division of Elections results extract (tab-separated), polled by server/src/adapters/fldos.js. extractUrl = the ResultsExtract.Asp download for one election date (OfficialResults=N: unofficial, PartyRaces=N: general-election races). One row per county x candidate; the statewide number is the sum of the 67 counties' rows for one race. Until the first rows appear the file is a header line only: the adapter then writes nothing. Set enabled:false to stop polling one without deleting it. Every contest in the extract is stored; races = headline races expected (coverage), not a filter. The extract is the Division's own contests (federal, statewide, legislative, multi-county, judicial retention, amendments); county and municipal contests are on the county Supervisor of Elections sites, so allContests is false. contestRules name FL offices the shared rules miss.",
+  "_howto": "Florida Division of Elections election-night results, polled by server/src/adapters/fldos.js. 2026 general: downloadsUrl = the Florida Election Watch Downloads page (named in the Secretary of State's 2026-11 readiness release); the adapter reads that page for its own current link to fileName (?v= changes on every page load; the bare file URL serves a stale cached copy), HEADs it, and downloads the tab-delimited file only when its ETag changes. Older elections: extractUrl = the ResultsExtract.Asp download (same column layout; OfficeDesc instead of RaceName). One row per county x candidate; statewide = sum of the 67 counties. Set enabled:false to stop polling.",
   "elections": [
     {
       "state": "FL",
       "id": "FL-2026-general",
       "name": "Florida 2026 General (Division of Elections)",
-      "extractUrl": "https://results.elections.myflorida.com/ResultsExtract.Asp?ElectionDate=11/3/2026&OfficialResults=N&PartyRaces=N&DATAMODE=",
-      "url": "https://results.elections.myflorida.com/",
+      "url": "https://floridaelectionwatch.gov/",
       "date": "2026-11-03",
       "races": [
         "senate",
@@ -14,10 +13,59 @@
         "house"
       ],
       "measures": true,
-      "enabled": false,
-      "verified": "2026-11-03",
-      "note": "Disabled at ship time: endpoint verified live 2026-11-03 but it returned only the header row through 00:03 UTC, so the row parser has not been checked against real data rows. Enable once a real extract has been parsed (node script against the adapter) and checked.",
-      "allContests": false
+      "enabled": true,
+      "verified": "2026-11-04",
+      "note": "Enabled 2026-11-04 after verifying the parsed Election Watch file (Last-Modified 01:30:03Z) against Election Watch's own Contest Results by County pages: Amendments 1-3 identical statewide and in Miami-Dade, Broward, Hillsborough; Senate and Governor identical in 66 of 67 counties incl. those three (the pages already showed a newer Columbia upload than the file). Governor rows are tickets: CanNameFirst = Governor candidate's surname, CanNameLast = running mate's, '/' in CanNameMiddle.",
+      "allContests": false,
+      "downloadsUrl": "https://floridaelectionwatch.gov/Downloads",
+      "fileName": "20261103_ElecResultsFL.txt",
+      "ticketNames": {
+        "source": "https://floridaelectionwatch.gov/StateOffices/Governor",
+        "copied": "2026-11-04",
+        "note": "The results file gives tickets as surnames only (CanNameFirst = Governor candidate, CanNameLast = running mate). Full names exactly as Florida Election Watch's own Governor page lists them ('<Governor> and <Lt. Governor>'), keyed by the Governor candidate's surname in the file. A surname not listed here is shown as the surname.",
+        "names": {
+          "Donalds": {
+            "name": "Byron Donalds",
+            "runningMate": "Bryan Avila"
+          },
+          "Jolly": {
+            "name": "David Jolly",
+            "runningMate": "Gwen Graham"
+          },
+          "Jewett": {
+            "name": "Scott Eckhard Jewett",
+            "runningMate": "Nicole Skelly"
+          },
+          "Burkett": {
+            "name": "Charles Burkett",
+            "runningMate": "Ruben A. Coto"
+          },
+          "Russo": {
+            "name": "Frank J. Russo",
+            "runningMate": "Rachel Rodriguez"
+          },
+          "Dimanche": {
+            "name": "Moliere \"Moe\" Dimanche",
+            "runningMate": "Benjiman Rojas"
+          },
+          "Abrams": {
+            "name": "Dean Ocean Abrams",
+            "runningMate": "Joe Van Vactor"
+          },
+          "Datto": {
+            "name": "Jeffrey Peter \"Dr. Jeff\" Datto",
+            "runningMate": "Juan Santana"
+          },
+          "Anderson": {
+            "name": "Kathy Anderson",
+            "runningMate": "Daniel Nokovich"
+          },
+          "Morris": {
+            "name": "Erik Morris",
+            "runningMate": "LeRoy Alaways"
+          }
+        }
+      }
     }
   ],
   "contestRules": [

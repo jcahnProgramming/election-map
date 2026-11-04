@@ -149,6 +149,7 @@ const COLUMNS = [
   ['races', 'level', 'TEXT'],
   ['races', 'kind', 'TEXT'],
   ['races', 'jurisdiction', 'TEXT'],
+  ['candidates', 'running_mate', 'TEXT'], // joint tickets (FL Governor / Lt. Governor): the running mate, never the headline name
 ];
 
 const RACES_V03 = `CREATE TABLE races_v03 (
@@ -283,7 +284,7 @@ export function writeSnapshot(db, r) {
       });
       const raceId = st.raceId.get(electionId, race.key).id;
       const candIds = (race.choices ?? []).map((c, position) => {
-        st.upsertCandidate.run({ race_id: raceId, name: c.name, party: c.party, party_raw: c.partyRaw ?? '', position });
+        st.upsertCandidate.run({ race_id: raceId, name: c.name, party: c.party, party_raw: c.partyRaw ?? '', position, running_mate: c.runningMate ?? null });
         return st.candidateId.get(raceId, position).id;
       });
       const unitsSeen = new Set();
@@ -355,9 +356,10 @@ function prepared(db) {
         title = COALESCE(excluded.title, races.title), level = excluded.level, kind = excluded.kind,
         jurisdiction = COALESCE(excluded.jurisdiction, races.jurisdiction)`),
     raceId: db.prepare('SELECT id FROM races WHERE election_id = ? AND source_key = ?'),
-    upsertCandidate: db.prepare(`INSERT INTO candidates (race_id, name, party, party_raw, position)
-      VALUES (@race_id, @name, @party, @party_raw, @position)
-      ON CONFLICT (race_id, position) DO UPDATE SET name = excluded.name, party = excluded.party, party_raw = excluded.party_raw`),
+    upsertCandidate: db.prepare(`INSERT INTO candidates (race_id, name, party, party_raw, position, running_mate)
+      VALUES (@race_id, @name, @party, @party_raw, @position, @running_mate)
+      ON CONFLICT (race_id, position) DO UPDATE SET name = excluded.name, party = excluded.party, party_raw = excluded.party_raw,
+        running_mate = excluded.running_mate`),
     candidateId: db.prepare('SELECT id FROM candidates WHERE race_id = ? AND position = ?'),
     upsertUnit: db.prepare(`INSERT INTO reporting_units (state, level, county_fips, name) VALUES (@state, @level, @county_fips, @name)
       ON CONFLICT (state, level, county_fips) DO NOTHING`),
