@@ -202,3 +202,10 @@ test('measureStatus: a counties-only source shows its counted lead instead of "t
   assert.equal(measureStatus({ pctReporting: null, yes: 600, no: 400 }), 'too-early'); // nothing published at all
   assert.equal(measureStatus({ pctReporting: 5, yes: 600, no: 400 }), 'too-early'); // a real % below the gate
 });
+
+test('reportingText words county counts the way the source does ("reported" for Alabama, "complete" for Clarity)', async () => {
+  const { reportingText } = await import('../src/format.js');
+  assert.equal(reportingText({ countiesComplete: 56, countiesTotal: 67, countiesLabel: 'reported' }), '56 of 67 counties reported');
+  assert.equal(reportingText({ countiesComplete: 5, countiesTotal: 64, countiesLabel: 'complete' }), '5 of 64 counties complete');
+  assert.equal(reportingText({ countiesComplete: 5, countiesTotal: 64 }), '5 of 64 counties complete');
+});

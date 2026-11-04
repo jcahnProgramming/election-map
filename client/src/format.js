@@ -10,7 +10,9 @@ export const fmtReporting = (n) => (isNum(n) ? `${Number(n) > 0 && Number(n) < 1
  */
 export function reportingText(e, word = 'in') {
   if (isNum(e?.pctReporting)) return `${fmtReporting(e.pctReporting)} ${word}`;
-  if (isNum(e?.countiesTotal) && Number(e.countiesTotal) > 0) return `${fmtVotes(e.countiesComplete ?? 0)} of ${fmtVotes(e.countiesTotal)} counties complete`;
+  if (isNum(e?.countiesTotal) && Number(e.countiesTotal) > 0) {
+    return `${fmtVotes(e.countiesComplete ?? 0)} of ${fmtVotes(e.countiesTotal)} counties ${e.countiesLabel === 'reported' ? 'reported' : 'complete'}`;
+  }
   return null;
 }
 export const barWidth = (pct) => `${isNum(pct) ? Math.max(0, Math.min(100, Number(pct))).toFixed(1) : 0}%`;

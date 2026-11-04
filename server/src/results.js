@@ -158,6 +158,12 @@ export function createResults(db, adapters, opts = {}) {
    * from details.json) are never served as a "% in" either.
    */
   const noPublishedPct = (source, scope) => source === 'clarity' && scope === 'state';
+  /**
+   * County counts as the source words them: Clarity's state pages count counties "complete" (Election Night Reporting
+   * Complete); Alabama's page says "Counties Reported" (which can include partly counted counties).
+   */
+  const COUNTY_WORD = { alsos: 'reported' };
+  const countiesOut = (cc, ct, source) => (ct ? { countiesComplete: cc ?? 0, countiesTotal: ct, countiesLabel: COUNTY_WORD[source] ?? 'complete' } : {});
 
   /** Election-wide turnout per unit key for one snapshot. */
   function loadTurnout(snapshotId, noPct = false) {
@@ -412,7 +418,7 @@ export function createResults(db, adapters, opts = {}) {
       precinctsReporting: sw?.pr ?? null,
       precinctsTotal: sw?.pt ?? null,
       // Sources that publish counties complete instead of a % (Clarity statewide sites): never turned into a %.
-      ...(sw?.ct ? { countiesComplete: sw.cc ?? 0, countiesTotal: sw.ct } : {}),
+      ...countiesOut(sw?.cc, sw?.ct, races[0].source),
       ballotsCast: turnout.get('state')?.ballotsCast ?? null,
       ...sourceFields(races[0]),
     };
@@ -436,7 +442,7 @@ export function createResults(db, adapters, opts = {}) {
       state: r.state, contest: r.name, district: r.district ?? null, live: true,
       totalVotes: s.totalVotes, leader: s.leader, tied: s.tied, marginPts: s.marginPts, multiSeat: !!s.multiSeat,
       pctReporting: u?.pct ?? null,
-      ...(u?.ct ? { countiesComplete: u.cc ?? 0, countiesTotal: u.ct } : {}),
+      ...countiesOut(u?.cc, u?.ct, r.source),
       lead: lead ? { name: lead.name, party: lead.party, partyRaw: lead.partyRaw ?? null, runningMate: lead.runningMate ?? null, photo: lead.photo ?? null } : null,
       // Top-two / same-party contests: the seat goes to that party whichever of the two leads.
       runnerUpParty: second && second.votes > 0 ? second.party : null,
@@ -684,7 +690,7 @@ export function createResults(db, adapters, opts = {}) {
           scope: e.scope,
           ...row,
           pctReporting: pct,
-          ...(rp?.ct ? { countiesComplete: rp.cc ?? 0, countiesTotal: rp.ct } : {}),
+          ...countiesOut(rp?.cc, rp?.ct, e.source),
           precinctsReporting: rp?.pr ?? null,
           precinctsTotal: rp?.pt ?? null,
           source: e.source,
@@ -817,7 +823,7 @@ export function createResults(db, adapters, opts = {}) {
         no: m.no,
         pctYes: m.yes + m.no > 0 ? Math.round((1000 * m.yes) / (m.yes + m.no)) / 10 : null,
         pctReporting: noPublishedPct(m.source, 'state') ? null : m.pct ?? pctOf(m.pr, m.pt), // measures here are state-scope
-        ...(m.ct ? { countiesComplete: m.cc ?? 0, countiesTotal: m.ct } : {}),
+        ...countiesOut(m.cc, m.ct, m.source),
         source: m.source,
         sourceName: adapterName(m.source),
         sourceUrl: m.url ?? null,

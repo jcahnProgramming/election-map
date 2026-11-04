@@ -173,6 +173,10 @@ export function buildAl(statewide, countyPages, t, unmatched = () => {}) {
     const statewideOffice = !/\b(district|circuit|county|place no)\b/i.test(c.name) || cls?.office === 'senate' || cls?.office === 'governor';
     const units = [yn({
       level: 'state', name: statewideOffice ? st : c.name, votes: c.rows.map((r) => r.votes),
+      // The page's own "Counties Reported: 56 of 67" (election-wide): shown as counties reported for statewide
+      // offices, the only contests every county votes on. District contests get no figure (it isn't per contest).
+      ...(statewideOffice && statewide?.countiesTotal
+        ? { countiesComplete: statewide.countiesReported ?? 0, countiesTotal: statewide.countiesTotal } : {}),
       precinctsReporting: null, precinctsTotal: null, pctReporting: null,
     })];
     for (const { m, p } of counties) {

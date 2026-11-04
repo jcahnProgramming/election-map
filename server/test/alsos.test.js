@@ -83,3 +83,18 @@ test('polling: statewide page each poll, county list + county pages on a new "La
   assert.equal((await adapter.fetch(tt, ctx)).changed, false);
   assert.deepEqual(calls, ['statewideResultsByContest.aspx?ecode=1001305']);
 });
+
+test('AL: the page\'s "Counties Reported: 7 of 67" goes on statewide offices (labelled "reported"); district contests get none', async () => {
+  const r = buildAl(parseAlPage(read('statewide.html')), [], t);
+  const gov = r.races.find((x) => x.office === 'governor');
+  assert.deepEqual([gov.units[0].countiesComplete, gov.units[0].countiesTotal], [7, 67]);
+  const h1 = r.races.find((x) => x.office === 'house' && x.district === '1');
+  assert.equal(h1.units[0].countiesTotal, undefined);
+
+  const { openDb, writeSnapshot } = await import('../src/db.js');
+  const { createResults } = await import('../src/results.js');
+  const db = openDb(':memory:');
+  writeSnapshot(db, { ...r, version: '1', source: 'alsos', fetchedAt: '2026-11-04T02:04:00Z' });
+  const st = createResults(db, [{ id: 'alsos', name: 'Alabama SOS', targets: () => [] }]).state('AL', 'governor').statewide;
+  assert.deepEqual([st.countiesComplete, st.countiesTotal, st.countiesLabel], [7, 67, 'reported']);
+});
