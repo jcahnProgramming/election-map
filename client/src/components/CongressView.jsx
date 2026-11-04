@@ -52,7 +52,7 @@ function Chamber({ id, title, ch, note }) {
   );
 }
 
-function Closest({ up, onOpen }) {
+export function Closest({ up, onOpen }) {
   const list = closestSeats(up);
   return (
     <section className="closest" aria-labelledby="closest-h">
