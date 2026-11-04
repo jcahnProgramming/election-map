@@ -65,8 +65,7 @@
       "reason": "Akamai 403 (\"Acceptable Use Policy\")"
     },
     "LA": {
-      "status": "planned",
-      "reason": "JSON blobs, map not built yet"
+      "status": "live"
     },
     "MA": {
       "status": "no_feed",
