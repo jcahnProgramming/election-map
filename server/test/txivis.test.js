@@ -116,3 +116,11 @@ test('localToIso handles both sides of the DST change', () => {
   assert.equal(localToIso('Oct 29, 2026 22:13:17', 'America/Chicago'), '2026-10-30T03:13:17.000Z');
   assert.equal(localToIso('garbage', 'America/Chicago'), null);
 });
+
+test('TX live: Home.LastUpdatedTime is UTC (shipped config), never a time in the future', () => {
+  // Election night 2026: the 7th publish (enr/53815/7/) said "Nov 04, 2026 01:13:09" when it was 01:13Z (19:13 CST).
+  // Read as Texas local time it became 07:13Z, six hours ahead, and the national "Last update" showed it.
+  const cfg = JSON.parse(readFileSync(new URL('../../config/sources/txivis.json', import.meta.url), 'utf8'));
+  const tz = cfg.elections.find((e) => String(e.electionId) === '53815').timeZone;
+  assert.equal(localToIso('Nov 04, 2026 01:13:09', tz), '2026-11-04T01:13:09.000Z');
+});
