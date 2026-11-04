@@ -119,7 +119,7 @@
         "value": "https://www.vaformarriageequality.com/",
         "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/3154e39f-6260-4126-9d7d-a906d554334a/pdf/cfreports",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "opposition_committee_name": {
         "value": "Virginians Against 3",
@@ -204,7 +204,7 @@
         "value": "https://www.vvff.info/",
         "source_url": "https://cf.elections.virginia.gov/Printable/StatementOfOrganization/2e19b1cf-aef2-4b29-8c7a-ea0a1556b050/pdf/cfreports",
         "as_of": "2026-11-03",
-        "reviewed": false
+        "reviewed": true
       },
       "party_positions": [],
       "legislative_vote": {
@@ -234,7 +234,7 @@
         "legislative_vote: second-reference passage in the 2026 Regular Session (House 1/14/2026, roll call https://lis.virginia.gov/vote-details/HJ2/20261/2619793; Senate 1/16/2026, roll call https://lis.virginia.gov/vote-details/HJ2/20261/SV27). \"other\" = recorded as not voting (House: Austin, Knight — the record notes Knight intended to vote nay; Senate: Pillion). The House roll-call page's own name-list footer counts one fewer yea than its official tally header; the header tally is used. First-reference (2025 session) votes not recorded here.",
         "legislative_vote.by_party: null — the LIS roll calls list members by surname only, without party.",
         "party_positions: no position on this amendment was found published by the Democratic Party of Virginia (vademocrats.org) or the Republican Party of Virginia (rpv.org / virginia.gop); none recorded.",
-        "opposition_committee_name: Virginia Voters For Freedom, Inc registered as opposing \"Proposed Constitutional Amendments, Question 1, 2 and 3\" (statewide, 11/03/2026); it is the only opposing committee found that names this question.",
+        "opposition_committee_name: Virginia Voters For Freedom, Inc (RC-26-00041) registered as opposing \"Proposed Constitutional Amendments, Question 1, 2 and 3\" (statewide, 11/03/2026); it is the only opposing committee found that names this question.",
         "proponent_website: the supporting committee Virginians for the Right to Vote (RC-26-00005, Support, \"Restoration of Rights\") lists no website on its Statement of Organization; Feminists for Voting Rights also registered in support."
       ]
     }

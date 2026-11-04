@@ -50,24 +50,33 @@ test('reviewed elsewhere: CO Democrats (12), FL, ID Prop 1, NC, OH Issue 3, VA Q
   assert.match(info('VA', 'Question 1').opposition.website, /virginiansforsafereproductivepolicy\.com/);
 });
 
-test('still unreviewed: positions "Not yet verified" (no position, no link), websites omitted', () => {
-  // UT Amendment B: the Utah Republican Party entry exists but is unreviewed → pending; Democrats have no entry at all.
+test('second review round (UT, VA, WA): the 7 verified values are served, each on its side', () => {
+  // UT Amendment B: the Utah Republican Party's own release; Democrats have no entry → "No published position".
   const ub = info('UT', 'Constitutional Amendment B');
   const rep = ub.partyPositions.find((p) => p.major === 'REP');
-  assert.deepEqual([rep.party, rep.position, rep.pending, rep.sourceUrl], ['Utah Republican Party', null, true, null]);
+  assert.deepEqual([rep.party, rep.position, rep.pending], ['Utah Republican Party', 'support', false]);
+  assert.match(rep.sourceUrl, /utgop\.org\/utahns_support_lower_taxes_vote_yes_on_amendment_b/);
   const dem = ub.partyPositions.find((p) => p.major === 'DEM');
   assert.deepEqual([dem.position, dem.pending], [null, false]);
-  // Unreviewed websites are omitted, not placeholdered.
-  for (const [st, id] of [['VA', 'Question 2'], ['VA', 'Question 3'], ['RI', 'Question 3']]) {
-    assert.deepEqual(info(st, id).campaignWebsites, [], `${st} ${id}`);
-  }
-  const leaked = JSON.stringify([
-    ub, info('VA', 'Question 2'), info('VA', 'Question 3'), info('RI', 'Question 3'),
-    ...measureInfoList(EK, 'WA').map((m) => publicInfo(m)),
-  ]);
-  for (const s of ['vaformarriageequality', 'vvff.info', 'no645.com', 'NoHateInWAState', 'di-ag.org', 'voteyeson3ri']) {
-    assert.ok(!leaked.includes(s), `${s} must not be served`);
-  }
+  const sites = (st, id) => info(st, id).campaignWebsites.map((w) => [w.side, w.url]);
+  assert.deepEqual(sites('VA', 'Question 2'), [['support', 'https://www.vaformarriageequality.com/']]);
+  assert.deepEqual(sites('VA', 'Question 3'), [['oppose', 'https://www.vvff.info/']]);
+  assert.deepEqual(sites('WA', 'Initiative Measure No. IP26-645'), [['oppose', 'https://no645.com/']]);
+  assert.deepEqual(sites('WA', 'Initiative Measure No. IL26-001'), [['oppose', 'https://NoHateInWAState.org/About-I-001']]);
+  assert.deepEqual(sites('WA', 'Initiative Measure No. IL26-638'),
+    [['support', 'https://www.di-ag.org'], ['oppose', 'https://NoHateInWAState.org/About-I-638']]);
+});
+
+test('still unreviewed: RI Question 3 proponent website (source filing gone, independent expenditure) is never served', () => {
+  const rq3 = info('RI', 'Question 3');
+  assert.deepEqual(rq3.campaignWebsites, []);
+  const leaked = JSON.stringify(rq3);
+  assert.ok(!leaked.includes('voteyeson3ri'), 'unreviewed website must not be served');
+  assert.ok(!leaked.includes('independent-expenditure'), 'the reviewer note on an unreviewed value stays in the file');
+  const raw = measureInfoList(EK, 'RI').find((m) => m.measure_id === 'Question 3').proponent_website;
+  assert.equal(raw.reviewed, false);
+  assert.match(raw.note, /404/);
+  assert.match(raw.note, /independent-expenditure/);
 });
 
 test('partyPositionsOf: majors always (unreviewed = pending, no position or source), others only when reviewed', () => {
