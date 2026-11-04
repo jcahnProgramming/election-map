@@ -2,8 +2,7 @@
   "_howto": "Why each state does or doesn't have live results here. Source of truth: docs/source-roadmap.md. status: \"live\" (a statewide adapter polls it), \"planned\" (a machine-readable feed exists, adapter not built or not enabled yet), \"blocked\" (the results site rejects automated access; we never work around that), \"no_feed\" (the state publishes no statewide machine-readable live results). reason: internal note, never shown. Adding a state's adapter = flip it to \"live\" in the same change (server/test/coverage-status.test.js checks this).",
   "states": {
     "AK": {
-      "status": "no_feed",
-      "reason": "PDF summary reports only"
+      "status": "live"
     },
     "AL": {
       "status": "planned",
