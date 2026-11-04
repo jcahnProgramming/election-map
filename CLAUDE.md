@@ -5,7 +5,10 @@ https://election.jamiecahn.com through a Cloudflare tunnel to <HOST> (<HOST_OS>)
 confidential and nothing in it ever needs a secret.
 
 ## What the app is
-- A US map, state by state, for one office at a time, picked with a **Federal / State** toggle: Federal =
+- A US map, state by state. Default view **Top race** (no params in the URL): each state colored by its highest-office
+  contest (Senate, else Governor, else the House statewide popular vote; a special Senate race never outranks the
+  regular one), with its other major races listed beside it, never added to it. Or one office at a time, picked with a
+  **Federal / State** toggle: Federal =
   U.S. Senate / U.S. House (House = the statewide popular vote across a state's districts); State = Governor plus
   every statewide office the feeds carry (Attorney General, Secretary of State, …; built from `/api/offices`, never
   hardcoded). Hover → votes counted per party; click → the state with counties shaded, where the source has counties.

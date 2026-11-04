@@ -1,9 +1,11 @@
 import React from 'react';
 import { legendItems } from '../shading.js';
 
-export default function Legend({ showNoData = false, multiSeat = false }) {
+export default function Legend({ showNoData = false, multiSeat = false, note = null }) {
   const items = legendItems(undefined, { multiSeat });
   return (
+    <>
+    {note && <p className="legend-note">{note}</p>}
     <ul className="legend" aria-label="Map legend">
       {items.map((l) => (
         <li key={l.label}>
@@ -22,5 +24,6 @@ export default function Legend({ showNoData = false, multiSeat = false }) {
         </li>
       )}
     </ul>
+    </>
   );
 }

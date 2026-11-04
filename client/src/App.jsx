@@ -14,7 +14,9 @@ import Changelog from './components/Changelog.jsx';
 
 const DEFAULT_OFFICE = 'senate';
 const REFETCH_DEBOUNCE_MS = 600;
-const LEVELS = [['federal', 'Federal'], ['state', 'State']];
+// "Top race" (the default) colors each state by its highest-office contest; it has no office pills.
+const LEVELS = [['top', 'Top race'], ['federal', 'Federal'], ['state', 'State']];
+const TOP = 'top';
 const FEDERAL = new Set(['president', 'senate', 'house']);
 // The version this bundle was built as (CHANGELOG.json, injected by vite.config.js).
 // eslint-disable-next-line no-undef
@@ -40,14 +42,25 @@ function parseLocation(loc) {
   }
   let office = String(p.get('office') || '').toLowerCase();
   office = ALIASES[office] ?? office;
-  const levelAsked = p.get('level') === 'state' ? 'state' : p.get('level') === 'federal' ? 'federal' : null;
+  const lv = p.get('level');
+  const levelAsked = lv === 'top' || lv === 'state' || lv === 'federal' ? lv : null;
+  const st = String(p.get('state') || '').toUpperCase();
+  const rest = { state: /^[A-Z]{2}$/.test(st) ? st : null, tab: p.get('tab') === 'all' ? 'all' : 'overview' };
+  // No level and no office (a bare URL), or level=top: the Top race view.
+  if (levelAsked === TOP || (!levelAsked && !OFFICE_RE.test(office)) || office === TOP) return { ...rest, office: TOP, level: TOP };
   if (!OFFICE_RE.test(office)) office = levelAsked === 'state' ? 'governor' : DEFAULT_OFFICE;
   const level = levelAsked ?? (FEDERAL.has(office) ? 'federal' : 'state');
-  const st = String(p.get('state') || '').toUpperCase();
-  return { state: /^[A-Z]{2}$/.test(st) ? st : null, office, level, tab: p.get('tab') === 'all' ? 'all' : 'overview' };
+  return { ...rest, office, level };
 }
 function toSearch({ state, office, level, tab }) {
   const p = new URLSearchParams();
+  if (level === TOP) {
+    // The default view: no level / office in the URL.
+    if (state) p.set('state', state);
+    if (state && tab === 'all') p.set('tab', 'all');
+    const q = p.toString();
+    return q ? `?${q}` : '';
+  }
   p.set('level', level);
   p.set('office', ALIAS_OF[office] ?? office);
   if (state) p.set('state', state);
@@ -259,8 +272,11 @@ export default function App() {
     document.title = `${stateName ? `${stateName} · ` : ''}${shortLabel(race)} · Election Night 2026 (unofficial)`;
   }, [stateName, race, officesBox.data]);
 
+  // In Top race, the state view shows that state's top office (the server resolves it).
+  const viewRace = race === TOP ? (stateData?.topOffice ?? TOP) : race;
   const pickLevel = (lv) => {
     if (lv === level) return;
+    if (lv === TOP) return navigate({ level: TOP, office: TOP });
     const first = (levels[lv]?.length ? levels[lv] : FALLBACK_OFFICES[lv])[0]?.office;
     navigate({ level: lv, office: first });
   };
@@ -291,14 +307,16 @@ export default function App() {
               <button key={k} type="button" className="level-btn" aria-pressed={k === level} onClick={() => pickLevel(k)}>{label}</button>
             ))}
           </div>
-          <div className="race-group" role="group" aria-label="Race">
-            {officeList.map((o) => (
-              <button key={o.office} type="button" className="race-btn" aria-pressed={o.office === race}
-                onClick={() => navigate({ office: o.office, level })}>
-                {shortLabel(o.office)}
-              </button>
-            ))}
-          </div>
+          {level !== TOP && (
+            <div className="race-group" role="group" aria-label="Race">
+              {officeList.map((o) => (
+                <button key={o.office} type="button" className="race-btn" aria-pressed={o.office === race}
+                  onClick={() => navigate({ office: o.office, level })}>
+                  {shortLabel(o.office)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="hdr-meta">
@@ -329,7 +347,9 @@ export default function App() {
                   <button type="button" className="link-btn" onClick={() => navigate({ state: null })}>← United States</button>
                   <span className="sep" aria-hidden="true">/</span>
                   <span className="here" aria-current="page">{stateName}</span>
-                  {tab === 'overview' && <span className="sub">· {longLabel(race)}</span>}
+                  {tab === 'overview' && (
+                    <span className="sub">· {race === TOP ? `Top race: ${viewRace === TOP ? '…' : longLabel(viewRace)}` : longLabel(race)}</span>
+                  )}
                 </>
               ) : (
                 <>
@@ -362,7 +382,7 @@ export default function App() {
           )}
 
           {abbr ? (
-            <StateView abbr={abbr} race={race} tab={tab} data={stateData} error={stateBox.error}
+            <StateView abbr={abbr} race={viewRace} tab={tab} data={stateData} error={stateBox.error}
               contests={contestsBox.data} contestsError={contestsBox.error} onOpenMeasure={openMeasure} />
           ) : (
             <NationalView data={national.data} race={race} error={national.error} onSelectState={(s) => navigate({ state: s })} />
@@ -371,6 +391,7 @@ export default function App() {
           {(!abbr || tab === 'overview') && (
             <Legend
               showNoData={!!abbr && stateData?.countyData === 'partial'}
+              note={!abbr && race === TOP ? 'Each state colored by its top race on the ballot: U.S. Senate, else Governor, else the U.S. House statewide popular vote.' : null}
               multiSeat={abbr ? !!stateData?.statewide?.multiSeat : (nStates || []).some((s) => s.multiSeat)}
             />
           )}

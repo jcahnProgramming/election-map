@@ -199,6 +199,17 @@ button { cursor: pointer; }
 .seat-rows .who { display: flex; align-items: center; gap: 6px; font-weight: 600; }
 .seat-rows .val { font-family: var(--font-num); white-space: nowrap; }
 
+/* ---------- Top race ---------- */
+.tip-contest { margin-top: -4px; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--muted); }
+.other-races { display: flex; flex-direction: column; gap: 4px; border-top: 1px solid var(--border-2); padding-top: 8px; }
+.other-races .k { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--muted-2); }
+.other-races .line { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; }
+.other-races .who { color: var(--text-2); }
+.other-races .val { font-family: var(--font-num); text-align: right; overflow-wrap: anywhere; }
+.legend-note { margin: 0 0 -6px; font-size: 12px; color: var(--muted); }
+/* Millions of votes must fit a quarter-width card without breaking mid-number. */
+.stat-cards .card .big:not(.na) { font-size: clamp(16px, 1.75vw, 24px); overflow-wrap: normal; white-space: nowrap; }
+
 /* ---------- Candidates ---------- */
 .ptag { display: inline-block; margin-left: 6px; font-family: var(--font-num); font-size: 10px; font-weight: 600; letter-spacing: .04em; padding: 1px 5px; border-radius: 3px; vertical-align: 1px; text-transform: uppercase; }
 .ptag.dem { background: #16264A; color: #93B4FA; }

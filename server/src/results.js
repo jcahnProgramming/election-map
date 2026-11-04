@@ -18,9 +18,11 @@ import { findMeasureInfo, measureInfoList, publicInfo } from './measureinfo.js';
 export const RACES = ['senate', 'governor', 'house'];
 const PARTIES = ['DEM', 'REP', 'OTHER'];
 export const OFFICE_RE = /^[a-z][a-z_]{1,48}$/;
+/** Pseudo-office: each state's top race (Senate, else Governor, else the House statewide popular vote). */
+export const TOP = 'top';
 
 /** Selector levels → contest levels they draw from. */
-export const SELECT_LEVELS = { federal: ['federal'], state: ['statewide'] };
+export const SELECT_LEVELS = { top: [], federal: ['federal'], state: ['statewide'] };
 const OFFICE_ORDER = ['president', 'senate', 'house', 'governor', 'lieutenant_governor', 'attorney_general', 'secretary_of_state',
   'treasurer', 'auditor', 'controller'];
 const GROUPS = [
@@ -330,8 +332,10 @@ export function createResults(db, adapters, opts = {}) {
       contests = races.map((r) => r.name);
     } else {
       // Two contests for the same office (e.g. a regular and a special Senate race) are different races:
-      // never summed. The first is the headline; the rest are listed separately.
-      const [first, ...rest] = races;
+      // never summed. The regular contest is the headline (a special / unexpired-term one goes after it); the rest are
+      // listed separately.
+      const special = (r) => /\b(special|unexpired|vacancy)\b/i.test(r.name);
+      const [first, ...rest] = [...races].sort((a, b) => Number(special(a)) - Number(special(b)));
       units = loadRace(first);
       contests = [first.name];
       otherContests = rest.map((r) => {
@@ -363,6 +367,12 @@ export function createResults(db, adapters, opts = {}) {
 
   function national(race, ek = electionsCfg().current) {
     const srcs = sourcesByState(ek);
+    if (race === TOP) {
+      return {
+        election: ek, race, office: TOP, officeLabel: 'Top race on the ballot', generatedAt: new Date().toISOString(),
+        states: STATES.map((s) => topRace(ek, s.abbr, srcs).entry),
+      };
+    }
     return {
       election: ek,
       race,
@@ -370,6 +380,50 @@ export function createResults(db, adapters, opts = {}) {
       officeLabel: officeLabel(race),
       generatedAt: new Date().toISOString(),
       states: STATES.map((s) => stateRace(ek, s.abbr, race, srcs).entry),
+    };
+  }
+
+  /** One line about a contest that isn't the one coloring the map: its leading candidate (or party) and margin. */
+  function raceLine(office, e, name = null) {
+    const lead = e.candidates?.[0];
+    return {
+      office, label: officeLabel(office), name: name ?? e.contests?.[0] ?? null, status: e.status,
+      partySum: !!e.partySum, multiSeat: !!e.multiSeat, seats: e.seats ?? null,
+      leader: e.leader ?? null, tied: !!e.tied, marginPts: e.marginPts ?? null, totalVotes: e.totalVotes ?? 0,
+      leadName: e.partySum || !e.totalVotes ? null : lead?.name ?? null,
+      leadParty: lead?.party ?? null, leadPartyRaw: lead?.partyRaw ?? null,
+      pctReporting: e.pctReporting ?? null,
+    };
+  }
+
+  /**
+   * "Top race": each state's highest-office contest this election, Senate, else Governor, else the U.S. House
+   * statewide popular vote. The color is that one contest (the House fallback is the one sum CLAUDE.md allows, and
+   * says so); the state's other major contests are listed beside it, never added to it.
+   */
+  function topRace(ek, abbr, srcs = sourcesByState(ek)) {
+    const views = Object.fromEntries(RACES.map((o) => [o, stateRace(ek, abbr, o, srcs)]));
+    const has = (o) => ['reporting', 'awaiting'].includes(views[o].entry.status);
+    const order = ['senate', 'governor', 'house'];
+    let pick = order.find(has);
+    if (!pick) {
+      // Nothing from a source: the top race the state is expected to hold (still "no data source yet").
+      pick = order.find((o) => views[o].entry.status === 'no-source') ?? 'senate';
+    }
+    const chosen = views[pick];
+    const otherRaces = [];
+    for (const o of order) {
+      const e = views[o].entry;
+      if (o !== pick && has(o)) otherRaces.push(raceLine(o, e));
+      // A second contest for the same office (a special Senate election) is its own line.
+      for (const c of e.otherContests ?? []) {
+        otherRaces.push(raceLine(o, { ...c, status: c.totalVotes > 0 ? 'reporting' : 'awaiting' }, c.name));
+      }
+    }
+    return {
+      ...chosen,
+      entry: { ...chosen.entry, topOffice: pick, topLabel: pick === 'house' ? 'U.S. House · statewide popular vote' : officeLabel(pick), otherRaces },
+      office: pick,
     };
   }
 
@@ -546,6 +600,12 @@ export function createResults(db, adapters, opts = {}) {
   }
 
   function state(abbr, race, ek = electionsCfg().current) {
+    if (race === TOP) {
+      // The state's top race: the same view as asking for that office, plus which office it is and the other races.
+      const t = topRace(ek, stateByAbbr(abbr).abbr);
+      const out = state(abbr, t.office, ek);
+      return { ...out, topOffice: t.office, statewide: { ...out.statewide, topOffice: t.office, topLabel: t.entry.topLabel, otherRaces: t.entry.otherRaces } };
+    }
     const { entry, counties: stateCounties, turnout, methods } = stateRace(ek, abbr, race);
     const known = new Map(countiesOf(entry.state).map((c) => [c.fips, c.name]));
     let counties = stateCounties;

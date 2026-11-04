@@ -61,7 +61,7 @@ const raceParam = (req, res, ek) => {
     return null;
   }
   let race = req.query.office ?? req.query.race;
-  if (race == null && level) race = results.offices(ek).levels[level][0]?.office;
+  if (race == null && level) race = level === 'top' ? 'top' : results.offices(ek).levels[level][0]?.office;
   race = String(race ?? 'senate');
   if (!OFFICE_RE.test(race)) {
     res.status(400).json({ error: 'office must be an office key such as senate, house, governor, attorney_general (see /api/offices)' });

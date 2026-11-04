@@ -73,7 +73,9 @@ export default function NationalView({ data, race, error, onSelectState }) {
       <Tally states={data?.states} />
       {data && (
         <p className="contest-line">
-          {reporting} state{reporting === 1 ? '' : 's'} with {longLabel(race)} votes counted so far
+          {race === 'top'
+            ? `${reporting} state${reporting === 1 ? '' : 's'} with votes counted in their top race so far`
+            : `${reporting} state${reporting === 1 ? '' : 's'} with ${longLabel(race)} votes counted so far`}
           {otherLeading > 0 ? ` · ${otherLeading} led by a candidate outside the two major parties` : ''}.
         </p>
       )}

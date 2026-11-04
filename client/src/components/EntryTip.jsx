@@ -1,6 +1,7 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
-import { partyShares, leadText, fmtMT, candidateList, hasCandidates } from '../calc.js';
+import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag } from '../calc.js';
+import { TOSSUP_MARGIN } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
 
 /** Small party tag from the source's label (DEM / REP / LIB / IND / …); nothing for a nonpartisan candidate. */
@@ -36,6 +37,34 @@ export function CandidateRows({ entry, cap = Infinity, bars = true }) {
         </div>
       ))}
     </>
+  );
+}
+
+/**
+ * "Other races in this state" (Top race view): one line per other major contest, its leading candidate and margin, or
+ * Toss-up. Each line is its own contest; nothing here is added to the contest that colors the map.
+ */
+export function OtherRaces({ races }) {
+  if (!races?.length) return null;
+  const line = (r) => {
+    if (r.status !== 'reporting' || !r.totalVotes) return 'No votes counted yet';
+    if (r.multiSeat) return `Vote for ${r.seats}`;
+    const m = r.marginPts != null ? Math.abs(Number(r.marginPts)) : null;
+    if (r.tied || !r.leader || (m != null && m < TOSSUP_MARGIN)) return 'Toss-up';
+    const who = r.partySum ? `${r.leader === 'DEM' ? 'Democrats' : r.leader === 'REP' ? 'Republicans' : 'Other parties'} lead`
+      : `${r.leadName}${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw }) ? ` (${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw })})` : ''}`;
+    return `${who} +${m?.toFixed(1)}`;
+  };
+  return (
+    <div className="other-races">
+      <span className="k">Other races in this state</span>
+      {races.map((r, i) => (
+        <div className="line" key={`${r.office}-${i}`}>
+          <span className="who">{r.office === 'house' ? 'U.S. House (popular vote)' : r.name && /special|unexpired/i.test(r.name) ? `${r.label} (special)` : r.label}</span>
+          <span className="val">{line(r)}</span>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -80,6 +109,9 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
         <span className="t">{title}</span>
         {reporting && <span className="r">{reporting}</span>}
       </div>
+      {kind === 'state' && entry?.topLabel && (
+        <span className="tip-contest">{entry.topLabel}{entry.partySum && entry.contests?.length > 1 ? ` (${entry.contests.length} districts)` : ''}</span>
+      )}
       {status === 'reporting' && entry.multiSeat && (
         <>
           <SeatRows entry={entry} />
@@ -90,7 +122,7 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
         <>
           {hasCandidates(entry) ? <CandidateRows entry={entry} cap={5} /> : <PartyRows entry={entry} />}
           <span className="foot">{leadText(entry)}</span>
-          {entry.otherContests?.length > 0 && (
+          {entry.otherContests?.length > 0 && !entry.otherRaces && (
             <span className="foot">
               Also on the ballot: {entry.otherContests.map((c) => c.name).join('; ')}. Shown separately in the state view.
             </span>
@@ -108,6 +140,7 @@ export default function EntryTip({ title, entry, race, kind = 'state', sourceNam
       )}
       {status === 'no-race' && <span className="foot">No {shortLabel(race)} race on the ballot here this year.</span>}
       {status === 'no-data' && <span className="foot">No results from this source for this county.</span>}
+      {kind === 'state' && entry?.otherRaces?.length > 0 && <OtherRaces races={entry.otherRaces} />}
       {kind === 'state' && entry?.official && status !== 'no-source' && (
         <span className="foot src">Official results ↗ {hostOf(entry.official.url)}</span>
       )}

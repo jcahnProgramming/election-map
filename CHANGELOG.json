@@ -7,6 +7,7 @@
       "title": "Every race, every source",
       "sections": {
         "New": [
+          "Top race view, now the default: each state colored by its top race on the ballot (U.S. Senate, else Governor, else the U.S. House popular vote), with its other major races listed in the tooltip",
           "Federal / State selector: U.S. Senate and U.S. House, or Governor, Attorney General, Secretary of State and every other statewide office our sources carry",
           "\"All races\" tab for each state: every contest in its official feed (state legislature, county, local, judicial, ballot questions), grouped and searchable, with each contest's candidates",
           "Ballot measure details from official sources: ballot title, official summary, who placed it on the ballot, registered opposition, the legislature's vote to refer and the full ballot text",

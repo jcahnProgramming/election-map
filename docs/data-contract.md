@@ -133,3 +133,10 @@ Socket.io events unchanged: `results:update` `{ sourceId, election, states, fetc
   `info` (static, official measure information — `docs/measures-data.md`). Unreviewed proponent/opposition websites and
   party positions are removed on the server, never sent.
 - Every state's official results page: `config/official-results.json`.
+
+### Top race (`office=top`)
+`/api/national?office=top` (or `level=top`): each state's entry is its top contest (senate, else governor, else the House
+statewide popular vote; a special/unexpired-term Senate race never outranks the regular one) plus `topOffice`, `topLabel`
+and `otherRaces: [{ office, label, name, status, leader, tied, marginPts, leadName, leadParty, leadPartyRaw, partySum,
+multiSeat, seats, totalVotes, pctReporting }]` (each its own contest, never summed in). `/api/state/:abbr?office=top`
+returns that state's top-office view with `topOffice`.

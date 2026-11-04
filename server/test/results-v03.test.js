@@ -117,6 +117,46 @@ test('national map for a statewide office: honest statuses and the official link
   assert.equal(sv.counties.find((c) => c.fips === '08041').leader, 'REP');
 });
 
+test('top race: Senate, else Governor, else House popular vote; specials after the regular race; others listed, never summed', () => {
+  const db = openDb(':memory:');
+  const adapterTop = { ...adapter, targets: () => ['CO', 'CA', 'UT'].map((s) => ({ key: `${s}/1`, state: s, scope: 'state', levels: ['state'] })) };
+  const w = (state, races) => writeSnapshot(db, { source: 'fake', fetchedAt: '2026-11-04T02:00:00Z', version: '1',
+    election: { sourceKey: `${state}/1`, state, scope: 'state', name: state }, races });
+  w('CO', [
+    // A special election listed first in the feed must not become the headline.
+    { office: 'senate', key: '1', name: 'United States Senator - Special Election (Unexpired Term)', choices: [cand('X', 'REP'), cand('Y', 'DEM')], units: [st([90, 10])] },
+    { office: 'senate', key: '2', name: 'United States Senator', choices: [cand('Jane', 'DEM'), cand('Joe', 'REP')], units: [st([600, 400])] },
+    { office: 'governor', key: '3', name: 'Governor', choices: [cand('G1', 'DEM'), cand('G2', 'REP')], units: [st([505, 495])] },
+    { office: 'house', key: '4', district: '1', name: 'Rep District 1', choices: [cand('H1', 'DEM'), cand('H2', 'REP')], units: [st([70, 30])] },
+  ]);
+  w('CA', [{ office: 'governor', key: 'g', name: 'Governor', choices: [cand('G1', 'DEM'), cand('G2', 'REP')], units: [st([10, 5])] }]);
+  w('UT', [
+    { office: 'house', key: 'h1', district: '1', name: 'Rep District 1', choices: [cand('A', 'REP'), cand('B', 'DEM')], units: [st([60, 40])] },
+    { office: 'house', key: 'h2', district: '2', name: 'Rep District 2', choices: [cand('C', 'REP'), cand('D', 'DEM')], units: [st([55, 45])] },
+  ]);
+  const r = createResults(db, [adapterTop]);
+  const n = r.national('top');
+  const by = Object.fromEntries(n.states.map((s) => [s.state, s]));
+  assert.equal(by.CO.topOffice, 'senate');
+  assert.deepEqual(by.CO.candidates.map((c) => c.name), ['Jane', 'Joe']); // the regular race colors the map
+  assert.equal(by.CO.totalVotes, 1000); // one contest's votes, nothing added from the others
+  assert.deepEqual(by.CO.otherRaces.map((x) => [x.office, x.name, x.leadName]), [
+    ['senate', 'United States Senator - Special Election (Unexpired Term)', 'X'],
+    ['governor', 'Governor', 'G1'],
+    ['house', 'Rep District 1', null], // the House line is the popular vote by party
+  ]);
+  assert.equal(by.CA.topOffice, 'governor');
+  assert.equal(by.UT.topOffice, 'house');
+  assert.equal(by.UT.topLabel, 'U.S. House · statewide popular vote');
+  assert.equal(by.UT.partySum, true);
+  assert.equal(by.TX.status, 'no-source');
+  // The state view in Top race mode resolves to that state's top office.
+  const sv = r.state('CA', 'top');
+  assert.equal(sv.topOffice, 'governor');
+  assert.equal(sv.race, 'governor');
+  assert.equal(sv.statewide.topLabel, 'Governor');
+});
+
 test('multi-seat contests: no leader, no margin, top-N seats', () => {
   const co = seed().national('university_regent').states.find((s) => s.state === 'CO');
   assert.equal(co.multiSeat, true);

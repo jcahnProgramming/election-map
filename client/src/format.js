@@ -7,8 +7,9 @@ export const fmtReporting = (n) => (isNum(n) ? `${Number(n) > 0 && Number(n) < 1
 export const barWidth = (pct) => `${isNum(pct) ? Math.max(0, Math.min(100, Number(pct))).toFixed(1) : 0}%`;
 
 export const RACES = ['senate', 'governor', 'house'];
-export const RACE_SHORT = { senate: 'Senate', governor: 'Governor', house: 'House' };
+export const RACE_SHORT = { top: 'Top race', senate: 'Senate', governor: 'Governor', house: 'House' };
 export const RACE_LONG = {
+  top: 'Top race on the ballot',
   senate: 'U.S. Senate',
   governor: 'Governor',
   house: 'U.S. House · statewide popular vote',
