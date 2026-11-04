@@ -1,7 +1,6 @@
 import React from 'react';
 import { effectiveStatus, PARTY_COLOR } from '../shading.js';
-import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel, staleSourceText } from '../calc.js';
-import { isTossupMargin, fmtMargin } from '../shading.js';
+import { partyShares, leadText, fmtMT, candidateList, hasCandidates, partyTag, coverageCopy, OFFICIAL_LINK_TEXT, districtLine, districtLabel, staleSourceText, otherRaceLine } from '../calc.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth, shortLabel, hostOf } from '../format.js';
 import { photoCredits } from '../avatar.js';
 import Avatar from './Avatar.jsx';
@@ -98,24 +97,19 @@ export function CandidateRows({ entry, cap = Infinity, bars = true, interactive 
  */
 export function OtherRaces({ races }) {
   if (!races?.length) return null;
-  const line = (r) => {
-    if (r.status !== 'reporting' || !r.totalVotes) return 'No votes counted yet';
-    if (r.multiSeat) return `Vote for ${r.seats}`;
-    const m = r.marginPts != null ? fmtMargin(r.marginPts) : null;
-    if (r.tied || !r.leader || isTossupMargin(r.marginPts)) return 'Toss-up';
-    const who = r.partySum ? `${r.leader === 'DEM' ? 'Democrats' : r.leader === 'REP' ? 'Republicans' : 'Other parties'} lead`
-      : `${r.leadName}${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw }) ? ` (${partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw })})` : ''}`;
-    return `${who} +${m}`;
-  };
   return (
     <div className="other-races">
       <span className="k">Other races in this state</span>
-      {races.map((r, i) => (
-        <div className="line" key={`${r.office}-${i}`}>
-          <span className="who">{r.office === 'house' ? 'U.S. House (popular vote)' : r.name && /special|unexpired/i.test(r.name) ? `${r.label} (special)` : r.label}</span>
-          <span className="val">{line(r)}</span>
-        </div>
-      ))}
+      {races.map((r, i) => {
+        // Left (wraps): race + who leads, exactly as the source names them. Right (one line): the margin.
+        const { label, who, margin } = otherRaceLine(r);
+        return (
+          <div className="or-line" key={`${r.office}-${i}`}>
+            <span className="or-who"><span className="or-label">{label}</span>{who ? <span className="or-name">{who}</span> : null}</span>
+            <span className="or-margin">{margin}</span>
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -446,3 +446,21 @@ button { cursor: pointer; }
 
 /* Official source not responding: the numbers shown are its last update (0.5.1) */
 .stale { color: var(--text); font-weight: 600; }
+
+/* ---------- 0.5.3: nothing overflows a tooltip ----------
+   The box grows with its content between min-width and max-width (min(420px, 100vw - 16px)); inside it, anything that
+   holds a name wraps (breaking inside an over-long word or hostname if it has to) and only numbers / margins stay on one
+   line, right-aligned. */
+.tip > *, .tip .cand-body, .tip .tip-row, .tip .line { min-width: 0; max-width: 100%; }
+.tip .foot, .tip .tip-contest, .tip .official-link, .tip .official-link .host, .tip .no-live { overflow-wrap: anywhere; }
+.tip .nm, .tip .tip-head .t, .tip .or-who, .district-row .nm, .closest-row .nm, .closest-row .cs { overflow-wrap: anywhere; }
+.tip .tip-head .t { flex: 1 1 auto; }
+.tip-row .line .who { flex: 1 1 auto; }
+.tip-row .line .val { flex: none; white-space: nowrap; text-align: right; }
+.other-races .or-line { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: baseline; font-size: 12.5px; }
+.other-races .or-who { min-width: 0; color: var(--text-2); }
+.other-races .or-label { color: var(--muted); margin-right: 6px; }
+.other-races .or-name { color: var(--text-2); font-weight: 600; }
+.other-races .or-margin { font-family: var(--font-num); white-space: nowrap; text-align: right; justify-self: end; }
+.district-row .dl { min-width: 0; }
+.district-row .dm { justify-self: end; }

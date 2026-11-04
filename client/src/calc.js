@@ -335,3 +335,19 @@ export function staleSourceText(entry) {
   const at = fmtMT(entry.sourceUpdatedAt || entry.fetchedAt);
   return `Official source not responding — showing last update${at ? ` at ${at}` : ''}`;
 }
+
+/**
+ * One "Other races in this state" row, split for a two-column layout: `label` + `who` on the left (they wrap), `margin`
+ * on the right (never wraps). Names stay exactly as the source writes them (ticket casing, "AND" vs "/").
+ * @returns {{ label:string, who:string|null, margin:string }}
+ */
+export function otherRaceLine(r, tossup = TOSSUP_MARGIN) {
+  const label = r.office === 'house' ? 'U.S. House (popular vote)' : r.name && /special|unexpired/i.test(r.name) ? `${r.label} (special)` : r.label;
+  if (r.status !== 'reporting' || !r.totalVotes) return { label, who: null, margin: 'No votes counted yet' };
+  if (r.multiSeat) return { label, who: null, margin: `Vote for ${r.seats}` };
+  if (r.tied || !r.leader || isTossupMargin(r.marginPts, tossup)) return { label, who: null, margin: 'Toss-up' };
+  const m = `+${fmtMargin(r.marginPts)}`;
+  if (r.partySum) return { label, who: null, margin: `${r.leader === 'DEM' ? 'Democrats' : r.leader === 'REP' ? 'Republicans' : 'Other parties'} lead ${m}` };
+  const tag = partyTag({ party: r.leadParty, partyRaw: r.leadPartyRaw });
+  return { label, who: `${r.leadName ?? ''}${tag ? ` (${tag})` : ''}`.trim() || null, margin: m };
+}
