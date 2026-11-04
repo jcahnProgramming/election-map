@@ -2,6 +2,16 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.5.5",
+      "date": "2026-11-03",
+      "title": "No derived % for Clarity states, even from older data",
+      "sections": {
+        "Fixed": [
+          "Colorado, Iowa, South Carolina and West Virginia never show a \"% in\" (or precinct counts) we worked out ourselves, including results stored before 0.5.4; they show counties complete once their source publishes it, and otherwise no reporting figure"
+        ]
+      }
+    },
+    {
       "version": "0.5.4",
       "date": "2026-11-03",
       "title": "Only published reporting figures",

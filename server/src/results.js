@@ -152,14 +152,21 @@ export function createResults(db, adapters, opts = {}) {
 
   const unitKey = (row) => (row.level === 'state' ? 'state' : row.county_fips);
   const pctOf = (pr, pt) => (pt ? Math.round((1000 * (pr ?? 0)) / pt) / 10 : null);
+  /**
+   * Sources whose official page publishes no precinct-reporting figure (statewide Clarity sites show counties complete
+   * and turnout only). Enforced here, at read time, so snapshots stored before that rule (with precinct counts derived
+   * from details.json) are never served as a "% in" either.
+   */
+  const noPublishedPct = (source, scope) => source === 'clarity' && scope === 'state';
 
   /** Election-wide turnout per unit key for one snapshot. */
-  function loadTurnout(snapshotId) {
+  function loadTurnout(snapshotId, noPct = false) {
     const out = new Map();
     for (const t of q.turnout.all(snapshotId)) {
       out.set(unitKey(t), {
         registered: t.registered, ballotsCast: t.ballots_cast, turnoutPct: t.turnout_pct,
-        ballotsOutstanding: t.ballots_outstanding, precinctsReporting: t.precincts_reporting, precinctsTotal: t.precincts_total,
+        ballotsOutstanding: t.ballots_outstanding,
+        precinctsReporting: noPct ? null : t.precincts_reporting, precinctsTotal: noPct ? null : t.precincts_total,
       });
     }
     return out;
@@ -179,7 +186,9 @@ export function createResults(db, adapters, opts = {}) {
       unit(v).candidates.push({ name: v.name, party: v.party, partyRaw: v.party_raw, ...(v.running_mate ? { runningMate: v.running_mate } : {}), votes: v.votes });
     }
     for (const x of q.reporting.all(r.snapshot_id, r.id)) {
-      Object.assign(unit(x), { pr: x.pr, pt: x.pt, pct: x.pct ?? pctOf(x.pr, x.pt), cc: x.cc ?? null, ct: x.ct ?? null });
+      const noPct = noPublishedPct(r.source, r.scope);
+      Object.assign(unit(x), noPct ? { pr: null, pt: null, pct: null, cc: x.cc ?? null, ct: x.ct ?? null }
+        : { pr: x.pr, pt: x.pt, pct: x.pct ?? pctOf(x.pr, x.pt), cc: x.cc ?? null, ct: x.ct ?? null });
     }
     const rows = q.methods.all(r.snapshot_id, r.id);
     if (rows.length) {
@@ -382,7 +391,7 @@ export function createResults(db, adapters, opts = {}) {
         return { name: r.name, ...sum, precinctsReporting: u?.pr ?? null, precinctsTotal: u?.pt ?? null };
       });
     }
-    const turnout = loadTurnout(races[0].snapshot_id);
+    const turnout = loadTurnout(races[0].snapshot_id, noPublishedPct(races[0].source, races[0].scope));
     const sw = units.get('state');
     const voteFor = houseSum ? 1 : races[0].vote_for ?? 1;
     const s = summarize(sw?.candidates ?? [], sw?.pct, voteFor);
@@ -616,7 +625,8 @@ export function createResults(db, adapters, opts = {}) {
       const meas = new Map((top ? q.unitMeasures.all(e.snapshot_id, top.id) : []).map((r) => [r.race_id, r]));
       const rep = new Map((top ? q.unitReporting.all(e.snapshot_id, top.id) : []).map((r) => [r.race_id, r]));
       for (const r of q.contestsOf.all(e.election_id, e.snapshot_id)) {
-        const rp = rep.get(r.id);
+        const rp0 = rep.get(r.id);
+        const rp = rp0 && noPublishedPct(e.source, e.scope) ? { ...rp0, pr: null, pt: null, pct: null } : rp0;
         const pct = rp ? rp.pct ?? pctOf(rp.pr, rp.pt) : null;
         let row;
         if (r.office === 'measure') {
@@ -721,7 +731,7 @@ export function createResults(db, adapters, opts = {}) {
     for (const races of byElection.values()) {
       // House: that county's districts combined by party. Senate/governor: the county's first contest for the office.
       const units = race === 'house' ? combineHouse(races.map(loadRace)) : loadRace(races[0]);
-      const turnout = loadTurnout(races[0].snapshot_id);
+      const turnout = loadTurnout(races[0].snapshot_id, noPublishedPct(races[0].source, races[0].scope));
       for (const [k, u] of units) {
         if (k === 'state' || out.has(k)) continue;
         out.set(k, { ...u, turnout: turnout.get(k) ?? null, ...sourceFields(races[0]) });
@@ -806,7 +816,7 @@ export function createResults(db, adapters, opts = {}) {
         yes: m.yes,
         no: m.no,
         pctYes: m.yes + m.no > 0 ? Math.round((1000 * m.yes) / (m.yes + m.no)) / 10 : null,
-        pctReporting: m.pct ?? pctOf(m.pr, m.pt),
+        pctReporting: noPublishedPct(m.source, 'state') ? null : m.pct ?? pctOf(m.pr, m.pt), // measures here are state-scope
         ...(m.ct ? { countiesComplete: m.cc ?? 0, countiesTotal: m.ct } : {}),
         source: m.source,
         sourceName: adapterName(m.source),
