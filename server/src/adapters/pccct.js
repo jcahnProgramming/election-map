@@ -25,6 +25,14 @@ import { matchCounty } from '../geo.js';
 
 const lastVersion = new Map(); // target key → Version
 
+// The feed's own office type codes (officeList[].OT, seen 2026-11-03): SW statewide, C Congress, S State Senate,
+// A State House (Representative), PD Probate district, SM town office. S and A are reliable office identities; the
+// rest (SW titles, probate judges, town offices) are named by the contest rules.
+const OFFICE_TYPES = {
+  S: { level: 'legislative', office: 'state_senate' },
+  A: { level: 'legislative', office: 'state_house' },
+};
+
 function targets() {
   const cfg = readConfig('sources/pccct.json', { elections: [] });
   return cfg.elections
@@ -36,8 +44,12 @@ function targets() {
       countyFips: null,
       label: e.name,
       levels: ['state', 'county'],
+      // Headline races expected (coverage). Every contest in the feed is stored whatever this says.
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: e.measures !== false,
+      // Electiondata.json carries every office on the state-election ballot (statewide, Congress, legislature, probate,
+      // town offices) and every town question.
+      allContests: e.allContests ?? true,
       base: e.base.replace(/\/$/, ''),
       electionId: String(e.electionId),
       url: e.url,
@@ -124,11 +136,19 @@ export function parsePcc(data, lookup, t, { unmatched = () => {} } = {}) {
   const offices = Object.assign({}, ...(lookup.officeList ?? []));
   const races = [];
   for (const [oid, office] of Object.entries(offices)) {
-    const cls = classifyContest(office.NM, []);
-    if (!cls || cls.office === 'measure' || !t.races.includes(cls.office)) continue;
-    const district = cls.office === 'house' ? (office.D && office.D !== '0' ? String(Number(office.D)) : cls.district) : null;
+    // Every office in the feed is stored. The built-in classifier still names the headline offices; the feed's own office
+    // type (OT) gives the level for the legislature; everything else is classified downstream (contests.js + pccct.json).
+    const raw = classifyContest(office.NM, []);
+    const cls = raw && raw.office !== 'measure' ? raw : null;
+    const feedDistrict = office.D && office.D !== '0' ? String(Number(office.D)) : null;
+    const district = cls?.office === 'house' ? feedDistrict ?? cls.district : cls ? null : feedDistrict;
     const stLines = lines(data.stateVotes?.[oid]);
-    if (!stLines.length) continue;
+    if (!stLines.length) continue; // an office with no candidate lines at all has nothing to store
+    const identity = cls ? { office: cls.office } : OFFICE_TYPES[office.OT] ?? { office: null };
+    // A town-level office (OT "SM": Registrar of Voters, Board of Education, RTM) has no district name in the feed:
+    // the towns that report it are its jurisdiction.
+    const reportingTowns = Object.keys(data.townVotes ?? {}).filter((tid) => data.townVotes[tid]?.[oid]);
+    const townName = office.OT === 'SM' && reportingTowns.length === 1 ? lookup.townIds?.[reportingTowns[0]] ?? null : null;
 
     // Group party lines by person.
     const choices = [];
@@ -158,58 +178,83 @@ export function parsePcc(data, lookup, t, { unmatched = () => {} } = {}) {
       return v;
     };
 
-    const statewide = office.OT === 'SW' || cls.office === 'senate' || cls.office === 'governor';
+    const statewide = office.OT === 'SW' || cls?.office === 'senate' || cls?.office === 'governor';
+    // One town's own contest: that town's precinct count is the contest's.
+    const townPr = townName ? townPrec(reportingTowns[0]) : null;
     const units = [{
-      level: 'state', name: statewide ? state : (office.DT || office.NM),
+      level: 'state', name: statewide ? state : (townName || office.DT || office.NM),
       votes: tally(stLines),
       ...(statewide
         ? { precinctsReporting: statePrec.reporting, precinctsTotal: statePrec.total, pctReporting: pct(statePrec.reporting, statePrec.total) }
-        : { precinctsReporting: null, precinctsTotal: null, pctReporting: null }),
+        : townPr
+          ? { precinctsReporting: townPr.reporting, precinctsTotal: townPr.total, pctReporting: pct(townPr.reporting, townPr.total) }
+          : { precinctsReporting: null, precinctsTotal: null, pctReporting: null }),
     }];
     for (const c of countyList) {
       const towns = townsOf(c.fips).filter((tid) => data.townVotes?.[tid]?.[oid]);
       if (!towns.length) continue;
       const votes = tally(towns.flatMap((tid) => lines(data.townVotes[tid][oid])));
       // Town precinct counts cover the whole town; only a statewide contest can use them.
-      const cp = statewide ? countyPrec.get(c.fips) : { precinctsReporting: null, precinctsTotal: null };
+      const cp = statewide ? countyPrec.get(c.fips)
+        : townPr ? { precinctsReporting: townPr.reporting, precinctsTotal: townPr.total } : { precinctsReporting: null, precinctsTotal: null };
       units.push({ level: 'county', countyFips: c.fips, name: c.name, votes, ...cp, pctReporting: pct(cp.precinctsReporting, cp.precinctsTotal) });
     }
     races.push({
-      office: cls.office, district, name: office.NM, key: String(oid), voteFor: 1, statewide, title: null,
+      ...identity, district, name: office.NM, key: String(oid),
+      // The feed has no vote-for field. Statewide, congressional, legislative and probate offices are single-seat by law;
+      // town offices (Board of Education, RTM, Registrar) can elect several, so their vote-for is unknown (null).
+      voteFor: office.OT === 'SM' || !office.OT ? null : 1,
+      statewide, title: null, ...(townName ? { jurisdiction: townName } : {}),
       choices: outChoices, units,
     });
   }
 
-  // ---- ballot questions: keyed by town. Only a question every town votes on is statewide.
-  if (t.measures) {
+  // ---- ballot questions: keyed by town. A question every town votes on is statewide; any other question is stored as
+  // its town's local question (statewide:false), one race per town: identical wording in two towns is never summed.
+  {
     const towns = Object.entries(lookup.townIds ?? {});
-    const byText = new Map(); // question text → [{ tid, yes, no }]
+    const byText = new Map(); // question text → { num, rows: [{ tid, town, num, yes, no }] }
     const townIdByName = new Map(towns.map(([tid, n]) => [normName(n), tid]));
     for (const [townName, qs] of Object.entries(data.ballotQuestion ?? {})) {
       const tid = townIdByName.get(normName(townName));
+      if (!tid) unmatched('county', townName, `${state} PCC ballot-question town not in townIds`);
       for (const q of qs ?? []) {
         const text = String(q.QN ?? '').replace(/^\s*\d+\.\s*/, '').replace(/\s+/g, ' ').trim();
-        if (!byText.has(text)) byText.set(text, { num: String(q.QN ?? '').match(/^\s*(\d+)\./)?.[1] ?? null, rows: [] });
-        byText.get(text).rows.push({ tid, yes: int(q.YES), no: int(q.NO) });
+        const num = String(q.QN ?? '').match(/^\s*(\d+)\./)?.[1] ?? null;
+        if (!byText.has(text)) byText.set(text, { num, rows: [] });
+        byText.get(text).rows.push({ tid, town: townName, num, yes: int(q.YES), no: int(q.NO) });
       }
     }
+    const sumRows = (rs) => ({ yes: sumOrNull(rs.map((r) => r.yes)) ?? 0, no: sumOrNull(rs.map((r) => r.no)) ?? 0 });
+    const yesNo = [{ name: 'Yes', party: 'OTHER', partyRaw: '' }, { name: 'No', party: 'OTHER', partyRaw: '' }];
     for (const [text, { num, rows }] of byText) {
-      if (towns.length === 0 || new Set(rows.map((r) => r.tid)).size < towns.length) continue; // local question
-      const sumRows = (rs) => ({ yes: sumOrNull(rs.map((r) => r.yes)) ?? 0, no: sumOrNull(rs.map((r) => r.no)) ?? 0 });
-      const s = sumRows(rows);
-      const units = [{ level: 'state', name: state, votes: [s.yes, s.no], ...s, precinctsReporting: statePrec.reporting, precinctsTotal: statePrec.total, pctReporting: pct(statePrec.reporting, statePrec.total) }];
-      for (const c of countyList) {
-        const set = new Set(townsOf(c.fips));
-        const cs = sumRows(rows.filter((r) => set.has(r.tid)));
-        const cp = countyPrec.get(c.fips);
-        units.push({ level: 'county', countyFips: c.fips, name: c.name, votes: [cs.yes, cs.no], ...cs, ...cp, pctReporting: pct(cp.precinctsReporting, cp.precinctsTotal) });
+      const statewideQ = towns.length > 0 && new Set(rows.map((r) => r.tid)).size >= towns.length;
+      if (statewideQ) {
+        const s = sumRows(rows);
+        const units = [{ level: 'state', name: state, votes: [s.yes, s.no], ...s, precinctsReporting: statePrec.reporting, precinctsTotal: statePrec.total, pctReporting: pct(statePrec.reporting, statePrec.total) }];
+        for (const c of countyList) {
+          const set = new Set(townsOf(c.fips));
+          const cs = sumRows(rows.filter((r) => set.has(r.tid)));
+          const cp = countyPrec.get(c.fips);
+          units.push({ level: 'county', countyFips: c.fips, name: c.name, votes: [cs.yes, cs.no], ...cs, ...cp, pctReporting: pct(cp.precinctsReporting, cp.precinctsTotal) });
+        }
+        const name = num ? `Question ${num}` : text.slice(0, 60);
+        races.push({ office: 'measure', district: null, name, key: `q:${name}:${text.slice(0, 40)}`, voteFor: 1, statewide: true, title: text, choices: yesNo, units });
+        continue;
       }
-      const name = num ? `Question ${num}` : text.slice(0, 60);
-      races.push({
-        office: 'measure', district: null, name, key: `q:${name}:${text.slice(0, 40)}`, voteFor: 1, statewide: true, title: text,
-        choices: [{ name: 'Yes', party: 'OTHER', partyRaw: '' }, { name: 'No', party: 'OTHER', partyRaw: '' }],
-        units,
-      });
+      for (const row of rows) {
+        const s = { yes: row.yes ?? 0, no: row.no ?? 0 };
+        const p = row.tid ? townPrec(row.tid) : { reporting: null, total: null };
+        const prec = { precinctsReporting: p.reporting, precinctsTotal: p.total, pctReporting: pct(p.reporting, p.total) };
+        const units = [{ level: 'state', name: row.town, votes: [s.yes, s.no], ...s, ...prec }];
+        const c = row.tid ? townCounty.get(String(row.tid)) : null;
+        if (c) units.push({ level: 'county', countyFips: c.fips, name: c.name, votes: [s.yes, s.no], ...s, ...prec });
+        const name = `${row.town} Question ${row.num ?? ''}`.trim();
+        races.push({
+          office: 'measure', level: 'measure', district: null, name, key: `q:${row.town}:${row.num ?? ''}:${text.slice(0, 40)}`, voteFor: 1,
+          statewide: false, jurisdiction: row.town, title: text, choices: yesNo, units,
+        });
+      }
     }
   }
 

@@ -6,11 +6,17 @@
 // One row per county x candidate (amendments: one row per county x Yes/No). Juris1num is the district for
 // district races. There is no statewide row, no turnout, no vote-type split and no "last updated" stamp in
 // the file, so: state unit = sum of the county rows of one race; turnout / methods / sourceUpdatedAt = null.
+// Every contest in the extract is stored (federal, statewide, legislative, multi-county, judicial retention, amendments).
+// The state extract is the Division's own contests: county and municipal contests are on the 67 county Supervisor of
+// Elections sites, so targets say allContests:false. Judicial retention ("Retain ...? Yes/No") is a candidate-style
+// race with Yes / No choices, never a measure.
 // Change detection: content hash. A header-only file writes nothing (no snapshot), because an empty snapshot
 // would read as "no race for this office".
 import { createHash } from 'node:crypto';
 import { readConfig } from '../config.js';
 import { classifyContest, normalizeParty, yesNoSide } from '../normalize.js';
+
+const JUDICIAL = /\b(retain|retention|justice|judge|court)\b/i;
 import { matchCounty } from '../geo.js';
 
 const lastVersion = new Map();
@@ -26,8 +32,10 @@ function targets() {
       countyFips: null,
       label: e.name,
       levels: ['state', 'county'],
+      // Headline races expected (coverage). Every contest in the extract is stored whatever this says.
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: e.measures !== false,
+      allContests: e.allContests ?? false,
       extractUrl: e.extractUrl,
       url: e.url,
       date: e.date ?? null,
@@ -91,12 +99,16 @@ export function parseFl(text, t, { unmatched = () => {} } = {}) {
     if (!cls && /^USS$/i.test(c.code)) cls = { office: 'senate', district: null };
     if (!cls && /^USR$/i.test(c.code)) cls = { office: 'house', district: null };
     if (!cls && /^GOV$/i.test(c.code)) cls = { office: 'governor', district: null };
-    if (!cls) continue;
-    if (cls.office === 'measure' ? !t.measures : !t.races.includes(cls.office)) continue;
-    const district = cls.office === 'house' ? (int(c.juris1) != null ? String(int(c.juris1)) : cls.district) : null;
+    // Anything else (statewide row offices, legislature, judges, multi-county seats) is stored with office null and
+    // classified downstream (contests.js + fldos.json contestRules).
+    const isMeasure = cls?.office === 'measure';
+    const yesNo = names.length === 2 && names.some((n) => yesNoSide(n) === 'yes') && names.some((n) => yesNoSide(n) === 'no');
+    const retention = !isMeasure && yesNo && JUDICIAL.test(c.desc);
+    const juris = int(c.juris1) != null && int(c.juris1) > 0 ? String(int(c.juris1)) : null;
+    const district = cls?.office === 'house' ? juris ?? cls.district : cls ? null : juris;
 
     const choices = cands.map((r, i) => {
-      if (cls.office === 'measure') return { name: names[i], party: 'OTHER', partyRaw: '' };
+      if (isMeasure || retention) return { name: names[i], party: 'OTHER', partyRaw: '' };
       const party = partyOf(r, `${t.state} ${c.desc} / ${names[i]}`, unmatched);
       return { name: names[i], party, partyRaw: r.PartyCode ?? '' };
     });
@@ -130,16 +142,20 @@ export function parseFl(text, t, { unmatched = () => {} } = {}) {
       v.votes.forEach((n, i) => { stVotes[i] += n; });
       if (v.total != null) { precKnown = true; pt += v.total; pr += v.reporting ?? 0; }
     }
-    const statewide = cls.office === 'senate' || cls.office === 'governor' || (cls.office === 'measure' && byCounty.size >= allCounties.size);
-    const stateName = statewide ? t.state : (district ? `Congressional District ${district}` : c.desc);
+    const statewide = cls?.office === 'senate' || cls?.office === 'governor'
+      || (cls?.office !== 'house' && byCounty.size >= allCounties.size && allCounties.size > 1);
+    // Contest names repeat per district ("State Senator"): add the extract's district number when the name lacks it.
+    const fullName = !cls && district && !new RegExp(`\\b0*${district}\\b`).test(c.desc) ? `${c.desc}, District ${district}` : c.desc;
+    const stateName = statewide ? t.state
+      : cls?.office === 'house' ? (district ? `Congressional District ${district}` : c.desc) : fullName;
     const units = [{
       level: 'state', name: stateName, votes: stVotes,
       precinctsReporting: precKnown ? pr : null, precinctsTotal: precKnown ? pt : null, pctReporting: precKnown ? pct(pr, pt) : null,
     }, ...countyUnits];
 
-    let name = c.desc;
+    let name = cls ? c.desc : fullName;
     let title = null;
-    if (cls.office === 'measure') {
+    if (isMeasure) {
       ({ name, title } = measureNames(c.desc));
       const yi = names.findIndex((n) => yesNoSide(n) === 'yes');
       const ni = names.findIndex((n) => yesNoSide(n) === 'no');
@@ -148,7 +164,13 @@ export function parseFl(text, t, { unmatched = () => {} } = {}) {
         u.no = u.votes[ni] ?? 0;
       }
     }
-    races.push({ office: cls.office, district, name, key: c.key, voteFor: 1, statewide, title, choices, units });
+    races.push({
+      office: cls?.office ?? null, district, name, key: c.key,
+      // The extract has no vote-for column: the headline offices are single-seat; anything else is left unknown.
+      voteFor: cls ? 1 : null,
+      statewide, title, choices, units,
+      ...(retention ? { kind: 'retention' } : {}),
+    });
   }
   return { races, rowCount: rows.length };
 }

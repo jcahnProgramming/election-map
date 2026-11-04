@@ -13,6 +13,10 @@
 //                                                "Reg Voters" (the page hard-codes registration because this was "0"),
 //                                                "Percentage". A zero registration is treated as unpublished (null).
 // Delaware has no county-level turnout and no ballot measures in 2026. No winner flags exist.
+// The statewide file lists EVERY contest on the ballot (federal, statewide, State Senate / House districts, county
+// offices, school-board ...), each with its own precinct counts, so every contest is stored from the same two files:
+// no extra request (the firewall wants 3 s between requests). A contest whose precinct total is the state's total is
+// statewide; any other contest only gets the county columns that actually carry votes for it.
 // The Socrata copy (data.delaware.gov yg7x-kgjc) is not used: data_as_of was still 2026-09-29 on election night.
 import { createHash } from 'node:crypto';
 import { readConfig } from '../config.js';
@@ -25,6 +29,7 @@ const METHODS = [
   ['Early Voting Votes', 'Early Voting Votes'],
 ];
 const lastVersion = new Map();
+const STATEWIDE_SHARE = 0.9;
 
 function targets() {
   const c = readConfig('sources/deenr.json', { elections: [] });
@@ -40,8 +45,10 @@ function targets() {
       label: e.name,
       date: e.date ?? null,
       levels: ['state', 'county'],
+      // Headline races expected (coverage). Every contest in the files is stored whatever this says.
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: true,
+      allContests: e.allContests ?? true,
       countyColumns: e.countyColumns ?? ['New Castle', 'Kent', 'Sussex'],
       requestGapMs: e.requestGapMs ?? c.requestGapMs ?? 3000,
       url: e.url ?? `${e.base ?? c.base}/${e.electionId}.html`,
@@ -113,14 +120,18 @@ export function parseDeEnr({ statewide, byCounty = [], turnout = null }, t, unma
   const byContest = groupBy(statewide, (r) => r['Contest Title']);
   const countyByContest = groupBy(byCounty, (r) => r['Contest Title']);
 
+  // The state's precinct total = the widest contest's. Statewide offices don't all list the same total (GE2026: U.S. Senator
+  // 530, Attorney General 527), so a contest within STATEWIDE_SHARE of it is statewide; the largest non-statewide
+  // contest (New Castle County) is about half the state's precincts.
+  const statePrecincts = statewide.reduce((m, r) => Math.max(m, num(r['Total Precincts']) ?? 0), 0) || null;
+
   const races = [];
   for (const [title, rowsRaw] of byContest) {
+    if (title == null || String(title).trim() === '') continue;
     const rows = [...rowsRaw].sort((a, b) => (num(a.Pos) ?? 0) - (num(b.Pos) ?? 0));
     const labels = rows.map((r) => String(r['Candidate Name'] ?? '').trim());
-    const cls = classifyContest(title, labels);
-    if (!cls) continue;
-    if (cls.office === 'measure' ? !t.measures : !(t.races ?? ['senate', 'governor', 'house']).includes(cls.office)) continue;
-    const isMeasure = cls.office === 'measure';
+    const cls = classifyContest(title, labels); // null for anything but the headline offices / yes-no questions: stored anyway
+    const isMeasure = cls?.office === 'measure';
     const yesIdx = isMeasure ? labels.findIndex((l) => yesNoSide(l) === 'yes') : -1;
     const noIdx = isMeasure ? labels.findIndex((l) => yesNoSide(l) === 'no') : -1;
 
@@ -142,24 +153,27 @@ export function parseDeEnr({ statewide, byCounty = [], turnout = null }, t, unma
     };
     const pr = num(rows[0]['Precincts Reported']);
     const pt = num(rows[0]['Total Precincts']);
+    const isStatewide = !!cls && cls.office !== 'measure' ? true : pt != null && statePrecincts != null && pt >= STATEWIDE_SHARE * statePrecincts;
     const votes = rows.map((r) => num(r['Total Votes']) ?? 0);
     const methods = METHODS.filter(([f]) => rows.some((r) => r[f] != null)).map(([f, label]) => {
       const v = rows.map((r) => num(r[f]) ?? 0);
       return { label, bucket: methodBucket(label), votes: isMeasure ? [v[yesIdx] ?? 0, v[noIdx] ?? 0] : v };
     });
     const units = [withYesNo({
-      level: 'state', name: state, votes, precinctsReporting: pr, precinctsTotal: pt,
+      level: 'state', name: isStatewide ? state : String(title).trim(), votes, precinctsReporting: pr, precinctsTotal: pt,
       pctReporting: pt ? round1((100 * (pr ?? 0)) / pt) : null,
       ...(methods.length ? { methods } : {}),
     })];
 
-    // County columns, matched to the statewide rows by candidate name. The races we track are statewide, so every
-    // county column applies.
+    // County columns, matched to the statewide rows by candidate name. A statewide contest uses every county column; a
+    // district / county contest only the columns that carry votes for it (the file shows 0, not blank, for a county
+    // outside the contest, so a column of zeros can't be told from "not counted yet" and is left out).
     const cRows = countyByContest.get(title) ?? [];
     if (cRows.length) {
       const byName = new Map(cRows.map((r) => [String(r['Candidate Name'] ?? '').trim(), r]));
       for (const cty of counties) {
         if (!cRows.some((r) => r[cty.col] != null)) continue;
+        if (!isStatewide && !cRows.some((r) => (num(r[cty.col]) ?? 0) > 0)) continue;
         units.push(withYesNo({
           level: 'county', countyFips: cty.fips, name: cty.name,
           votes: labels.map((l) => num(byName.get(l)?.[cty.col]) ?? 0),
@@ -169,12 +183,12 @@ export function parseDeEnr({ statewide, byCounty = [], turnout = null }, t, unma
     }
 
     races.push({
-      office: cls.office,
-      district: cls.district ?? (cls.office === 'house' ? 'AL' : null),
+      office: cls?.office ?? null,
+      district: cls ? cls.district ?? (cls.office === 'house' ? 'AL' : null) : null,
       name: title,
       key: title,
-      voteFor: null,
-      statewide: true,
+      voteFor: null, // the files don't publish it
+      statewide: isMeasure || isStatewide,
       title: isMeasure ? title : null,
       choices,
       units,

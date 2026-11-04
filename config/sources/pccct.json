@@ -1,5 +1,5 @@
 {
-  "_howto": "PCC Technology public election reporting sites, polled by server/src/adapters/pccct.js. base = the site's ng-app/data folder; electionId from {base}/Elections.json. Files: {base}/election/{id}/Version.json, then {base}/election/{id}/{Version}/Electiondata.json + Lookupdata.json. Reporting is by town; county units are built only because Lookupdata.json itself maps every town to its county (countyTowns). Set enabled:false to stop polling one without deleting it.",
+  "_howto": "PCC Technology public election reporting sites, polled by server/src/adapters/pccct.js. base = the site's ng-app/data folder; electionId from {base}/Elections.json. Files: {base}/election/{id}/Version.json, then {base}/election/{id}/{Version}/Electiondata.json + Lookupdata.json. Reporting is by town; county units are built only because Lookupdata.json itself maps every town to its county (countyTowns). Set enabled:false to stop polling one without deleting it. Every office in Electiondata.json is stored (statewide, Congress, State Senate/Representative from the feed office type, Judge of Probate, town offices) and every town ballot question (one local measure per town; a question every town votes on is statewide). contestRules name the town offices (OT SM) the shared rules do not.",
   "elections": [
     {
       "state": "CT",
@@ -8,11 +8,22 @@
       "name": "Connecticut 2026 State Election (Secretary of the State)",
       "url": "https://ctemspublic.tgstg.net/",
       "date": "2026-11-03",
-      "races": ["senate", "governor", "house"],
+      "races": [
+        "senate",
+        "governor",
+        "house"
+      ],
       "measures": true,
       "enabled": true,
       "verified": "2026-11-03",
-      "note": "No U.S. Senate race in CT in 2026. The only ballot questions are town charter questions (no statewide measure). Fusion voting: a candidate's party lines are summed into one choice (the source's own candidateGrouping does the same statewide)."
+      "note": "No U.S. Senate race in CT in 2026. The only ballot questions are town charter questions (no statewide measure). Fusion voting: a candidate's party lines are summed into one choice (the source's own candidateGrouping does the same statewide).",
+      "allContests": true
     }
+  ],
+  "contestRules": [
+    {"match": "^registrar of voters\\b", "level": "local", "office": "registrar_of_voters"},
+    {"match": "^representative town meeting\\b", "level": "local", "office": "city_council"},
+    {"match": "^board of education\\b", "level": "local", "office": "school_board"},
+    {"match": "^judge of probate\\b", "level": "judicial", "office": "trial_court"}
   ]
 }

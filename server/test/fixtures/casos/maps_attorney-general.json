@@ -1,0 +1,48 @@
+{
+  "statewide": {
+    "raceTitle": "Attorney General - Statewide Results",
+    "Reporting": "0% (0 of 23,860) precincts reporting",
+    "ReportingTime": "November 2, 2026, 6:28 p.m.",
+    "candidates": [
+      {
+        "Name": "Rob Bonta",
+        "Party": "Dem",
+        "Votes": "0",
+        "Percent": "0.0",
+        "incumbent": true,
+        "color": "0c434a"
+      },
+      {
+        "Name": "Michael E. Gates",
+        "Party": "Rep",
+        "Votes": "0",
+        "Percent": "0.0",
+        "incumbent": false,
+        "color": "a1f4c7"
+      }
+    ]
+  },
+  "alameda": {
+    "raceTitle": "Attorney General - Alameda County Results",
+    "Reporting": "0% (0 of 627) precincts reporting",
+    "ReportingTime": "November 2, 2026, 6:28 p.m.",
+    "candidates": [
+      {
+        "Name": "Rob Bonta",
+        "Party": "Dem",
+        "Votes": "0",
+        "Percent": "0.0",
+        "incumbent": true,
+        "color": "0c434a"
+      },
+      {
+        "Name": "Michael E. Gates",
+        "Party": "Rep",
+        "Votes": "0",
+        "Percent": "0.0",
+        "incumbent": false,
+        "color": "a1f4c7"
+      }
+    ]
+  }
+}

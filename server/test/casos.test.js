@@ -93,3 +93,52 @@ test('parseReporting / parseReportingTime', () => {
   assert.equal(parseReportingTime('November 3, 2026, 12:10 a.m.'), '2026-11-03T08:10:00.000Z');
   assert.equal(parseReportingTime(null), null);
 });
+
+test('CA down-ballot endpoints: statewide offices (with counties), legislature and BOE districts are all emitted', async () => {
+  const { enrichRaces } = await import('../src/contests.js');
+  const f = files();
+  f.candidate.push(
+    { office: 'attorney_general', level: 'statewide', key: 'attorney-general', map: load('maps_attorney-general.json') },
+    { office: 'superintendent_of_public_instruction', level: 'statewide', key: 'superintendent-of-public-instruction',
+      statewide: load('superintendent-of-public-instruction.json') },
+  );
+  f.districts = [
+    { spec: { slug: 'state-senate/district/all', level: 'legislative', office: 'state_senate', keyPrefix: 'state-senate' },
+      list: load('state-senate_district_all.json') },
+    { spec: { slug: 'state-assembly/district/all', level: 'legislative', office: 'state_house', keyPrefix: 'state-assembly' },
+      list: load('state-assembly_district_all.json') },
+    { spec: { slug: 'board-of-equalization/district/all', level: 'statewide', office: 'board_of_equalization', keyPrefix: 'board-of-equalization' },
+      list: load('board-of-equalization_district_all.json') },
+  ];
+  const { r, seen } = parse(f);
+  const ag = r.races.find((x) => x.key === 'attorney-general');
+  assert.equal(ag.name, 'Attorney General');
+  assert.deepEqual([ag.level, ag.office], ['statewide', 'attorney_general']);
+  assert.deepEqual(ag.units.map((u) => [u.level, u.countyFips ?? null]), [['state', null], ['county', '06001']]);
+  const spi = r.races.find((x) => x.key === 'superintendent-of-public-instruction');
+  assert.deepEqual(spi.choices.map((c) => c.party), ['OTHER', 'OTHER']);
+
+  const sd = r.races.filter((x) => x.office === 'state_senate');
+  assert.deepEqual(sd.map((x) => [x.key, x.name, x.district]), [
+    ['state-senate-2', 'State Senate District 2', '2'], ['state-senate-4', 'State Senate District 4', '4']]);
+  assert.equal(r.races.filter((x) => x.office === 'state_house').length, 2);
+  assert.equal(r.races.filter((x) => x.office === 'board_of_equalization').length, 4);
+  // Peace & Freedom is a known third party (OTHER): not logged as unknown.
+  assert.ok(!seen.some(([k, v]) => k === 'party' && v === 'P&F'));
+
+  const unclassified = enrichRaces(r, 'casos');
+  assert.deepEqual(unclassified, []);
+  // Top races unchanged.
+  assert.deepEqual([r.races.find((x) => x.key === 'governor').level, r.races.find((x) => x.key === 'governor').office], ['statewide', 'governor']);
+  assert.ok(r.races.filter((x) => x.office === 'house').every((x) => x.level === 'federal'));
+  assert.ok(r.races.filter((x) => x.office === 'measure').every((x) => x.kind === 'yes_no'));
+});
+
+test('CA targets: headline races only for coverage, allContests false (per-race endpoints)', async () => {
+  const { default: casos } = await import('../src/adapters/casos.js');
+  const [t] = casos.targets();
+  assert.deepEqual(t.races.sort(), ['governor', 'house']);
+  assert.equal(t.allContests, false);
+  assert.ok(t.districtRaces.length >= 3);
+  assert.ok(t.candidateRaces.length <= 10, 'a handful of requests per poll, not hundreds');
+});

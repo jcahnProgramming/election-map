@@ -11,6 +11,13 @@
 //   {base}/ballot-measures/county/{slug}   the same, for one county
 //   {base}/status                   { statewide:{...}, alameda:{ precinctsReporting, precinctsTotal, voterTurnout,
 //                                     totalRegisteredVoters, voterTurnoutPercentage, lastReportTimestamp:"202409160932", ... } }
+//   {base}/{office-slug}, {base}/maps/{office-slug}   the same for every statewide office: lieutenant-governor, attorney-general,
+//                                     secretary-of-state, controller, treasurer, insurance-commissioner,
+//                                     superintendent-of-public-instruction (verified 2026-11-03)
+//   {base}/state-senate/district/all, /state-assembly/district/all, /board-of-equalization/district/all
+//                                     arrays shaped like us-rep/district/all (verified 2026-11-03)
+// The API is per-race endpoints: it carries only the contests we ask for (no county / local / judicial contests: those
+// are on the 58 county sites), so targets say allContests:false. Which endpoints we ask for is config (casos.json).
 // Not found: a county breakdown for House (maps/us-rep/... is not a route), unprocessed-ballot counts (/unprocessed-ballots 500).
 // Numbers are strings with thousands separators. Change detection: a hash of the statewide files.
 import { createHash } from 'node:crypto';
@@ -19,6 +26,7 @@ import { classifyContest, normalizeParty } from '../normalize.js';
 import { matchCounty } from '../geo.js';
 
 const lastVersion = new Map(); // target key → content hash
+const HEADLINE = ['senate', 'governor', 'house'];
 
 function targets() {
   const cfg = readConfig('sources/casos.json', { elections: [] });
@@ -33,12 +41,16 @@ function targets() {
       label: e.name,
       date: e.date ?? null,
       levels: ['state', 'county'],
-      races: [...new Set([...(e.candidateRaces ?? []).map((r) => r.office), ...(e.houseSlug ? ['house'] : [])])],
+      // Headline races expected (coverage); every configured contest is stored regardless.
+      races: [...new Set([...(e.candidateRaces ?? []).map((r) => r.office), ...(e.houseSlug ? ['house'] : [])])]
+        .filter((o) => HEADLINE.includes(o)),
+      allContests: e.allContests ?? false,
       measures: Boolean(e.measuresSlug),
       url: e.url,
       timeZone: e.timeZone ?? 'America/Los_Angeles',
       candidateRaces: e.candidateRaces ?? [],
       houseSlug: e.houseSlug ?? null,
+      districtRaces: e.districtRaces ?? [],
       measuresSlug: e.measuresSlug ?? null,
       countyMeasures: e.countyMeasures === true,
       statusSlug: e.statusSlug ?? null,
@@ -110,7 +122,8 @@ function unitFrom(entry, names, base) {
 
 /**
  * Pure parse of the CA SOS files into the adapter result (docs/data-contract.md).
- * @param {object} files { candidate:[{ office, statewide, map }], house:[...]|null, measures:{...}|null,
+ * @param {object} files { candidate:[{ office, level?, key?, statewide, map }], house:[...]|null,
+ *                         districts:[{ spec:{ slug, level, office, keyPrefix }, list:[...] }], measures:{...}|null,
  *                         measuresByCounty:{ slug: {...} }, status:{...}|null }
  */
 export function parseCaSos(files, t, unmatched = () => {}) {
@@ -121,8 +134,11 @@ export function parseCaSos(files, t, unmatched = () => {}) {
     const sw = cr.map?.statewide ?? cr.statewide;
     if (!sw?.candidates?.length) continue;
     const title = cleanTitle(sw.raceTitle);
-    const cls = classifyContest(title);
-    if (!cls || cls.office !== cr.office) unmatched('contest', title, `${t.state} expected ${cr.office}`);
+    const headline = HEADLINE.includes(cr.office);
+    if (headline) {
+      const cls = classifyContest(title);
+      if (!cls || cls.office !== cr.office) unmatched('contest', title, `${t.state} expected ${cr.office}`);
+    }
     const choices = candidateChoices(t.state, title, sw.candidates, unmatched);
     const names = choices.map((c) => c.name);
     times.push(sw.ReportingTime);
@@ -132,17 +148,41 @@ export function parseCaSos(files, t, unmatched = () => {}) {
       const m = countyOf(t.state, slug, unmatched, `${t.state} ${title}`);
       if (m) units.push(unitFrom(entry, names, { level: 'county', countyFips: m.fips, name: m.name }));
     }
-    races.push({ office: cr.office, district: null, name: title, key: cr.office, voteFor: 1, statewide: true, title: null, choices, units });
+    races.push({
+      // Headline offices keep the built-in office; any other statewide office takes its identity (level + office) from
+      // the endpoint's config entry, since the API itself is one endpoint per office.
+      office: cr.office ?? null, ...(!headline && cr.level ? { level: cr.level } : {}),
+      district: null, name: title, key: cr.key ?? cr.office, voteFor: 1, statewide: true, title: null, choices, units,
+    });
+  }
+
+  // Other district contests (State Senate, State Assembly, Board of Equalization): one array per endpoint, statewide per district.
+  for (const d of files.districts ?? []) {
+    for (const h of Array.isArray(d.list) ? d.list : []) {
+      const title = cleanTitle(h?.raceTitle);
+      if (!title) continue;
+      const district = title.match(/\bDistrict (\d+)\b/i)?.[1]?.replace(/^0+(?=\d)/, '') ?? null;
+      const choices = candidateChoices(t.state, title, h.candidates ?? [], unmatched);
+      times.push(h.ReportingTime);
+      races.push({
+        office: d.spec.office ?? null, ...(d.spec.level && d.spec.office ? { level: d.spec.level } : {}), district, name: title,
+        key: `${d.spec.keyPrefix ?? d.spec.office}-${district ?? title}`, voteFor: 1, statewide: true, title: null,
+        choices, units: [unitFrom(h, choices.map((c) => c.name), { level: 'state', name: t.state })],
+      });
+    }
   }
 
   for (const h of files.house ?? []) {
     const title = cleanTitle(h.raceTitle);
     const cls = classifyContest(title);
-    if (!cls || cls.office !== 'house') { unmatched('contest', title, `${t.state} House file`); continue; }
+    const isHouse = cls?.office === 'house';
+    // A title we can't read as a House district is still stored (classified later, or recorded as unclassified).
+    if (!isHouse) unmatched('contest', title, `${t.state} House file`);
     const choices = candidateChoices(t.state, title, h.candidates ?? [], unmatched);
     times.push(h.ReportingTime);
     races.push({
-      office: 'house', district: cls.district, name: title, key: `us-rep-${cls.district}`, voteFor: 1, statewide: true, title: null,
+      office: isHouse ? 'house' : null, district: isHouse ? cls.district : null, name: title,
+      key: isHouse ? `us-rep-${cls.district}` : `us-rep-file-${title}`, voteFor: 1, statewide: true, title: null,
       choices, units: [unitFrom(h, choices.map((c) => c.name), { level: 'state', name: t.state })],
     });
   }
@@ -207,8 +247,13 @@ export function parseCaSos(files, t, unmatched = () => {}) {
 async function fetchTarget(t, { http, unmatched, log }) {
   const get = async (slug) => (await http.get(`${t.base}/${slug}`, { accept: 'application/json' })).text;
   const texts = {};
-  for (const cr of t.candidateRaces) texts[`c:${cr.office}`] = await get(cr.countyMap ?? cr.slug);
+  // A headline endpoint failing fails the poll (as before); a down-ballot endpoint failing is logged and skipped this round.
+  const optional = async (slug) => get(slug).catch((err) => { log?.warn?.(`casos: ${slug} unavailable: ${err.message}`); return null; });
+  for (const cr of t.candidateRaces) {
+    texts[`c:${cr.key ?? cr.office}`] = HEADLINE.includes(cr.office) ? await get(cr.countyMap ?? cr.slug) : await optional(cr.countyMap ?? cr.slug);
+  }
   if (t.houseSlug) texts.house = await get(t.houseSlug);
+  for (const d of t.districtRaces) texts[`d:${d.slug}`] = await optional(d.slug);
   if (t.measuresSlug) texts.measures = await get(t.measuresSlug);
   if (t.statusSlug) {
     texts.status = await get(t.statusSlug).catch((err) => { log?.warn?.(`casos: status unavailable: ${err.message}`); return null; });
@@ -220,10 +265,12 @@ async function fetchTarget(t, { http, unmatched, log }) {
   const files = {
     version,
     candidate: t.candidateRaces.map((cr) => {
-      const j = parse(texts[`c:${cr.office}`]);
-      return cr.countyMap ? { office: cr.office, map: j } : { office: cr.office, statewide: j };
+      const j = parse(texts[`c:${cr.key ?? cr.office}`]);
+      const id = { office: cr.office, level: cr.level, key: cr.key };
+      return cr.countyMap ? { ...id, map: j } : { ...id, statewide: j };
     }),
     house: parse(texts.house),
+    districts: t.districtRaces.map((spec) => ({ spec, list: parse(texts[`d:${spec.slug}`]) })),
     measures: parse(texts.measures),
     status: parse(texts.status),
     measuresByCounty: {},

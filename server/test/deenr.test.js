@@ -17,7 +17,7 @@ test('DE: senate + at-large house, counties, methods, timestamp', () => {
   const un = [];
   const r = parseDeEnr(load(), target, (...a) => un.push(a));
   assert.deepEqual(un, []);
-  assert.deepEqual(r.races.map((x) => [x.office, x.district]), [['senate', null], ['house', 'AL']]);
+  assert.deepEqual(r.races.map((x) => [x.office, x.district]), [['senate', null], ['house', 'AL'], [null, null], [null, null]]);
   const s = r.races[0];
   assert.deepEqual(s.choices[0], { name: 'CHRIS COONS', party: 'DEM', partyRaw: 'Democratic Party' });
   assert.deepEqual(s.units.map((u) => [u.level, u.countyFips ?? null]), [['state', null], ['county', '10003'], ['county', '10001'], ['county', '10005']]);
@@ -53,4 +53,29 @@ test('DE: unknown party labels are reported', () => {
   const un = [];
   parseDeEnr(d, target, (...a) => un.push(a));
   assert.deepEqual(un.map((x) => x.slice(0, 2)), [['party', 'Zebra Party']]);
+});
+
+test('DE: every contest in the statewide file is stored; a county office gets only its own county', async () => {
+  const { enrichRaces } = await import('../src/contests.js');
+  const un = [];
+  const d = load();
+  const r = parseDeEnr(d, target, (...a) => un.push(a));
+  const ag = r.races.find((x) => x.name === 'Attorney General');
+  // 527 precincts vs. the state's 530: still statewide, every county column.
+  assert.equal(ag.statewide, true);
+  assert.deepEqual(ag.units.map((u) => [u.level, u.name]), [['state', 'DE'], ['county', 'New Castle'], ['county', 'Kent'], ['county', 'Sussex']]);
+  const sheriff = r.races.find((x) => x.name === 'Kent County Sheriff');
+  assert.equal(sheriff.statewide, false);
+  assert.deepEqual([sheriff.units[0].name, sheriff.units[0].precinctsTotal, sheriff.voteFor], ['Kent County Sheriff', 97, null]);
+  // Before any count every county column is 0: none can be told apart, so no county units yet.
+  assert.equal(sheriff.units.length, 1);
+  // Once Kent reports, only Kent's column carries votes.
+  d.byCounty.find((x) => x['Contest Title'] === 'Kent County Sheriff').Kent = 1234;
+  const s2 = parseDeEnr(d, target).races.find((x) => x.name === 'Kent County Sheriff');
+  assert.deepEqual(s2.units.slice(1).map((u) => [u.countyFips, u.votes[0]]), [['10001', 1234]]);
+
+  assert.deepEqual(enrichRaces(r, 'deenr'), []);
+  assert.deepEqual([ag.level, ag.office], ['statewide', 'attorney_general']);
+  assert.deepEqual([sheriff.level, sheriff.office, sheriff.jurisdiction], ['county', 'sheriff', 'Kent']);
+  assert.deepEqual([r.races[0].level, r.races[0].office], ['federal', 'senate']);
 });

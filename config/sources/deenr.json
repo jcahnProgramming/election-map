@@ -1,5 +1,5 @@
 {
-  "_howto": "Elections polled by the Delaware Department of Elections ENR adapter (server/src/adapters/deenr.js). The ENR page https://elections.delaware.gov/results/enr/{electionId}.html loads Election_StatewideResults_ID_{electionId}.json, Election_ByCountyWithWilmington_ID_{electionId}.json and Election_VoterTurnout_ID_{electionId}.json from the same folder. countyColumns = the county columns of the by-county file ('Wilmington' / 'Rest of New Castle' are parts of New Castle and are not used). The Socrata dataset data.delaware.gov yg7x-kgjc is NOT used: it carries the same statewide rows but its data_as_of was still 2026-09-29 on election night.",
+  "_howto": "Elections polled by the Delaware Department of Elections ENR adapter (server/src/adapters/deenr.js). The ENR page https://elections.delaware.gov/results/enr/{electionId}.html loads Election_StatewideResults_ID_{electionId}.json, Election_ByCountyWithWilmington_ID_{electionId}.json and Election_VoterTurnout_ID_{electionId}.json from the same folder. countyColumns = the county columns of the by-county file ('Wilmington' / 'Rest of New Castle' are parts of New Castle and are not used). The Socrata dataset data.delaware.gov yg7x-kgjc is NOT used: it carries the same statewide rows but its data_as_of was still 2026-09-29 on election night. The statewide file lists every contest on the ballot (federal, statewide, legislative, county, local), so every contest is stored from the same files (allContests:true); races = headline races expected (coverage), not a filter.",
   "base": "https://elections.delaware.gov/results/enr",
   "requestGapMs": 3000,
   "elections": [
@@ -9,9 +9,14 @@
       "name": "Delaware 2026 General Election",
       "date": "2026-11-03",
       "url": "https://elections.delaware.gov/results/enr/GE2026.html",
-      "countyColumns": ["New Castle", "Kent", "Sussex"],
+      "countyColumns": [
+        "New Castle",
+        "Kent",
+        "Sussex"
+      ],
       "verified": "2026-11-03",
-      "enabled": true
+      "enabled": true,
+      "allContests": true
     }
   ]
 }

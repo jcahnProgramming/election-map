@@ -1,5 +1,5 @@
 {
-  "_howto": "Elections polled by the Vermont SOS adapter (server/src/adapters/vtsos.js). guid comes from {base}/elections/elections.json. sections are the keys of the election index whose files hold contests we track (federal = U.S. House/Senate, stateWide = Governor; add a ballot-question section here if one appears). The source reports by town and names each town's county (townDistricts), so county results are sums of towns. timeZone is the zone of lastUpdatedDate.",
+  "_howto": "Elections polled by the Vermont SOS adapter (server/src/adapters/vtsos.js). guid comes from {base}/elections/elections.json. sections are the keys of the election index whose files we read: federal (U.S. House/Senate), stateWide (Governor, Lt. Governor, Treasurer, Secretary of State, Auditor, Attorney General), senate / house (State Senate / State House districts), county (Probate Judge, Assistant Judge, State's Attorney, Sheriff, High Bailiff), town (Justice of the Peace, local questions). Every contest in them is stored; with all six the target holds the whole ballot (allContests). Section files are only downloaded when the index shows a new publish stamp. races = headline races expected (coverage), not a filter. The source reports by town and names each town's county (townDistricts), so county results are sums of towns. timeZone is the zone of lastUpdatedDate. contestRules name VT offices the shared rules don't (High Bailiff is a county office; a Justice of the Peace is a town officer, not a trial court).",
   "base": "https://static.electionresults.vermont.gov",
   "elections": [
     {
@@ -9,11 +9,16 @@
       "date": "2026-11-03",
       "url": "https://electionresults.vermont.gov/",
       "timeZone": "America/New_York",
-      "sections": ["federal", "stateWide"],
+      "sections": ["federal", "stateWide", "senate", "house", "county", "town"],
       "races": ["senate", "governor", "house"],
       "measures": true,
+      "allContests": true,
       "verified": "2026-11-03",
       "enabled": true
     }
+  ],
+  "contestRules": [
+    {"match": "^high bailiff\\b", "level": "county", "office": "county_office"},
+    {"match": "^justice of the peace\\b", "level": "local", "office": "local_office"}
   ]
 }

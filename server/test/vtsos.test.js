@@ -22,7 +22,8 @@ test('VT 2026 general (live, before first town reports): races, version, timesta
   const { r, seen } = parse('');
   assert.equal(r.version, '20261103185112/20261103185112/20261103185112');
   assert.equal(r.sourceUpdatedAt, '2026-11-03T23:51:00.000Z'); // "11/03/2026 06:51 PM" EST
-  assert.deepEqual(r.races.map((x) => x.office), ['house', 'governor']); // no U.S. Senate race in VT in 2026; Lt. Gov not tracked
+  // No U.S. Senate race in VT in 2026. Lt. Governor is stored too (office left to the contest rules).
+  assert.deepEqual(r.races.map((x) => [x.office, x.name]), [['house', 'REPRESENTATIVE TO CONGRESS'], ['governor', 'GOVERNOR'], [null, 'LIEUTENANT GOVERNOR']]);
   const gov = r.races.find((x) => x.office === 'governor');
   // Fusion label: the raw label is kept, the party resolves to its first recognised part.
   const janoo = gov.choices.find((c) => c.name === 'AMANDA JANOO');
@@ -76,4 +77,62 @@ test('VT helpers', () => {
   assert.equal(parseUpdated('11/03/2026 11:05 PM'), '2026-11-04T04:05:00.000Z');
   assert.equal(parseUpdated('06/11/2026 03:31 PM'), '2026-06-11T19:31:00.000Z'); // EDT
   assert.equal(parseUpdated('nope'), null);
+});
+
+test('VT 2026 down-ballot sections (live samples): State Senate / House districts, county offices, town offices', async () => {
+  const { enrichRaces, resetContestRules } = await import('../src/contests.js');
+  const seen = [];
+  const sections = ['federal', 'stateWide', 'senate', 'house', 'county', 'town'].map((s) => rd('', `${s}.json`));
+  const r = parseVt(rd('', 'index.json'), sections, rd('', 'turnout.json'), target, (...a) => seen.push(a));
+  const by = (n) => r.races.find((x) => x.name === n);
+
+  const sen = by('STATE SENATOR - ADDISON');
+  assert.deepEqual([sen.level, sen.office, sen.district, sen.voteFor], ['legislative', 'state_senate', 'ADDISON', 2]);
+  assert.equal(sen.units[0].name, 'ADDISON'); // the source's "District Wide" row
+  assert.equal(sen.units[0].votes[sen.choices.findIndex((c) => c.name === 'RUTH HARDY')], 503);
+  const ben4 = by('STATE REPRESENTATIVE - BENNINGTON-4');
+  assert.deepEqual([ben4.office, ben4.voteFor], ['state_house', 2]);
+  assert.equal(by('STATE REPRESENTATIVE - ADDISON-2').voteFor, 1);
+  // The oid is shared by every district: keys are per district.
+  assert.equal(new Set(r.races.map((x) => x.key)).size, r.races.length);
+
+  const asj = by('ASSISTANT JUDGE - ADDISON COUNTY');
+  assert.equal(asj.voteFor, 2); // 1 on the office, 2 on its rows: two are elected
+  assert.equal(asj.jurisdiction, 'Addison');
+  assert.equal(asj.units[0].name, 'Addison County');
+  for (const n of ['PROBATE JUDGE', "STATE'S ATTORNEY", 'SHERIFF', 'HIGH BAILIFF']) assert.ok(by(`${n} - ADDISON COUNTY`), n);
+  // Town offices with no result rows yet (Justice of the Peace before the town reports) have nothing to store yet.
+  assert.ok(!r.races.some((x) => /JUSTICE OF THE PEACE/.test(x.name)));
+  assert.ok(r.races.every((x) => x.choices.length > 0));
+
+  resetContestRules();
+  const unclassified = enrichRaces(r, 'vtsos');
+  assert.deepEqual(unclassified, []);
+  assert.deepEqual([by('SHERIFF - ADDISON COUNTY').level, by('SHERIFF - ADDISON COUNTY').office], ['county', 'sheriff']);
+  assert.deepEqual([by("STATE'S ATTORNEY - ADDISON COUNTY").office], ['district_attorney']);
+  assert.deepEqual([by('HIGH BAILIFF - ADDISON COUNTY').level], ['county']);
+  assert.deepEqual([by('PROBATE JUDGE - ADDISON COUNTY').level], ['judicial']);
+  assert.deepEqual([by('LIEUTENANT GOVERNOR').level, by('LIEUTENANT GOVERNOR').office], ['statewide', 'lieutenant_governor']);
+  assert.equal(by('GOVERNOR').office, 'governor');
+});
+
+test('VT town contests and local questions: one race per town, a local question is a measure but not statewide', async () => {
+  const { enrichRaces } = await import('../src/contests.js');
+  const town = rd('', 'town.json');
+  const row = (tid, tn, rc) => ({ tid, tn, distReported: '1/1', rc, wc: [] });
+  // Justice of the Peace once Cornwall reports (shape of the live town file, rows filled in).
+  town.d[0].o[0].cs = [row(66, 'CORNWALL', [{ cid: 1, cn: 'A SMITH', vc: 10, pn: 'DEMOCRATIC' }, { cid: 2, cn: 'B JONES', vc: 7, pn: 'REPUBLICAN' }])];
+  town.d[0].o.push({ tid: 66, tn: 'CORNWALL', ldid: 0, ld: null, oid: 900, on: 'ARTICLE 1', vf: 1, otc: 'L', bq: 'Shall the town buy a fire truck?',
+    cs: [row(66, 'CORNWALL', [{ cid: 3, cn: 'YES', vc: 30, pn: null }, { cid: 4, cn: 'NO', vc: 12, pn: null }])] });
+  const seen = [];
+  const r = parseVt(rd('', 'index.json'), [town], null, target, (...a) => seen.push(a));
+  const jp = r.races.find((x) => /JUSTICE OF THE PEACE/.test(x.name));
+  assert.equal(jp.name, 'JUSTICE OF THE PEACE - 2 YEARS - CORNWALL');
+  assert.deepEqual([jp.jurisdiction, jp.voteFor, jp.key], ['Cornwall', 7, 't:17:66:0']);
+  const q = r.races.find((x) => x.office === 'measure');
+  assert.deepEqual([q.name, q.title, q.statewide, q.jurisdiction], ['ARTICLE 1 - CORNWALL', 'Shall the town buy a fire truck?', false, 'Cornwall']);
+  assert.deepEqual([q.units[0].yes, q.units[0].no], [30, 12]);
+  assert.ok(seen.some(([k, v]) => k === 'town' && v === 'CORNWALL')); // not in this fixture's townDistricts: logged
+  assert.deepEqual(enrichRaces(r, 'vtsos'), []);
+  assert.deepEqual([jp.level, jp.office], ['local', 'local_office']);
 });

@@ -1,5 +1,5 @@
 {
-  "_howto": "Elections polled by the California SOS adapter (server/src/adapters/casos.js). base is the SOS results API. candidateRaces: statewide candidate contests, each with the API slug of its statewide file and (optionally) its county map file. houseSlug returns every U.S. House district (statewide per district; the API has no county breakdown for House that we found). measuresSlug is the statewide measures file; countyMeasures:true also fetches {measuresSlug}/county/{slug} for each county (58 requests, only when the statewide files change). statusSlug gives county turnout; it is ignored when its lastReportTimestamp is older than the election date (it held Sep 2024 test data on the afternoon of 2026-11-03). CA has no U.S. Senate race in 2026 (/returns/us-senate answers 500).",
+  "_howto": "Elections polled by the California SOS adapter (server/src/adapters/casos.js). base is the SOS results API. candidateRaces: statewide candidate contests, each with the API slug of its statewide file and (optionally) its county map file; offices other than senate/governor carry level + office (the endpoint is the office identity) and a stable key. districtRaces: other per-district endpoints ({slug}/district/all arrays: State Senate, State Assembly, Board of Equalization), each with level, office and keyPrefix. The API is per-race endpoints, so a target never holds every contest on the ballot (allContests:false; county/local/judicial contests are on the county sites). Each extra entry is one more request per poll. houseSlug returns every U.S. House district (statewide per district; the API has no county breakdown for House that we found). measuresSlug is the statewide measures file; countyMeasures:true also fetches {measuresSlug}/county/{slug} for each county (58 requests, only when the statewide files change). statusSlug gives county turnout; it is ignored when its lastReportTimestamp is older than the election date (it held Sep 2024 test data on the afternoon of 2026-11-03). CA has no U.S. Senate race in 2026 (/returns/us-senate answers 500).",
   "base": "https://api.sos.ca.gov/returns",
   "elections": [
     {
@@ -10,14 +10,88 @@
       "url": "https://electionresults.sos.ca.gov/",
       "timeZone": "America/Los_Angeles",
       "candidateRaces": [
-        { "office": "governor", "slug": "governor", "countyMap": "maps/governor" }
+        {
+          "office": "governor",
+          "slug": "governor",
+          "countyMap": "maps/governor"
+        },
+        {
+          "office": "lieutenant_governor",
+          "level": "statewide",
+          "key": "lieutenant-governor",
+          "slug": "lieutenant-governor",
+          "countyMap": "maps/lieutenant-governor"
+        },
+        {
+          "office": "secretary_of_state",
+          "level": "statewide",
+          "key": "secretary-of-state",
+          "slug": "secretary-of-state",
+          "countyMap": "maps/secretary-of-state"
+        },
+        {
+          "office": "attorney_general",
+          "level": "statewide",
+          "key": "attorney-general",
+          "slug": "attorney-general",
+          "countyMap": "maps/attorney-general"
+        },
+        {
+          "office": "controller",
+          "level": "statewide",
+          "key": "controller",
+          "slug": "controller",
+          "countyMap": "maps/controller"
+        },
+        {
+          "office": "treasurer",
+          "level": "statewide",
+          "key": "treasurer",
+          "slug": "treasurer",
+          "countyMap": "maps/treasurer"
+        },
+        {
+          "office": "insurance_commissioner",
+          "level": "statewide",
+          "key": "insurance-commissioner",
+          "slug": "insurance-commissioner",
+          "countyMap": "maps/insurance-commissioner"
+        },
+        {
+          "office": "superintendent_of_public_instruction",
+          "level": "statewide",
+          "key": "superintendent-of-public-instruction",
+          "slug": "superintendent-of-public-instruction",
+          "countyMap": "maps/superintendent-of-public-instruction"
+        }
       ],
       "houseSlug": "us-rep/district/all",
+      "districtRaces": [
+        {
+          "slug": "state-senate/district/all",
+          "level": "legislative",
+          "office": "state_senate",
+          "keyPrefix": "state-senate"
+        },
+        {
+          "slug": "state-assembly/district/all",
+          "level": "legislative",
+          "office": "state_house",
+          "keyPrefix": "state-assembly"
+        },
+        {
+          "slug": "board-of-equalization/district/all",
+          "level": "statewide",
+          "office": "board_of_equalization",
+          "keyPrefix": "board-of-equalization"
+        }
+      ],
       "measuresSlug": "ballot-measures",
       "countyMeasures": true,
       "statusSlug": "status",
       "verified": "2026-11-03",
-      "enabled": true
+      "enabled": true,
+      "allContests": false
     }
   ]
 }

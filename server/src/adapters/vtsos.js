@@ -19,6 +19,10 @@ import { classifyContest, normalizeParty, yesNoSide } from '../normalize.js';
 import { matchCounty } from '../geo.js';
 
 const lastVersion = new Map(); // target key → version
+// Every results section the index names (verified live 2026-11-03): federal (U.S. House / Senate), stateWide (Governor ...
+// Attorney General), senate / house (State Senate / State House districts), county (Probate Judge, Assistant Judge,
+// State's Attorney, Sheriff, High Bailiff), town (Justice of the Peace; local questions).
+const SECTIONS = ['federal', 'stateWide', 'senate', 'house', 'county', 'town'];
 
 function targets() {
   const cfg = readConfig('sources/vtsos.json', { elections: [] });
@@ -34,9 +38,12 @@ function targets() {
       label: e.name,
       date: e.date ?? null,
       levels: ['state', 'county'],
+      // Headline races expected (coverage). Every contest in the sections read is stored whatever this says.
       races: e.races ?? ['senate', 'governor', 'house'],
       measures: e.measures !== false,
-      sections: e.sections ?? ['federal', 'stateWide'],
+      sections: e.sections ?? SECTIONS,
+      // federal + stateWide + senate + house + county + town is the whole general-election ballot.
+      allContests: e.allContests ?? SECTIONS.every((x) => (e.sections ?? SECTIONS).includes(x)),
       url: e.url,
       timeZone: e.timeZone ?? 'America/New_York',
     }));
@@ -87,6 +94,53 @@ function partyOf(raw) {
   return r;
 }
 
+/** Every contest object in a section file: {d:[{o:[...]}]} for most sections, {d:[{co:[...]}]} for the county one. */
+function* contestsOf(file) {
+  for (const block of file?.d ?? []) {
+    for (const o of block?.o ?? []) if (o) yield o;
+    for (const o of block?.co ?? []) if (o) yield o;
+  }
+}
+
+const cleanDist = (s) => String(s ?? '').replace(/_+$/, '').replace(/\s+/g, ' ').trim();
+const titleWord = (s) => String(s ?? '').trim().toLowerCase().replace(/\b[a-z]/g, (c) => c.toUpperCase());
+
+/**
+ * Where a contest belongs, from the fields the source puts on it (seen live 2026-11-03):
+ *   dn/dc + isrep   a State Senate (isrep false) or State House (isrep true) district: rows are towns + a "District Wide" row
+ *   ctyid/ctyn      a county contest (Probate Judge, Assistant Judge, State's Attorney, Sheriff, High Bailiff): "County Wide" row
+ *   tid/tn (+ld)    a town contest (Justice of the Peace; local questions)
+ *   none of these   a statewide contest (federal / stateWide sections): "STATE WIDE" row
+ * The oid is shared by every district / county / town instance of an office, so it is only a key for statewide contests.
+ */
+function scopeOf(o) {
+  if (o.dn != null || o.dc != null) {
+    const dist = cleanDist(o.dn ?? o.dc);
+    const house = o.isrep === true;
+    return {
+      kind: 'district', suffix: dist, unitName: dist, district: dist,
+      level: 'legislative', office: house ? 'state_house' : 'state_senate',
+      key: (x) => `${house ? 'h' : 'sn'}:${x.oid}:${x.dc ?? dist}`,
+    };
+  }
+  if (o.ctyid != null || o.ctyn != null) {
+    const county = titleWord(o.ctyn);
+    return {
+      kind: 'county', suffix: `${String(o.ctyn ?? '').trim()} COUNTY`, unitName: `${county} County`, jurisdiction: county || null,
+      key: (x) => `cty:${x.oid}:${x.ctyid ?? x.ctyn}`,
+    };
+  }
+  if (o.tid != null || o.tn != null) {
+    const town = titleWord(o.tn);
+    const local = o.ld ? ` ${String(o.ld).trim()}` : '';
+    return {
+      kind: 'town', suffix: `${String(o.tn ?? '').trim()}${local}`, unitName: town, jurisdiction: town || null,
+      key: (x) => `t:${x.oid}:${x.tid ?? x.tn}:${x.ldid ?? 0}`,
+    };
+  }
+  return { kind: 'statewide', key: (x) => String(x.oid) };
+}
+
 /**
  * Pure parse of the VT index + section files + turnout file into the adapter result (docs/data-contract.md).
  * @param {object} index      the {guid}.json index
@@ -117,77 +171,87 @@ export function parseVt(index, sections, turnoutFile, t, unmatched = () => {}) {
 
   const races = [];
   for (const file of sections) {
-    for (const block of file?.d ?? []) {
-      for (const o of block.o ?? []) {
-        const rows = o.cs ?? [];
-        const swRow = rows.find((r) => Number(r.tid) === 0);
-        const townRows = rows.filter((r) => Number(r.tid) !== 0);
-        const sample = swRow ?? townRows[0];
-        if (!sample) continue;
-        const cands = (sample.rc ?? []).map((c) => ({ cid: c.cid, name: String(c.cn ?? '').replace(/\s+/g, ' ').trim(), raw: c.pn ?? '' }));
-        const cls = classifyContest(o.on, cands.map((c) => c.name));
-        if (!cls) continue;
-        if (cls.office === 'measure' ? !t.measures : !t.races.includes(cls.office)) continue;
-        const isMeasure = cls.office === 'measure';
-        const name = String(o.on).replace(/\s+/g, ' ').trim();
+    for (const o of contestsOf(file)) {
+      const scope = scopeOf(o);
+      const rows = o.cs ?? [];
+      const swRow = rows.find((r) => Number(r.tid) === 0);
+      const townRows = rows.filter((r) => Number(r.tid) !== 0);
+      const sample = swRow ?? townRows[0];
+      if (!sample) continue; // no result rows published for this contest yet (town contests before their town reports)
+      const cands = (sample.rc ?? []).map((c) => ({ cid: c.cid, name: String(c.cn ?? '').replace(/\s+/g, ' ').trim(), raw: c.pn ?? '' }));
+      const baseName = String(o.on ?? '').replace(/\s+/g, ' ').trim();
+      // The built-in classifier names the headline offices and yes/no questions; it only sees the bare office name for
+      // statewide contests (a district / county / town contest is never U.S. Senate, Governor or a statewide measure).
+      const raw = classifyContest(baseName, cands.map((c) => c.name));
+      const cls = raw && (scope.kind === 'statewide' || raw.office === 'measure') ? raw : null;
+      const isMeasure = cls?.office === 'measure';
+      // Contest names repeat across districts / counties / towns ("STATE SENATOR", "SHERIFF"): add the source's own
+      // district / county / town name so each contest is told apart.
+      const name = scope.suffix ? `${baseName} - ${scope.suffix}` : baseName;
 
-        const choices = cands.map((c) => {
-          if (isMeasure) return { name: c.name, party: 'OTHER', partyRaw: c.raw };
-          const { party, known } = partyOf(c.raw);
-          if (!known) unmatched('party', c.raw, `${t.state} ${name} / ${c.name}`);
-          return { name: c.name, party, partyRaw: c.raw };
-        });
-        const hasWriteIns = !isMeasure && rows.some((r) => (r.wc ?? []).length);
-        if (hasWriteIns) choices.push({ name: 'Write-ins', party: 'OTHER', partyRaw: '' });
+      const choices = cands.map((c) => {
+        if (isMeasure) return { name: c.name, party: 'OTHER', partyRaw: c.raw };
+        const { party, known } = partyOf(c.raw);
+        if (!known) unmatched('party', c.raw, `${t.state} ${name} / ${c.name}`);
+        return { name: c.name, party, partyRaw: c.raw };
+      });
+      const hasWriteIns = !isMeasure && rows.some((r) => (r.wc ?? []).length);
+      if (hasWriteIns) choices.push({ name: 'Write-ins', party: 'OTHER', partyRaw: '' });
 
-        const rowVotes = (r) => {
-          const byCid = new Map((r.rc ?? []).map((c) => [String(c.cid), num(c.vc) ?? 0]));
-          const v = cands.map((c) => byCid.get(String(c.cid)) ?? 0);
-          if (hasWriteIns) v.push((r.wc ?? []).reduce((s, c) => s + (num(c.vc) ?? 0), 0));
-          return v;
-        };
-        const add = (a, b) => a.map((x, i) => x + b[i]);
+      const rowVotes = (r) => {
+        const byCid = new Map((r.rc ?? []).map((c) => [String(c.cid), num(c.vc) ?? 0]));
+        const v = cands.map((c) => byCid.get(String(c.cid)) ?? 0);
+        if (hasWriteIns) v.push((r.wc ?? []).reduce((s, c) => s + (num(c.vc) ?? 0), 0));
+        return v;
+      };
+      const add = (a, b) => a.map((x, i) => x + b[i]);
 
-        // Precincts = the town's voting districts; distReported is repeated on each of a town's rows, so count each town once.
-        const precinctsByTown = new Map();
-        for (const r of townRows) { const f = fraction(r.distReported); if (f && !precinctsByTown.has(r.tid)) precinctsByTown.set(r.tid, f); }
+      // Precincts = the town's voting districts; distReported is repeated on each of a town's rows, so count each town once.
+      const precinctsByTown = new Map();
+      for (const r of townRows) { const f = fraction(r.distReported); if (f && !precinctsByTown.has(r.tid)) precinctsByTown.set(r.tid, f); }
 
-        const byCounty = new Map(); // fips → { m, votes, pr, pt, towns:Set }
-        let stateSum = new Array(choices.length).fill(0);
-        for (const r of townRows) {
-          const v = rowVotes(r);
-          stateSum = add(stateSum, v);
-          const m = countyOfTown(r.tid, r.tn);
-          if (!m) continue;
-          const c = byCounty.get(m.fips) ?? { m, votes: new Array(choices.length).fill(0), towns: new Set() };
-          c.votes = add(c.votes, v);
-          c.towns.add(r.tid);
-          byCounty.set(m.fips, c);
-        }
-        const precincts = (tids) => {
-          let pr = 0; let pt = 0; let any = false;
-          for (const tid of tids) { const f = precinctsByTown.get(tid); if (f) { any = true; pr += f[0]; pt += f[1]; } }
-          return any ? { precinctsReporting: pr, precinctsTotal: pt, pctReporting: pt ? round1((100 * pr) / pt) : null }
-            : { precinctsReporting: null, precinctsTotal: null, pctReporting: null };
-        };
-
-        const units = [{
-          level: 'state', name: t.state, votes: swRow ? rowVotes(swRow) : stateSum,
-          ...precincts(new Set(townRows.map((r) => r.tid))),
-        }];
-        for (const c of [...byCounty.values()].sort((a, b) => a.m.fips.localeCompare(b.m.fips))) {
-          units.push({ level: 'county', countyFips: c.m.fips, name: c.m.name, votes: c.votes, ...precincts(c.towns) });
-        }
-        if (isMeasure) {
-          const yi = choices.findIndex((ch) => yesNoSide(ch.name) === 'yes');
-          const ni = choices.findIndex((ch) => yesNoSide(ch.name) === 'no');
-          for (const u of units) { u.yes = u.votes[yi] ?? 0; u.no = u.votes[ni] ?? 0; }
-        }
-        races.push({
-          office: cls.office, district: cls.district, name, key: String(o.oid), voteFor: num(o.vf) ?? 1, statewide: true,
-          title: isMeasure ? name : null, choices, units,
-        });
+      const byCounty = new Map(); // fips → { m, votes, pr, pt, towns:Set }
+      let stateSum = new Array(choices.length).fill(0);
+      for (const r of townRows) {
+        const v = rowVotes(r);
+        stateSum = add(stateSum, v);
+        const m = countyOfTown(r.tid, r.tn);
+        if (!m) continue;
+        const c = byCounty.get(m.fips) ?? { m, votes: new Array(choices.length).fill(0), towns: new Set() };
+        c.votes = add(c.votes, v);
+        c.towns.add(r.tid);
+        byCounty.set(m.fips, c);
       }
+      const precincts = (tids) => {
+        let pr = 0; let pt = 0; let any = false;
+        for (const tid of tids) { const f = precinctsByTown.get(tid); if (f) { any = true; pr += f[0]; pt += f[1]; } }
+        return any ? { precinctsReporting: pr, precinctsTotal: pt, pctReporting: pt ? round1((100 * pr) / pt) : null }
+          : { precinctsReporting: null, precinctsTotal: null, pctReporting: null };
+      };
+
+      const units = [{
+        level: 'state', name: scope.unitName ?? t.state, votes: swRow ? rowVotes(swRow) : stateSum,
+        ...precincts(new Set(townRows.map((r) => r.tid))),
+      }];
+      for (const c of [...byCounty.values()].sort((a, b) => a.m.fips.localeCompare(b.m.fips))) {
+        units.push({ level: 'county', countyFips: c.m.fips, name: c.m.name, votes: c.votes, ...precincts(c.towns) });
+      }
+      if (isMeasure) {
+        const yi = choices.findIndex((ch) => yesNoSide(ch.name) === 'yes');
+        const ni = choices.findIndex((ch) => yesNoSide(ch.name) === 'no');
+        for (const u of units) { u.yes = u.votes[yi] ?? 0; u.no = u.votes[ni] ?? 0; }
+      }
+      // vote-for: the office's own vf, or the contest-wide row's when larger (county ASSISTANT JUDGE says 1 on the office,
+      // 2 on its rows: two are elected).
+      const vf = Math.max(num(o.vf) ?? 0, num(swRow?.vf) ?? 0) || null;
+      races.push({
+        office: cls?.office ?? scope.office ?? null, ...(!cls && scope.level ? { level: scope.level } : {}),
+        district: cls ? cls.district : scope.district ?? null, name, key: scope.key(o),
+        voteFor: vf ?? (cls && !isMeasure ? 1 : null),
+        statewide: scope.kind === 'statewide' || !isMeasure,
+        ...(scope.jurisdiction ? { jurisdiction: scope.jurisdiction } : {}),
+        title: isMeasure ? (typeof o.bq === 'string' && o.bq.trim() ? o.bq.trim() : name) : null, choices, units,
+      });
     }
   }
 

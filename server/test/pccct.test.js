@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { parsePcc } from '../src/adapters/pccct.js';
 
-// Trimmed from the live CT feed on election night (Governor, Congress 1-5, State Senator 1; all 169 towns).
+// Trimmed from the live CT feed on election night (Governor, Congress 1-5, State Senator 1; all 169 towns), plus
+// Attorney General, State Representative 1, Judge of Probate 54, Ansonia Registrar of Voters, Darien Board of Education.
 const load = (f) => JSON.parse(readFileSync(fileURLToPath(new URL(`./fixtures/pccct/${f}`, import.meta.url)), 'utf8'));
 const data = load('Electiondata.json');
 const lookup = load('Lookupdata.json');
@@ -15,11 +16,44 @@ const run = (d = data, l = lookup, t = target) => {
   return { ...parsePcc(d, l, t, { unmatched: (...a) => unmatched.push(a) }), unmatched };
 };
 
-test('CT: governor + five House districts; state legislature skipped', () => {
+test('CT: every office in the feed is stored; headline offices keep their built-in identity', () => {
   const { races } = run();
-  assert.deepEqual(races.map((r) => `${r.office}:${r.district ?? ''}`), ['governor:', 'house:1', 'house:2', 'house:3', 'house:4', 'house:5']);
-  assert.ok(races[0].statewide);
-  assert.ok(races.slice(1).every((r) => !r.statewide));
+  const top = races.filter((r) => ['governor', 'house'].includes(r.office));
+  assert.deepEqual(top.map((r) => `${r.office}:${r.district ?? ''}`), ['governor:', 'house:1', 'house:2', 'house:3', 'house:4', 'house:5']);
+  assert.ok(top[0].statewide);
+  assert.ok(top.slice(1).every((r) => !r.statewide));
+  assert.equal(races.filter((r) => r.office !== 'measure').length, 12);
+  const byName = (n) => races.find((r) => r.name === n);
+  // Legislature: the feed's own office type gives the identity.
+  assert.deepEqual(['level', 'office', 'district', 'voteFor'].map((k) => byName('State Senator 1')[k]), ['legislative', 'state_senate', '1', 1]);
+  assert.deepEqual(['level', 'office', 'district'].map((k) => byName('State Representative 1')[k]), ['legislative', 'state_house', '1']);
+  // Statewide row offices and probate judges are left to the contest rules (office null here).
+  const ag = byName('Attorney General');
+  assert.equal(ag.office, null);
+  assert.ok(ag.statewide);
+  assert.equal(ag.units[0].precinctsTotal, 778);
+  assert.equal(byName('Judge of Probate 54').district, '54');
+  // Town offices: jurisdiction is the one town that reports them; vote-for unknown (the feed has none, can be multi-seat).
+  const reg = byName('Registrar of Voters');
+  assert.deepEqual([reg.jurisdiction, reg.voteFor, reg.statewide, reg.units[0].name], ['Ansonia', null, false, 'Ansonia']);
+  assert.equal(reg.units[0].precinctsTotal, reg.units[1].precinctsTotal);
+  assert.ok(reg.units[0].precinctsTotal > 0);
+  assert.equal(byName('Board of Education').jurisdiction, 'Darien');
+});
+
+test('CT: after enrichRaces every fixture contest is classified (pccct.json rules for town offices)', async () => {
+  const { enrichRaces, resetContestRules } = await import('../src/contests.js');
+  resetContestRules();
+  const { races } = run();
+  const unclassified = enrichRaces({ races, election: { scope: 'state', state: 'CT' } }, 'pccct');
+  assert.deepEqual(unclassified, []);
+  const get = (n) => races.find((r) => r.name === n);
+  assert.deepEqual([get('Attorney General').level, get('Attorney General').office], ['statewide', 'attorney_general']);
+  assert.deepEqual([get('Judge of Probate 54').level, get('Judge of Probate 54').office], ['judicial', 'trial_court']);
+  assert.deepEqual([get('Registrar of Voters').level, get('Registrar of Voters').office], ['local', 'registrar_of_voters']);
+  assert.deepEqual([get('Board of Education').level, get('Board of Education').office], ['local', 'school_board']);
+  assert.equal(get('Governor and Lieutenant Governor').office, 'governor');
+  assert.ok(races.filter((r) => r.office === 'measure').every((r) => r.kind === 'yes_no' && r.level === 'measure'));
 });
 
 test('CT: fusion lines are one choice per person, party from the major line, every code kept', () => {
@@ -73,14 +107,23 @@ test('CT: turnout from the source; zero registered is "not published", not zero'
   assert.equal(run(d).turnout[0].turnoutPct, 12.5);
 });
 
-test('CT: town questions are local; a question in every town becomes a statewide measure', () => {
-  assert.equal(run().races.filter((r) => r.office === 'measure').length, 0);
+test('CT: town questions are stored as local measures, one per town; a question in every town becomes a statewide measure', () => {
+  const local = run().races.filter((r) => r.office === 'measure');
+  const nTownQs = Object.values(data.ballotQuestion).reduce((s, qs) => s + qs.length, 0);
+  assert.equal(local.length, nTownQs);
+  assert.ok(local.every((r) => r.statewide === false && r.jurisdiction && r.title));
+  const a1 = local.find((r) => r.name === 'Ansonia Question 1');
+  assert.match(a1.title, /City of Ansonia Charter/);
+  assert.deepEqual(a1.units.map((u) => [u.level, u.name]), [['state', 'Ansonia'], ['county', 'New Haven']]);
+  assert.equal(new Set(local.map((r) => r.key)).size, local.length);
   const d = structuredClone(data);
   d.ballotQuestion = Object.fromEntries(Object.values(lookup.townIds).map((n, i) => [n, [
     { QN: '1.  "Shall there be a constitutional convention?"', YES: String(i + 1), NO: '1', NTH: '-', NTL: '-' },
   ]]));
   const m = run(d).races.find((r) => r.office === 'measure');
   assert.equal(m.name, 'Question 1');
+  assert.equal(m.statewide, true);
+  assert.equal(run(d).races.filter((r) => r.office === 'measure').length, 1);
   assert.equal(m.title, '"Shall there be a constitutional convention?"');
   const n = Object.keys(lookup.townIds).length;
   assert.equal(m.units[0].yes, (n * (n + 1)) / 2);

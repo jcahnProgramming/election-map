@@ -1,5 +1,5 @@
 {
-  "_howto": "Florida Division of Elections results extract (tab-separated), polled by server/src/adapters/fldos.js. extractUrl = the ResultsExtract.Asp download for one election date (OfficialResults=N: unofficial, PartyRaces=N: general-election races). One row per county x candidate; the statewide number is the sum of the 67 counties' rows for one race. Until the first rows appear the file is a header line only: the adapter then writes nothing. Set enabled:false to stop polling one without deleting it.",
+  "_howto": "Florida Division of Elections results extract (tab-separated), polled by server/src/adapters/fldos.js. extractUrl = the ResultsExtract.Asp download for one election date (OfficialResults=N: unofficial, PartyRaces=N: general-election races). One row per county x candidate; the statewide number is the sum of the 67 counties' rows for one race. Until the first rows appear the file is a header line only: the adapter then writes nothing. Set enabled:false to stop polling one without deleting it. Every contest in the extract is stored; races = headline races expected (coverage), not a filter. The extract is the Division's own contests (federal, statewide, legislative, multi-county, judicial retention, amendments); county and municipal contests are on the county Supervisor of Elections sites, so allContests is false. contestRules name FL offices the shared rules miss.",
   "elections": [
     {
       "state": "FL",
@@ -16,7 +16,20 @@
       "measures": true,
       "enabled": false,
       "verified": "2026-11-03",
-      "note": "Disabled at ship time: endpoint verified live 2026-11-03 but it returned only the header row through 00:03 UTC, so the row parser has not been checked against real data rows. Enable once a real extract has been parsed (node script against the adapter) and checked."
+      "note": "Disabled at ship time: endpoint verified live 2026-11-03 but it returned only the header row through 00:03 UTC, so the row parser has not been checked against real data rows. Enable once a real extract has been parsed (node script against the adapter) and checked.",
+      "allContests": false
+    }
+  ],
+  "contestRules": [
+    {
+      "match": "district court of appeal",
+      "level": "judicial",
+      "office": "appeals_court"
+    },
+    {
+      "match": "^chief financial officer",
+      "level": "statewide",
+      "office": "chief_financial_officer"
     }
   ]
 }
