@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { shade, marginBandIndex, leadCategory, TOSSUP_MARGIN, PALETTE } from '../src/shading.js';
 import {
   tallyStates, estReporting, turnoutPct, precinctPct, methodShares, measureStatus, measureShares,
-  leadText, newestTime, fmtMT, MEASURE_TOO_EARLY_PCT,
+  leadText, newestTime, fmtMT, MEASURE_TOO_EARLY_PCT, partyTag, candidateList, hasCandidates,
 } from '../src/calc.js';
 
 const rep = (leader, marginPts, extra = {}) => ({ status: 'reporting', leader, marginPts, totalVotes: 100, ...extra });
@@ -109,6 +109,52 @@ test('leadText', () => {
   assert.equal(leadText(rep('DEM', 3.21)), 'Democrat leading by 3.2 pts');
   assert.equal(leadText(rep('REP', 1.04)), 'Toss-up · margin 1.0 pts');
   assert.equal(leadText({ status: 'awaiting' }), null);
+  // With candidates: the leading candidate by name, with the source's party tag.
+  const cands = [
+    { name: 'Ann Lee', party: 'DEM', partyRaw: 'DEM', votes: 520 },
+    { name: 'Bo Kim', party: 'REP', partyRaw: 'REP', votes: 480 },
+  ];
+  assert.equal(leadText(rep('DEM', 4, { candidates: cands })), 'Ann Lee (DEM) leading by 4.0 pts');
+  assert.equal(leadText(rep('DEM', 1.5, { candidates: cands })), 'Toss-up · Ann Lee (DEM) ahead by 1.5 pts');
+  // The House statewide sum names the party, not a fake person.
+  assert.equal(leadText(rep('DEM', 4, { partySum: true, candidates: [{ name: 'DEM candidates, all districts', party: 'DEM', votes: 1 }] })),
+    'Democrat leading by 4.0 pts');
+});
+
+test('partyTag: from the source label; never "Other" for a named third party', () => {
+  assert.equal(partyTag({ party: 'DEM', partyRaw: 'Democratic' }), 'DEM');
+  assert.equal(partyTag({ party: 'REP', partyRaw: 'R' }), 'REP');
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: 'Libertarian' }), 'LIB');
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: 'IND' }), 'IND');
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: 'Green' }), 'GRN');
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: '' }), '');
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: 'Unity' }), 'UNITY');
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: 'American Constitution' }), 'AMER');
+});
+
+test('candidateList: every candidate by votes, same-party candidates separate, write-ins last, cap + more', () => {
+  const entry = { candidates: [
+    { name: 'Write-in', party: 'OTHER', partyRaw: '', votes: 5 },
+    { name: 'C', party: 'REP', partyRaw: 'REP', votes: 300 },
+    { name: 'A', party: 'DEM', partyRaw: 'DEM', votes: 400 },
+    { name: 'B', party: 'DEM', partyRaw: 'DEM', votes: 250 },
+    { name: 'D', party: 'OTHER', partyRaw: 'LIB', votes: 45 },
+  ] };
+  const all = candidateList(entry);
+  assert.deepEqual(all.rows.map((r) => `${r.name}:${r.tag}`), ['A:DEM', 'C:REP', 'B:DEM', 'D:LIB']);
+  assert.deepEqual(all.writeIns.map((w) => [w.name, w.votes, w.named]), [['Write-in', 5, false]]);
+  assert.equal(all.rows[0].pct, 40);
+  const capped = candidateList(entry, 2);
+  assert.equal(capped.rows.length, 2);
+  assert.equal(capped.more, 2);
+  // Named write-in candidates (OH) each keep their own row; tooltips count them in "N more".
+  const oh = { candidates: [{ name: 'Brown', party: 'DEM', votes: 9 }, { name: 'Faris', party: 'OTHER', partyRaw: 'Write-in', votes: 1 },
+    { name: 'Holliman', party: 'OTHER', partyRaw: 'Write-in', votes: 0 }] };
+  assert.deepEqual(candidateList(oh).writeIns.map((w) => w.name), ['Faris', 'Holliman']);
+  assert.equal(candidateList(oh, 5).more, 2);
+  assert.equal(partyTag({ party: 'OTHER', partyRaw: 'Other-part' }), 'OTHER');
+  assert.equal(hasCandidates({ partySum: true, candidates: entry.candidates }), false);
+  assert.equal(hasCandidates(entry), true);
 });
 
 test('newestTime and fmtMT', () => {

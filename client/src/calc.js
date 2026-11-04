@@ -100,16 +100,80 @@ export function partyShares(entry) {
 
 const PARTY_WORD = { DEM: 'Democrat', REP: 'Republican', OTHER: 'Other party' };
 
-/** "Democrat leading by 3.2 pts" / "Toss-up · margin 1.1 pts" / "Tied" / null when not reporting. */
+// Short party tags from the source's own label. DEM/REP from the normalized party; everything else from partyRaw,
+// so a Libertarian is LIB, not "Other". Unknown labels are shown as the source wrote them (shortened).
+const TAGS = [
+  [/^(lib|lbr|lbt|l|libertarian)$/, 'LIB'], [/^(grn|gre|g|green|green party)$/, 'GRN'],
+  [/^(ind|i|indep|independent)$/, 'IND'], [/^(una|uaf|unaffiliated|unc)$/, 'UNA'], [/^(np|npa|nonp|non|nonpartisan|non partisan|no party|no party preference|npp|non-partis|nonprtycan|none)$/, 'NP'],
+  [/^(con|cst|constitution)$/, 'CON'], [/^(wf|wfp|working families)$/, 'WF'], [/^(fwd|forward)$/, 'FWD'], [/^(p&f|peace and freedom)$/, 'P&F'],
+  [/^(pc|petitioning candidate)$/, 'PET'], [/^(apv|approval voting)$/, 'APV'], [/^(soc|socialist)$/, 'SOC'],
+  [/^other[- ]?part(y)?$/, 'OTHER'],
+];
+/** "DEM" / "REP" / "LIB" / "IND" / … from a candidate's party; '' when the source gives no label (nonpartisan). */
+export function partyTag(c) {
+  if (!c) return '';
+  if (c.party === 'DEM') return 'DEM';
+  if (c.party === 'REP') return 'REP';
+  const raw = String(c.partyRaw ?? '').trim();
+  const k = raw.toLowerCase().replace(/\s+/g, ' ');
+  if (!k || /^(oth|other|w|wi|write-in|write in)$/.test(k)) return '';
+  for (const [re, tag] of TAGS) if (re.test(k)) return tag;
+  return raw.length <= 5 ? raw.toUpperCase() : raw.slice(0, 4).toUpperCase();
+}
+
+export const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
+
+/**
+ * Every candidate the source lists, sorted by votes, with a party tag and % of the votes counted. Write-ins come last on
+ * their own line. Never collapses candidates into "Other"; two candidates of one party stay two rows.
+ * @param {number} [cap] show at most this many named candidates (`more` = how many were left out)
+ * Named write-in candidates (OH lists them) each keep their own row, marked as write-ins, never merged.
+ * @returns {{ rows:{name,tag,party,votes,pct}[], writeIns:{name,votes,pct,named:boolean}[], more:number, total:number }}
+ */
+export function candidateList(entry, cap = Infinity) {
+  const all = Array.isArray(entry?.candidates) ? entry.candidates : [];
+  const total = all.reduce((s, c) => s + (Number(c.votes) || 0), 0);
+  const pct = (v) => (total > 0 ? (100 * (Number(v) || 0)) / total : null);
+  const byVotes = (a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0);
+  const named = all.filter((c) => !isWriteIn(c)).sort(byVotes);
+  const rows = named.slice(0, cap).map((c) => ({ name: c.name, tag: partyTag(c), party: c.party, votes: Number(c.votes) || 0, pct: pct(c.votes) }));
+  // Write-ins: the generic "Write-in" line as is; named write-in candidates each on their own line. When capped (tooltips),
+  // they count toward "N more" except the generic line.
+  const wiAll = all.filter(isWriteIn).sort(byVotes).map((c) => ({
+    name: c.name, votes: Number(c.votes) || 0, pct: pct(c.votes), named: !/^\s*write[- ]?ins?\s*$/i.test(c.name),
+  }));
+  const writeIns = Number.isFinite(cap) ? wiAll.filter((w) => !w.named) : wiAll;
+  return {
+    rows,
+    writeIns,
+    more: Math.max(0, named.length - rows.length) + (wiAll.length - writeIns.length),
+    total,
+  };
+}
+
+/** True when the entry lists real candidates (not the U.S. House statewide sum by party). */
+export const hasCandidates = (entry) => !entry?.partySum && Array.isArray(entry?.candidates) && entry.candidates.length > 0;
+
+const nameWithTag = (c) => (c ? `${c.name}${partyTag(c) ? ` (${partyTag(c)})` : ''}` : '');
+
+/**
+ * "Jane Doe (DEM) leading by 3.2 pts" / "Toss-up · Jane Doe (DEM) ahead by 1.1 pts" / "Tied · toss-up" / null when not
+ * reporting. The U.S. House statewide sum names the party ("Democrats leading the House popular vote by …").
+ */
 export function leadText(entry, tossup = TOSSUP_MARGIN) {
   const c = leadCategory(entry, tossup);
   if (!c) return null;
+  if (c === 'multi') {
+    const top = (entry.candidates || []).filter((x) => !isWriteIn(x)).slice(0, entry.seats || 2).map(nameWithTag).filter(Boolean);
+    return `Vote for ${entry.seats || 2} · most votes so far: ${top.join(', ') || '—'}`;
+  }
   const m = isNum(entry.marginPts) ? Math.abs(Number(entry.marginPts)).toFixed(1) : null;
+  const first = hasCandidates(entry) ? [...entry.candidates].sort((a, b) => (Number(b.votes) || 0) - (Number(a.votes) || 0))[0] : null;
   if (c === 'tossup') {
     if (entry.tied || !entry.leader) return 'Tied · toss-up';
-    return `Toss-up · margin ${m ?? '—'} pts`;
+    return first ? `Toss-up · ${nameWithTag(first)} ahead by ${m ?? '—'} pts` : `Toss-up · margin ${m ?? '—'} pts`;
   }
-  return `${PARTY_WORD[c]} leading by ${m} pts`;
+  return first ? `${nameWithTag(first)} leading by ${m} pts` : `${PARTY_WORD[c]} leading by ${m} pts`;
 }
 
 /** Newest ISO timestamp among the given values (ignores null / invalid). */

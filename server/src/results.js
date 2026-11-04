@@ -349,6 +349,7 @@ export function createResults(db, adapters, opts = {}) {
       status: s.totalVotes > 0 ? 'reporting' : 'awaiting',
       hasCountyData: counties.size > 0,
       voteFor,
+      ...(race === 'house' ? { partySum: true } : {}), // the House statewide popular vote: a sum by party, not people
       contests,
       ...s,
       ...(otherContests.length ? { otherContests } : {}),
@@ -584,6 +585,7 @@ export function createResults(db, adapters, opts = {}) {
       countyData, countyNote,
       counties: [...(counties ?? new Map()).values()].map((u) => ({
         fips: u.fips, name: known.get(u.fips) ?? u.name, ...summarize(u.candidates, u.pct, entry.voteFor ?? 1),
+        ...(race === 'house' ? { partySum: true } : {}),
         precinctsReporting: u.pr ?? null, precinctsTotal: u.pt ?? null,
         turnout: u.turnout !== undefined ? u.turnout : turnout?.get(u.fips) ?? null,
         methods: methodsOut(u.methods),

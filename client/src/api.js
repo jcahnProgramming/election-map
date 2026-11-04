@@ -20,8 +20,10 @@ export async function getJson(path) {
 }
 
 export const api = {
-  national: (race) => getJson(`/api/national?race=${encodeURIComponent(race)}`),
-  state: (abbr, race) => getJson(`/api/state/${encodeURIComponent(abbr)}?race=${encodeURIComponent(race)}`),
+  offices: () => getJson('/api/offices'),
+  national: (office) => getJson(`/api/national?office=${encodeURIComponent(office)}`),
+  state: (abbr, office) => getJson(`/api/state/${encodeURIComponent(abbr)}?office=${encodeURIComponent(office)}`),
+  contests: (abbr) => getJson(`/api/state/${encodeURIComponent(abbr)}/contests`),
   changelog: () => getJson('/api/changelog'),
   measures: (abbr) => getJson(abbr ? `/api/measures?state=${encodeURIComponent(abbr)}` : '/api/measures'),
   coverage: () => getJson('/api/coverage'),

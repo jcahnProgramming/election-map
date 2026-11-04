@@ -1,8 +1,8 @@
 import React from 'react';
 import { legendItems } from '../shading.js';
 
-export default function Legend({ showNoData = false }) {
-  const items = legendItems();
+export default function Legend({ showNoData = false, multiSeat = false }) {
+  const items = legendItems(undefined, { multiSeat });
   return (
     <ul className="legend" aria-label="Map legend">
       {items.map((l) => (

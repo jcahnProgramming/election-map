@@ -5,13 +5,20 @@ https://election.jamiecahn.com through a Cloudflare tunnel to <HOST> (<HOST_OS>)
 confidential and nothing in it ever needs a secret.
 
 ## What the app is
-- A US map, state by state, for one race at a time: **U.S. Senate / Governor / U.S. House** (House = the
-  statewide popular vote across a state's districts). Hover → votes counted per party; click → the state
-  with counties shaded, where the source has counties.
+- A US map, state by state, for one office at a time, picked with a **Federal / State** toggle: Federal =
+  U.S. Senate / U.S. House (House = the statewide popular vote across a state's districts); State = Governor plus
+  every statewide office the feeds carry (Attorney General, Secretary of State, …; built from `/api/offices`, never
+  hardcoded). Hover → votes counted per party; click → the state with counties shaded, where the source has counties.
+- State view tabs: **Overview** (the selected office) and **All races** (every contest in the state's feeds,
+  grouped Federal / Statewide / State legislature / County / Local / Judicial / Ballot measures, searchable).
+- Multi-seat contests (vote for 2+) are never shaded or summarized as a two-way margin: top-N candidates instead.
+- Every state links to its official results page (`config/official-results.json`); every number names its source
+  and that source's last update.
 - Shading: leader's colour (DEM blue / REP red / OTHER green), lighter for narrower margins; margin under
   2 points → purple. No race for the office → neutral grey. A race we have no source for → hatched grey.
   The shading rule lives in `client/src/shading.js` (pure function; the design must reuse it, not fork it).
-- A right-hand sidebar of statewide ballot measures (yes / no / % yes / % reporting).
+- A right-hand sidebar of statewide ballot measures (yes / no / % yes / % reporting), with official measure
+  information from static per-election files (`config/elections/<key>/measures/<ST>.json`, `docs/measures-data.md`).
 - Always visible: "Unofficial results — counts change as ballots are reported".
 
 ## Rules (non-negotiable)
@@ -32,8 +39,13 @@ confidential and nothing in it ever needs a secret.
    goes on the roadmap (`docs/source-roadmap.md`) instead.
 6. **Append-only results.** Every new source version is a new `snapshots` row with its own vote rows;
    `latest_snapshot` points at what the API serves. Never UPDATE or DELETE result rows.
-7. Unmatched county names / unknown party labels are logged and recorded in the `unmatched` table, never
-   silently dropped.
+7. Unmatched county names / unknown party labels / unclassified contests are logged and recorded in the
+   `unmatched` table, never silently dropped. Adapters store every contest their feed publishes.
+8. **Measure information is official or absent.** Titles, summaries and ballot text are verbatim from official
+   sources, each with its source URL; never write or AI-generate a summary. Campaign websites and party positions are
+   served only once a human sets `reviewed: true` (`docs/measures-review.md`, regenerate with
+   `node scripts/measures-review.js`). Both sides of a measure get the same treatment; party positions use neutral
+   position colours, never party colours.
 
 ## Stack
 - Node 22 (Node 20 is EOL since April 2026) + Express, SQLite via better-sqlite3, Socket.io.
@@ -46,21 +58,26 @@ confidential and nothing in it ever needs a secret.
 - `server/src/index.js` Express + Socket.io + poller wiring. `results.js` builds API responses from the latest
   snapshots. `db.js` schema + snapshot writer. `poller.js` per-target loops with backoff. `http.js` shared
   client (UA, timeouts, ETag/Last-Modified; get/getJson/getBuffer/post). `normalize.js` party + contest
-  classification, `splitPartyPrefix`, `methodBucket`. `geo.js` FIPS. `elections.js` election keys (current from
+  classification, `splitPartyPrefix`, `methodBucket`. `contests.js` classifies every contest (level / office key /
+  kind) from `config/contest-rules.json` + per-adapter `contestRules`. `measureinfo.js` loads the static measure files
+  and enforces the review gate. `geo.js` FIPS. `elections.js` election keys (current from
   `config/elections.json`). `apicache.js` / `ratelimit.js` public-traffic hardening.
 - `server/src/adapters/*.js` one file per source: clarity (CO/IA/SC + county sites), enhancedvoting (GA/VA/UT/WA/RI/ID),
   txivis, casos, vtsos, ncsbe, tallyenr (AR), deenr, nistcdf (OH; generic parser in `_nist-cdf.js`), pccct, fldos.
   Files starting with `_` are helpers the registry skips. An adapter's `sourceKey` must be unique per election.
 - `config/sources/<id>.json` what each adapter polls (`enabled:false` parks a target). `config/races-2026.json` which states hold which
   races (only used for states with no source). `config/clarity-county-candidates.json` research output.
-- `design/election-map-design.dc.html` the Claude Design export: the spec. `client/` is its React port
+  `config/official-results.json` every state's official results page. `config/elections/<key>/measures/<ST>.json`
+  researched measure information (not under `data/`: that's the SQLite bind mount).
+- `design/election-map-design-v2.dc.html` the current Claude Design export: the spec (v1 kept for history). `client/` is its React port
   (tokens in `client/src/tokens.css`, pure calculations in `client/src/calc.js`, shading in `shading.js`).
 - `docs/data-contract.md` adapter result → DB → API shape. `null` = not published; never show 0 for missing data.
 - `docs/source-roadmap.md` what every uncovered state publishes: the to-do list for new adapters.
 
 ## API
-`GET /api/health`, `/api/national?race=`, `/api/state/:abbr?race=`, `/api/measures[?state=]`, `/api/coverage`,
-`/api/elections`, `/api/changelog`. Every read takes `?election=` (default: current); nothing may assume one election.
+`GET /api/health`, `/api/offices`, `/api/national?office=&level=` (`race=` still accepted), `/api/state/:abbr?office=`,
+`/api/state/:abbr/contests?q=`, `/api/measures[?state=]`, `/api/coverage`, `/api/elections`, `/api/changelog`.
+Client routes are query strings: `?level=state&office=ag&state=CO&tab=all` (0.2 `#/CO/senate` links are rewritten). Every read takes `?election=` (default: current); nothing may assume one election.
 Reads are cached in memory between polls and sent with `Cache-Control: public, max-age=15`; health is no-store;
 /api/* is rate-limited per IP. Socket.io: `results:update` {sourceId, election, states, fetchedAt} when new numbers land (clients refetch);
 `source:checked` after every successful poll (heartbeat).

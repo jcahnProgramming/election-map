@@ -2,6 +2,24 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.3.0",
+      "date": "2026-11-03",
+      "title": "Every race, every source",
+      "sections": {
+        "New": [
+          "Federal / State selector: U.S. Senate and U.S. House, or Governor, Attorney General, Secretary of State and every other statewide office our sources carry",
+          "\"All races\" tab for each state: every contest in its official feed (state legislature, county, local, judicial, ballot questions), grouped and searchable, with each contest's candidates",
+          "Ballot measure details from official sources: ballot title, official summary, who placed it on the ballot, registered opposition, the legislature's vote to refer and the full ballot text",
+          "Official results link for every state, and the source and its last update for every number"
+        ],
+        "Improved": [
+          "Candidates by name everywhere: tooltips, the state totals, county details and every contest list show each candidate with a party tag, votes and %, never lumped into \"Other\" (the U.S. House view stays a statewide sum by party)",
+          "Contests that elect several people (vote for 2 or more) show their top candidates instead of a misleading two-way margin",
+          "Views are shareable links (e.g. ?level=state&office=ag&state=CO)"
+        ]
+      }
+    },
+    {
       "version": "0.2.0",
       "date": "2026-11-03",
       "title": "The real design, more states",

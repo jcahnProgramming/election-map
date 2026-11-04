@@ -6,8 +6,12 @@ import { shade, NO_SOURCE_PATTERN } from '../shading.js';
  * features: pre-projected GeoJSON; pathFn: d3 geoPath; entryFor(f) -> result entry | undefined
  * renderTip(f, entry) -> ReactNode; onPick(f) optional; selectedId: feature drawn with a highlight.
  */
-export default function MapSvg({ features, pathFn, entryFor, renderTip, onPick, selectedId, label, strokeWidth = 0.8 }) {
-  const [hover, setHover] = useState(null); // { f, x, y }
+export default function MapSvg({ features, pathFn, entryFor, renderTip, onPick, onHover, selectedId, label, strokeWidth = 0.8 }) {
+  const [hover, setHoverState] = useState(null); // { f, x, y }
+  const setHover = (h) => {
+    setHoverState(h);
+    if (h && onHover) onHover(h.f); // the caller keeps the last one (e.g. for a clickable source bar)
+  };
   const P = NO_SOURCE_PATTERN;
   const hoverF = hover?.f;
   const sel = selectedId != null ? features.find((f) => f.id === selectedId) : null;

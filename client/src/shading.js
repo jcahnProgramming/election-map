@@ -30,6 +30,7 @@ export const PALETTE = {
   awaiting: '#11161D',
   awaitingStroke: '#9AA4B2',
   noData: '#171C23',
+  multiSeat: '#5B6472',
   stroke: '#0E1116',
 };
 
@@ -63,6 +64,7 @@ export function effectiveStatus(entry) {
 /** 'DEM' | 'REP' | 'OTHER' | 'tossup' | null (null = not reporting). Ties are toss-ups. */
 export function leadCategory(entry, tossup = TOSSUP_MARGIN) {
   if (effectiveStatus(entry) !== 'reporting') return null;
+  if (entry.multiSeat) return 'multi'; // several winners: no two-way margin to shade
   if (!entry.leader || entry.tied) return 'tossup';
   if (marginBandIndex(entry.marginPts, tossup) === -1) return 'tossup';
   return PALETTE[entry.leader] ? entry.leader : 'OTHER';
@@ -83,6 +85,7 @@ export function shade(entry, tossup = TOSSUP_MARGIN) {
     case 'reporting':
     default: {
       const cat = leadCategory(entry, tossup);
+      if (cat === 'multi') return { ...base, key: 'multi-seat', fill: PALETTE.multiSeat, label: 'Multi-seat contest (see candidates)' };
       if (cat === 'tossup' || !cat) return { ...base, key: 'tossup', fill: PALETTE.tossup, label: `Toss-up <${tossup} pts` };
       const band = marginBandIndex(entry.marginPts, tossup);
       return { ...base, key: `${cat}-${band}`, band, fill: PALETTE[cat][band], label: `${cat} leading ${MARGIN_BANDS[band].label}` };
@@ -91,7 +94,7 @@ export function shade(entry, tossup = TOSSUP_MARGIN) {
 }
 
 /** Legend entries, in display order. `kind` tells the UI how to draw the swatch. */
-export function legendItems(tossup = TOSSUP_MARGIN) {
+export function legendItems(tossup = TOSSUP_MARGIN, { multiSeat = false } = {}) {
   return [
     { kind: 'fill', color: PALETTE.DEM[2], label: 'Dem 12+' },
     { kind: 'fill', color: PALETTE.DEM[1], label: 'Dem 5–12' },
@@ -104,6 +107,7 @@ export function legendItems(tossup = TOSSUP_MARGIN) {
     { kind: 'awaiting', color: PALETTE.awaiting, stroke: PALETTE.awaitingStroke, label: 'No votes counted yet' },
     { kind: 'hatch', color: PALETTE.noSourceBg, line: PALETTE.noSourceLine, label: 'Race, no data source yet' },
     { kind: 'fill', color: PALETTE.noRace, label: 'No race' },
+    ...(multiSeat ? [{ kind: 'fill', color: PALETTE.multiSeat, label: 'Multi-seat contest: votes counted, no margin' }] : []),
   ];
 }
 

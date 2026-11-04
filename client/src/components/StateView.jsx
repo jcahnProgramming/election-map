@@ -4,8 +4,11 @@ import EntryTip from './EntryTip.jsx';
 import Details from './Details.jsx';
 import { loadCounties, fitPath, ABBR_TO_FIPS } from '../geo.js';
 import { effectiveStatus } from '../shading.js';
-import { partyShares, leadText } from '../calc.js';
-import { fmtVotes, fmtPct, fmtReporting, RACE_SHORT, RACE_LONG, hostOf } from '../format.js';
+import { partyShares, leadText, candidateList, hasCandidates } from '../calc.js';
+import { fmtVotes, fmtPct, fmtReporting, shortLabel, longLabel, hostOf } from '../format.js';
+import { fmtMT } from '../calc.js';
+import AllRaces from './AllRaces.jsx';
+import { SeatRows, PartyTag } from './EntryTip.jsx';
 
 /** Statewide strip: Dem / Rep / Other / Reporting (or an honest status in place of numbers). */
 export function TotalsStrip({ entry, race, stateName, compact = false }) {
@@ -28,26 +31,57 @@ export function TotalsStrip({ entry, race, stateName, compact = false }) {
   }
   if (!hasNums) {
     const msg = status === 'no-race'
-      ? `No ${RACE_SHORT[race]} race on the ballot in ${stateName} this year`
-      : `${stateName} has a ${RACE_SHORT[race]} race, but we don't have a results source for it yet`;
+      ? `No ${shortLabel(race)} race on the ballot in ${stateName} this year`
+      : `${stateName} has a ${shortLabel(race)} race, but we don't have a results source for it yet`;
     return (
       <div className="grid grid-4 stat-cards">
         <div className="card" style={{ gridColumn: '1 / -1' }}>
-          <span className="k">{RACE_LONG[race]}</span>
+          <span className="k">{longLabel(race)}</span>
           <span className="big na">{msg}</span>
         </div>
       </div>
     );
   }
   const pct = entry.pctReporting;
+  if (entry.multiSeat) {
+    return (
+      <div className="grid grid-4 stat-cards">
+        <div className="card" style={{ gridColumn: '1 / -1' }}>
+          <span className="k">{longLabel(race)} · vote for {entry.seats}</span>
+          <span className="small">Several candidates win this contest, so there is no two-way margin. Most votes counted so far
+            {pct != null ? ` · ${fmtReporting(pct)} reporting` : ''}:</span>
+          <div className="seat-rows"><SeatRows entry={entry} /></div>
+        </div>
+      </div>
+    );
+  }
+  const reportingCard = card('', 'Reporting',
+    pct != null ? fmtReporting(pct) : '—',
+    status === 'reporting' ? leadText(entry) : pct == null ? 'Not published by this source' : 'No votes counted yet');
+  if (hasCandidates(entry)) {
+    // The top three candidates by name (every candidate is listed in Details below), then reporting.
+    const { rows } = candidateList(entry, 3);
+    const cls = (p) => (p === 'DEM' ? 'dem' : p === 'REP' ? 'rep' : 'oth');
+    return (
+      <div className="grid grid-4 stat-cards">
+        {rows.map((c, i) => (
+          <div className="card" key={`${c.name}-${i}`}>
+            <span className={`k cand ${cls(c.party)}`}>{c.name}<PartyTag tag={c.tag} party={c.party} /></span>
+            <span className="big">{fmtVotes(c.votes)}</span>
+            <span className="small">{fmtPct(c.pct)}</span>
+          </div>
+        ))}
+        {reportingCard}
+      </div>
+    );
+  }
+  // U.S. House: the statewide popular vote is a sum by party across districts (each district's candidates are in All races).
   return (
     <div className="grid grid-4 stat-cards">
       {card('dem', 'Democratic', fmtVotes(entry.parties?.DEM), fmtPct(sh.DEM))}
       {card('rep', 'Republican', fmtVotes(entry.parties?.REP), fmtPct(sh.REP))}
       {card('oth', 'Other', fmtVotes(entry.parties?.OTHER), fmtPct(sh.OTHER))}
-      {card('', compact ? 'Reporting' : 'Reporting',
-        pct != null ? fmtReporting(pct) : '—',
-        status === 'reporting' ? leadText(entry) : pct == null ? 'Not published by this source' : 'No votes counted yet')}
+      {reportingCard}
     </div>
   );
 }
@@ -56,14 +90,29 @@ function SourceLine({ entry }) {
   const name = entry?.sourceName || entry?.source;
   if (!name) return null;
   const url = entry?.sourceUrl;
+  const updated = fmtMT(entry?.sourceUpdatedAt || entry?.fetchedAt);
   return (
     <span className="s">
       Source: {url ? <a href={url} target="_blank" rel="noopener noreferrer">{name}{entry?.sourceName ? '' : ` (${hostOf(url)})`}</a> : name}
+      {updated ? ` · updated ${updated}` : ''}
     </span>
   );
 }
 
-export default function StateView({ abbr, race, data, error }) {
+/** Every number one click from its government source: the state's official results page, always shown. */
+export function SourceStrip({ entry, official, name }) {
+  const covered = entry && (entry.status === 'reporting' || entry.status === 'awaiting');
+  return (
+    <p className="source-bar">
+      {covered && entry.sourceName ? <SourceLine entry={entry} /> : <span>{entry?.sourceNote || `No data source yet for ${name}`}</span>}
+      {official?.url
+        ? <a className="official" href={official.url} target="_blank" rel="noopener noreferrer">Official results ↗{official.office ? <span className="who"> {official.office}</span> : null}</a>
+        : <span className="muted">Official results page not on file yet</span>}
+    </p>
+  );
+}
+
+export default function StateView({ abbr, race, tab = 'overview', data, error, contests, contestsError, onOpenMeasure }) {
   const [geo, setGeo] = useState(null);
   const [geoError, setGeoError] = useState(null);
   const [pinned, setPinned] = useState(null); // county FIPS
@@ -130,8 +179,8 @@ export default function StateView({ abbr, race, data, error }) {
     panel = (
       <div className="empty">
         <MapIcon />
-        <span className="t">No {RACE_SHORT[race]} race in {name} this year</span>
-        <span className="d">{data.countyNote || `There is no ${RACE_LONG[race]} contest on ${name}'s ballot in our sources.`}</span>
+        <span className="t">No {shortLabel(race)} race in {name} this year</span>
+        <span className="d">{data.countyNote || `There is no ${longLabel(race)} contest on ${name}'s ballot in our sources.`}</span>
       </div>
     );
   } else if (status === 'no-source') {
@@ -140,7 +189,7 @@ export default function StateView({ abbr, race, data, error }) {
         <MapIcon />
         <span className="t">No results source for {name} yet</span>
         <span className="d">
-          {data.countyNote || `${name} has a ${RACE_SHORT[race]} race, but we don't read its official results yet. It's on our list.`}
+          {data.countyNote || `${name} has a ${shortLabel(race)} race, but we don't read its official results yet. It's on our list.`}
         </span>
       </div>
     );
@@ -157,13 +206,23 @@ export default function StateView({ abbr, race, data, error }) {
     );
   }
 
+  const official = data?.official || sw?.official || contests?.official || null;
+  if (tab === 'all') {
+    return (
+      <>
+        <SourceStrip entry={sw} official={official} name={contests?.name || name} />
+        <AllRaces data={contests} error={contestsError} stateName={contests?.name || name} onOpenMeasure={onOpenMeasure} />
+      </>
+    );
+  }
+
   return (
     <>
+      <SourceStrip entry={sw} official={official} name={name} />
       <TotalsStrip entry={sw} race={race} stateName={name} />
       {sw?.contests?.length > 0 && (
         <p className="contest-line">
           {race === 'house' ? `${sw.contests.length} district contest${sw.contests.length === 1 ? '' : 's'}, summed into the statewide House popular vote` : <b>{sw.contests.join('; ')}</b>}
-          {showCounties && sw?.sourceName ? <> · <SourceLine entry={sw} /></> : null}
         </p>
       )}
       <div className="map-panel">{panel}</div>

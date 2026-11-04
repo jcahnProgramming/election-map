@@ -1,10 +1,40 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import MapSvg from './MapSvg.jsx';
 import EntryTip from './EntryTip.jsx';
 import { stateFeatures, path, FIPS_TO_ABBR } from '../geo.js';
-import { tallyStates } from '../calc.js';
+import { tallyStates, fmtMT } from '../calc.js';
 import { TOSSUP_MARGIN } from '../shading.js';
-import { RACE_LONG } from '../format.js';
+import { longLabel } from '../format.js';
+
+/**
+ * Where a state's numbers come from, with a real link to its official results page. Under the map it follows the
+ * last state hovered (a tooltip can't hold a clickable link), so every state's government source is one click away.
+ */
+export function SourceBar({ entry, name }) {
+  if (!entry) {
+    return <p className="source-bar muted">Hover or tap a state to see where its numbers come from, with a link to its official results page.</p>;
+  }
+  const covered = entry.status === 'reporting' || entry.status === 'awaiting';
+  const updated = fmtMT(entry.sourceUpdatedAt || entry.fetchedAt);
+  return (
+    <p className="source-bar">
+      <b>{name || entry.name}</b>
+      {covered && entry.sourceName ? (
+        <span>
+          Source: {entry.sourceUrl ? <a href={entry.sourceUrl} target="_blank" rel="noopener noreferrer">{entry.sourceName}</a> : entry.sourceName}
+          {updated ? ` · updated ${updated}` : ''}
+        </span>
+      ) : (
+        <span>{entry.status === 'no-race' ? 'No race for this office in our sources' : 'No data source yet'}</span>
+      )}
+      {entry.official?.url ? (
+        <a href={entry.official.url} target="_blank" rel="noopener noreferrer" className="official">
+          Official results ↗{entry.official.office ? <span className="who"> {entry.official.office}</span> : null}
+        </a>
+      ) : null}
+    </p>
+  );
+}
 
 export function Tally({ states }) {
   const t = tallyStates(states);
@@ -34,6 +64,7 @@ export default function NationalView({ data, race, error, onSelectState }) {
     return m;
   }, [data]);
 
+  const [lastFips, setLastFips] = useState(null);
   const reporting = (data?.states || []).filter((s) => s.status === 'reporting').length;
   const otherLeading = tallyStates(data?.states).other;
 
@@ -42,17 +73,18 @@ export default function NationalView({ data, race, error, onSelectState }) {
       <Tally states={data?.states} />
       {data && (
         <p className="contest-line">
-          {reporting} state{reporting === 1 ? '' : 's'} with {RACE_LONG[race]} votes counted so far
+          {reporting} state{reporting === 1 ? '' : 's'} with {longLabel(race)} votes counted so far
           {otherLeading > 0 ? ` · ${otherLeading} led by a candidate outside the two major parties` : ''}.
         </p>
       )}
       <div className="map-panel">
         {data ? (
           <MapSvg
-            label={`US map: ${RACE_LONG[race]}, each state shaded by who is leading in votes counted so far`}
+            label={`US map: ${longLabel(race)}, each state shaded by who is leading in votes counted so far`}
             features={stateFeatures}
             pathFn={path}
             entryFor={(f) => byFips[f.id]}
+            onHover={(f) => setLastFips(f.id)}
             onPick={(f) => {
               const abbr = byFips[f.id]?.state || FIPS_TO_ABBR[f.id];
               if (abbr) onSelectState(abbr);
@@ -65,6 +97,10 @@ export default function NationalView({ data, race, error, onSelectState }) {
           </div>
         )}
       </div>
+      {data && (
+        <SourceBar entry={lastFips ? byFips[lastFips] : null}
+          name={lastFips ? stateFeatures.find((f) => f.id === lastFips)?.properties?.name : null} />
+      )}
     </>
   );
 }

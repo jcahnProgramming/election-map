@@ -1,6 +1,7 @@
 import React from 'react';
-import { turnoutPct, precinctPct, methodShares } from '../calc.js';
-import { fmtVotes, fmtPct, barWidth, RACE_SHORT } from '../format.js';
+import { turnoutPct, precinctPct, methodShares, hasCandidates } from '../calc.js';
+import { CandidateRows } from './EntryTip.jsx';
+import { fmtVotes, fmtPct, barWidth, shortLabel } from '../format.js';
 import { PARTY_COLOR, PARTY_TEXT } from '../shading.js';
 
 const has = (n) => n != null && Number.isFinite(Number(n));
@@ -36,6 +37,15 @@ export default function Details({ race, scope, entry, county, countyMissing, rac
         {showHint && <span className="hint">Click a county to see its details</span>}
       </div>
       {countyMissing && <div className="banner note">This source publishes no results for this county.</div>}
+      {hasCandidates(entry) && (
+        <div className="card cands">
+          <div className="methods-head">
+            <span className="k">Candidates · {shortLabel(race)}{entry.multiSeat ? ` · vote for ${entry.seats}` : ''}</span>
+            <span className="note">Every candidate the source lists, by votes counted so far</span>
+          </div>
+          <CandidateRows entry={entry} />
+        </div>
+      )}
       <div className="grid grid-3">
         <div className="card">
           <span className="k">Turnout so far</span>
@@ -79,11 +89,11 @@ export default function Details({ race, scope, entry, county, countyMissing, rac
       </div>
       <div className="card methods">
         <div className="methods-head">
-          <span className="k">Vote method · {RACE_SHORT[race]}</span>
+          <span className="k">Vote method · {shortLabel(race)}</span>
           <span className="note">Method names come from each source</span>
         </div>
         {noRace && !county ? (
-          <span className="na-text">No {RACE_SHORT[race]} race on the ballot here this year.</span>
+          <span className="na-text">No {shortLabel(race)} race on the ballot here this year.</span>
         ) : methods.length ? (
           methods.map((m) => (
             <div className="method" key={m.label}>

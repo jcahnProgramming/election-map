@@ -14,6 +14,17 @@ export const RACE_LONG = {
   house: 'U.S. House · statewide popular vote',
 };
 
+// Labels for every other office come from the server (/api/offices); App registers them here once loaded.
+const officeLabels = new Map();
+export function registerOfficeLabels(levels) {
+  for (const list of Object.values(levels || {})) for (const o of list || []) if (o?.office && o.label) officeLabels.set(o.office, o.label);
+}
+const titleize = (k) => String(k || '').split('_').map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w)).join(' ');
+/** Short office name for buttons and sentences ("Senate", "Attorney General"). */
+export const shortLabel = (office) => RACE_SHORT[office] ?? officeLabels.get(office) ?? titleize(office);
+/** Long office name for headings ("U.S. Senate", "U.S. House · statewide popular vote"). */
+export const longLabel = (office) => RACE_LONG[office] ?? officeLabels.get(office) ?? titleize(office);
+
 /** "Nov 3, 2026" from "2026-11-03" without timezone drift. */
 export function fmtDate(ymd) {
   if (!ymd) return '';
