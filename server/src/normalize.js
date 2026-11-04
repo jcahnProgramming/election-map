@@ -1,7 +1,8 @@
 // Party labels and contest names from many sources → our small normalized vocabulary.
 // Everything that isn't clearly DEM or REP is OTHER; the raw label is always kept alongside.
 
-const DEM = new Set(['dem', 'd', 'democrat', 'democratic', 'democratic party', 'dfl', 'democratic farmer labor', 'democratic-farmer-labor', 'democratic farmer-labor']);
+const DEM = new Set(['dem', 'd', 'democrat', 'democratic', 'democratic party', 'dfl', 'democratic farmer labor', 'democratic-farmer-labor', 'democratic farmer-labor',
+  'democratic-npl', 'democratic npl', 'dem-npl']); // ND: Democratic-Nonpartisan League
 const REP = new Set(['rep', 'r', 'gop', 'republican', 'republican party']);
 // Labels we have seen and know are third parties / unaffiliated, so we don't log them as unknown.
 const KNOWN_OTHER = new Set([

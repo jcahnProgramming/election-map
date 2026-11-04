@@ -101,8 +101,7 @@
       "status": "live"
     },
     "ND": {
-      "status": "planned",
-      "reason": "ResultsAjax.svc CSV/XML export"
+      "status": "live"
     },
     "NE": {
       "status": "live"

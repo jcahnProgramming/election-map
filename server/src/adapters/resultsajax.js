@@ -44,6 +44,7 @@ function targets() {
       countyFips: null,
       label: e.name,
       date: e.date ?? null,
+      electionDate: e.electionDate ?? null,
       url: e.site,
       site: e.site.replace(/\/$/, ''),
       service: `${e.serviceRoot.replace(/\/$/, '')}/${e.svc ?? 'ResultsAjax.svc'}`,
@@ -69,7 +70,8 @@ const raceKey = (r) => `${r.type}/${r.raceId}`;
 export function parseCategoryPage(html) {
   const out = [];
   const seen = new Set();
-  const re = /BuildCounty\(\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\)/g;
+  // "County Results" (BuildCounty) and "Map" (CreateMap) buttons carry the same four ids; ND's newer pages only have CreateMap.
+  const re = /(?:BuildCounty|CreateMap)\(\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*,\s*'([^']*)'\s*\)/g;
   for (const m of String(html).matchAll(re)) {
     const r = { type: m[1].trim(), raceId: m[2].trim(), osn: m[3].trim(), party: m[4].trim() };
     if (!r.raceId || seen.has(raceKey(r))) continue;
@@ -77,6 +79,12 @@ export function parseCategoryPage(html) {
     out.push(r);
   }
   return out;
+}
+
+/** The election the site is showing: its hidden hidElectionDate field ("11/3/2026"), or null. */
+export function pageElectionDate(html) {
+  const tag = String(html).match(/<input[^>]*id="hidElectionDate"[^>]*>/i)?.[0];
+  return tag?.match(/value="([^"]*)"/i)?.[1] ?? null;
 }
 
 /** The change check: turnout without CurrentDateTime (the server's clock, different on every request). */
@@ -105,7 +113,16 @@ async function fetchTarget(t, { http, log, unmatched }) {
     const seen = new Set();
     for (const cat of t.categories) {
       await pause(t.requestGapMs);
-      const page = await http.get(`${t.site}/resultsSW.aspx?type=${encodeURIComponent(cat)}&map=CTY`, { accept: 'text/html' });
+      // A category is a type code ("FED") or, for ND's pages, the page's whole query string ("text=Race&type=SW&map=CTY").
+      const q = cat.includes('=') ? cat : `type=${encodeURIComponent(cat)}&map=CTY`;
+      const page = await http.get(`${t.site}/resultsSW.aspx?${q}`, { accept: 'text/html' });
+      // Between elections a site keeps showing the last one (ND showed 11/5/2024 on the afternoon of 11/3/2026): store
+      // nothing until it shows the configured election.
+      const shown = pageElectionDate(page.text);
+      if (t.electionDate && shown !== t.electionDate) {
+        log?.warn?.(`${t.state}: the site shows the ${shown ?? 'unknown'} election, not ${t.electionDate}; nothing stored`);
+        return { changed: false, version: s.version };
+      }
       for (const r of parseCategoryPage(page.text)) {
         if (seen.has(raceKey(r))) continue;
         seen.add(raceKey(r));
