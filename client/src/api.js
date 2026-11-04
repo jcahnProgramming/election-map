@@ -22,6 +22,7 @@ export async function getJson(path) {
 export const api = {
   national: (race) => getJson(`/api/national?race=${encodeURIComponent(race)}`),
   state: (abbr, race) => getJson(`/api/state/${encodeURIComponent(abbr)}?race=${encodeURIComponent(race)}`),
+  changelog: () => getJson('/api/changelog'),
   measures: (abbr) => getJson(abbr ? `/api/measures?state=${encodeURIComponent(abbr)}` : '/api/measures'),
   coverage: () => getJson('/api/coverage'),
   health: () => getJson('/api/health'),

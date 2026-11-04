@@ -1,49 +1,54 @@
-// Pure shading rule for states and counties. No React / DOM dependencies,
-// so the final design can reuse (and re-palette) it.
+// Pure shading rule for states and counties. No React / DOM dependencies.
+// CLAUDE.md: the design must reuse this one function, not fork it.
 //
-// Input: any result entry with { status?, leader, marginPts, totalVotes }.
+// Input: any result entry with { status?, leader, marginPts, totalVotes, tied? }.
 //   - National state entries carry `status`.
 //   - County entries have no `status`; it is derived from totalVotes.
-// Output: { key, fill, stroke, strokeDasharray, label }
-//   `fill` for no-source is `url(#<NO_SOURCE_PATTERN_ID>)`; the SVG must
-//   define that pattern (see NO_SOURCE_PATTERN below).
+//   - `null`/`undefined` (e.g. a county the source has no row for) => 'no-data'.
+// Output: { key, fill, stroke, dash, label, band }
+//   `fill` for no-source is `url(#<NO_SOURCE_PATTERN_ID>)`; the SVG must define that pattern
+//   (see NO_SOURCE_PATTERN below).
 
-export const TOSSUP_MARGIN = 2; // < 2 points => toss-up purple
+/** |margin| below this many points is a toss-up (purple). The single config constant for it. */
+export const TOSSUP_MARGIN = 2;
 
-// Margin bands (points), narrowest first. Index into each party's palette.
+// Margin bands (points) above the toss-up threshold, narrowest first. Index into each party's palette.
 export const MARGIN_BANDS = [
-  { min: 2, max: 5, label: '2–5' },
-  { min: 5, max: 10, label: '5–10' },
-  { min: 10, max: 20, label: '10–20' },
-  { min: 20, max: Infinity, label: '20+' },
+  { min: 0, max: 5, label: '<5' },
+  { min: 5, max: 12, label: '5–12' },
+  { min: 12, max: Infinity, label: '12+' },
 ];
 
 export const PALETTE = {
-  DEM: ['#c6dbef', '#9ecae1', '#4292c6', '#08519c'],
-  REP: ['#fcbba1', '#fc9272', '#ef3b2c', '#a50f15'],
-  OTHER: ['#c7e9c0', '#a1d99b', '#41ab5d', '#006d2c'],
-  tossup: '#9e7bb5',
-  noRace: '#d9d9d9',
-  noSourceBg: '#bdbdbd',
-  noSourceLine: '#6e6e6e',
-  awaiting: '#fafafa',
-  awaitingStroke: '#666',
-  stroke: '#fff',
+  DEM: ['#93B4FA', '#4F86F7', '#2457D6'],
+  REP: ['#F7A1A1', '#EF5B5B', '#C42323'],
+  OTHER: ['#8FE3B0', '#34B36B', '#17804A'],
+  tossup: '#8B6FD6',
+  noRace: '#2A313C',
+  noSourceBg: '#1B212B',
+  noSourceLine: '#3D4756',
+  awaiting: '#11161D',
+  awaitingStroke: '#9AA4B2',
+  noData: '#171C23',
+  stroke: '#0E1116',
 };
+
+export const PARTY_COLOR = { DEM: '#4F86F7', REP: '#EF5B5B', OTHER: '#9AA4B2' };
+export const PARTY_TEXT = { DEM: '#93B4FA', REP: '#F7A1A1', OTHER: '#9AA4B2' };
 
 export const NO_SOURCE_PATTERN_ID = 'hatch-no-source';
 export const NO_SOURCE_PATTERN = {
   id: NO_SOURCE_PATTERN_ID,
-  size: 6,
+  size: 7,
   background: PALETTE.noSourceBg,
   line: PALETTE.noSourceLine,
 };
 
-/** Returns the band index (0..3) for a margin in points, or -1 for toss-up. */
-export function marginBandIndex(marginPts) {
-  if (marginPts == null || !isFinite(marginPts)) return 0; // unknown margin: lightest band
-  const m = Math.abs(marginPts);
-  if (m < TOSSUP_MARGIN) return -1;
+/** Band index (0..2) for a margin in points, or -1 for toss-up (also for an unknown margin). */
+export function marginBandIndex(marginPts, tossup = TOSSUP_MARGIN) {
+  if (marginPts == null || !Number.isFinite(Number(marginPts))) return -1;
+  const m = Math.abs(Number(marginPts));
+  if (m < tossup) return -1;
   for (let i = MARGIN_BANDS.length - 1; i >= 0; i--) if (m >= MARGIN_BANDS[i].min) return i;
   return 0;
 }
@@ -55,27 +60,51 @@ export function effectiveStatus(entry) {
   return entry.totalVotes > 0 ? 'reporting' : 'awaiting';
 }
 
-export function shade(entry) {
+/** 'DEM' | 'REP' | 'OTHER' | 'tossup' | null (null = not reporting). Ties are toss-ups. */
+export function leadCategory(entry, tossup = TOSSUP_MARGIN) {
+  if (effectiveStatus(entry) !== 'reporting') return null;
+  if (!entry.leader || entry.tied) return 'tossup';
+  if (marginBandIndex(entry.marginPts, tossup) === -1) return 'tossup';
+  return PALETTE[entry.leader] ? entry.leader : 'OTHER';
+}
+
+export function shade(entry, tossup = TOSSUP_MARGIN) {
   const status = effectiveStatus(entry);
-  const base = { stroke: PALETTE.stroke, strokeDasharray: null };
+  const base = { stroke: PALETTE.stroke, dash: null, band: null };
   switch (status) {
     case 'no-race':
       return { ...base, key: 'no-race', fill: PALETTE.noRace, label: 'No race' };
     case 'no-source':
-      return { ...base, key: 'no-source', fill: `url(#${NO_SOURCE_PATTERN_ID})`, label: 'No data source yet' };
+      return { ...base, key: 'no-source', fill: `url(#${NO_SOURCE_PATTERN_ID})`, label: 'Race, no data source yet' };
     case 'awaiting':
-      return { key: 'awaiting', fill: PALETTE.awaiting, stroke: PALETTE.awaitingStroke, strokeDasharray: '3 2', label: 'No votes counted yet' };
+      return { ...base, key: 'awaiting', fill: PALETTE.awaiting, stroke: PALETTE.awaitingStroke, dash: '3 2', label: 'No votes counted yet' };
     case 'no-data':
-      return { ...base, key: 'no-data', fill: PALETTE.noRace, label: 'No data' };
+      return { ...base, key: 'no-data', fill: PALETTE.noData, label: 'No data from this source' };
     case 'reporting':
     default: {
-      const leader = entry.leader;
-      const band = marginBandIndex(entry.marginPts);
-      if (!leader || band === -1) return { ...base, key: 'tossup', fill: PALETTE.tossup, label: 'Toss-up (< 2 pts)' };
-      const pal = PALETTE[leader] || PALETTE.OTHER;
-      return { ...base, key: `${leader}-${band}`, fill: pal[band], label: `${leader} leading by ${MARGIN_BANDS[band].label} pts` };
+      const cat = leadCategory(entry, tossup);
+      if (cat === 'tossup' || !cat) return { ...base, key: 'tossup', fill: PALETTE.tossup, label: `Toss-up <${tossup} pts` };
+      const band = marginBandIndex(entry.marginPts, tossup);
+      return { ...base, key: `${cat}-${band}`, band, fill: PALETTE[cat][band], label: `${cat} leading ${MARGIN_BANDS[band].label}` };
     }
   }
+}
+
+/** Legend entries, in display order. `kind` tells the UI how to draw the swatch. */
+export function legendItems(tossup = TOSSUP_MARGIN) {
+  return [
+    { kind: 'fill', color: PALETTE.DEM[2], label: 'Dem 12+' },
+    { kind: 'fill', color: PALETTE.DEM[1], label: 'Dem 5–12' },
+    { kind: 'fill', color: PALETTE.DEM[0], label: 'Dem <5' },
+    { kind: 'fill', color: PALETTE.tossup, label: `Toss-up <${tossup} pts` },
+    { kind: 'fill', color: PALETTE.REP[0], label: 'Rep <5' },
+    { kind: 'fill', color: PALETTE.REP[1], label: 'Rep 5–12' },
+    { kind: 'fill', color: PALETTE.REP[2], label: 'Rep 12+' },
+    { kind: 'other', colors: PALETTE.OTHER, label: 'Other party leading' },
+    { kind: 'awaiting', color: PALETTE.awaiting, stroke: PALETTE.awaitingStroke, label: 'No votes counted yet' },
+    { kind: 'hatch', color: PALETTE.noSourceBg, line: PALETTE.noSourceLine, label: 'Race, no data source yet' },
+    { kind: 'fill', color: PALETTE.noRace, label: 'No race' },
+  ];
 }
 
 export default shade;

@@ -1,0 +1,119 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { shade, marginBandIndex, leadCategory, TOSSUP_MARGIN, PALETTE } from '../src/shading.js';
+import {
+  tallyStates, estReporting, turnoutPct, precinctPct, methodShares, measureStatus, measureShares,
+  leadText, newestTime, fmtMT, MEASURE_TOO_EARLY_PCT,
+} from '../src/calc.js';
+
+const rep = (leader, marginPts, extra = {}) => ({ status: 'reporting', leader, marginPts, totalVotes: 100, ...extra });
+
+test('TOSSUP_MARGIN defaults to 2', () => assert.equal(TOSSUP_MARGIN, 2));
+
+test('margin bands: <5, 5–12, 12+, toss-up below threshold', () => {
+  assert.equal(marginBandIndex(1.99), -1);
+  assert.equal(marginBandIndex(2), 0);
+  assert.equal(marginBandIndex(4.99), 0);
+  assert.equal(marginBandIndex(5), 1);
+  assert.equal(marginBandIndex(11.9), 1);
+  assert.equal(marginBandIndex(12), 2);
+  assert.equal(marginBandIndex(-30), 2);
+  assert.equal(marginBandIndex(null), -1);
+  assert.equal(marginBandIndex(3, 4), -1); // configurable threshold
+});
+
+test('shade: palette per party and band', () => {
+  assert.equal(shade(rep('DEM', 13)).fill, '#2457D6');
+  assert.equal(shade(rep('DEM', 6)).fill, '#4F86F7');
+  assert.equal(shade(rep('DEM', 3)).fill, '#93B4FA');
+  assert.equal(shade(rep('REP', 3)).fill, '#F7A1A1');
+  assert.equal(shade(rep('REP', 6)).fill, '#EF5B5B');
+  assert.equal(shade(rep('REP', 20)).fill, '#C42323');
+  assert.equal(shade(rep('DEM', 1.5)).fill, '#8B6FD6');
+  assert.equal(shade(rep(null, 0, { tied: true })).fill, '#8B6FD6');
+  assert.equal(shade(rep('OTHER', 20)).fill, PALETTE.OTHER[2]);
+});
+
+test('shade: empty states are distinct', () => {
+  const keys = ['no-race', 'no-source', 'awaiting'].map((status) => shade({ status }).key);
+  assert.deepEqual(keys, ['no-race', 'no-source', 'awaiting']);
+  assert.equal(shade({ status: 'no-race' }).fill, '#2A313C');
+  assert.match(shade({ status: 'no-source' }).fill, /^url\(#/);
+  assert.equal(shade(undefined).key, 'no-data');
+  // county entries: derived status
+  assert.equal(shade({ totalVotes: 0, leader: null }).key, 'awaiting');
+  assert.equal(shade({ totalVotes: 10, leader: 'REP', marginPts: 40 }).key, 'REP-2');
+});
+
+test('leadCategory: only reporting states count', () => {
+  assert.equal(leadCategory({ status: 'awaiting' }), null);
+  assert.equal(leadCategory(rep('DEM', 2.5)), 'DEM');
+});
+
+test('tallyStates counts only reporting; ties are toss-ups', () => {
+  const t = tallyStates([
+    rep('DEM', 10), rep('DEM', 2), rep('REP', 30), rep('REP', 1), rep(null, 0, { tied: true }),
+    { status: 'awaiting' }, { status: 'no-source' }, { status: 'no-race' },
+  ]);
+  assert.deepEqual(t, { dem: 2, rep: 1, toss: 2, other: 0 });
+});
+
+test('estReporting is vote-weighted and skips unknown pct', () => {
+  assert.equal(estReporting([]), null);
+  assert.equal(estReporting([{ pctReporting: 50, totalVotes: 100 }, { pctReporting: 100, totalVotes: 300 }]), 87.5);
+  assert.equal(estReporting([{ pctReporting: null, totalVotes: 1000 }, { pctReporting: 20, totalVotes: 10 }]), 20);
+  assert.equal(estReporting([{ pctReporting: 0, totalVotes: 0 }]), null);
+});
+
+test('turnoutPct prefers the source figure, never invents 0', () => {
+  assert.equal(turnoutPct(null), null);
+  assert.equal(turnoutPct({ turnoutPct: 61.2, ballotsCast: 1, registered: 1000 }), 61.2);
+  assert.equal(turnoutPct({ ballotsCast: 250, registered: 1000 }), 25);
+  assert.equal(turnoutPct({ ballotsCast: 250, registered: null }), null);
+  assert.equal(turnoutPct({ ballotsCast: 250, registered: 0 }), null);
+});
+
+test('precinctPct', () => {
+  assert.equal(precinctPct(5, 10), 50);
+  assert.equal(precinctPct(null, 10), null);
+  assert.equal(precinctPct(0, 0), null);
+});
+
+test('methodShares: share of counted and D/R share within each method', () => {
+  const rows = methodShares([
+    { label: 'Mail Ballots', bucket: 'mail_early', total: 300, parties: { DEM: 180, REP: 90, OTHER: 30 } },
+    { label: 'Election Day', bucket: 'election_day', total: 100, parties: { DEM: 40, REP: 60, OTHER: 0 } },
+    { label: 'Provisional', bucket: 'provisional', total: 0, parties: { DEM: 0, REP: 0, OTHER: 0 } },
+  ]);
+  assert.equal(rows[0].label, 'Mail Ballots');
+  assert.equal(rows[0].share, 75);
+  assert.equal(rows[0].dPct, 60);
+  assert.equal(rows[0].rPct, 30);
+  assert.equal(rows[1].rPct, 60);
+  assert.equal(rows[2].dPct, null);
+  assert.deepEqual(methodShares(null), []);
+});
+
+test('measureStatus: TOO EARLY below threshold or unknown, never passed/failed', () => {
+  assert.equal(MEASURE_TOO_EARLY_PCT, 10);
+  assert.equal(measureStatus({ yes: 10, no: 5, pctReporting: null }), 'too-early');
+  assert.equal(measureStatus({ yes: 10, no: 5, pctReporting: 9.9 }), 'too-early');
+  assert.equal(measureStatus({ yes: 10, no: 5, pctReporting: 10 }), 'yes');
+  assert.equal(measureStatus({ yes: 4, no: 5, pctReporting: 50 }), 'no');
+  assert.equal(measureStatus({ yes: 0, no: 0, pctReporting: 50 }), 'too-early');
+  assert.deepEqual(measureShares({ yes: 3, no: 1 }), { yesPct: 75, noPct: 25 });
+  assert.deepEqual(measureShares({ yes: 0, no: 0 }), { yesPct: null, noPct: null });
+});
+
+test('leadText', () => {
+  assert.equal(leadText(rep('DEM', 3.21)), 'Democrat leading by 3.2 pts');
+  assert.equal(leadText(rep('REP', 1.04)), 'Toss-up · margin 1.0 pts');
+  assert.equal(leadText({ status: 'awaiting' }), null);
+});
+
+test('newestTime and fmtMT', () => {
+  assert.equal(newestTime([null, '2026-11-04T01:00:00Z', 'bad', '2026-11-04T02:30:00Z']), '2026-11-04T02:30:00Z');
+  assert.equal(newestTime([]), null);
+  assert.equal(fmtMT('2026-11-04T02:30:00Z'), '19:30 MT'); // MST = UTC-7 on Nov 4
+  assert.equal(fmtMT(null), null);
+});

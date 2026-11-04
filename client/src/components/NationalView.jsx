@@ -1,66 +1,70 @@
 import React, { useMemo } from 'react';
 import MapSvg from './MapSvg.jsx';
-import { ResultSummary } from './ResultSummary.jsx';
-import { stateFeatures, NATIONAL_VIEWBOX, FIPS_TO_ABBR } from '../geo.js';
-import { fmtMargin, fmtPct, fmtVotes } from '../format.js';
+import EntryTip from './EntryTip.jsx';
+import { stateFeatures, path, FIPS_TO_ABBR } from '../geo.js';
+import { tallyStates } from '../calc.js';
+import { TOSSUP_MARGIN } from '../shading.js';
+import { RACE_LONG } from '../format.js';
 
-const STATUS_SHORT = {
-  reporting: 'Reporting',
-  awaiting: 'No votes counted yet',
-  'no-source': 'No data source yet',
-  'no-race': 'No race',
-};
+export function Tally({ states }) {
+  const t = tallyStates(states);
+  const v = (n) => (states ? n : '—');
+  return (
+    <div className="grid grid-3 tally stat-cards">
+      <div className="card">
+        <span className="k dem">Democrat leading</span>
+        <span className="big xl">{v(t.dem)}</span>
+      </div>
+      <div className="card">
+        <span className="k toss">Toss-up (&lt;{TOSSUP_MARGIN} pts)</span>
+        <span className="big xl">{v(t.toss)}</span>
+      </div>
+      <div className="card">
+        <span className="k rep">Republican leading</span>
+        <span className="big xl">{v(t.rep)}</span>
+      </div>
+    </div>
+  );
+}
 
-export default function NationalView({ data, onSelectState }) {
+export default function NationalView({ data, race, error, onSelectState }) {
   const byFips = useMemo(() => {
     const m = {};
     for (const s of data?.states || []) m[s.fips] = s;
     return m;
   }, [data]);
 
-  const rows = useMemo(
-    () =>
-      [...(data?.states || [])]
-        .filter((s) => s.status !== 'no-race')
-        .sort((a, b) => String(a.name).localeCompare(String(b.name))),
-    [data]
-  );
+  const reporting = (data?.states || []).filter((s) => s.status === 'reporting').length;
+  const otherLeading = tallyStates(data?.states).other;
 
   return (
-    <div>
-      <MapSvg
-        label="Map of U.S. states shaded by current leader"
-        features={stateFeatures}
-        viewBox={NATIONAL_VIEWBOX}
-        entryFor={(f) => byFips[f.id]}
-        onSelect={(f) => {
-          const abbr = byFips[f.id]?.state || FIPS_TO_ABBR[f.id];
-          if (abbr) onSelectState(abbr);
-        }}
-        renderTooltip={(f, e) => <ResultSummary name={e?.name || f.properties?.name} entry={e} />}
-      />
-      <details>
-        <summary>All states with this race ({rows.length}) — table view</summary>
-        <table>
-          <thead>
-            <tr>
-              <th>State</th><th>Status</th><th>Leading</th>
-              <th className="num">Total votes</th><th className="num">Reporting</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((s) => (
-              <tr key={s.state}>
-                <td><a href={`#/${s.state}/${data.race}`}>{s.name}</a></td>
-                <td>{STATUS_SHORT[s.status] || s.status}</td>
-                <td>{s.status === 'reporting' ? fmtMargin(s.leader, s.marginPts) : '—'}</td>
-                <td className="num">{fmtVotes(s.totalVotes)}</td>
-                <td className="num">{fmtPct(s.pctReporting, 0)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </details>
-    </div>
+    <>
+      <Tally states={data?.states} />
+      {data && (
+        <p className="contest-line">
+          {reporting} state{reporting === 1 ? '' : 's'} with {RACE_LONG[race]} votes counted so far
+          {otherLeading > 0 ? ` · ${otherLeading} led by a candidate outside the two major parties` : ''}.
+        </p>
+      )}
+      <div className="map-panel">
+        {data ? (
+          <MapSvg
+            label={`US map: ${RACE_LONG[race]}, each state shaded by who is leading in votes counted so far`}
+            features={stateFeatures}
+            pathFn={path}
+            entryFor={(f) => byFips[f.id]}
+            onPick={(f) => {
+              const abbr = byFips[f.id]?.state || FIPS_TO_ABBR[f.id];
+              if (abbr) onSelectState(abbr);
+            }}
+            renderTip={(f, e) => <EntryTip title={e?.name || f.properties?.name} entry={e} race={race} />}
+          />
+        ) : (
+          <div className="map-box">
+            <div className="map-msg">{error ? 'Map unavailable until the results server answers.' : 'Loading map…'}</div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }

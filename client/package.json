@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --port 5173",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test \"test/**/*.test.js\""
   },
   "dependencies": {
     "d3-geo": "^3.1.2",

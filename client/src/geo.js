@@ -1,5 +1,5 @@
 import { feature } from 'topojson-client';
-import { geoPath } from 'd3-geo';
+import { geoPath, geoIdentity } from 'd3-geo';
 import statesTopo from 'us-atlas/states-albers-10m.json';
 
 // Pre-projected (Albers, 975x610) — no projection.
@@ -21,6 +21,13 @@ export function loadCounties() {
     countiesPromise.catch(() => { countiesPromise = null; });
   }
   return countiesPromise;
+}
+
+/** A path generator that fits the given (pre-projected) features into the national 975x610 frame. */
+export function fitPath(features, pad = 16, width = 975, height = 610) {
+  const fc = { type: 'FeatureCollection', features };
+  const projection = geoIdentity().fitExtent([[pad, pad], [width - pad, height - pad]], fc);
+  return geoPath(projection);
 }
 
 export function viewBoxFor(feat, padFrac = 0.04) {

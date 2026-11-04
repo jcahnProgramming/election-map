@@ -1,0 +1,133 @@
+// Pure display calculations (no React / DOM). Tested in client/test/.
+// Rule: `null` means "this source doesn't publish it". Never turn missing data into 0.
+import { TOSSUP_MARGIN, leadCategory } from './shading.js';
+
+/** Measures with % reporting below this (or unknown) show TOO EARLY. */
+export const MEASURE_TOO_EARLY_PCT = 10;
+
+const isNum = (n) => n != null && n !== '' && Number.isFinite(Number(n));
+
+/** Counts strip: only states with status 'reporting'; ties and |margin| < TOSSUP_MARGIN are toss-ups. */
+export function tallyStates(states, tossup = TOSSUP_MARGIN) {
+  const t = { dem: 0, rep: 0, toss: 0, other: 0 };
+  for (const s of states || []) {
+    const c = leadCategory(s, tossup);
+    if (c === 'DEM') t.dem++;
+    else if (c === 'REP') t.rep++;
+    else if (c === 'tossup') t.toss++;
+    else if (c === 'OTHER') t.other++;
+  }
+  return t;
+}
+
+/** Est. reporting = Σ(pct × votes) / Σ votes over states with pctReporting known. null when nothing to weigh. */
+export function estReporting(states) {
+  let num = 0, den = 0;
+  for (const s of states || []) {
+    if (!isNum(s?.pctReporting) || !isNum(s?.totalVotes) || Number(s.totalVotes) <= 0) continue;
+    num += Number(s.pctReporting) * Number(s.totalVotes);
+    den += Number(s.totalVotes);
+  }
+  return den > 0 ? num / den : null;
+}
+
+/** Turnout %: the source's own figure if it states one, else ballotsCast / registered. null if neither. */
+export function turnoutPct(t) {
+  if (!t) return null;
+  if (isNum(t.turnoutPct)) return Number(t.turnoutPct);
+  if (isNum(t.ballotsCast) && isNum(t.registered) && Number(t.registered) > 0) {
+    return (100 * Number(t.ballotsCast)) / Number(t.registered);
+  }
+  return null;
+}
+
+/** Precinct share 0–100, or null when either number is unknown / total is 0. */
+export function precinctPct(reporting, total) {
+  if (!isNum(reporting) || !isNum(total) || Number(total) <= 0) return null;
+  return Math.max(0, Math.min(100, (100 * Number(reporting)) / Number(total)));
+}
+
+/**
+ * Vote method rows: [{ label, bucket, total, parties }] → share of counted + D/R/Other share within each method.
+ * Returns [] for null/empty input. Shares are null when a method has no votes yet.
+ */
+export function methodShares(methods) {
+  if (!Array.isArray(methods) || !methods.length) return [];
+  const rows = methods.map((m) => {
+    const p = m.parties || {};
+    const d = Number(p.DEM) || 0, r = Number(p.REP) || 0, o = Number(p.OTHER) || 0;
+    const total = isNum(m.total) ? Number(m.total) : d + r + o;
+    return { label: m.label, bucket: m.bucket, total, d, r, o };
+  });
+  const all = rows.reduce((a, m) => a + m.total, 0);
+  return rows.map((m) => ({
+    label: m.label,
+    bucket: m.bucket,
+    total: m.total,
+    share: all > 0 ? (100 * m.total) / all : null,
+    dPct: m.total > 0 ? (100 * m.d) / m.total : null,
+    rPct: m.total > 0 ? (100 * m.r) / m.total : null,
+    oPct: m.total > 0 ? (100 * m.o) / m.total : null,
+  }));
+}
+
+/** 'too-early' | 'yes' | 'no' | 'tied'. Never passed/failed. */
+export function measureStatus(m, minPct = MEASURE_TOO_EARLY_PCT) {
+  if (!m || !isNum(m.pctReporting) || Number(m.pctReporting) < minPct) return 'too-early';
+  const yes = Number(m.yes) || 0, no = Number(m.no) || 0;
+  if (yes + no === 0) return 'too-early';
+  if (yes === no) return 'tied';
+  return yes > no ? 'yes' : 'no';
+}
+
+export const MEASURE_STATUS_LABEL = { 'too-early': 'TOO EARLY', yes: 'YES LEADS', no: 'NO LEADS', tied: 'TIED' };
+
+/** Yes / no share of the votes counted on a measure, or nulls. */
+export function measureShares(m) {
+  const yes = Number(m?.yes) || 0, no = Number(m?.no) || 0;
+  const t = yes + no;
+  if (t <= 0) return { yesPct: null, noPct: null };
+  return { yesPct: (100 * yes) / t, noPct: (100 * no) / t };
+}
+
+/** Party shares of an entry's total, as { DEM, REP, OTHER } in percent (null when nothing counted). */
+export function partyShares(entry) {
+  const t = Number(entry?.totalVotes) || 0;
+  const p = entry?.parties || {};
+  const f = (v) => (t > 0 ? (100 * (Number(v) || 0)) / t : null);
+  return { DEM: f(p.DEM), REP: f(p.REP), OTHER: f(p.OTHER) };
+}
+
+const PARTY_WORD = { DEM: 'Democrat', REP: 'Republican', OTHER: 'Other party' };
+
+/** "Democrat leading by 3.2 pts" / "Toss-up · margin 1.1 pts" / "Tied" / null when not reporting. */
+export function leadText(entry, tossup = TOSSUP_MARGIN) {
+  const c = leadCategory(entry, tossup);
+  if (!c) return null;
+  const m = isNum(entry.marginPts) ? Math.abs(Number(entry.marginPts)).toFixed(1) : null;
+  if (c === 'tossup') {
+    if (entry.tied || !entry.leader) return 'Tied · toss-up';
+    return `Toss-up · margin ${m ?? '—'} pts`;
+  }
+  return `${PARTY_WORD[c]} leading by ${m} pts`;
+}
+
+/** Newest ISO timestamp among the given values (ignores null / invalid). */
+export function newestTime(values) {
+  let best = null, bestT = -Infinity;
+  for (const v of values || []) {
+    if (!v) continue;
+    const t = Date.parse(v);
+    if (Number.isFinite(t) && t > bestT) { bestT = t; best = v; }
+  }
+  return best;
+}
+
+const mtFmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Denver', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+/** "HH:MM MT" in America/Denver, or null. */
+export function fmtMT(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return `${mtFmt.format(d)} MT`;
+}
