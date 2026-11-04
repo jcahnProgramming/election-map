@@ -1,0 +1,192 @@
+{
+  "_howto": "Why each state does or doesn't have live results here. Source of truth: docs/source-roadmap.md. status: \"live\" (a statewide adapter polls it), \"planned\" (a machine-readable feed exists, adapter not built or not enabled yet), \"blocked\" (the results site rejects automated access; we never work around that), \"no_feed\" (the state publishes no statewide machine-readable live results). reason: internal note, never shown. Adding a state's adapter = flip it to \"live\" in the same change (server/test/coverage-status.test.js checks this).",
+  "states": {
+    "AK": {
+      "status": "no_feed",
+      "reason": "PDF summary reports only"
+    },
+    "AL": {
+      "status": "planned",
+      "reason": "ASP.NET export (needs a scraper)"
+    },
+    "AR": {
+      "status": "live"
+    },
+    "AZ": {
+      "status": "blocked",
+      "reason": "results.arizona.vote and azsos.gov answer 403 (Cloudflare)"
+    },
+    "CA": {
+      "status": "live"
+    },
+    "CO": {
+      "status": "live"
+    },
+    "CT": {
+      "status": "live"
+    },
+    "DC": {
+      "status": "planned",
+      "reason": "React + SignalR app, data API not found yet"
+    },
+    "DE": {
+      "status": "live"
+    },
+    "FL": {
+      "status": "planned",
+      "reason": "adapter fldos built, disabled until real data is checked"
+    },
+    "GA": {
+      "status": "live"
+    },
+    "HI": {
+      "status": "planned",
+      "reason": "TSV media.txt after first release"
+    },
+    "IA": {
+      "status": "live"
+    },
+    "ID": {
+      "status": "live"
+    },
+    "IL": {
+      "status": "no_feed",
+      "reason": "no statewide election-night results (county clerks)"
+    },
+    "IN": {
+      "status": "planned",
+      "reason": "versioned JSON, filename not resolved yet"
+    },
+    "KS": {
+      "status": "no_feed",
+      "reason": "Power BI dashboard, no feed"
+    },
+    "KY": {
+      "status": "blocked",
+      "reason": "Akamai 403 (\"Acceptable Use Policy\")"
+    },
+    "LA": {
+      "status": "planned",
+      "reason": "JSON blobs, map not built yet"
+    },
+    "MA": {
+      "status": "no_feed",
+      "reason": "no statewide live results"
+    },
+    "MD": {
+      "status": "planned",
+      "reason": "static HTML pages"
+    },
+    "ME": {
+      "status": "no_feed",
+      "reason": "results posted days later (site also 403)"
+    },
+    "MI": {
+      "status": "blocked",
+      "reason": "connection timed out (likely firewalled)"
+    },
+    "MN": {
+      "status": "blocked",
+      "reason": "Radware bot manager; files host 403"
+    },
+    "MO": {
+      "status": "blocked",
+      "reason": "Cloudflare 403"
+    },
+    "MS": {
+      "status": "no_feed",
+      "reason": "no statewide election-night results"
+    },
+    "MT": {
+      "status": "blocked",
+      "reason": "Cloudflare 403"
+    },
+    "NC": {
+      "status": "live"
+    },
+    "ND": {
+      "status": "planned",
+      "reason": "ResultsAjax.svc CSV/XML export"
+    },
+    "NE": {
+      "status": "planned",
+      "reason": "ResultsAjax.svc CSV/XML export"
+    },
+    "NH": {
+      "status": "no_feed",
+      "reason": "results posted later (site also 403)"
+    },
+    "NJ": {
+      "status": "no_feed",
+      "reason": "no statewide live results (county clerks)"
+    },
+    "NM": {
+      "status": "planned",
+      "reason": "ResultsAjax.svc CSV/XML export"
+    },
+    "NV": {
+      "status": "blocked",
+      "reason": "Imperva redirect loop"
+    },
+    "NY": {
+      "status": "blocked",
+      "reason": "Cloudflare 403 (intermittent)"
+    },
+    "OH": {
+      "status": "live"
+    },
+    "OK": {
+      "status": "blocked",
+      "reason": "AWS WAF 403"
+    },
+    "OR": {
+      "status": "planned",
+      "reason": "ResultsAjax.svc CSV/XML export"
+    },
+    "PA": {
+      "status": "blocked",
+      "reason": "Imperva challenge + reCAPTCHA"
+    },
+    "RI": {
+      "status": "live"
+    },
+    "SC": {
+      "status": "live"
+    },
+    "SD": {
+      "status": "planned",
+      "reason": "ResultsAjax.svc CSV/XML export"
+    },
+    "TN": {
+      "status": "blocked",
+      "reason": "CloudFront 403"
+    },
+    "TX": {
+      "status": "live"
+    },
+    "UT": {
+      "status": "live"
+    },
+    "VA": {
+      "status": "live"
+    },
+    "VT": {
+      "status": "live"
+    },
+    "WA": {
+      "status": "live"
+    },
+    "WI": {
+      "status": "no_feed",
+      "reason": "WEC publishes no election-night totals (site also 403)"
+    },
+    "WV": {
+      "status": "planned",
+      "reason": "Clarity, general EID not found yet"
+    },
+    "WY": {
+      "status": "no_feed",
+      "reason": "PDF / HTML only, no live feed"
+    }
+  }
+}

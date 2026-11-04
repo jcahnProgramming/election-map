@@ -1,0 +1,422 @@
+{
+  "state": "SC",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "Annie Andrews"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Annie_Andrews_York_Town_%28cropped_2%29.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Annie_Andrews_York_Town_%28cropped_2%29.png",
+      "license": "CC BY 4.0",
+      "credit": "York County Democratic Party",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Crop of a York County Democratic Party YouTube video still"
+    },
+    {
+      "match": [
+        "Darline Graham"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Official_portrait_of_Darline_Graham%2C_member_of_the_United_States_Senate_from_South_Carolina_%282026%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Official_portrait_of_Darline_Graham%2C_member_of_the_United_States_Senate_from_South_Carolina_%282026%29.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Rosa Pineda, United States Senate",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Kasie Whitener"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Mark Hackett"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jenny Costa Honeycutt"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Nancy Lacore"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/VADM_Nancy_S._Lacore_%282%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:VADM_Nancy_S._Lacore_%282%29.jpg",
+      "license": "Public domain (PD-USGov)",
+      "credit": "U.S. Navy",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "U.S. Navy flag officer portrait (VADM Nancy S. Lacore)"
+    },
+    {
+      "match": [
+        "Bill Reeside"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Joe Wilson"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Joe_Wilson%2C_official_portrait%2C_115th_Congress_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Joe_Wilson%2C_official_portrait%2C_115th_Congress_%28cropped%29.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Zyon Khalifa"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Dayna Alane Smith"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Sheri Biggs"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/Rep._Sheri_Biggs_official_photo%2C_119th_Congress_%283x4_full_crop%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Sheri_Biggs_official_photo%2C_119th_Congress_%283x4_full_crop%29.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Eunice Lehmacher"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Brian Corriea"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "William Timmons"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/William_Timmons%2C_official_portrait_%28119th_Congress%29.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:William_Timmons%2C_official_portrait_%28119th_Congress%29.png",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Jessica Ethridge"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Courtney McClain"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Mallory Dittmer"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Wes Climer"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article has no image; no Commons image found"
+    },
+    {
+      "match": [
+        "James E Jim Clyburn"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Jim_Clyburn_official_portrait_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jim_Clyburn_official_portrait_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Donald Baker",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "John Peterson"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Russell Fry"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Russell_Fry_119th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Russell_Fry_119th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "John Gregory Vincent"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Alan Wilson / Mike Reichenbach"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Removed: Commons file was taken from a social-media post (X) and its PD-USGov-Congress tag is doubtful for a state Attorney General; social media is not an allowed source."
+    },
+    {
+      "match": [
+        "Jermaine Johnson / Sam Skardon"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article has no image; no Commons image found"
+    },
+    {
+      "match": [
+        "Michael Addison / Candace Brewer"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Walid Hakim / Arnold E Karr"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kit not checked"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import MapSvg from './MapSvg.jsx';
 import EntryTip from './EntryTip.jsx';
 import { stateFeatures, path, FIPS_TO_ABBR } from '../geo.js';
-import { tallyStates, fmtMT } from '../calc.js';
+import { tallyStates, fmtMT, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import { TOSSUP_MARGIN } from '../shading.js';
 import { longLabel } from '../format.js';
 
@@ -25,11 +25,13 @@ export function SourceBar({ entry, name }) {
           {updated ? ` · updated ${updated}` : ''}
         </span>
       ) : (
-        <span>{entry.status === 'no-race' ? 'No race for this office in our sources' : 'No data source yet'}</span>
+        <span>{entry.status === 'no-race' ? 'No race for this office in our sources'
+          : entry.coverageStatus === 'live' && entry.sourceNote ? entry.sourceNote
+            : `${coverageCopy(entry.coverageStatus).title} ${coverageCopy(entry.coverageStatus).detail}`}</span>
       )}
       {entry.official?.url ? (
         <a href={entry.official.url} target="_blank" rel="noopener noreferrer" className="official">
-          Official results ↗{entry.official.office ? <span className="who"> {entry.official.office}</span> : null}
+          {covered ? 'Official results ↗' : OFFICIAL_LINK_TEXT}{entry.official.office ? <span className="who"> {entry.official.office}</span> : null}
         </a>
       ) : null}
     </p>
@@ -91,6 +93,7 @@ export default function NationalView({ data, race, error, onSelectState }) {
               const abbr = byFips[f.id]?.state || FIPS_TO_ABBR[f.id];
               if (abbr) onSelectState(abbr);
             }}
+            pickLabel={(f) => `Open ${byFips[f.id]?.name || f.properties?.name || "state"}`}
             renderTip={(f, e) => <EntryTip title={e?.name || f.properties?.name} entry={e} race={race} />}
           />
         ) : (

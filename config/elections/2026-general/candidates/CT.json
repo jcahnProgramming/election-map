@@ -1,0 +1,248 @@
+{
+  "state": "CT",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "Luke Bronin"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/43/Mayor_Luke_Bronin.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mayor_Luke_Bronin.jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "MJL (crop of a CC BY 2.0 photo by the office of Gov. Dannel Malloy)",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Derived from Commons file \"Gov. Malloy, State and Local Officials Break Ground on the Future Site of Hartford’s Parkville Market (44807788871).jpg\"."
+    },
+    {
+      "match": [
+        "Amy Chai"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Mary L. Sanders",
+        "Mary Sanders"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Joe Courtney"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Rep._Joe_Courtney_Portrait_2024.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Joe_Courtney_Portrait_2024.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Office of Congressman Joe Courtney",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "George Patrick Austin"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Rosa L. DeLauro",
+        "Rosa DeLauro"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Rosa_DeLauro_118th_Congress_Cropped_Official_Portrait.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rosa_DeLauro_118th_Congress_Cropped_Official_Portrait.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Christopher Lancia"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Thomas Egan"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Jim Himes"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Jim_Himes_Official_Portrait%2C_117th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jim_Himes_Official_Portrait,_117th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Michael Ted Goldstein"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Benjamin Wesley"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Jahana Hayes"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Jahana_Hayes%2C_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jahana_Hayes,_official_portrait,_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Chris Shea"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article / Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "Ned Lamont and Susan Bysiewicz"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Governor_Ned_Lamont_of_Connecticut%2C_official_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Governor_Ned_Lamont_of_Connecticut,_official_portrait.jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "The Office of Governor Ned Lamont",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Official governor portrait (source portal.ct.gov) as licensed on Commons; photo of Ned Lamont (top of ticket)."
+    },
+    {
+      "match": [
+        "Ryan Fazio and Matt Corey"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Ryan_Fazio%2C_2026_%283x4_headshot%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ryan_Fazio,_2026_(3x4_headshot).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "James Naleski",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Photo of Ryan Fazio (top of ticket), 2026."
+    }
+  ]
+}

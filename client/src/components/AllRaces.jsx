@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { TOSSUP_MARGIN, PARTY_COLOR } from '../shading.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth } from '../format.js';
-import { candidateList, partyTag } from '../calc.js';
+import { candidateList, partyTag, coverageCopy, OFFICIAL_LINK_TEXT } from '../calc.js';
 import { PartyTag } from './EntryTip.jsx';
+import Avatar from './Avatar.jsx';
 
 /**
  * Every contest in a state's feeds (GET /api/state/:abbr/contests), grouped and searchable. Each row stands alone:
@@ -38,7 +39,13 @@ export default function AllRaces({ data, error, stateName, onOpenMeasure }) {
           {query.trim() ? `${matched} of ${data.total}` : data.total} contest{data.total === 1 ? '' : 's'} on the {stateName} ballot in our sources
         </span>
       </div>
-      {data.note && <p className="map-note">{data.note}</p>}
+      {!data.sources?.length && data.coverageStatus && data.coverageStatus !== 'live' ? (
+        <div className="empty no-live-panel">
+          <span className="t">{coverageCopy(data.coverageStatus).title}</span>
+          <span className="d">{coverageCopy(data.coverageStatus).detail}</span>
+          {data.official?.url && <a className="btn official-btn" href={data.official.url} target="_blank" rel="noopener noreferrer">{OFFICIAL_LINK_TEXT}</a>}
+        </div>
+      ) : data.note && <p className="map-note">{data.note}</p>}
       {groups.map((g) => (
         <div className="race-group-card" key={g.level}>
           <div className="rg-head">
@@ -124,8 +131,8 @@ function Row({ c, open, onToggle, onOpenMeasure }) {
               : [...list.rows, ...list.writeIns.map((w) => ({ ...w, wi: true, tag: w.named ? 'WRITE-IN' : '' }))].map((x, i) => (
                 <li key={`${x.name}-${i}`} className={`${c.multiSeat && i < c.seats ? 'top' : ''}${x.wi ? ' wi' : ''}`}>
                   <span className="who">
-                    {x.party && <span className="sw8" style={{ background: PARTY_COLOR[x.party] || PARTY_COLOR.OTHER }} />}
-                    {x.name}<PartyTag tag={x.tag} party={x.party} />
+                    <Avatar name={x.name} party={x.wi ? 'OTHER' : x.party} photo={x.wi ? null : x.photo} />
+                    <span className="nm">{x.name}<PartyTag tag={x.tag} party={x.party} /></span>
                   </span>
                   <span className="num">{fmtVotes(x.votes)} · {fmtPct(x.pct)}</span>
                   <span className="bar thin"><span style={{ width: barWidth(x.pct), background: x.wi ? 'var(--muted-2)' : PARTY_COLOR[x.party] || PARTY_COLOR.OTHER }} /></span>

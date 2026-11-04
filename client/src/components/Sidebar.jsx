@@ -1,25 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { measureStatus, measureShares, MEASURE_STATUS_LABEL } from '../calc.js';
+import { measureStatus, measureShares, MEASURE_STATUS_LABEL, positionDisplay, websiteLabel, displayDomain } from '../calc.js';
 import { fmtVotes, fmtPct, fmtReporting, barWidth } from '../format.js';
 
-// Party positions use neutral position colours, never party colours.
-const POSITION = {
-  support: { label: 'SUPPORT', color: '#5EEAD4' },
-  oppose: { label: 'OPPOSE', color: '#FCD34D' },
-  no_position: { label: 'NO POSITION', color: '#9AA4B2' },
-};
 const ext = { target: '_blank', rel: 'noopener noreferrer' };
 
-function PlacedBy({ p, website }) {
+function PlacedBy({ p }) {
   let who;
   if (!p) who = <span className="plain">Not in our official sources yet</span>;
   else if (p.type === 'legislative_referral') {
     who = <span className="plain">Referred by the Legislature{p.billNumber ? ` (${p.billNumber})` : ''}</span>;
   } else if (p.type === 'initiative') {
-    const name = p.proponentName || 'Citizen initiative (proponent not named in the official filing)';
-    who = website
-      ? <><a href={website.url} {...ext}>{name} ↗</a><span className="muted">(their website)</span></>
-      : <span className="plain">{name}</span>;
+    who = <span className="plain">{p.proponentName || 'Citizen initiative (proponent not named in the official filing)'}</span>;
   } else who = <span className="plain">{p.detail || 'Placed on the ballot by law'}</span>;
   return (
     <div className="m-row">
@@ -72,14 +63,24 @@ function Measure({ m, highlight }) {
 
       {info && (
         <div className="m-rows">
-          <PlacedBy p={info.placedBy} website={info.proponentWebsite} />
+          <PlacedBy p={info.placedBy} />
           {info.opposition && (
             <div className="m-row">
               <span className="m-k">Registered opposition</span>
-              {info.opposition.website
-                ? <><a href={info.opposition.website} {...ext}>{info.opposition.name} ↗</a><span className="muted">(their website)</span></>
-                : <span className="plain">{info.opposition.name}</span>}
+              <span className="plain">{info.opposition.name}</span>
               {info.opposition.sourceUrl && <a className="m-src" href={info.opposition.sourceUrl} {...ext} aria-label="Campaign-finance filing">filing</a>}
+            </div>
+          )}
+          {info.campaignWebsites?.length > 0 && (
+            <div className="m-block m-sites">
+              {info.campaignWebsites.map((w) => (
+                <div className="m-row" key={`${w.side}-${w.url}`}>
+                  <span className="m-k">{websiteLabel(w)}</span>
+                  <a href={w.url} {...ext}>{displayDomain(w.url)} ↗</a>
+                  {w.sourceUrl && <a className="m-src" href={w.sourceUrl} {...ext} aria-label="Where this website is listed officially">listed in</a>}
+                  {w.note && <span className="m-note">{w.note}</span>}
+                </div>
+              ))}
             </div>
           )}
         </div>
@@ -87,15 +88,20 @@ function Measure({ m, highlight }) {
 
       {info?.partyPositions?.length > 0 && (
         <div className="m-block">
-          <span className="m-k">Official party positions</span>
-          <div className="m-pills">
-            {info.partyPositions.map((p) => (
-              <a key={p.party} className="m-pill" href={p.sourceUrl || undefined} {...ext}>
-                <span>{p.party}</span>
-                <b style={{ color: POSITION[p.position].color }}>{POSITION[p.position].label}</b>
-              </a>
-            ))}
-          </div>
+          <span className="m-k">Party positions</span>
+          <ul className="m-parties">
+            {info.partyPositions.map((p) => {
+              const d = positionDisplay(p.position);
+              return (
+                <li key={p.party}>
+                  <span className="pp-party">{p.party}</span>
+                  {p.position && p.sourceUrl
+                    ? <a href={p.sourceUrl} {...ext} style={{ color: d.color }} className="pp-pos">{d.label} ↗</a>
+                    : <span style={{ color: d.color }} className={`pp-pos${p.position ? '' : ' none'}`}>{d.label}</span>}
+                </li>
+              );
+            })}
+          </ul>
         </div>
       )}
 

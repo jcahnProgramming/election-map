@@ -1,0 +1,1702 @@
+{
+  "state": "CA",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "Mike McGuire"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/State_Senator_Mike_McGuire.jpg/500px-State_Senator_Mike_McGuire.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:State_Senator_Mike_McGuire.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "State of California",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "California State Senate portrait (state senator); Wikipedia article 'Mike McGuire (politician)'."
+    },
+    {
+      "match": [
+        "James Gallagher"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/James_Gallagher%2C_official_portrait_%28119th_Congress%29.jpg/500px-James_Gallagher%2C_official_portrait_%28119th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:James_Gallagher,_official_portrait_(119th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Mark DeSaulnier"
+      ],
+      "office": "house",
+      "district": "10",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Mark_DeSaulnier-1.jpeg/500px-Mark_DeSaulnier-1.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mark_DeSaulnier-1.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Jeff Frese"
+      ],
+      "office": "house",
+      "district": "10",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Connie Chan"
+      ],
+      "office": "house",
+      "district": "11",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Connie_Chan%2C_2025.jpg/500px-Connie_Chan%2C_2025.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Connie_Chan,_2025.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "San Francisco Board of Supervisors",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "San Francisco Board of Supervisors official portrait."
+    },
+    {
+      "match": [
+        "Scott Wiener"
+      ],
+      "office": "house",
+      "district": "11",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Scott_Wiener_Official_Biography_Portrait.jpg/500px-Scott_Wiener_Official_Biography_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Scott_Wiener_Official_Biography_Portrait.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "California State Senate",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "California State Senate official biography portrait (state senator)."
+    },
+    {
+      "match": [
+        "Jamie Joyce"
+      ],
+      "office": "house",
+      "district": "12",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Lateefah Simon"
+      ],
+      "office": "house",
+      "district": "12",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Rep._Lateefah_Simon_Official_Portrait.jpg/500px-Rep._Lateefah_Simon_Official_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Lateefah_Simon_Official_Portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Adam Gray"
+      ],
+      "office": "house",
+      "district": "13",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Adam_Gray%2C_official_portrait_%28119th_Congress%29.jpg/500px-Adam_Gray%2C_official_portrait_%28119th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Adam_Gray,_official_portrait_(119th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Leah Herman",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Kevin Lincoln"
+      ],
+      "office": "house",
+      "district": "13",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/KevinLincoln.jpg/500px-KevinLincoln.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:KevinLincoln.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "City of Stockton",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "City of Stockton portrait; Commons description names 'Stockton, CA mayor Kevin Lincoln II'."
+    },
+    {
+      "match": [
+        "Melissa Hernandez"
+      ],
+      "office": "house",
+      "district": "14",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Commons image of this candidate (Wikipedia 'Melissa Hernández' is a different person); campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Aisha Wahab"
+      ],
+      "office": "house",
+      "district": "14",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Aisha_Wahab%2C_official_portrait_-_2026.jpg/500px-Aisha_Wahab%2C_official_portrait_-_2026.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Aisha_Wahab,_official_portrait_-_2026.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Kevin Mullin"
+      ],
+      "office": "house",
+      "district": "15",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Rep._Kevin_Mullin_official_portrait%2C_118th_Congress_%281%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Kevin_Mullin_official_portrait,_118th_Congress_(1).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Charles Hoelter"
+      ],
+      "office": "house",
+      "district": "15",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Sam Liccardo"
+      ],
+      "office": "house",
+      "district": "16",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Liccardo_Sam_119th_Congress_%28cropped%29.jpg/500px-Liccardo_Sam_119th_Congress_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Liccardo_Sam_119th_Congress_(cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Peter Sundin Soulé"
+      ],
+      "office": "house",
+      "district": "16",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Ro Khanna"
+      ],
+      "office": "house",
+      "district": "17",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Ro_Khanna%2C_official_portrait%2C_115th_Congress_%283x4%29.jpg/500px-Ro_Khanna%2C_official_portrait%2C_115th_Congress_%283x4%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ro_Khanna,_official_portrait,_115th_Congress_(3x4).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. Congress/Eric Connolly",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "115th Congress portrait (older)."
+    },
+    {
+      "match": [
+        "Ritesh Tandon"
+      ],
+      "office": "house",
+      "district": "17",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Zoe Lofgren"
+      ],
+      "office": "house",
+      "district": "18",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Zoe_Lofgren_Official_Portrait_2024.jpeg/500px-Zoe_Lofgren_Official_Portrait_2024.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Zoe_Lofgren_Official_Portrait_2024.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brian Thorpe, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Shane Lewis"
+      ],
+      "office": "house",
+      "district": "18",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jimmy Panetta"
+      ],
+      "office": "house",
+      "district": "19",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Jimmy_Panetta_official_portrait_%28cropped%29_2.jpg/500px-Jimmy_Panetta_official_portrait_%28cropped%29_2.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jimmy_Panetta_official_portrait_(cropped)_2.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Eric Connolly; U.S. House Office of Photography",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Peter Coe Verbica"
+      ],
+      "office": "house",
+      "district": "19",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jared Huffman"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Jared_Huffman_Portrait_118.jpg/500px-Jared_Huffman_Portrait_118.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jared_Huffman_Portrait_118.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Robin Littau"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Sandra Van Scotter"
+      ],
+      "office": "house",
+      "district": "20",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Vince Fong"
+      ],
+      "office": "house",
+      "district": "20",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Vince_Fong_official_congressional_photograph_118th_congress.jpg/500px-Vince_Fong_official_congressional_photograph_118th_congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Vince_Fong_official_congressional_photograph_118th_congress.jpg",
+      "license": "Public domain (PD-USGov)",
+      "credit": "United States House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Jim Costa"
+      ],
+      "office": "house",
+      "district": "21",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Rep_Costa_Headshot_2_%28cropped%29.jpg/500px-Rep_Costa_Headshot_2_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep_Costa_Headshot_2_(cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Jim Costa's Congressional Office",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Kyle Kirkland"
+      ],
+      "office": "house",
+      "district": "21",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Randy Villegas"
+      ],
+      "office": "house",
+      "district": "22",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "David G. Valadao"
+      ],
+      "office": "house",
+      "district": "22",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/David_Valadao_117th_U.S_Congress.jpg/500px-David_Valadao_117th_U.S_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:David_Valadao_117th_U.S_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Committee",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Tessa Lynn Hodge"
+      ],
+      "office": "house",
+      "district": "23",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jay Obernolte"
+      ],
+      "office": "house",
+      "district": "23",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Jay_Obernolte_119th_Congress.jpg/500px-Jay_Obernolte_119th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jay_Obernolte_119th_Congress.jpg",
+      "license": "Public domain (PD-USGov)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Salud Carbajal"
+      ],
+      "office": "house",
+      "district": "24",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Salud_Carbajal_-_117th_Congress.jpg/500px-Salud_Carbajal_-_117th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Salud_Carbajal_-_117th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Bob Smith"
+      ],
+      "office": "house",
+      "district": "24",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Raul Ruiz"
+      ],
+      "office": "house",
+      "district": "25",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Raul_Ruiz_%28D-CA%29_118th_Congress_1.jpg/500px-Raul_Ruiz_%28D-CA%29_118th_Congress_1.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Raul_Ruiz_(D-CA)_118th_Congress_1.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Joe Males"
+      ],
+      "office": "house",
+      "district": "25",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jacqui Irwin"
+      ],
+      "office": "house",
+      "district": "26",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Jacqui_Irwin_%28cropped%29_150302-Z-WQ610-_%2816698067641%29.jpg/500px-Jacqui_Irwin_%28cropped%29_150302-Z-WQ610-_%2816698067641%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jacqui_Irwin_(cropped)_150302-Z-WQ610-_(16698067641).jpg",
+      "license": "CC BY 2.0",
+      "credit": "California National Guard",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Cropped from a 2015 California National Guard event photo (not a formal portrait)."
+    },
+    {
+      "match": [
+        "Sam Gallucci"
+      ],
+      "office": "house",
+      "district": "26",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "George Whitesides"
+      ],
+      "office": "house",
+      "district": "27",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/George_T._Whitesides%2C_official_portrait_%28119th_Congress%29_%281%29.jpg/500px-George_T._Whitesides%2C_official_portrait_%28119th_Congress%29_%281%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:George_T._Whitesides,_official_portrait_(119th_Congress)_(1).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons file title uses 'George T. Whitesides'."
+    },
+    {
+      "match": [
+        "Jason Gibbs"
+      ],
+      "office": "house",
+      "district": "27",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article exists but has no image; no Commons file found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Judy Chu"
+      ],
+      "office": "house",
+      "district": "28",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Judy_Chu_2019-05-02.jpg/500px-Judy_Chu_2019-05-02.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Judy_Chu_2019-05-02.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Eric Connolly, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "April A. Verlato"
+      ],
+      "office": "house",
+      "district": "28",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Angélica María Dueñas"
+      ],
+      "office": "house",
+      "district": "29",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Luz Maria Rivas"
+      ],
+      "office": "house",
+      "district": "29",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Rep._Luz_Rivas_%28D-CA%29%2C_Official_Portrait%2C_119th_Congress.jpg/500px-Rep._Luz_Rivas_%28D-CA%29%2C_Official_Portrait%2C_119th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Luz_Rivas_(D-CA),_Official_Portrait,_119th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons file uses 'Luz Rivas'."
+    },
+    {
+      "match": [
+        "Ami Bera"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Ami_Bera_117th_Congress.jpeg/500px-Ami_Bera_117th_Congress.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ami_Bera_117th_Congress.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Robb Tucker"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Laura Friedman"
+      ],
+      "office": "house",
+      "district": "30",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Laura_Friedman%2C_House_portrait.jpg/500px-Laura_Friedman%2C_House_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Laura_Friedman,_House_portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Scott Alan Meyers"
+      ],
+      "office": "house",
+      "district": "30",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Commons image of this candidate (Wikipedia 'Scott Meyers' is a different person); campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Gil Cisneros"
+      ],
+      "office": "house",
+      "district": "31",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Gil_Cisneros_119th_Congress_2.jpg/500px-Gil_Cisneros_119th_Congress_2.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Gil_Cisneros_119th_Congress_2.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Eric Ching"
+      ],
+      "office": "house",
+      "district": "31",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Brad Sherman"
+      ],
+      "office": "house",
+      "district": "32",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Brad_Sherman_portrait_%28118th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Brad_Sherman_portrait_(118th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Larry Thompson"
+      ],
+      "office": "house",
+      "district": "32",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Pete Aguilar"
+      ],
+      "office": "house",
+      "district": "33",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Pete_Aguilar_117th_congress.jpeg/500px-Pete_Aguilar_117th_congress.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Pete_Aguilar_117th_congress.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services, Franmarie Metzler",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Stephanie M. Vargas"
+      ],
+      "office": "house",
+      "district": "33",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Jimmy Gomez"
+      ],
+      "office": "house",
+      "district": "34",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Jimmy_Gomez_official_portrait_%28light_crop%29.jpg/500px-Jimmy_Gomez_official_portrait_%28light_crop%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jimmy_Gomez_official_portrait_(light_crop).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US House Office of Photography",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Angela Gonzales-Torres"
+      ],
+      "office": "house",
+      "district": "34",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Norma J. Torres"
+      ],
+      "office": "house",
+      "district": "35",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Norma_Torres_118th_congress.jpeg/500px-Norma_Torres_118th_congress.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Norma_Torres_118th_congress.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brendan O'Hara, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Mike Cargile"
+      ],
+      "office": "house",
+      "district": "35",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Ted W. Lieu"
+      ],
+      "office": "house",
+      "district": "36",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Congressman_Ted_W._Lieu_Official_Photo.jpg/500px-Congressman_Ted_W._Lieu_Official_Photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Congressman_Ted_W._Lieu_Official_Photo.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Houston Brignano"
+      ],
+      "office": "house",
+      "district": "36",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Sydney Kamlager-Dove"
+      ],
+      "office": "house",
+      "district": "37",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Sydney_Kamlager-Dove_118th-2.jpeg/500px-Sydney_Kamlager-Dove_118th-2.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Sydney_Kamlager-Dove_118th-2.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Samantha Mota"
+      ],
+      "office": "house",
+      "district": "37",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Hilda Solis"
+      ],
+      "office": "house",
+      "district": "38",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Hilda_Solis%2C_2025.jpg/500px-Hilda_Solis%2C_2025.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Hilda_Solis,_2025.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "Los Angeles County Board of Supervisors",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Los Angeles County Board of Supervisors official portrait."
+    },
+    {
+      "match": [
+        "Pedro Antonio Casas"
+      ],
+      "office": "house",
+      "district": "38",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Mark Takano"
+      ],
+      "office": "house",
+      "district": "39",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mark_Takano_118th_Congress.jpeg/500px-Mark_Takano_118th_Congress.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mark_Takano_118th_Congress.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Steve Manos"
+      ],
+      "office": "house",
+      "district": "39",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Eric Jones"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Mike Thompson"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Mike_Thompson%2C_official_portrait%2C_116th_Congress_%283x4_cropped%29.jpg/500px-Mike_Thompson%2C_official_portrait%2C_116th_Congress_%283x4_cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Mike_Thompson,_official_portrait,_116th_Congress_(3x4_cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House Office of Photography/House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Ken Calvert"
+      ],
+      "office": "house",
+      "district": "40",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Ken_Calvert.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ken_Calvert.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Small original (335px wide); Commons description lists him as CA-41 (pre-2026 district)."
+    },
+    {
+      "match": [
+        "Young Kim"
+      ],
+      "office": "house",
+      "district": "40",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Young_Kim_117th_U.S_Congress.jpg/500px-Young_Kim_117th_U.S_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Young_Kim_117th_U.S_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Office of Congresswoman Young Kim",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Linda Sánchez"
+      ],
+      "office": "house",
+      "district": "41",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Linda_S%C3%A1nchez%2C_116th_Congress%2C_official_photo.jpg/500px-Linda_S%C3%A1nchez%2C_116th_Congress%2C_official_photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Linda_S%C3%A1nchez,_116th_Congress,_official_photo.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Government",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Mitch Clemmons"
+      ],
+      "office": "house",
+      "district": "41",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Robert Garcia"
+      ],
+      "office": "house",
+      "district": "42",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Robert_Garcia_119th_Congress.jpeg/500px-Robert_Garcia_119th_Congress.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Robert_Garcia_119th_Congress.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Brian Burley"
+      ],
+      "office": "house",
+      "district": "42",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Maxine Waters"
+      ],
+      "office": "house",
+      "district": "43",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Maxine_Waters%2C_Official_Portrait%2C_113th_Congress_%28cropped%29.jpg/500px-Maxine_Waters%2C_Official_Portrait%2C_113th_Congress_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Maxine_Waters,_Official_Portrait,_113th_Congress_(cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House of Representatives photographic studio",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "113th Congress portrait (older)."
+    },
+    {
+      "match": [
+        "Cristian Morales"
+      ],
+      "office": "house",
+      "district": "43",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Nanette Diaz Barragan"
+      ],
+      "office": "house",
+      "district": "44",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Nanette_Barragan_official_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Nanette_Barragan_official_portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Reps./Sharon Wallace",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons file uses 'Nanette Barragan'."
+    },
+    {
+      "match": [
+        "Genevieve Angel"
+      ],
+      "office": "house",
+      "district": "44",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Derek Tran"
+      ],
+      "office": "house",
+      "district": "45",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Rep._Derek_Tran_Official_Portrait.jpg/500px-Rep._Derek_Tran_Official_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Derek_Tran_Official_Portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services, Ike Hayman",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Chuong V. Vo"
+      ],
+      "office": "house",
+      "district": "45",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Lou Correa"
+      ],
+      "office": "house",
+      "district": "46",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Lou_Correa_118th_Congress_%28mid-cropped%29.jpg/500px-Lou_Correa_118th_Congress_%28mid-cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Lou_Correa_118th_Congress_(mid-cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Leah Herman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "David Pan"
+      ],
+      "office": "house",
+      "district": "46",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Commons image of this candidate (Wikipedia 'David Pan' is a different person); campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Dave Min"
+      ],
+      "office": "house",
+      "district": "47",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Rep._Dave_Min_Official_Portrait.jpg/500px-Rep._Dave_Min_Official_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Dave_Min_Official_Portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Jenny Rae Le Roux"
+      ],
+      "office": "house",
+      "district": "47",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Marni von Wilpert"
+      ],
+      "office": "house",
+      "district": "48",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Marni_von_Wilpert.jpg/500px-Marni_von_Wilpert.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Marni_von_Wilpert.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "City of San Diego",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "City of San Diego council portrait."
+    },
+    {
+      "match": [
+        "Jim Desmond"
+      ],
+      "office": "house",
+      "district": "48",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Jim_Desmond_Official_Portrait.jpg/500px-Jim_Desmond_Official_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jim_Desmond_Official_Portrait.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "County of San Diego",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "San Diego County Board of Supervisors portrait."
+    },
+    {
+      "match": [
+        "Mike Levin"
+      ],
+      "office": "house",
+      "district": "49",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Rep._Mike_Levin_official_photo.jpg/500px-Rep._Mike_Levin_official_photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Mike_Levin_official_photo.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Armen Kurdian"
+      ],
+      "office": "house",
+      "district": "49",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Michael Masuda"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Tom McClintock"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Tom_McClintock_portrait_%28118th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Tom_McClintock_portrait_(118th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Scott Peters"
+      ],
+      "office": "house",
+      "district": "50",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Scott_Peters_official_portrait_116th_Congress.jpg/500px-Scott_Peters_official_portrait_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Scott_Peters_official_portrait_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US House Office of Photography",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Steve Cohen"
+      ],
+      "office": "house",
+      "district": "50",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Commons image of this candidate (not the Tennessee congressman Steve Cohen); campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Sara Jacobs"
+      ],
+      "office": "house",
+      "district": "51",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Representative_Sara_Jacobs_full_portrait.jpg/500px-Representative_Sara_Jacobs_full_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Representative_Sara_Jacobs_full_portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Kristie Baxter",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Ricardo Cabrera"
+      ],
+      "office": "house",
+      "district": "51",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Juan Vargas"
+      ],
+      "office": "house",
+      "district": "52",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Juan_Vargas_official_photo.jpg/500px-Juan_Vargas_official_photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Juan_Vargas_official_photo.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Jeff Belle"
+      ],
+      "office": "house",
+      "district": "52",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Richard Pan"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Richard_Pan_2010.jpg/500px-Richard_Pan_2010.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Richard_Pan_2010.jpg",
+      "license": "CC BY-SA 2.0",
+      "credit": "Dr. Richard Pan from Sacramento, CA, USA",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "2010 Flickr photo from his time as State Assemblyman; CC BY-SA requires attribution and share-alike."
+    },
+    {
+      "match": [
+        "Kevin Kiley"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "OTHER",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Rep._Kevin_Kiley_official_photo%2C_118th_Congress_2.jpg/500px-Rep._Kevin_Kiley_official_photo%2C_118th_Congress_2.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Kevin_Kiley_official_photo,_118th_Congress_2.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Doris Matsui"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Doris_Matsui_portrait_%28118th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Doris_Matsui_portrait_(118th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives — Office of the Clerk",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Mai Vang"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Sacramento_City_Councilmember_Mai_Vang.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Sacramento_City_Councilmember_Mai_Vang.jpg",
+      "license": "Public domain (PD-CAGov)",
+      "credit": "Sacramento City Council",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Sacramento City Council official portrait."
+    },
+    {
+      "match": [
+        "John Garamendi"
+      ],
+      "office": "house",
+      "district": "8",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/John_Garamendi_portrait_%28118th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:John_Garamendi_portrait_(118th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives — Office of the Clerk",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "Rudy Recile"
+      ],
+      "office": "house",
+      "district": "8",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Josh Harder"
+      ],
+      "office": "house",
+      "district": "9",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Josh_Harder%2C_official_portrait%2C_116th_Congress_%283x4_cropped%29.jpg/500px-Josh_Harder%2C_official_portrait%2C_116th_Congress_%283x4_cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Josh_Harder,_official_portrait,_116th_Congress_(3x4_cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "John McBride"
+      ],
+      "office": "house",
+      "district": "9",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked"
+    },
+    {
+      "match": [
+        "Xavier Becerra"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/HHS_Xavier_Becerra.jpg/500px-HHS_Xavier_Becerra.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:HHS_Xavier_Becerra.jpg",
+      "license": "Public domain (PD-USGov-HHS)",
+      "credit": "United States Department of Health and Human Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Official HHS portrait from his time as U.S. Secretary of Health and Human Services."
+    },
+    {
+      "match": [
+        "Steve Hilton"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Steve_Hilton_%2854233445987_crop%29.jpg/500px-Steve_Hilton_%2854233445987_crop%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Steve_Hilton_(54233445987_crop).jpg",
+      "license": "CC BY 2.0",
+      "credit": "Gage Skidmore",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Event photo (2024 AmericaFest), Flickr via Commons; CC BY 2.0 requires attribution."
+    }
+  ]
+}

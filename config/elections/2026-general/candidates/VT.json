@@ -1,0 +1,185 @@
+{
+  "state": "VT",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "BECCA BALINT"
+      ],
+      "office": "house",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Rep._Becca_Balint_-_118th_Congress.jpg/500px-Rep._Becca_Balint_-_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Becca_Balint_-_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "GERALD MALLOY"
+      ],
+      "office": "house",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Gerald_Malloy_for_US_Senate_Vermont_%28cropped%29.jpg/500px-Gerald_Malloy_for_US_Senate_Vermont_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Gerald_Malloy_for_US_Senate_Vermont_(cropped).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "VolunteerMalloy",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Self-uploaded 2022 campaign photo (account \"VolunteerMalloy\"), described as Republican candidate Gerald Malloy for US Senate Vermont. The enwiki article \"Gerald Malloy\" is a different person (SC state senator)."
+    },
+    {
+      "match": [
+        "SUZANNE \"SUZ\" SEYMOUR",
+        "SUZANNE SEYMOUR"
+      ],
+      "office": "house",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "RYAN P. WALTON",
+        "RYAN WALTON"
+      ],
+      "office": "house",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "PHOENIX K. ALTAIR",
+        "PHOENIX ALTAIR"
+      ],
+      "office": "house",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "ADAM ORTIZ"
+      ],
+      "office": "house",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "PHIL SCOTT"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Phil_Scott_2019_%283x4_cropped%29.png/500px-Phil_Scott_2019_%283x4_cropped%29.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Phil_Scott_2019_(3x4_cropped).png",
+      "license": "Public domain (PD-USGov-Military-Air National Guard)",
+      "credit": "Master Sgt. Sarah Mattison, U.S. Air National Guard",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Event photo by U.S. Air National Guard (2019), not an official portrait."
+    },
+    {
+      "match": [
+        "AMANDA JANOO"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Amanda_Janoo_at_candidate_forum_in_May_2026_%28cropped%29.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Amanda_Janoo_at_candidate_forum_in_May_2026_(cropped).png",
+      "license": "CC BY 4.0",
+      "credit": "Town Meeting TV",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Frame from a CC BY YouTube video (Town Meeting TV candidate forum, May 2026)."
+    },
+    {
+      "match": [
+        "BRIAN JUDD"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons has 2022 photos of a Brian Judd in Vermont, but they do not identify him as this candidate; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "DEAN ROY"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    },
+    {
+      "match": [
+        "JUNE GOODBAND"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kit not checked."
+    }
+  ]
+}

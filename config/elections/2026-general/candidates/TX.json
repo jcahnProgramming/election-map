@@ -1,0 +1,1446 @@
+{
+  "state": "TX",
+  "election": "2026-general",
+  "candidates": [
+    {
+      "match": [
+        "NATHANIEL MORAN"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/97/Rep._Nathaniel_Moran_official_photo%2C_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Nathaniel_Moran_official_photo,_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "YOLANDA R. PRINCE"
+      ],
+      "office": "house",
+      "district": "1",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "CHRIS GOBER"
+      ],
+      "office": "house",
+      "district": "10",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "CAITLIN ROURK"
+      ],
+      "office": "house",
+      "district": "10",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "AUGUST PFLUGER"
+      ],
+      "office": "house",
+      "district": "11",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/August_Pfluger_official_photo.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:August_Pfluger_official_photo.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "CLAIRE REYNOLDS"
+      ],
+      "office": "house",
+      "district": "11",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "CRAIG GOLDMAN"
+      ],
+      "office": "house",
+      "district": "12",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Craig_Goldman%2C_official_portrait_%28119th_Congress%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Craig_Goldman,_official_portrait_(119th_Congress).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Nate Payne",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "ANGELA \"HELI\" RODRIGUEZ PRILLIMAN"
+      ],
+      "office": "house",
+      "district": "12",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "RONNY JACKSON"
+      ],
+      "office": "house",
+      "district": "13",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Ronny_Jackson%2C_official_portrait_-_2025.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ronny_Jackson,_official_portrait_-_2025.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brian Thorpe",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "MARK NAIR"
+      ],
+      "office": "house",
+      "district": "13",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "RANDY WEBER"
+      ],
+      "office": "house",
+      "district": "14",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Randy_Weber_118th_cong.jpeg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Randy_Weber_118th_cong.jpeg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "THURMAN BILL BARTIE"
+      ],
+      "office": "house",
+      "district": "14",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "MONICA DE LA CRUZ"
+      ],
+      "office": "house",
+      "district": "15",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Rep._Monica_De_La_Cruz_-_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Monica_De_La_Cruz_-_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "118th Congress official portrait. The newer \"MDLC Official Portrait 2025.jpg\" on Commons is tagged CC BY-SA 4.0 \"own work\" by an uploader, so this PD file was preferred."
+    },
+    {
+      "match": [
+        "BOBBY PULIDO"
+      ],
+      "office": "house",
+      "district": "15",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Bobby23_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Bobby23_(cropped).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Mezquitic",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Concert photo (singing at Laredo Coliseum), not a headshot; the Commons file names the singer Bobby Pulido, the same person as the candidate per his Wikipedia article."
+    },
+    {
+      "match": [
+        "ADAM BAUMAN"
+      ],
+      "office": "house",
+      "district": "16",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "VERONICA ESCOBAR"
+      ],
+      "office": "house",
+      "district": "16",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Veronica_Escobar_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Veronica_Escobar_official_portrait,_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House Office of Photography/House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "PETE SESSIONS"
+      ],
+      "office": "house",
+      "district": "17",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Pete_Sessions_Congressional_ID_photo_117.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Pete_Sessions_Congressional_ID_photo_117.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "US House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Small (335x410) congressional ID photo, 117th Congress."
+    },
+    {
+      "match": [
+        "CASEY SHEPARD"
+      ],
+      "office": "house",
+      "district": "17",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "RONALD DWAYNE WHITFIELD"
+      ],
+      "office": "house",
+      "district": "18",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "CHRISTIAN DASHAUN MENEFEE"
+      ],
+      "office": "house",
+      "district": "18",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Christian_Menefee%2C_official_portrait_%28119th_Congress%29_%282%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Christian_Menefee,_official_portrait_(119th_Congress)_(2).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brendan O'Hara",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "TOM SELL"
+      ],
+      "office": "house",
+      "district": "19",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "KYLE RABLE"
+      ],
+      "office": "house",
+      "district": "19",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "STEVE TOTH"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Steve_Toth_at_Alamo_Cenotaph_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Steve_Toth_at_Alamo_Cenotaph_(cropped).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Jonmallard",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "2021 event photo as a state representative, not a headshot."
+    },
+    {
+      "match": [
+        "SHAUN FINNIE"
+      ],
+      "office": "house",
+      "district": "2",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "EDGARDO RAFAEL BAEZ"
+      ],
+      "office": "house",
+      "district": "20",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "JOAQUIN CASTRO"
+      ],
+      "office": "house",
+      "district": "20",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Joaquin_Castro%2C_official_portrait%2C_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Joaquin_Castro,_official_portrait,_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Nate Payne",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "MARK TEIXEIRA"
+      ],
+      "office": "house",
+      "district": "21",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Removed: 2011 sports action photo; not a usable headshot (researcher recommended null)."
+    },
+    {
+      "match": [
+        "KRISTIN HOOK"
+      ],
+      "office": "house",
+      "district": "21",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "TREVER NEHLS"
+      ],
+      "office": "house",
+      "district": "22",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Left null: a possible Commons match exists (File:Blackjack_Recognition_Ceremony_Trever_Nehls_(cropped).jpg, PD U.S. Army Reserve, 2020, \"Col. Trever Nehls\"), but the page does not identify him as this candidate. Do not use twin brother Rep. Troy Nehls's portrait."
+    },
+    {
+      "match": [
+        "MARQUETTE GREENE-SCOTT"
+      ],
+      "office": "house",
+      "district": "22",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "BRANDON HERRERA"
+      ],
+      "office": "house",
+      "district": "23",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Brandon_Herrera_with_attendees_%2855457704523%29_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Brandon_Herrera_with_attendees_(55457704523)_(cropped).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Gage Skidmore",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Crop of a 2026 event photo; the Commons description names him as a U.S. Congressional candidate."
+    },
+    {
+      "match": [
+        "KATY PADILLA STOUT"
+      ],
+      "office": "house",
+      "district": "23",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "BEN MENDOZA"
+      ],
+      "office": "house",
+      "district": "23",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "BETH VAN DUYNE"
+      ],
+      "office": "house",
+      "district": "24",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Beth_Van_Duyne.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Beth_Van_Duyne.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Office Congresswoman Beth Van Duyne",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "KEVIN BURGE"
+      ],
+      "office": "house",
+      "district": "24",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "ROGER WILLIAMS"
+      ],
+      "office": "house",
+      "district": "25",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Rep_Williams_Official_Portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep_Williams_Official_Portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Commons credit links williams.house.gov (Roger Williams, TX-25)."
+    },
+    {
+      "match": [
+        "DIONE SIMS"
+      ],
+      "office": "house",
+      "district": "25",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "BRANDON GILL"
+      ],
+      "office": "house",
+      "district": "26",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/76/Brandon_Gill%2C_official_portrait%2C_119th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Brandon_Gill,_official_portrait,_119th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Nate Payne",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "STEVEN SHOOK"
+      ],
+      "office": "house",
+      "district": "26",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "PHIL GRAY"
+      ],
+      "office": "house",
+      "district": "26",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "MICHAEL CLOUD"
+      ],
+      "office": "house",
+      "district": "27",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Michael_Cloud%2C_Official_Portrait%2C_115th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Michael_Cloud,_Official_Portrait,_115th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House Office of Photography",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "TANYA LLOYD"
+      ],
+      "office": "house",
+      "district": "27",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "TANO E. TIJERINA"
+      ],
+      "office": "house",
+      "district": "28",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "HENRY CUELLAR"
+      ],
+      "office": "house",
+      "district": "28",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Henry_Cuellar%2C_official_portrait.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Henry_Cuellar,_official_portrait.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Eric Connolly; U.S. House Office of Photography",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "MARLÓN DURÁN"
+      ],
+      "office": "house",
+      "district": "28",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "MARTHA FIERRO"
+      ],
+      "office": "house",
+      "district": "29",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "SYLVIA GARCIA"
+      ],
+      "office": "house",
+      "district": "29",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Sylvia_Garcia%2C_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Sylvia_Garcia,_official_portrait,_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "KEITH SELF"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Rep._Keith_Self_official_photo%2C_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Keith_Self_official_photo,_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "EVAN HUNT"
+      ],
+      "office": "house",
+      "district": "3",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "EVERETT JACKSON"
+      ],
+      "office": "house",
+      "district": "30",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "FREDERICK D. HAYNES III"
+      ],
+      "office": "house",
+      "district": "30",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/72/Frederick_Haynes_III_at_Calvary_Baptist_Church.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Frederick_Haynes_III_at_Calvary_Baptist_Church.png",
+      "license": "CC BY 3.0",
+      "credit": "Calvary Baptist Church Jamaica, NY",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "2018 video still of him preaching (from a CC BY YouTube video), not a headshot."
+    },
+    {
+      "match": [
+        "JOHN CARTER"
+      ],
+      "office": "house",
+      "district": "31",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/John_Carter%2C_official_portrait_114th_Congress_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:John_Carter,_official_portrait_114th_Congress_(cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "114th Congress portrait (older)."
+    },
+    {
+      "match": [
+        "JUSTIN EARLY"
+      ],
+      "office": "house",
+      "district": "31",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "GREG STOKER"
+      ],
+      "office": "house",
+      "district": "31",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "JACE YARBROUGH"
+      ],
+      "office": "house",
+      "district": "32",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Left null: a possible Commons match exists (File:Joint_Base_Commander_visits_the_US_Air_Force_Honor_Guard_-_Jace_Yarbrough_(cropped).jpg, PD US military, 2014, \"1st Lt. Jace Yarbrough of Tuscola, Texas\"), but the page does not identify him as this candidate."
+    },
+    {
+      "match": [
+        "DAN BARRIOS"
+      ],
+      "office": "house",
+      "district": "32",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "PATRICK DAVID GILLESPIE"
+      ],
+      "office": "house",
+      "district": "33",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "COLIN ALLRED"
+      ],
+      "office": "house",
+      "district": "33",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Colin_Allred%2C_official_portrait%2C_117th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Colin_Allred,_official_portrait,_117th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Ike Hayman",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Official portrait from his earlier House term (117th Congress, TX-32)."
+    },
+    {
+      "match": [
+        "CARLOS DE LA CRUZ"
+      ],
+      "office": "house",
+      "district": "35",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "JOHNNY C. GARCIA"
+      ],
+      "office": "house",
+      "district": "35",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "BRIAN BABIN"
+      ],
+      "office": "house",
+      "district": "36",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Brian_Babin_115th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Brian_Babin_115th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House Office of Photography/House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "RHONDA HART"
+      ],
+      "office": "house",
+      "district": "36",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "LAUREN B. PEÑA"
+      ],
+      "office": "house",
+      "district": "37",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "GREG CASAR"
+      ],
+      "office": "house",
+      "district": "37",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Rep._Greg_Casar_-_118th_Congress_%283x4_cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Greg_Casar_-_118th_Congress_(3x4_cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "JON BONCK"
+      ],
+      "office": "house",
+      "district": "38",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Wikipedia article has no image; no Commons file found."
+    },
+    {
+      "match": [
+        "MELISSA MCDONOUGH"
+      ],
+      "office": "house",
+      "district": "38",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "ALEX MCMENEMY"
+      ],
+      "office": "house",
+      "district": "38",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "PAT FALLON"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/43/PatFallon118th.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:PatFallon118th.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "JASON PEARCE"
+      ],
+      "office": "house",
+      "district": "4",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "LANCE GOODEN"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/Lance_Gooden%2C_official_portrait%2C_116th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Lance_Gooden,_official_portrait,_116th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "United States Congress",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "CHELSEY HOCKETT"
+      ],
+      "office": "house",
+      "district": "5",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "JAKE ELLZEY"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Jake_Ellzey_Official_Portrait_-_117th_Congress_%28full%29.png",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Jake_Ellzey_Official_Portrait_-_117th_Congress_(full).png",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "DANNY MINTON"
+      ],
+      "office": "house",
+      "district": "6",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "ALEXANDER HALE"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "LIZZIE PANNILL FLETCHER"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Lizzie_Fletcher_117th_Congress_2_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Lizzie_Fletcher_117th_Congress_2_(cropped).jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "Brendan O'Hara, House Creative Services",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "ESPOIR NGABO"
+      ],
+      "office": "house",
+      "district": "7",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "JESSICA HART STEINMANN"
+      ],
+      "office": "house",
+      "district": "8",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "LAURA JONES"
+      ],
+      "office": "house",
+      "district": "8",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "ALEX MEALER"
+      ],
+      "office": "house",
+      "district": "9",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "LETICIA GUTIERREZ"
+      ],
+      "office": "house",
+      "district": "9",
+      "party": "DEM",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "KEN PAXTON"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Ken_Paxton_-_55022425595_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Ken_Paxton_-_55022425595_(cropped).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Gage Skidmore",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "2025 event photo (AmericaFest), cropped."
+    },
+    {
+      "match": [
+        "JAMES TALARICO"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/70/James_Talarico_Press_Conference_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:James_Talarico_Press_Conference_(cropped).jpg",
+      "license": "CC BY-SA 4.0",
+      "credit": "Antonioaesparza",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "Jan 2025 press conference photo, cropped."
+    },
+    {
+      "match": [
+        "TED BROWN"
+      ],
+      "office": "senate",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "ERIC FLORES"
+      ],
+      "office": "house",
+      "district": "34",
+      "party": "REP",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Commons image found (Commons \"Hugo Eric Flores\" files are a different person, a Mexican politician)."
+    },
+    {
+      "match": [
+        "VICENTE GONZALEZ"
+      ],
+      "office": "house",
+      "district": "34",
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Rep._Vicente_Gonzalez%2C_118th_Congress.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Rep._Vicente_Gonzalez,_118th_Congress.jpg",
+      "license": "Public domain (PD-USGov-Congress)",
+      "credit": "U.S. House of Representatives",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": null
+    },
+    {
+      "match": [
+        "CHRIS ROYAL"
+      ],
+      "office": "house",
+      "district": "34",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "EDDIE ESPINOZA"
+      ],
+      "office": "house",
+      "district": "34",
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    },
+    {
+      "match": [
+        "GREG ABBOTT"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "REP",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Greg_Abbott_at_NASA_2024_%28cropped%29.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Greg_Abbott_at_NASA_2024_(cropped).jpg",
+      "license": "Public domain (PD-USGov-NASA)",
+      "credit": "NASA Johnson Space Center / NASA-JSC/Robert Markowitz",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "2024 NASA visit photo, cropped."
+    },
+    {
+      "match": [
+        "GINA HINOJOSA"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "DEM",
+      "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Gina_Hinojosa_at_the_AFL-CIO_COPE_convention_in_2024.jpg",
+      "source_type": "wikimedia_commons",
+      "source_page_url": "https://commons.wikimedia.org/wiki/File:Gina_Hinojosa_at_the_AFL-CIO_COPE_convention_in_2024.jpg",
+      "license": "CC0 1.0",
+      "credit": "RRC1701",
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "2024 event photo as state representative."
+    },
+    {
+      "match": [
+        "PAT DIXON"
+      ],
+      "office": "governor",
+      "district": null,
+      "party": "OTHER",
+      "photo_url": null,
+      "source_type": null,
+      "source_page_url": null,
+      "license": null,
+      "credit": null,
+      "as_of": "2026-11-03",
+      "reviewed": false,
+      "note": "No Wikipedia article or Commons image found; campaign press kits not checked."
+    }
+  ]
+}

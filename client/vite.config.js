@@ -16,6 +16,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': { target: API, changeOrigin: true },
+      '/photos': { target: API, changeOrigin: true },
       '/socket.io': { target: SOCKET, changeOrigin: true, ws: true },
     },
   },

@@ -38,7 +38,7 @@
       "opposition_website": null,
       "party_positions": [
         { "party": "Republican Party of Florida", "position": "support",
-          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": false }
+          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": true }
       ],
       "legislative_vote": {
         "chambers": [
@@ -90,7 +90,7 @@
       "opposition_website": null,
       "party_positions": [
         { "party": "Republican Party of Florida", "position": "support",
-          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": false }
+          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": true }
       ],
       "legislative_vote": {
         "chambers": [
@@ -142,10 +142,10 @@
       "opposition_website": null,
       "party_positions": [
         { "party": "Republican Party of Florida", "position": "support",
-          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": false },
+          "source_url": "https://florida.gop/1-2-3/", "as_of": "2026-11-03", "reviewed": true },
         { "party": "Florida Democratic Party", "position": "oppose",
           "source_url": "https://floridadems.org/2026/07/florida-democrats-vote-to-oppose-amendment-3-warning-it-would-cut-local-services-and-threaten-public-safety/",
-          "as_of": "2026-11-03", "reviewed": false }
+          "as_of": "2026-11-03", "reviewed": true }
       ],
       "legislative_vote": {
         "chambers": [
