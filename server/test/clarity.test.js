@@ -13,6 +13,7 @@ const TARGETS = {
   co: { key: 'CO/127407', path: 'CO', eid: '127407', state: 'CO', scope: 'state', countyFips: null, label: 'Colorado 2026 General', version: '383402' },
   ia: { key: 'IA/127077', path: 'IA', eid: '127077', state: 'IA', scope: 'state', countyFips: null, label: 'Iowa 2026 General Election', version: '383360' },
   sc: { key: 'SC/127300', path: 'SC', eid: '127300', state: 'SC', scope: 'state', countyFips: null, label: 'South Carolina 2026 General', version: '382659' },
+  wv: { key: 'WV/127496', path: 'WV', eid: '127496', state: 'WV', scope: 'state', countyFips: null, label: 'West Virginia 2026 General Election', version: '383572' },
   denton: { key: 'TX/Denton/127398', path: 'TX/Denton', eid: '127398', state: 'TX', scope: 'county', countyFips: '48121', label: 'Denton County, TX', version: '382120' },
 };
 
@@ -218,4 +219,24 @@ test('per-adapter contestRules (config/sources/clarity.json) cover Clarity abbre
   const races = Object.keys(names).map((name, i) => ({ office: null, name, key: String(i), choices: [{ name: 'A', party: 'OTHER' }, { name: 'B', party: 'OTHER' }], units: [] }));
   assert.deepEqual(enrichRaces({ election: { scope: 'state' }, races }, 'clarity'), []);
   assert.deepEqual(Object.fromEntries(races.map((r) => [r.name, r.office])), names);
+});
+
+test('WV (live, early count 2026-11-04 01:00Z): Senate, House 2, amendment, legislature; LBN / MTN known', () => {
+  const { r, unmatched } = parse('wv');
+  assert.deepEqual(unmatched, []);
+  assert.equal(r.sourceUpdatedAt, '2026-11-04T01:00:26.000Z');
+  assert.deepEqual(r.turnout.find((u) => u.level === 'state'), { level: 'state', name: 'WV', registered: 1210307, ballotsCast: 37091, turnoutPct: 3.06, ballotsOutstanding: null, precinctsReporting: 124, precinctsTotal: 1642 });
+  assert.equal(r.turnout.filter((u) => u.level === 'county').length, 55);
+  const sen = r.races.find((x) => x.office === 'senate');
+  assert.deepEqual(sen.choices.map((c) => c.party), ['DEM', 'REP', 'OTHER']);
+  assert.deepEqual(sen.units[0].votes, [19690, 16105, 898]);
+  assert.equal(sen.units.filter((u) => u.level === 'county').length, 55);
+  const h2 = r.races.find((x) => x.office === 'house');
+  assert.equal(h2.district, '2');
+  assert.deepEqual([h2.units[0].precinctsReporting, h2.units[0].precinctsTotal], [67, 760]);
+  const m = r.races.find((x) => x.office === 'measure');
+  assert.deepEqual([m.units[0].yes, m.units[0].no], [23137, 10858]);
+  enrichRaces(r, 'clarity');
+  assert.equal(r.races.find((x) => /13th Senatorial/.test(x.name)).level, 'legislative');
+  assert.equal(r.races.find((x) => /79th District/.test(x.name)).level, 'legislative');
 });

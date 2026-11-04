@@ -1,0 +1,23 @@
+{
+  "_howto": "Elections polled by the Louisiana Secretary of State adapter (server/src/adapters/lasos.js). data = the JSON blob endpoint the voterportal.sos.la.gov/graphical page reads. electionId = ElectionMode.htm PKElectionID for this election (nothing is stored while the site is in another election; ElectionDates.htm lists them). date = the election date (the yyyyMMdd blob folder). Parish files are swept sweepBatch per poll. Set enabled:false to stop polling.",
+  "data": "https://voterportal.sos.la.gov/ElectionResults/ElectionResults/Data",
+  "requestGapMs": 400,
+  "sweepBatch": 16,
+  "sweepSeconds": 300,
+  "metaSeconds": 1800,
+  "knownOtherParties": ["NOPTY", "OTHER", "IND", "GRN"],
+  "contestRules": [
+    {"match": "^bese\\b", "level": "statewide", "office": "state_board_of_education", "note": "LA: BESE -- District 1 (Board of Elementary and Secondary Education)"},
+    {"match": "^police juror\\b", "level": "county", "office": "county_commission", "note": "LA: a police jury is the parish governing body"},
+    {"match": "^parish president\\b", "level": "county", "office": "county_office", "note": "LA: parish executive"}
+  ],
+  "elections": [
+    {
+      "electionId": 344,
+      "name": "Louisiana November 3, 2026 Election",
+      "date": "2026-11-03",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}

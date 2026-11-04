@@ -1,5 +1,7 @@
 # ---------- build: install deps + build the React client ----------
-FROM node:22-bookworm-slim AS build
+# Pinned minor (not the floating node:22 tag): server/src/http.js needs tls.setDefaultCACertificates (Node >= 22.19).
+# 22.23 is what node:22-bookworm-slim resolved to on 2026-11-03 (same digest), so this pin changes nothing tonight.
+FROM node:22.23-bookworm-slim AS build
 WORKDIR /app
 # better-sqlite3 compiles a native addon when no prebuilt binary matches.
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -19,7 +21,7 @@ RUN node scripts/check-changelog.js \
  && mkdir -p config
 
 # ---------- runtime ----------
-FROM node:22-bookworm-slim
+FROM node:22.23-bookworm-slim
 ENV NODE_ENV=production \
     DATA_DIR=/data \
     PORT=3710

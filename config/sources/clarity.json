@@ -46,6 +46,15 @@
       "note": "Not listed in SC/elections.json (returns []); id found via scvotes.gov"
     },
     {
+      "state": "WV",
+      "path": "WV",
+      "eid": "127496",
+      "scope": "state",
+      "name": "West Virginia 2026 General Election",
+      "verified": "2026-11-03",
+      "note": "Not listed in WV/elections.json (returns []); id from the '2026 General Election Results' link on sos.wv.gov/govotewv"
+    },
+    {
       "state": "AZ",
       "path": "AZ/Pinal",
       "eid": "127280",

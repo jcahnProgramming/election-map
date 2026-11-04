@@ -1,0 +1,23 @@
+{
+  "_howto": "Elections polled by the Alaska Division of Elections adapter (server/src/adapters/akdoe.js). electionId = the id in https://www.elections.alaska.gov/election-results/e/?id={id} (upper case in the file path); the page links {base}/enr/{ID}/results/GA_ENR_Precinct_State_of_Alaska.csv, the precinct-level results of every contest. Alaska has no counties: statewide only. Ranked-choice contests are first-choice counts. Set enabled:false to stop polling.",
+  "_contestRulesHowto": "Contest-name rules for this source, tried before the shared config/contest-rules.json.",
+  "base": "https://www.elections.alaska.gov",
+  "contestRules": [
+    {
+      "match": "^senate district [a-t]$",
+      "level": "legislative",
+      "office": "state_senate",
+      "note": "AK: state senate seats are lettered (Senate District A..T)"
+    }
+  ],
+  "elections": [
+    {
+      "electionId": "26GENR",
+      "name": "Alaska 2026 General Election",
+      "date": "2026-11-03",
+      "url": "https://www.elections.alaska.gov/election-results/e/?id=26genr",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}

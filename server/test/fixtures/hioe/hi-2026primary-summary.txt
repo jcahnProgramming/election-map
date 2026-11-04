@@ -1,0 +1,295 @@
+#FormatVersion 1																				
+#Contest ID	Contest Title	Contest Seq Nbr	Contest Type	Contest Party	Mail Blank Votes	In-Person Blank Votes	Mail Over Votes	In-Person Over Votes	Mail Invalid Votes	In-Person Invalid Votes	Registered Voters	Total Precincts	Counted Precincts	Candidate ID	Candidate Name	Candidate Seq Nbr	Candidate Party	Mail Votes	In-Person Votes	Total Votes
+338	"U.S. Representative, Dist I"	1	OF	N	811	17	0	0	2113	38	846543	223	223	1	"BERNING, Nathan M."	1		956	21	977
+364	"U.S. Representative, Dist I"	2	OF	G	104	2	0	0	1360	23	846543	223	223	1	"CONLEY, Jordan S."	1		392	10	402
+104	"U.S. Representative, Dist I"	3	OF	R	3664	199	0	0	843	15	846543	223	223	2	"LAM, Adriel C."	1		17596	934	18530
+266	"U.S. Representative, Dist I"	4	OF	D	3619	37	83	0	1756	32	846543	223	223	2	"CASE, Ed"	2		63301	483	63784
+266	"U.S. Representative, Dist I"	4	OF	D	3619	37	83	0	1756	32	846543	223	223	3	"KEOHOKALOLE, Jarrett K."	4		40326	522	40848
+266	"U.S. Representative, Dist I"	4	OF	D	3619	37	83	0	1756	32	846543	223	223	1	"BOOKER, Jennifer"	1		2395	38	2433
+266	"U.S. Representative, Dist I"	4	OF	D	3619	37	83	0	1756	32	846543	223	223	4	"FATULA, Ben"	3		1007	18	1025
+266	"U.S. Representative, Dist I"	4	OF	D	3619	37	83	0	1756	32	846543	223	223	5	"KISWANTO, Nicholas (Nick)"	5		1011	14	1025
+336	"U.S. Representative, Dist II"	5	OF	N	1416	50	2	0	3754	106	846543	273	273	2	"CODELIA, Edward A."	1		1194	36	1230
+336	"U.S. Representative, Dist II"	5	OF	N	1416	50	2	0	3754	106	846543	273	273	1	"TERRY, Randall"	2		705	33	738
+269	"U.S. Representative, Dist II"	6	OF	R	3081	183	0	0	1721	42	846543	273	273	1	"AWA, Brenton"	1		24415	1875	26290
+70	"U.S. Representative, Dist II"	7	OF	D	7798	166	55	1	1694	47	846543	273	273	4	"TOKUDA, Jill N."	4		90758	1317	92075
+70	"U.S. Representative, Dist II"	7	OF	D	7798	166	55	1	1694	47	846543	273	273	2	"KING, Steven"	3		3775	142	3917
+70	"U.S. Representative, Dist II"	7	OF	D	7798	166	55	1	1694	47	846543	273	273	5	"GUITHUES, Greg"	2		3039	121	3160
+70	"U.S. Representative, Dist II"	7	OF	D	7798	166	55	1	1694	47	846543	273	273	3	"BASIN, Kirill"	1		1467	63	1530
+543	Governor	8	OF	N	2074	68	3	0	5017	137	846543	494	494	4	"HILL, Bu Laia"	2		1291	35	1326
+543	Governor	8	OF	N	2074	68	3	0	5017	137	846543	494	494	1	"WILLIAMSON, Calvert A."	4		854	17	871
+543	Governor	8	OF	N	2074	68	3	0	5017	137	846543	494	494	3	"LEWMAN, Clyde McClain (Mac)"	3		483	24	507
+543	Governor	8	OF	N	2074	68	3	0	5017	137	846543	494	494	2	"GIUFFRE, John M. (Raghu)"	1		379	13	392
+490	Governor	9	OF	R	3785	91	43	1	2669	59	846543	494	494	2	"CORDERY, Gary"	1		33755	2673	36428
+490	Governor	9	OF	R	3785	91	43	1	2669	59	846543	494	494	3	"FUJIYAMA, Ken"	2		11173	426	11599
+377	Governor	10	OF	D	12953	248	138	0	3825	75	846543	494	494	1	"GREEN, Josh"	2		182453	1836	184289
+377	Governor	10	OF	D	12953	248	138	0	3825	75	846543	494	494	2	"SHIM, Lauren Kapoliahi'iaka"	4		10851	348	11199
+377	Governor	10	OF	D	12953	248	138	0	3825	75	846543	494	494	4	"LUCAS-TADEO, George (Teva)"	3		7857	277	8134
+377	Governor	10	OF	D	12953	248	138	0	3825	75	846543	494	494	3	"BOURGOIN, Duke"	1		4382	213	4595
+591	Lieutenant Governor	11	OF	N	2639	77	0	0	4871	119	846543	494	494	1	"KAMAU, Kilakila"	1		2445	80	2525
+581	Lieutenant Governor	12	OF	R	6847	257	58	1	2608	64	846543	494	494	4	"ANTHONY, Daniel"	1		15756	1226	16982
+581	Lieutenant Governor	12	OF	R	6847	257	58	1	2608	64	846543	494	494	3	"MEJIA, Margaret Rose"	3		9992	841	10833
+581	Lieutenant Governor	12	OF	R	6847	257	58	1	2608	64	846543	494	494	2	"PETERS, Robert E."	4		8485	414	8899
+581	Lieutenant Governor	12	OF	R	6847	257	58	1	2608	64	846543	494	494	1	"CRESENCIA, Hopelin (Hope)"	2		7618	452	8070
+415	Lieutenant Governor	13	OF	D	9179	162	145	0	4010	91	846543	494	494	2	"KAWAKAMI, Derek S.K."	4		138840	1407	140247
+415	Lieutenant Governor	13	OF	D	9179	162	145	0	4010	91	846543	494	494	6	"BELATTI, Della Au"	1		54235	1010	55245
+415	Lieutenant Governor	13	OF	D	9179	162	145	0	4010	91	846543	494	494	4	"CHOI, John"	2		12783	226	13009
+415	Lieutenant Governor	13	OF	D	9179	162	145	0	4010	91	846543	494	494	5	"PULETASI, Sam"	5		2084	68	2152
+415	Lieutenant Governor	13	OF	D	9179	162	145	0	4010	91	846543	494	494	3	"CUADRA, Ku L. (Bobby)"	3		1368	49	1417
+454	"State Senator, Dist 2"	14	OF	L	6	0	0	0	142	4	846543	18	18	1	"FOGEL, Frederick F."	1		39	2	41
+567	"State Senator, Dist 2"	15	OF	D	500	14	3	0	118	1	846543	18	18	1	"SAN BUENAVENTURA, Joy"	2		5167	91	5258
+567	"State Senator, Dist 2"	15	OF	D	500	14	3	0	118	1	846543	18	18	2	"AYNESSAZIAN, Tanya Yamanaka"	1		1843	72	1915
+175	"State Senator, Dist 5"	16	OF	D	1311	33	0	0	281	8	846543	22	22	1	"HASHIMOTO, Troy N."	1		7685	137	7822
+447	"State Senator, Dist 8"	17	OF	D	3524	105	0	0	311	5	846543	32	32	1	"KOUCHI, Ronald D."	1		10532	279	10811
+505	"State Senator, Dist 9"	18	OF	R	380	11	0	0	51	1	846543	16	16	1	"CROSWELL, David A."	1		1652	61	1713
+592	"State Senator, Dist 9"	19	OF	D	3738	42	0	0	96	2	846543	16	16	1	"CHANG, Stanley"	1		10056	73	10129
+409	"State Senator, Dist 10"	20	OF	D	807	10	4	0	159	0	846543	22	22	2	"SAYAMA, Jackson D."	2		6429	76	6505
+409	"State Senator, Dist 10"	20	OF	D	807	10	4	0	159	0	846543	22	22	1	"IHARA, Les, Jr."	1		3055	25	3080
+547	"State Senator, Dist 11"	21	OF	D	2728	44	0	0	74	2	846543	18	18	1	"FUKUNAGA, Carol"	1		8619	109	8728
+501	"State Senator, Dist 13"	22	OF	R	187	12	0	0	89	2	846543	12	12	1	"CHRISTIAN, Wallyn Kanoelani"	1		1027	63	1090
+469	"State Senator, Dist 13"	23	OF	D	541	9	7	0	163	6	846543	12	12	2	"NAKAMATSU, Tricia Kwai Lin"	3		4409	51	4460
+469	"State Senator, Dist 13"	23	OF	D	541	9	7	0	163	6	846543	12	12	1	"NAKAMURA, Jordan K."	4		1966	43	2009
+469	"State Senator, Dist 13"	23	OF	D	541	9	7	0	163	6	846543	12	12	4	"AHU ISA, Lei"	1		1242	19	1261
+469	"State Senator, Dist 13"	23	OF	D	541	9	7	0	163	6	846543	12	12	5	"LOGUE, James"	2		536	12	548
+469	"State Senator, Dist 13"	23	OF	D	541	9	7	0	163	6	846543	12	12	3	"VASQUEZ, Lynn"	5		234	2	236
+495	"State Senator, Dist 14"	24	OF	D	303	2	2	0	182	2	846543	20	20	2	"KIM, Donna Mercado"	1		3430	32	3462
+495	"State Senator, Dist 14"	24	OF	D	303	2	2	0	182	2	846543	20	20	1	"MACPHERSON, Christy Kikue"	2		2834	31	2865
+477	"State Senator, Dist 15"	25	OF	D	1170	17	0	0	125	2	846543	24	24	2	"WAKAI, Glenn"	1		4928	30	4958
+498	"State Senator, Dist 17"	26	OF	D	692	2	3	0	156	4	846543	14	14	1	"DELA CRUZ, Donovan"	2		6412	49	6461
+498	"State Senator, Dist 17"	26	OF	D	692	2	3	0	156	4	846543	14	14	2	"BROWN, Nani H."	1		2326	30	2356
+436	"State Senator, Dist 19 Vacancy"	27	OF	R	175	18	0	0	120	1	846543	16	16	1	"PIERICK, Elijah"	1		1124	66	1190
+202	"State Senator, Dist 19 Vacancy"	28	OF	D	573	5	4	0	149	6	846543	16	16	2	"LAMOSAO, Rachele F."	1		3864	24	3888
+202	"State Senator, Dist 19 Vacancy"	28	OF	D	573	5	4	0	149	6	846543	16	16	1	"RAHMAN, Inam Ikeda Perreira"	2		1359	15	1374
+442	"State Senator, Dist 20"	29	OF	R	37	0	4	0	226	5	846543	16	16	3	"FEVELLA, Kurt"	2		1140	72	1212
+442	"State Senator, Dist 20"	29	OF	R	37	0	4	0	226	5	846543	16	16	2	"MCDERMOTT, Bob"	3		1121	91	1212
+442	"State Senator, Dist 20"	29	OF	R	37	0	4	0	226	5	846543	16	16	1	"CABANILLA ARAKAWA, Rida"	1		323	10	333
+402	"State Senator, Dist 20"	30	OF	D	1315	24	0	0	67	2	846543	16	16	1	"OWENS, Markus"	1		3668	48	3716
+406	"State Senator, Dist 21"	31	OF	D	1811	31	0	0	104	4	846543	18	18	2	"GABBARD, Mike"	1		3588	63	3651
+387	"State Senator, Dist 25"	32	OF	D	1425	10	7	0	150	4	846543	24	24	1	"LEE, Chris"	1		9246	39	9285
+387	"State Senator, Dist 25"	32	OF	D	1425	10	7	0	150	4	846543	24	24	2	"SILVA, Bobby"	2		1628	18	1646
+231	"State Representative, Dist 1"	33	OF	D	1421	27	0	0	43	1	846543	8	8	1	"KUSCH, Matthias"	1		3717	58	3775
+484	"State Representative, Dist 2"	34	OF	R	159	8	0	0	43	0	846543	8	8	1	"KENNEALY, Jonathan"	1		714	45	759
+153	"State Representative, Dist 2"	35	OF	D	688	5	2	0	45	1	846543	8	8	1	"KEOHOKAPU LEE LOY, Sue"	2		3989	66	4055
+153	"State Representative, Dist 2"	35	OF	D	688	5	2	0	45	1	846543	8	8	2	"HOLT, Cristina (Tina)"	1		1404	39	1443
+404	"State Representative, Dist 3"	36	OF	L	4	0	0	0	64	0	846543	10	10	1	"MARTIN, Austin"	1		16	0	16
+201	"State Representative, Dist 3"	37	OF	D	220	5	2	0	72	0	846543	10	10	1	"TODD, Christopher L.T."	2		2419	27	2446
+201	"State Representative, Dist 3"	37	OF	D	220	5	2	0	72	0	846543	10	10	2	"KEAWEKANE, Kuulei (Kiana)"	1		1233	51	1284
+346	"State Representative, Dist 4"	38	OF	R	155	7	0	0	31	2	846543	8	8	1	"WITTENHAGEN, Zak"	1		741	48	789
+183	"State Representative, Dist 4"	39	OF	D	126	2	3	0	75	2	846543	8	8	1	"ILAGAN, Greggor"	2		2423	45	2468
+183	"State Representative, Dist 4"	39	OF	D	126	2	3	0	75	2	846543	8	8	2	"HUNT, Tamlyn (Tam)"	1		1222	50	1272
+467	"State Representative, Dist 5"	40	OF	R	169	14	0	0	65	0	846543	20	20	1	"MCCORMICK, Dalene"	1		800	74	874
+283	"State Representative, Dist 5"	41	OF	D	279	5	4	0	58	1	846543	20	20	2	"KAPELA, Jeanne"	2		2680	26	2706
+283	"State Representative, Dist 5"	41	OF	D	279	5	4	0	58	1	846543	20	20	1	"KANEALI'I-KLEINFELDER, Matt"	1		1156	27	1183
+331	"State Representative, Dist 6"	42	OF	D	813	12	0	0	40	0	846543	8	8	1	"KAHALOA, Kirstin"	1		3278	90	3368
+297	"State Representative, Dist 7"	43	OF	D	457	9	0	0	55	2	846543	14	14	1	"LOWEN, Nicole"	1		2390	60	2450
+566	"State Representative, Dist 8"	44	OF	R	109	2	2	0	46	0	846543	8	8	1	"PERREIRA, Monique"	2		740	43	783
+566	"State Representative, Dist 8"	44	OF	R	109	2	2	0	46	0	846543	8	8	2	"CERMELJ, Hope Alohalani"	1		192	13	205
+273	"State Representative, Dist 8"	45	OF	D	682	5	0	0	58	2	846543	8	8	1	"TARNAS, David A."	1		3399	27	3426
+27	"State Representative, Dist 9"	46	OF	D	622	14	0	0	138	2	846543	10	10	1	"WOODSON, Justin H."	1		3021	48	3069
+507	"State Representative, Dist 10"	47	OF	R	262	20	0	0	119	6	846543	14	14	2	"BUMANGLAG, Travis"	1		873	61	934
+156	"State Representative, Dist 10"	48	OF	D	412	7	3	0	150	4	846543	14	14	2	"MIYAKE, Tyson K."	2		3702	62	3764
+156	"State Representative, Dist 10"	48	OF	D	412	7	3	0	150	4	846543	14	14	1	"KAHO'OHANOHANO, Ki'i"	1		1181	38	1219
+396	"State Representative, Dist 11"	49	OF	R	191	8	0	0	58	0	846543	8	8	2	"WALKER, Sheila"	1		995	55	1050
+271	"State Representative, Dist 11"	50	OF	D	913	8	0	0	68	1	846543	8	8	1	"AMATO, Terez (T.Amato)"	1		2908	30	2938
+285	"State Representative, Dist 12"	51	OF	R	212	9	0	0	80	1	846543	10	10	1	"JOHNSON, Dan"	1		941	50	991
+188	"State Representative, Dist 12"	52	OF	D	348	4	7	0	135	2	846543	10	10	1	"YAMASHITA, Kyle T."	2		3039	32	3071
+188	"State Representative, Dist 12"	52	OF	D	348	4	7	0	135	2	846543	10	10	2	"KUOHA, Keoni"	1		2441	36	2477
+330	"State Representative, Dist 13"	53	OF	R	200	11	0	0	80	2	846543	18	18	1	"VANDERPOOL, Robin D."	1		669	51	720
+151	"State Representative, Dist 13"	54	OF	D	1010	10	0	0	105	3	846543	18	18	1	"POEPOE, Mahina"	1		3004	66	3070
+493	"State Representative, Dist 14"	55	OF	G	2	0	0	0	172	4	846543	10	10	1	"KIAKONA, Pa'ele"	1		164	17	181
+290	"State Representative, Dist 14"	56	OF	R	286	30	0	0	96	4	846543	10	10	1	"COCHRAN, Elle"	1		667	59	726
+32	"State Representative, Dist 14"	57	OF	D	362	13	3	0	122	5	846543	10	10	3	"PATEL, Sne"	3		963	32	995
+32	"State Representative, Dist 14"	57	OF	D	362	13	3	0	122	5	846543	10	10	1	"OLSON, Ashley"	2		904	27	931
+32	"State Representative, Dist 14"	57	OF	D	362	13	3	0	122	5	846543	10	10	2	"BALINBIN, Kanamu"	1		703	23	726
+232	"State Representative, Dist 15"	58	OF	D	800	28	0	0	117	1	846543	10	10	1	"NAKAMURA, Nadine K."	1		3387	89	3476
+323	"State Representative, Dist 16"	59	OF	R	275	21	0	0	84	2	846543	10	10	2	"HAZLEBECK, David"	1		814	120	934
+204	"State Representative, Dist 16"	60	OF	D	931	29	0	0	111	4	846543	10	10	1	"EVSLIN, Luke A."	1		4013	134	4147
+300	"State Representative, Dist 17"	61	OF	R	321	16	0	0	58	0	846543	12	12	1	"CLUETT, Misty"	1		703	65	768
+165	"State Representative, Dist 17"	62	OF	D	498	7	5	0	147	3	846543	12	12	3	"MORIKAWA, Daynette (Dee)"	1		3191	60	3251
+165	"State Representative, Dist 17"	62	OF	D	498	7	5	0	147	3	846543	12	12	2	"SCHIMMELFENNIG, Chad K."	2		1231	37	1268
+334	"State Representative, Dist 18"	63	OF	R	149	8	0	0	61	0	846543	10	10	1	"GEDEON, Joe"	1		1272	37	1309
+373	"State Representative, Dist 18"	64	OF	D	2043	13	0	0	50	0	846543	10	10	1	"WATARU, James (Jamie)"	1		5089	16	5105
+36	"State Representative, Dist 19"	65	OF	D	552	2	1	0	114	3	846543	8	8	1	"HASHEM, Mark Jun"	1		4144	17	4161
+36	"State Representative, Dist 19"	65	OF	D	552	2	1	0	114	3	846543	8	8	2	"PACARRO, Kahi"	2		3107	49	3156
+276	"State Representative, Dist 20"	66	OF	R	133	2	0	0	43	1	846543	10	10	1	"ASING, David"	1		629	24	653
+37	"State Representative, Dist 20"	67	OF	D	1317	12	0	0	34	1	846543	10	10	1	"NAKADA GRANDINETTI, Tina"	1		4422	39	4461
+167	"State Representative, Dist 21"	68	OF	D	328	1	8	0	113	0	846543	8	8	3	"TURBIN, Derek"	5		2620	18	2638
+167	"State Representative, Dist 21"	68	OF	D	328	1	8	0	113	0	846543	8	8	1	"MORROW, Jake Takaya"	3		1337	23	1360
+167	"State Representative, Dist 21"	68	OF	D	328	1	8	0	113	0	846543	8	8	2	"PHOMSOUVANH, Andrew"	4		1331	9	1340
+167	"State Representative, Dist 21"	68	OF	D	328	1	8	0	113	0	846543	8	8	4	"KNIGHT, Angie"	2		342	5	347
+167	"State Representative, Dist 21"	68	OF	D	328	1	8	0	113	0	846543	8	8	5	"ASUEGA-FUALAAU, Ranell"	1		166	1	167
+39	"State Representative, Dist 22"	69	OF	D	1199	17	0	0	37	1	846543	10	10	1	"GARRETT, Andrew Takuya"	1		4917	41	4958
+548	"State Representative, Dist 23"	70	OF	R	95	5	0	0	38	1	846543	10	10	1	"MUH, Victor"	1		478	26	504
+203	"State Representative, Dist 23"	71	OF	D	850	19	0	0	53	1	846543	10	10	1	"OLDS, Ikaika M."	1		2869	49	2918
+368	"State Representative, Dist 24"	72	OF	N	55	1	0	0	69	3	846543	8	8	1	"CLAUSEN, Jonathan"	1		74	0	74
+41	"State Representative, Dist 24"	73	OF	D	221	2	4	0	116	2	846543	8	8	1	"TAM, Adrian"	2		3023	38	3061
+41	"State Representative, Dist 24"	73	OF	D	221	2	4	0	116	2	846543	8	8	2	"EASTMAN, Bulla"	1		440	12	452
+42	"State Representative, Dist 25"	74	OF	D	1214	24	0	0	67	5	846543	8	8	1	"IWAMOTO, Kim Coco"	1		3698	59	3757
+530	"State Representative, Dist 26"	75	OF	R	66	2	0	0	50	0	846543	8	8	3	"SILVA, Tony"	2		367	26	393
+530	"State Representative, Dist 26"	75	OF	R	66	2	0	0	50	0	846543	8	8	2	"MCCREARY, Robin C. (Robyn)"	1		316	27	343
+160	"State Representative, Dist 26"	76	OF	D	400	5	2	0	69	3	846543	8	8	3	"ROSS, Ian M.A."	4		1989	28	2017
+160	"State Representative, Dist 26"	76	OF	D	400	5	2	0	69	3	846543	8	8	2	"CHAR, Nathan Kenichi"	1		1483	26	1509
+160	"State Representative, Dist 26"	76	OF	D	400	5	2	0	69	3	846543	8	8	1	"FUJINAKA, Janel S."	2		718	24	742
+160	"State Representative, Dist 26"	76	OF	D	400	5	2	0	69	3	846543	8	8	4	"HEIM, Arjuna"	3		415	6	421
+44	"State Representative, Dist 27"	77	OF	D	1044	17	0	0	57	2	846543	8	8	1	"TAKENOUCHI, Jenna W.Y.C."	1		5528	57	5585
+45	"State Representative, Dist 28"	78	OF	D	197	2	5	0	88	4	846543	8	8	3	"RATCLIFFE, Michael (Cov)"	5		719	13	732
+45	"State Representative, Dist 28"	78	OF	D	197	2	5	0	88	4	846543	8	8	5	"ALVES, Nadia"	2		631	13	644
+45	"State Representative, Dist 28"	78	OF	D	197	2	5	0	88	4	846543	8	8	2	"NAGATANI, Anthony A. (Tony)"	4		564	7	571
+45	"State Representative, Dist 28"	78	OF	D	197	2	5	0	88	4	846543	8	8	1	"ABIHAI, Reno"	1		246	6	252
+45	"State Representative, Dist 28"	78	OF	D	197	2	5	0	88	4	846543	8	8	4	"CARAVALHO, Ernest"	3		198	5	203
+270	"State Representative, Dist 29"	79	OF	R	88	7	0	0	45	1	846543	8	8	1	"ABALOS, Tess"	1		431	16	447
+217	"State Representative, Dist 29"	80	OF	D	57	1	3	0	118	0	846543	8	8	1	"HUSSEY, Ikaika"	1		1385	13	1398
+217	"State Representative, Dist 29"	80	OF	D	57	1	3	0	118	0	846543	8	8	2	"MIZUNO, John M."	2		1350	11	1361
+332	"State Representative, Dist 30"	81	OF	R	39	1	0	0	92	1	846543	8	8	2	"YBANEZ, Amanda"	1		216	4	220
+332	"State Representative, Dist 30"	81	OF	R	39	1	0	0	92	1	846543	8	8	3	"YOUNG, Angela Melody"	2		173	7	180
+190	"State Representative, Dist 30"	82	OF	D	65	0	0	0	93	2	846543	8	8	1	"TEMPLO, Shirley Ann"	3		1180	12	1192
+190	"State Representative, Dist 30"	82	OF	D	65	0	0	0	93	2	846543	8	8	3	"KEALOHA, Kekoa O Pololu"	2		430	9	439
+190	"State Representative, Dist 30"	82	OF	D	65	0	0	0	93	2	846543	8	8	2	"FAATEA, Faatea S."	1		117	1	118
+291	"State Representative, Dist 31"	83	OF	R	90	5	0	0	46	0	846543	8	8	1	"VALDEZ, Nancy"	1		577	25	602
+179	"State Representative, Dist 31"	84	OF	D	432	8	0	0	62	1	846543	8	8	1	"ICHIYAMA, Linda"	1		3130	15	3145
+313	"State Representative, Dist 32"	85	OF	R	69	5	0	0	74	3	846543	10	10	1	"SHIMIZU, Garner M."	1		877	27	904
+211	"State Representative, Dist 32"	86	OF	D	1289	19	0	0	46	1	846543	10	10	2	"AIU, Micah Pookela Kim"	1		2782	18	2800
+173	"State Representative, Dist 33"	87	OF	D	1640	16	0	0	63	1	846543	8	8	1	"KONG, Sam Satoru"	1		5061	28	5089
+324	"State Representative, Dist 34"	88	OF	R	138	5	0	0	46	0	846543	8	8	2	"DUPIO, Gaius, II (Kipi)"	1		797	31	828
+166	"State Representative, Dist 34"	89	OF	D	893	11	0	0	30	0	846543	8	8	1	"TAKAYAMA, Gregg"	1		4012	19	4031
+52	"State Representative, Dist 35"	90	OF	D	707	2	0	0	60	1	846543	12	12	1	"CHUN, Cory M."	1		2961	12	2973
+53	"State Representative, Dist 36"	91	OF	D	107	0	4	0	82	3	846543	8	8	3	"HARTSFIELD, Daisy Balais"	2		981	7	988
+53	"State Representative, Dist 36"	91	OF	D	107	0	4	0	82	3	846543	8	8	2	"BARSATAN, Eric C."	1		728	8	736
+53	"State Representative, Dist 36"	91	OF	D	107	0	4	0	82	3	846543	8	8	1	"MORITA, Maurice"	3		347	3	350
+511	"State Representative, Dist 37"	92	OF	N	31	1	0	0	71	1	846543	8	8	1	"SVRCINA, Emil"	1		56	3	59
+54	"State Representative, Dist 37"	93	OF	D	554	3	2	0	60	2	846543	8	8	1	"LA CHICA, Trish"	1		5015	28	5043
+54	"State Representative, Dist 37"	93	OF	D	554	3	2	0	60	2	846543	8	8	2	"NAGAMINE, Trevor T."	2		1171	9	1180
+305	"State Representative, Dist 38"	94	OF	R	67	5	0	0	83	0	846543	8	8	1	"CHEAPE MATSUMOTO, Lauren"	1		1244	45	1289
+320	"State Representative, Dist 39"	95	OF	R	81	6	0	0	68	2	846543	12	12	1	"DEGRACIA, Daniel (Danny)"	1		743	33	776
+320	"State Representative, Dist 39"	95	OF	R	81	6	0	0	68	2	846543	12	12	2	"KAIWI, Wayne"	2		440	34	474
+56	"State Representative, Dist 39"	96	OF	D	209	1	2	0	81	2	846543	12	12	1	"ROSENLEE, Corey"	2		2161	25	2186
+56	"State Representative, Dist 39"	96	OF	D	209	1	2	0	81	2	846543	12	12	2	"DOCTOLERO, Loren Keola"	1		1283	20	1303
+312	"State Representative, Dist 40"	97	OF	R	175	10	0	0	70	1	846543	8	8	1	"REYES ODA, Julie"	1		1087	76	1163
+57	"State Representative, Dist 40"	98	OF	D	369	10	0	0	57	3	846543	8	8	1	"MARTINEZ, Rose"	1		1869	26	1895
+296	"State Representative, Dist 41"	99	OF	R	147	12	0	0	55	0	846543	10	10	1	"ALCOS, David A., III"	1		1138	79	1217
+301	"State Representative, Dist 42"	100	OF	R	51	6	0	0	70	0	846543	8	8	1	"GARCIA, Diamond"	1		854	87	941
+59	"State Representative, Dist 42"	101	OF	D	632	9	0	0	44	1	846543	8	8	1	"PARIS, Anthony Makana"	1		1962	34	1996
+289	"State Representative, Dist 43"	102	OF	R	32	3	3	0	119	4	846543	8	8	2	"MEDEIROS, Sheila"	1		733	109	842
+289	"State Representative, Dist 43"	102	OF	R	32	3	3	0	119	4	846543	8	8	3	"SOUZA, Kanani"	2		809	33	842
+419	"State Representative, Dist 44"	103	OF	N	13	0	0	0	105	4	846543	8	8	1	"DE LA CRUZ, Blessings"	1		36	5	41
+463	"State Representative, Dist 44"	104	OF	R	79	6	0	0	56	4	846543	8	8	2	"WEAVER, Charla (Kahealani)"	1		840	60	900
+61	"State Representative, Dist 44"	105	OF	D	72	3	1	0	81	2	846543	8	8	2	"KILA, Darius K."	2		1734	26	1760
+61	"State Representative, Dist 44"	105	OF	D	72	3	1	0	81	2	846543	8	8	1	"KAHIKINA, Michael P."	1		223	5	228
+303	"State Representative, Dist 45"	106	OF	R	54	9	0	0	61	2	846543	8	8	2	"MURAOKA, Chris"	1		855	55	910
+247	"State Representative, Dist 45"	107	OF	D	359	5	0	0	29	1	846543	8	8	1	"KAOPUA, Kalehua"	1		1389	27	1416
+314	"State Representative, Dist 46"	108	OF	R	119	3	1	0	66	1	846543	14	14	1	"GABRIEL, Daniel Michael"	1		724	76	800
+314	"State Representative, Dist 46"	108	OF	R	119	3	1	0	66	1	846543	14	14	2	"YOUNGSTROM, Rocklin"	2		224	23	247
+62	"State Representative, Dist 46"	109	OF	D	487	12	0	0	92	0	846543	14	14	1	"PERRUSO, Amy A."	1		2719	41	2760
+288	"State Representative, Dist 47"	110	OF	R	127	4	0	0	46	0	846543	8	8	1	"TALAEAI, Mark"	1		959	48	1007
+215	"State Representative, Dist 47"	111	OF	D	280	0	0	0	39	0	846543	8	8	1	"QUINLAN, Sean"	1		1749	16	1765
+172	"State Representative, Dist 48"	112	OF	D	811	9	0	0	34	0	846543	10	10	1	"KITAGAWA, Lisa C."	1		4275	33	4308
+306	"State Representative, Dist 49"	113	OF	R	225	15	0	0	38	2	846543	12	12	1	"RODAS, 'Ale"	1		933	91	1024
+65	"State Representative, Dist 49"	114	OF	D	700	10	0	0	48	4	846543	12	12	2	"MATAYOSHI, Scot"	1		4341	24	4365
+356	"State Representative, Dist 50"	115	OF	G	1	0	0	0	48	1	846543	10	10	1	"FITZGERALD, Jesse W.M."	1		23	0	23
+66	"State Representative, Dist 50"	116	OF	D	1001	5	0	0	67	1	846543	10	10	1	"LEE, Mike"	1		4825	31	4856
+154	"State Representative, Dist 51"	117	OF	D	138	3	6	0	118	5	846543	10	10	2	"MARTEN, Lisa"	3		3376	11	3387
+154	"State Representative, Dist 51"	117	OF	D	138	3	6	0	118	5	846543	10	10	1	"KALAMA, Micah C.K."	2		1316	26	1342
+154	"State Representative, Dist 51"	117	OF	D	138	3	6	0	118	5	846543	10	10	3	"HAUMSCHILD, Steve"	1		253	0	253
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	9	"GALUTERIA, Brickwood M."	8		73598	1198	74796
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	15	"WAIHEE, John, IV"	15		69636	1125	70761
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	6	"ANDERSON, Ikaika"	2		57737	1181	58918
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	8	"SOUZA, Keoni"	14		56536	1464	58000
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	7	"AKINA, Adrian (Kealii)"	1		42704	1334	44038
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	2	"CRABBE, Kanekoa (Koa)"	7		29367	941	30308
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	10	"PARISH, Kalena A."	13		27268	1041	28309
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	13	"LEE, Brendon Kalei'aina"	10		22911	586	23497
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	16	"COSTELLO, Michelle (Mikala)"	6		22141	613	22754
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	4	"BAKER, Karl Veto"	3		19376	600	19976
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	1	"NIHIPALI, R. Kunani, Sr."	12		18575	619	19194
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	12	"BURKE, Jackie Kahookele"	5		14074	414	14488
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	14	"BILLIONAIRE, Shelby Pikachu"	4		10970	488	11458
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	11	"MARTIN, Philip (Kawika)"	11		8809	317	9126
+115	At-Large Trustee	118	OF	NON	340530	6807	531	4	0	0	846543	494	494	5	"KAUAULA, Clifford K."	9		8770	307	9077
+152	"Councilmember, Dist 1"	119	OF	NON	270	6	4	0	0	0	846543	6	6	2	"KIMBALL, Heather L."	2		2640	44	2684
+152	"Councilmember, Dist 1"	119	OF	NON	270	6	4	0	0	0	846543	6	6	1	"DEL ROSARIO, Ren"	1		1504	54	1558
+152	"Councilmember, Dist 1"	119	OF	NON	270	6	4	0	0	0	846543	6	6	3	"PENN, BJ"	3		226	8	234
+117	"Councilmember, Dist 2"	120	OF	NON	466	8	38	0	0	0	846543	12	12	3	"KAGIWADA, Jennifer (Jenn)"	5		2925	55	2980
+117	"Councilmember, Dist 2"	120	OF	NON	466	8	38	0	0	0	846543	12	12	1	"BOTELHO, Wendy S."	2		1018	25	1043
+117	"Councilmember, Dist 2"	120	OF	NON	466	8	38	0	0	0	846543	12	12	5	"FUKUSHIMA, JoNelle (Jo)"	3		881	43	924
+117	"Councilmember, Dist 2"	120	OF	NON	466	8	38	0	0	0	846543	12	12	2	"BAUTISTA, Blaine Kenji"	1		817	17	834
+117	"Councilmember, Dist 2"	120	OF	NON	466	8	38	0	0	0	846543	12	12	4	"HALVERSEN, William John"	4		104	6	110
+176	"Councilmember, Dist 3"	121	OF	NON	374	15	3	0	0	0	846543	14	14	1	"ONISHI, Dennis (Fresh)"	2		3353	77	3430
+176	"Councilmember, Dist 3"	121	OF	NON	374	15	3	0	0	0	846543	14	14	2	"CHANG, Kelton K."	1		1915	59	1974
+150	"Councilmember, Dist 4"	122	OF	NON	398	11	9	0	0	0	846543	4	4	3	"OHARA, Eileen"	4		1550	41	1591
+150	"Councilmember, Dist 4"	122	OF	NON	398	11	9	0	0	0	846543	4	4	2	"ENRIQUEZ, Lloyd K."	2		1111	40	1151
+150	"Councilmember, Dist 4"	122	OF	NON	398	11	9	0	0	0	846543	4	4	4	"HOFFELD, Cyd L. (Makanui)"	3		788	30	818
+150	"Councilmember, Dist 4"	122	OF	NON	398	11	9	0	0	0	846543	4	4	1	"BURROWS, Shannon (Smiley)"	1		728	26	754
+209	"Councilmember, Dist 5"	123	OF	NON	280	8	5	1	0	0	846543	10	10	5	"MATSON, Shannon Lopeka"	3		970	13	983
+209	"Councilmember, Dist 5"	123	OF	NON	280	8	5	1	0	0	846543	10	10	3	"RODENHURST, Ikaika"	4		934	19	953
+209	"Councilmember, Dist 5"	123	OF	NON	280	8	5	1	0	0	846543	10	10	1	"KANEALII-KLEINFELDER, Dawn"	1		879	27	906
+209	"Councilmember, Dist 5"	123	OF	NON	280	8	5	1	0	0	846543	10	10	4	"TUPA'I, Jr"	5		739	67	806
+209	"Councilmember, Dist 5"	123	OF	NON	280	8	5	1	0	0	846543	10	10	2	"MAKUAOLE-PERRIN, Chantel"	2		411	17	428
+121	"Councilmember, Dist 6"	124	OF	NON	466	10	9	0	0	0	846543	10	10	3	"ENRIQUES, Guy"	3		1331	33	1364
+121	"Councilmember, Dist 6"	124	OF	NON	466	10	9	0	0	0	846543	10	10	1	"AKI, Zed Kaapana"	1		1006	20	1026
+121	"Councilmember, Dist 6"	124	OF	NON	466	10	9	0	0	0	846543	10	10	2	"CANELAS, Justin R."	2		913	22	935
+121	"Councilmember, Dist 6"	124	OF	NON	466	10	9	0	0	0	846543	10	10	4	"MASTERS, Jason R"	5		748	20	768
+121	"Councilmember, Dist 6"	124	OF	NON	466	10	9	0	0	0	846543	10	10	5	"JONES, Kyle Kepano"	4		336	7	343
+220	"Councilmember, Dist 7"	125	OF	NON	496	10	0	0	0	0	846543	14	14	1	"POWERS, Manu"	3		2563	100	2663
+220	"Councilmember, Dist 7"	125	OF	NON	496	10	0	0	0	0	846543	14	14	2	"OMBAC, Edgar B. (Eddie O)"	2		821	46	867
+220	"Councilmember, Dist 7"	125	OF	NON	496	10	0	0	0	0	846543	14	14	3	"HENRIQUES, Mark G."	1		478	29	507
+123	"Councilmember, Dist 8"	126	OF	NON	1031	45	0	0	0	0	846543	6	6	2	"INABA, Holeka Goro"	1		2529	128	2657
+124	"Councilmember, Dist 9"	127	OF	NON	1064	22	0	0	0	0	846543	8	8	1	"HUSTACE, James E."	1		3703	60	3763
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	2	"BISSEN, Richard T., Jr."	1		15371	414	15785
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	7	"SUGIMURA, Yuki Lei Kashiwa"	8		11284	207	11491
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	5	"LA COSTA, P. Denise"	4		3783	187	3970
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	6	"PETTERSON, Amy"	7		827	24	851
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	9	"DUNBAR, John"	2		340	24	364
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	3	"LIGGETT, Travis A."	5		234	6	240
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	4	"WELSH, Callahan P."	9		198	11	209
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	10	"MOSES, Joseph"	6		153	11	164
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	1	"HERRMANN, Justin"	3		127	8	135
+568	Mayor	128	OF	NON	907	21	53	0	0	0	846543	68	68	8	"ZAHND, Laurent"	10		66	8	74
+488	Councilmember (Wailuku-Waihee-Waikapu)	129	OF	NON	5302	80	51	1	0	0	846543	68	68	5	"MONIZ, Marvin"	5		10883	236	11119
+488	Councilmember (Wailuku-Waihee-Waikapu)	129	OF	NON	5302	80	51	1	0	0	846543	68	68	3	"LINDSEY, Ashley Awakea"	3		6189	169	6358
+488	Councilmember (Wailuku-Waihee-Waikapu)	129	OF	NON	5302	80	51	1	0	0	846543	68	68	1	"FORREST, James (Nahele)"	1		5173	164	5337
+488	Councilmember (Wailuku-Waihee-Waikapu)	129	OF	NON	5302	80	51	1	0	0	846543	68	68	4	"KONOHIA, Randy Ha'aheo"	2		4126	229	4355
+488	Councilmember (Wailuku-Waihee-Waikapu)	129	OF	NON	5302	80	51	1	0	0	846543	68	68	2	"LLOYD, Alan Peter"	4		1619	42	1661
+354	Councilmember (Kahului)	130	OF	NON	6111	127	24	0	0	0	846543	68	68	3	"BATANGAN, Kauanoe"	2		13945	327	14272
+354	Councilmember (Kahului)	130	OF	NON	6111	127	24	0	0	0	846543	68	68	2	"KAMEKONA, Carol Lee"	3		10913	329	11242
+354	Councilmember (Kahului)	130	OF	NON	6111	127	24	0	0	0	846543	68	68	1	"ABABAN, Jason"	1		2350	138	2488
+132	Councilmember (Upcountry)	131	OF	NON	5379	94	36	0	0	0	846543	68	68	2	"PAHIA, Bobby"	3		13993	441	14434
+132	Councilmember (Upcountry)	131	OF	NON	5379	94	36	0	0	0	846543	68	68	4	"YOKOUCHI, Jon Masaru"	4		5881	133	6014
+132	Councilmember (Upcountry)	131	OF	NON	5379	94	36	0	0	0	846543	68	68	5	"CABILES, Derrick W."	1		5059	193	5252
+132	Councilmember (Upcountry)	131	OF	NON	5379	94	36	0	0	0	846543	68	68	3	"GUARD, John B., IV (Jb)"	2		2995	60	3055
+374	Mayor	132	OF	NON	998	18	72	0	0	0	846543	32	32	4	"RAPOZO, Mel"	5		7301	317	7618
+374	Mayor	132	OF	NON	998	18	72	0	0	0	846543	32	32	2	"CARVALHO, Bernard, Jr."	2		5557	187	5744
+374	Mayor	132	OF	NON	998	18	72	0	0	0	846543	32	32	6	"COWDEN, Felicia E."	3		3045	154	3199
+374	Mayor	132	OF	NON	998	18	72	0	0	0	846543	32	32	1	"ANDAYA-LINDSEY, Laura"	1		471	33	504
+374	Mayor	132	OF	NON	998	18	72	0	0	0	846543	32	32	3	"WIDENER, Michaela B."	6		356	26	382
+374	Mayor	132	OF	NON	998	18	72	0	0	0	846543	32	32	5	"DENIS, Megeso-William"	4		195	39	234
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	2	"KANESHIRO, Arryl J."	10		8018	232	8250
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	7	"HOLLAND, Fern Anuenue"	8		7927	306	8233
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	18	"OZAKI, Todd R."	18		7815	245	8060
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	4	"CORREA, Michelle Kaleiohi"	4		7222	252	7474
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	14	"BULOSAN, Addison"	2		6133	199	6332
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	16	"SHIGEMOTO, Taylor H."	22		5117	191	5308
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	1	"APPLEGATE, Paul Noboru"	1		5101	200	5301
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	3	"DECOSTA, Billy D."	5		4876	234	5110
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	11	"SMITH, Dane"	23		4583	197	4780
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	22	"COOTS, Mike"	3		3946	186	4132
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	9	"MARTIN, Umi"	13		3849	165	4014
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	23	"RAPOZO, Cheree"	20		3262	201	3463
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	8	"KAIMINAAUAO, Keola"	9		2717	169	2886
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	5	"MATTOS, John H. (Scooby)"	14		2221	185	2406
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	13	"POAI, Michael Roven"	19		1928	152	2080
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	25	"TRUJILLO, James (Jimmy T)"	24		1916	80	1996
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	15	"SECRETARIO, Rachel M."	21		1858	90	1948
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	27	"FERNANDES CABERTO, Trysten"	6		1715	76	1791
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	20	"OKHMAN, Yelena"	17		1501	173	1674
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	10	"MUKAI, Nelson"	16		1544	72	1616
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	6	"HAUPT, Jeremy"	7		1123	151	1274
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	12	"LINDSEY, Thomas, Jr. (Tom)"	12		891	109	1000
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	21	"WORKMAN, Skyler"	26		856	45	901
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	17	"MONTEMAYOR, John"	15		755	55	810
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	19	"WILSON, Herman K."	25		546	28	574
+136	Councilmember	133	OF	NON	37598	1390	74	0	0	0	846543	32	32	26	"LANGTAD, James R."	11		429	35	464
+137	"Councilmember, Dist II"	134	OF	NON	4021	117	0	0	0	0	846543	32	32	1	"WEYER, Matt"	1		9292	260	9552
+140	"Councilmember, Dist IV"	135	OF	NON	2712	34	210	0	0	0	846543	38	38	4	"OZAWA, Trevor"	3		12163	116	12279
+140	"Councilmember, Dist IV"	135	OF	NON	2712	34	210	0	0	0	846543	38	38	3	"WATERS, Tommy"	4		8633	45	8678
+140	"Councilmember, Dist IV"	135	OF	NON	2712	34	210	0	0	0	846543	38	38	2	"GREGORY, Tara Malia"	1		4115	110	4225
+140	"Councilmember, Dist IV"	135	OF	NON	2712	34	210	0	0	0	846543	38	38	1	"LIANG, Jason K."	2		2635	49	2684
+260	"Councilmember, Dist VIII"	136	OF	NON	8717	106	0	0	0	0	846543	34	34	1	"OKIMOTO, Val Aquino"	1		19098	230	19328
