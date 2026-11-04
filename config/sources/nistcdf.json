@@ -1,0 +1,19 @@
+{
+  "_howto": "Feeds in the NIST SP 1500-100 Election Results Common Data Format (XML, V1 or V2), polled by server/src/adapters/nistcdf.js. One entry per feed: feedUrl = the XML download, url = the human results page. generatedDate12HourClock: the exporter writes GeneratedDate on a 12-hour clock with no AM/PM (pick the latest of t / t+12h that isn't in the future). Set enabled:false to stop polling one without deleting it.",
+  "feeds": [
+    {
+      "id": "OH-2026-general",
+      "state": "OH",
+      "name": "Ohio 2026 General (Ohio Secretary of State)",
+      "feedUrl": "https://liveresults.ohiosos.gov/Api/v1/download?filename=VSSC1622XmlFileBlob",
+      "url": "https://liveresults.ohiosos.gov/",
+      "date": "2026-11-03",
+      "races": ["senate", "governor", "house"],
+      "measures": true,
+      "generatedDate12HourClock": true,
+      "enabled": true,
+      "verified": "2026-11-03",
+      "note": "V1 (IEEE 1622.2) schema, summary format: state + 88 counties, VoteCounts Type=Total only (no per-method split). County turnout: VotersRegistered, SummaryCounts Total BallotsCast, Absentee BallotsOutstanding, precincts SubUnitsReported/TotalSubUnits."
+    }
+  ]
+}

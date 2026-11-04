@@ -1,0 +1,970 @@
+<?xml version="1.0"?>
+<ElectionReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://grouper.ieee.org/groups/1622/groups/2/V1/1622_2-election_results_reporting.xsd" Format="SummaryContest" GeneratedDate="2026-11-03T11:48:35Z" Issuer="Ohio Secretary of State Frank LaRose" IssuerAbbreviation="OH" Sequence="0" SequenceEnd="0" Status="UnofficialPartial" VendorApplicationId="Ohio-ENR 1.0.02">
+  <Code Type="Fips" Value="39"/>
+  <Code OtherType="DisplayedFormat" Type="Other" Value="SummaryContest"/>
+  <GpUnitCollection>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA504C09A3E0633390EE0AE290" Name="Adams" IsElectoralDistrict="false" SubUnitsReported="0" TotalSubUnits="21" Type="County" VotersParticipated="0" VotersRegistered="17079">
+      <Code Type="StateLevel" Value="1"/>
+      <Code Type="LocalLevel" Value="Southwest"/>
+      <SummaryCounts Type="Total" BallotsCast="0"/>
+      <SummaryCounts Type="Absentee" BallotsCast="0" BallotsOutstanding="4"/>
+      <SummaryCounts Type="Provisional"/>
+      <ContactInformation>
+        <Uri>https://www.boe.ohio.gov/adams/election-info/election-results/</Uri>
+      </ContactInformation>
+      <CountStatus Status="InProcess" Type="Total"/>
+    </GpUnit>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA502C09A3E0633390EE0AE290" Name="Franklin" IsElectoralDistrict="false" SubUnitsReported="0" TotalSubUnits="889" Type="County" VotersParticipated="0" VotersRegistered="906080">
+      <Code Type="StateLevel" Value="25"/>
+      <Code Type="LocalLevel" Value="Central"/>
+      <SummaryCounts Type="Total" BallotsCast="0"/>
+      <SummaryCounts Type="Absentee" BallotsCast="0" BallotsOutstanding="579"/>
+      <SummaryCounts Type="Provisional"/>
+      <ContactInformation>
+        <Uri>https://vote.franklincountyohio.gov/election-info/2026</Uri>
+      </ContactInformation>
+      <CountStatus Status="InProcess" Type="Total"/>
+    </GpUnit>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA507409A3E0633390EE0AE290" Name="Hamilton" IsElectoralDistrict="false" SubUnitsReported="0" TotalSubUnits="563" Type="County" VotersParticipated="0" VotersRegistered="616754">
+      <Code Type="StateLevel" Value="31"/>
+      <Code Type="LocalLevel" Value="Southwest"/>
+      <SummaryCounts Type="Total" BallotsCast="0"/>
+      <SummaryCounts Type="Absentee" BallotsCast="0" BallotsOutstanding="534"/>
+      <SummaryCounts Type="Provisional"/>
+      <ContactInformation>
+        <Uri>https://votehamiltoncountyohio.gov/results/</Uri>
+      </ContactInformation>
+      <CountStatus Status="InProcess" Type="Total"/>
+    </GpUnit>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA506009A3E0633390EE0AE290" Name="Summit" IsElectoralDistrict="false" SubUnitsReported="0" TotalSubUnits="371" Type="County" VotersParticipated="0" VotersRegistered="376027">
+      <Code Type="StateLevel" Value="77"/>
+      <Code Type="LocalLevel" Value="Northeast"/>
+      <SummaryCounts Type="Total" BallotsCast="0"/>
+      <SummaryCounts Type="Absentee" BallotsCast="0" BallotsOutstanding="213"/>
+      <SummaryCounts Type="Provisional"/>
+      <ContactInformation>
+        <Uri>https://www.boe.ohio.gov/summit/elections</Uri>
+      </ContactInformation>
+      <CountStatus Status="InProcess" Type="Total"/>
+    </GpUnit>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA503C09A3E0633390EE0AE290" Name="Warren" IsElectoralDistrict="false" SubUnitsReported="0" TotalSubUnits="185" Type="County" VotersParticipated="0" VotersRegistered="177400">
+      <Code Type="StateLevel" Value="83"/>
+      <Code Type="LocalLevel" Value="Southwest"/>
+      <SummaryCounts Type="Total" BallotsCast="0"/>
+      <SummaryCounts Type="Absentee" BallotsCast="0" BallotsOutstanding="99"/>
+      <SummaryCounts Type="Provisional"/>
+      <ContactInformation>
+        <Uri>https://liveresults.boe.ohio.gov/ENR/warrenohenr/18/en/R_Index_18.html</Uri>
+      </ContactInformation>
+      <CountStatus Status="InProcess" Type="Total"/>
+    </GpUnit>
+    <!--Begin districts-->
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA509109A3E0633390EE0AE290" Name="Congressional District 1" IsElectoralDistrict="true" Type="Congressional"/>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA511F09A3E0633390EE0AE290" Name="Congressional District 13" IsElectoralDistrict="true" Type="Congressional"/>
+    <GpUnit xsi:type="ReportingUnit" ObjectId="_55A742EA50B509A3E0633390EE0AE290" Name="Statewide" IsElectoralDistrict="true" Type="State"/>
+    <!--Begin precincts-->
+  </GpUnitCollection>
+  <PartyCollection>
+    <Party ObjectId="_9BCCB0C4CCBE7EF8E0533390EE0A422D" Abbreviation="None" Color="877f87">
+      <Name>
+        <LanguageString Language="en">Blank (General Election Only)</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="-"/>
+    </Party>
+    <Party ObjectId="_AC855AE0DF484A2FA57D6DB3F6BA5CF9" Abbreviation="DEM" Color="0476b0">
+      <Name>
+        <LanguageString Language="en">Democratic</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="D"/>
+    </Party>
+    <Party ObjectId="_DD200138729942C6A023B19AF926ADB3" Abbreviation="LIB" Color="663300">
+      <Name>
+        <LanguageString Language="en">Libertarian</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="L"/>
+    </Party>
+    <Party ObjectId="_9426C73DBDE6454AA474A38DF95441AF" Abbreviation="Indep" Color="683e92">
+      <Name>
+        <LanguageString Language="en">Independent - NO ballot designation</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="NO"/>
+    </Party>
+    <Party ObjectId="_364A85C92D733C97E0530A90EE0A6179" Abbreviation="Nonprtycan" Color="683e92">
+      <Name>
+        <LanguageString Language="en">Nonparty candidate</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="NP"/>
+    </Party>
+    <Party ObjectId="_38C7D3223D4A667CE0530E90EE0A990E" Abbreviation="Other-part" Color="683e92">
+      <Name>
+        <LanguageString Language="en">Other-party candidate</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="OP"/>
+    </Party>
+    <Party ObjectId="_3756BCE1F95642B48AF39744B9AB0493" Abbreviation="REP" Color="bf452e">
+      <Name>
+        <LanguageString Language="en">Republican</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="R"/>
+    </Party>
+    <Party ObjectId="_847766AF01C04E06AF286F44D3F655FE" Abbreviation="Write-in" Color="f5802d">
+      <Name>
+        <LanguageString Language="en">Not Applicable - WI</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="WI"/>
+    </Party>
+    <Party ObjectId="_4078798702EA49A79B56B96D97AFB761" Abbreviation="Non-partis" Color="656565">
+      <Name>
+        <LanguageString Language="en">Non-partisan candidate</LanguageString>
+      </Name>
+      <Code Type="StateLevel" Value="XX"/>
+    </Party>
+  </PartyCollection>
+  <PersonCollection>
+    <Person ObjectId="_4AA3EE46DBECB0DBE0633390EE0A58CE">
+      <FirstName>Amy</FirstName>
+      <LastName>Acton</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_CO4AA3EE46DBECB0DBE0633390EE0A58CE">
+      <FirstName>David</FirstName>
+      <LastName>Pepper</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+      <ContactInformation>
+        <AddressLine>7750 Graves Rd</AddressLine>
+        <AddressLine>Indian Hill, OH</AddressLine>
+        <AddressLine>45243</AddressLine>
+      </ContactInformation>
+    </Person>
+    <Person ObjectId="_0E63190E520B41A8E0633390EE0AAA9F">
+      <FirstName>Sherrod</FirstName>
+      <LastName>Brown</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_4B312F020E82BE2AE0633390EE0AF66F">
+      <FirstName>Carey</FirstName>
+      <LastName>Coleman</LastName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_4B2036BF839BC6EEE0633390EE0AEB65">
+      <FirstName>Eric</FirstName>
+      <LastName>Conroy</LastName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_5A08529FB4851322E0633390EE0AE6D6">
+      <FirstName>Sandeep</FirstName>
+      <LastName>Dixit</LastName>
+      <PartyId>_364A85C92D733C97E0530A90EE0A6179</PartyId>
+    </Person>
+    <Person ObjectId="_E77833E491053CFEE0533390EE0ACAFD">
+      <FirstName>Stephen</FirstName>
+      <LastName>Faris</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+    </Person>
+    <Person ObjectId="_E77833E490A73CFEE0533390EE0ACAFD">
+      <FirstName>Timothy</FirstName>
+      <LastName>Grady</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+    </Person>
+    <Person ObjectId="_COE77833E490A73CFEE0533390EE0ACAFD">
+      <FirstName>Andrea</FirstName>
+      <LastName>Neutzling</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+      <ContactInformation>
+        <AddressLine>2440 Union Aly</AddressLine>
+        <AddressLine>Syracuse, OH</AddressLine>
+        <AddressLine>45779</AddressLine>
+      </ContactInformation>
+    </Person>
+    <Person ObjectId="_4B0A65DA9AAF0EAEE0633390EE0A7E11">
+      <FirstName>Heather</FirstName>
+      <LastName>Hill</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+    </Person>
+    <Person ObjectId="_CO4B0A65DA9AAF0EAEE0633390EE0A7E11">
+      <FirstName>Patrick</FirstName>
+      <LastName>Manley</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+      <ContactInformation>
+        <AddressLine>4405 Olentangy Blvd</AddressLine>
+        <AddressLine>Columbus, OH</AddressLine>
+        <AddressLine>43214</AddressLine>
+      </ContactInformation>
+    </Person>
+    <Person ObjectId="_59F4DEB13FEB0F04E0633390EE0A01BC">
+      <FirstName>Anthony</FirstName>
+      <LastName>Holliman</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+    </Person>
+    <Person ObjectId="_4AA30560E5190E39E0633390EE0A3B39">
+      <FirstName>Jon</FirstName>
+      <LastName>Husted</LastName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_20D2EDA90F844A22E0633390EE0AD909">
+      <FirstName>Don</FirstName>
+      <LastName>Kissick</LastName>
+      <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+    </Person>
+    <Person ObjectId="_CO20D2EDA90F844A22E0633390EE0AD909">
+      <FirstName>James</FirstName>
+      <LastName>Mills</LastName>
+      <MiddleName>L.</MiddleName>
+      <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+      <ContactInformation>
+        <AddressLine>990 Hampton Ct</AddressLine>
+        <AddressLine>Lebanon, OH</AddressLine>
+        <AddressLine>45036</AddressLine>
+      </ContactInformation>
+    </Person>
+    <Person ObjectId="_0E63190E51ED41A8E0633390EE0AAA9F">
+      <FirstName>Greg</FirstName>
+      <LastName>Landsman</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_59930677798D5D6FE0633390EE0ADD86">
+      <FirstName>Greg</FirstName>
+      <LastName>Levy</LastName>
+      <PartyId>_38C7D3223D4A667CE0530E90EE0A990E</PartyId>
+    </Person>
+    <Person ObjectId="_0E74F19693023B1AE0633390EE0AE3BF">
+      <FirstName>Vivek</FirstName>
+      <LastName>Ramaswamy</LastName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+    </Person>
+    <Person ObjectId="_CO0E74F19693023B1AE0633390EE0AE3BF">
+      <FirstName>Robert</FirstName>
+      <LastName>McColley</LastName>
+      <MiddleName>A.</MiddleName>
+      <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+      <ContactInformation>
+        <AddressLine>331 W Clinton St</AddressLine>
+        <AddressLine>Napoleon, OH</AddressLine>
+        <AddressLine>43545</AddressLine>
+      </ContactInformation>
+    </Person>
+    <Person ObjectId="_4AA30560E5180E39E0633390EE0A3B39">
+      <FirstName>William</FirstName>
+      <LastName>Redpath</LastName>
+      <MiddleName>B.</MiddleName>
+      <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+    </Person>
+    <Person ObjectId="_29DDFB8528190537E0530E90EE0A539F">
+      <FirstName>Emilia</FirstName>
+      <LastName>Sykes</LastName>
+      <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+    </Person>
+    <Person ObjectId="_576274EE440473A4E0633390EE0A591D">
+      <FirstName>Timothy</FirstName>
+      <LastName>Telymonde</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+    </Person>
+    <Person ObjectId="_E77833E4904C3CFEE0533390EE0ACAFD">
+      <FirstName>Renea</FirstName>
+      <LastName>Turner</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+    </Person>
+    <Person ObjectId="_COE77833E4904C3CFEE0533390EE0ACAFD">
+      <FirstName>Jalen</FirstName>
+      <LastName>Turner</LastName>
+      <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+      <ContactInformation>
+        <AddressLine>2737 Woodthrush Rd</AddressLine>
+        <AddressLine>Springfield, OH</AddressLine>
+        <AddressLine>45502</AddressLine>
+      </ContactInformation>
+    </Person>
+    <Person ObjectId="_5A1D2856A2CBD7BEE0633390EE0A2FBB">
+      <FirstName>Nathan</FirstName>
+      <LastName>Weise</LastName>
+      <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+    </Person>
+  </PersonCollection>
+  <OfficeCollection>
+    <OfficeGroup Name="ROOT">
+      <SubOfficeGroup Name="Statewide Issues"/>
+    </OfficeGroup>
+  </OfficeCollection>
+  <Election Date="2026-11-03" Type="General">
+    <Name>
+      <LanguageString Language="en">November 3, 2026 General Unofficial Canvass</LanguageString>
+    </Name>
+    <ContactInformation>
+      <Uri>https://vote.ohio.gov/</Uri>
+    </ContactInformation>
+    <CandidateCollection>
+      <Candidate ObjectId="_55A742EA5F7909A3E0633390EE0AE290" IsTopTicket="true" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Amy Acton</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_4AA3EE46DBECB0DBE0633390EE0A58CE</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_CO55A742EA5F7A09A3E0633390EE0AE290" PreElectionStatus="Qualified" IsTopTicket="false">
+        <BallotName>
+          <LanguageString Language="en">David Pepper</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_CO4AA3EE46DBECB0DBE0633390EE0A58CE</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA61EF09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Sherrod Brown</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_0E63190E520B41A8E0633390EE0AAA9F</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA573009A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Carey Coleman</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_4B312F020E82BE2AE0633390EE0AF66F</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA574A09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Eric Conroy</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_4B2036BF839BC6EEE0633390EE0AEB65</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_5A58EBEB13D5CFF2E0633390EE0ABEAC" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Sandeep Dixit</LanguageString>
+        </BallotName>
+        <PartyId>_364A85C92D733C97E0530A90EE0A6179</PartyId>
+        <PersonId>_5A08529FB4851322E0633390EE0AE6D6</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_59F4DEB13FEC0F04E0633390EE0A01BC" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Stephen Faris</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_E77833E491053CFEE0533390EE0ACAFD</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_59F4F0CBC2572408E0633390EE0A0E4A" IsTopTicket="true" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Timothy Grady</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_E77833E490A73CFEE0533390EE0ACAFD</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_CO59F4F0CBC2582408E0633390EE0A0E4A" PreElectionStatus="Qualified" IsTopTicket="false">
+        <BallotName>
+          <LanguageString Language="en">Andrea Neutzling</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_COE77833E490A73CFEE0533390EE0ACAFD</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_576292D859D073A6E0633390EE0A943A" IsTopTicket="true" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Heather Hill</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_4B0A65DA9AAF0EAEE0633390EE0A7E11</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_CO576292D859D173A6E0633390EE0A943A" PreElectionStatus="Qualified" IsTopTicket="false">
+        <BallotName>
+          <LanguageString Language="en">Patrick Manley</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_CO4B0A65DA9AAF0EAEE0633390EE0A7E11</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_59F4DEB140460F04E0633390EE0A01BC" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Anthony Holliman</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_59F4DEB13FEB0F04E0633390EE0A01BC</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA56A809A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Jon Husted</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_4AA30560E5190E39E0633390EE0A3B39</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_59434A42701E7F04E0633390EE0A7DE4" IsTopTicket="true" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Don Kissick</LanguageString>
+        </BallotName>
+        <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+        <PersonId>_20D2EDA90F844A22E0633390EE0AD909</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_CO59434A426FC47F04E0633390EE0A7DE4" PreElectionStatus="Qualified" IsTopTicket="false">
+        <BallotName>
+          <LanguageString Language="en">James Mills</LanguageString>
+        </BallotName>
+        <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+        <PersonId>_CO20D2EDA90F844A22E0633390EE0AD909</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA628A09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Greg Landsman</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_0E63190E51ED41A8E0633390EE0AAA9F</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_5993067779935D6FE0633390EE0ADD86" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Greg Levy</LanguageString>
+        </BallotName>
+        <PartyId>_38C7D3223D4A667CE0530E90EE0A990E</PartyId>
+        <PersonId>_59930677798D5D6FE0633390EE0ADD86</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA542B09A3E0633390EE0AE290" IsTopTicket="true" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Vivek Ramaswamy</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_0E74F19693023B1AE0633390EE0AE3BF</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_CO55A742EA542C09A3E0633390EE0AE290" PreElectionStatus="Qualified" IsTopTicket="false">
+        <BallotName>
+          <LanguageString Language="en">Robert McColley</LanguageString>
+        </BallotName>
+        <PartyId>_3756BCE1F95642B48AF39744B9AB0493</PartyId>
+        <PersonId>_CO0E74F19693023B1AE0633390EE0AE3BF</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA672809A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">William Redpath</LanguageString>
+        </BallotName>
+        <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+        <PersonId>_4AA30560E5180E39E0633390EE0A3B39</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_55A742EA628F09A3E0633390EE0AE290" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Emilia Sykes</LanguageString>
+        </BallotName>
+        <PartyId>_AC855AE0DF484A2FA57D6DB3F6BA5CF9</PartyId>
+        <PersonId>_29DDFB8528190537E0530E90EE0A539F</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_576274EE440573A4E0633390EE0A591D" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Timothy Telymonde</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_576274EE440473A4E0633390EE0A591D</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_59F4F0CBC2B12408E0633390EE0A0E4A" IsTopTicket="true" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Renea Turner</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_E77833E4904C3CFEE0533390EE0ACAFD</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_CO59F4F0CBC2B22408E0633390EE0A0E4A" PreElectionStatus="Qualified" IsTopTicket="false">
+        <BallotName>
+          <LanguageString Language="en">Jalen Turner</LanguageString>
+        </BallotName>
+        <PartyId>_847766AF01C04E06AF286F44D3F655FE</PartyId>
+        <PersonId>_COE77833E4904C3CFEE0533390EE0ACAFD</PersonId>
+      </Candidate>
+      <Candidate ObjectId="_5A1D2856A2CCD7BEE0633390EE0A2FBB" PreElectionStatus="Qualified">
+        <BallotName>
+          <LanguageString Language="en">Nathan Weise</LanguageString>
+        </BallotName>
+        <PartyId>_DD200138729942C6A023B19AF926ADB3</PartyId>
+        <PersonId>_5A1D2856A2CBD7BEE0633390EE0A2FBB</PersonId>
+      </Candidate>
+    </CandidateCollection>
+    <ContestCollection>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA542A09A3E0633390EE0AE290" Abbreviation="Governor and Lieutenant Governor " Name="Governor and Lieutenant Governor" SequenceOrder="01000000" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="Governor and Lieutenant Governor" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA5F7909A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA5F7909A3E0633390EE0AE290</CandidateId>
+          <CandidateId>_CO55A742EA5F7A09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS59F4F0CBC2572408E0633390EE0A0E4A" IsWriteIn="true">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_59F4F0CBC2572408E0633390EE0A0E4A</CandidateId>
+          <CandidateId>_CO59F4F0CBC2582408E0633390EE0A0E4A</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS576292D859D073A6E0633390EE0A943A" IsWriteIn="true">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_576292D859D073A6E0633390EE0A943A</CandidateId>
+          <CandidateId>_CO576292D859D173A6E0633390EE0A943A</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS59434A42701E7F04E0633390EE0A7DE4" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_59434A42701E7F04E0633390EE0A7DE4</CandidateId>
+          <CandidateId>_CO59434A426FC47F04E0633390EE0A7DE4</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA542B09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA542B09A3E0633390EE0AE290</CandidateId>
+          <CandidateId>_CO55A742EA542C09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS59F4F0CBC2B12408E0633390EE0A0E4A" IsWriteIn="true">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_59F4F0CBC2B12408E0633390EE0A0E4A</CandidateId>
+          <CandidateId>_CO59F4F0CBC2B22408E0633390EE0A0E4A</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50B509A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA542A09A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA56A709A3E0633390EE0AE290" Abbreviation="U.S. Senator" Name="U.S. Senator" SequenceOrder="06000000" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="U.S. Senator" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA61EF09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA61EF09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS59F4DEB13FEC0F04E0633390EE0A01BC" IsWriteIn="true">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_59F4DEB13FEC0F04E0633390EE0A01BC</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS59F4DEB140460F04E0633390EE0A01BC" IsWriteIn="true">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_59F4DEB140460F04E0633390EE0A01BC</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA56A809A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA56A809A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS5993067779935D6FE0633390EE0ADD86" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_5993067779935D6FE0633390EE0ADD86</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA672809A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA672809A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS576274EE440573A4E0633390EE0A591D" IsWriteIn="true">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_576274EE440573A4E0633390EE0A591D</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50B509A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA56A709A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA574909A3E0633390EE0AE290" Abbreviation="Representative to Congress - District 01" Name="Representative to Congress - District 01" SequenceOrder="07000001" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="Representative to Congress" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA574A09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA509109A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA574A09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA628A09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA509109A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA628A09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS5A1D2856A2CCD7BEE0633390EE0A2FBB" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA509109A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_5A1D2856A2CCD7BEE0633390EE0A2FBB</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA509109A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA574909A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="CandidateContest" ObjectId="_55A742EA572F09A3E0633390EE0AE290" Abbreviation="Representative to Congress - District 13" Name="Representative to Congress - District 13" SequenceOrder="07000013" VoteVariationType="NofM" NumberElected="1" VotesAllowed="1">
+        <Code OtherType="ContestType" Value="Representative to Congress" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="false"/>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA573009A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA511F09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA573009A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS5A58EBEB13D5CFF2E0633390EE0ABEAC" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA511F09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_5A58EBEB13D5CFF2E0633390EE0ABEAC</CandidateId>
+        </BallotSelection>
+        <BallotSelection xsi:type="CandidateSelection" ObjectId="_BS55A742EA628F09A3E0633390EE0AE290" IsWriteIn="false">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA511F09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+          <CandidateId>_55A742EA628F09A3E0633390EE0AE290</CandidateId>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA511F09A3E0633390EE0AE290</JurisdictionalScopeId>
+        <OfficeId>_OF55A742EA572F09A3E0633390EE0AE290</OfficeId>
+      </Contest>
+      <Contest xsi:type="BallotMeasureContest" ObjectId="_58F2C0185A8C8A6AE0633390EE0AF8C5" Abbreviation="State Issue 3" Name="State Issue 3 To require voters to present photo identification in order to vote" VoteVariationType="NofM" Type="BallotMeasure">
+        <Code OtherType="ContestType" Value="Statewide Issues" Type="Other"/>
+        <Code Type="Other" OtherType="IsTopRace" Value="true"/>
+        <BallotSelection xsi:type="BallotMeasureSelection" ObjectId="_YES58F2C0185A8C8A6AE0633390EE0AF8C5" Selection="YES">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+        </BallotSelection>
+        <BallotSelection xsi:type="BallotMeasureSelection" ObjectId="_NO58F2C0185A8C8A6AE0633390EE0AF8C5" Selection="NO">
+          <VoteCountsCollection>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA50B509A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin county totals-->
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA504C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA502C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA507409A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA506009A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <VoteCounts Type="Total" Count="0">
+              <GpUnitId>_55A742EA503C09A3E0633390EE0AE290</GpUnitId>
+            </VoteCounts>
+            <!--begin precinct totals-->
+          </VoteCountsCollection>
+        </BallotSelection>
+        <JurisdictionalScopeId>_55A742EA50B509A3E0633390EE0AE290</JurisdictionalScopeId>
+      </Contest>
+    </ContestCollection>
+  </Election>
+</ElectionReport>
