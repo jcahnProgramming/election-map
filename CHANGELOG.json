@@ -2,6 +2,17 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.5.2",
+      "date": "2026-11-03",
+      "title": "Maryland results host, Alaska measure titles",
+      "sections": {
+        "Fixed": [
+          "Maryland results are read straight from the State Board of Elections' election-night results site, and its \"Official results\" link goes there; the old page stopped updating before polls closed and now only redirects",
+          "Alaska's two statewide ballot measures show as Ballot Measure 2 and Ballot Measure 3 with their official titles, instead of the feed's petition codes (24ESEG, 25USCV)"
+        ]
+      }
+    },
+    {
       "version": "0.5.1",
       "date": "2026-11-03",
       "title": "Honest about silent sources",

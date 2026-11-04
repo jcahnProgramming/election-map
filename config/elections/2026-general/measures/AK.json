@@ -1,0 +1,40 @@
+{
+  "state": "AK",
+  "election": "2026-general",
+  "as_of": "2026-11-04",
+  "note": "The Division of Elections' results feed names these by petition file number only ('BM#2 24ESEG', 'BM#3 25USCV'); titles below are the official ones from the Division's petition-status pages.",
+  "measures": [
+    {
+      "measure_id": "Ballot Measure 2",
+      "match": ["24ESEG"],
+      "official_source_url": "https://www.elections.alaska.gov/petitions-and-ballot-measures/petition-status/?initiative_id=24ESEG",
+      "official_title": {
+        "value": "An Act to repeal a nonpartisan and open top four Primary election system and ranked-choice General election system; and to reestablish a partisan political Primary and change necessary and related appointment procedures; reestablish special runoff elections; and repeal and amend independent expenditure group requirements",
+        "source_url": "https://www.elections.alaska.gov/petitions-and-ballot-measures/petition-status/?initiative_id=24ESEG",
+        "as_of": "2026-11-04"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "detail": "Initiative petition 24ESEG; proper filing certified by the Lieutenant Governor on 2025-12-31.",
+        "source_url": "https://www.elections.alaska.gov/lt-governor-nancy-dahlstrom-certifies-proper-filing-of-ballot-initiative-petition-24eseg/",
+        "as_of": "2026-11-04"
+      }
+    },
+    {
+      "measure_id": "Ballot Measure 3",
+      "match": ["25USCV"],
+      "official_source_url": "https://www.elections.alaska.gov/petitions-and-ballot-measures/petition-status/?initiative_id=25USCV",
+      "official_title": {
+        "value": "United States Citizens Voter Act",
+        "source_url": "https://www.elections.alaska.gov/petitions-and-ballot-measures/petition-status/?initiative_id=25USCV",
+        "as_of": "2026-11-04"
+      },
+      "placed_by": {
+        "type": "initiative",
+        "detail": "Initiative petition 25USCV; proper filing certified by the Lieutenant Governor on 2026-03-17.",
+        "source_url": "https://www.elections.alaska.gov/lieutenant-governor-nancy-dahlstrom-certifies-proper-filing-of-ballot-initiative-petition-25uscv/",
+        "as_of": "2026-11-04"
+      }
+    }
+  ]
+}

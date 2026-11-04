@@ -90,3 +90,12 @@ test('sums: county numbers add up, methods per county and statewide, precincts',
   assert.deepEqual(alle.votes.slice(0, 2), [61, 50]);
   assert.equal(alle.pctReporting, 16.7);
 });
+
+test('MD 2026 general: the election-night results host (elections.maryland.gov redirects there; the old folder froze at 4:24 PM)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const cfg = JSON.parse(readFileSync(new URL('../../config/sources/mdsbe.json', import.meta.url), 'utf8'));
+  const md = (cfg.elections ?? []).find((e) => e.id === '2026GG');
+  assert.equal(md.base, 'https://results.elections.maryland.gov/elections/2026/General_results');
+  const off = JSON.parse(readFileSync(new URL('../../config/official-results.json', import.meta.url), 'utf8'));
+  assert.equal(new URL(off.states.MD.url).host, 'results.elections.maryland.gov');
+});
