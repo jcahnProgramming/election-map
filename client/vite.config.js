@@ -14,6 +14,9 @@ export default defineConfig({
   define: { __APP_VERSION__: JSON.stringify(APP_VERSION) },
   server: {
     port: 5173,
+    // Dev-only pages under client/dev/ (photo review) read the candidate photo files and the shared photo rules.
+    // Nothing else outside client/ is served; never the SQLite data directory.
+    fs: { allow: ['.', '../config/elections', '../config/elections.json', '../server/src/photo-rules.js'] },
     proxy: {
       '/api': { target: API, changeOrigin: true },
       '/photos': { target: API, changeOrigin: true },

@@ -11,6 +11,7 @@
     "dev": "node scripts/dev.js",
     "build": "node scripts/check-changelog.js && npm --prefix client run build",
     "start": "npm --prefix server start",
-    "check-changelog": "node scripts/check-changelog.js"
+    "check-changelog": "node scripts/check-changelog.js",
+    "photos:apply": "node scripts/photos-apply.js"
   }
 }

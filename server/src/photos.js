@@ -17,34 +17,14 @@ import { logger } from './log.js';
 
 const log = logger('photos');
 
-export const PHOTO_SOURCE_TYPES = ['official_portrait', 'wikimedia_commons', 'campaign_press_kit', 'candidate_submitted'];
-export const MAJOR_SHARE = 5; // % of counted votes that makes any candidate "major"
+import { PHOTO_SOURCE_TYPES, MAJOR_SHARE, normName, normDistrict, isWriteIn, isPartyNominee } from './photo-rules.js';
+
+export { PHOTO_SOURCE_TYPES, MAJOR_SHARE, normName, normDistrict, isPartyNominee };
 export const PHOTO_SIZE = 160; // px, square
 
 const PHOTO_OFFICES = new Set(['senate', 'governor', 'house']);
 
-/** Lowercase, no punctuation or quotes, single spaces: "Robert P. \"Family Man\" Murray, Jr." → "robert p family man murray jr". */
-export const normName = (s) => String(s ?? '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
-  .replace(/[^a-z0-9]+/g, ' ').trim();
-/** "07" / "7" → "7"; null / "" / "AL" / "at large" → "". */
-export const normDistrict = (d) => {
-  const s = String(d ?? '').trim().toLowerCase();
-  if (!s || s === 'al' || /^at[- ]?large$/.test(s)) return '';
-  return /^\d+$/.test(s) ? String(Number(s)) : s;
-};
-
 export const photoId = (url) => createHash('sha256').update(String(url)).digest('hex').slice(0, 20);
-
-const isWriteIn = (c) => /\bwrite[- ]?ins?\b/i.test(String(c?.name ?? '')) || /^(w|wi|wri|write-in|write in)$/i.test(String(c?.partyRaw ?? '').trim());
-// Labels that mean "no party": not a party nominee (they're major only at ≥ 5%).
-const NO_PARTY = /^(|ind|i|indep|independent|una|uaf|unaffiliated|unc|np|npa|nonp|non|nonpartisan|non partisan|no party|no party preference|npp|non-partis|nonprtycan|none|oth|other|other-part|other party|pc|pet|petitioning candidate|w|wi|wri|write-in|write in)$/;
-
-/** A party nominee of a party (any label other than "no party" / independent / write-in). */
-export const isPartyNominee = (c) => {
-  if (!c || isWriteIn(c)) return false;
-  if (c.party === 'DEM' || c.party === 'REP') return true;
-  return !NO_PARTY.test(String(c.partyRaw ?? '').trim().toLowerCase().replace(/\s+/g, ' '));
-};
 
 /** Major candidates of one contest: party nominees plus anyone at ≥ MAJOR_SHARE% of the votes counted. */
 export function majorCandidates(candidates) {
