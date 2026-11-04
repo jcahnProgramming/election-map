@@ -1,0 +1,33 @@
+{
+  "_howto": "Elections polled by the Maryland State Board of Elections adapter (server/src/adapters/mdsbe.js). base = the results folder; the adapter reads gen_results_{year}_1.html (its 'Last refreshed' line is the change check) and gen_results_{year}_by_county_{1..countyPages}.html (every contest, per county). multiCounty = regex on a contest's office heading (<h2>) for offices that span several counties and are summed across them; any other contest is kept per county. utcOffset = the offset of the pages' Eastern times on election day. Set enabled:false to stop polling.",
+  "_fipsHowto": "countyFips: county page names matched by FIPS instead of by name (us-atlas names both Baltimore County 24005 and Baltimore City 24510 'Baltimore').",
+  "requestGapMs": 500,
+  "multiCounty": "^(governor|comptroller|attorney general|representative in congress|u\\.?s\\.? senator|united states senator|state senator|house of delegates|judge of the circuit court|judge, appellate court|judge, supreme court|judge, court of appeals|question \\d+\\b)",
+  "countyFips": {
+    "Baltimore City": {
+      "fips": "24510",
+      "name": "Baltimore City"
+    }
+  },
+  "contestRules": [
+    {
+      "match": "register of wills$",
+      "level": "county",
+      "office": "county_office",
+      "note": "MD: each county's Register of Wills"
+    }
+  ],
+  "elections": [
+    {
+      "id": "2026GG",
+      "name": "Maryland 2026 Gubernatorial General Election",
+      "date": "2026-11-03",
+      "year": 2026,
+      "base": "https://elections.maryland.gov/elections/2026/general_results",
+      "countyPages": 24,
+      "utcOffset": "-05:00",
+      "verified": "2026-11-03",
+      "enabled": true
+    }
+  ]
+}

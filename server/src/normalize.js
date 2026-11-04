@@ -9,6 +9,7 @@ const KNOWN_OTHER = new Set([
   'fwd', 'forward', 'acn', 'american constitution', 'con', 'constitution', 'ind', 'independent', 'np', 'nonpartisan',
   'npa', 'no party', 'no party affiliation', 'wi', 'write-in', 'write in', 'oth', 'other', 'nom', 'nominated by petition',
   'ccp', 'n', 'y', 'unc', 'gre', 'una', 'cst', 'independent party of delaware', 'w', 'l', 'npp', 'peace and justice', 'freedom and unity', 'progressive', 'epic', 'independent american', 'labor democrat', 'no kings', 'cascade', 'fan', 'for all neighbors', 'no party preference', 'g', 'i', 'other-part', 'indep', 'nonprtycan', 'non-partis', 'none', 'wf', 'working families', 'lpf', 'wrk', 'lbt', 'nol', 'pnd', 'amc', 'non', 'ust', 'nlp', 'wcp', 'lmn', 'nwp', 'afp', 'byp', 'soc',
+  'working class party', 'other candidates', // MD
   'p&f', 'peace and freedom', 'nonp', 'non partisan', 'pc', 'petitioning candidate',
 ]);
 
