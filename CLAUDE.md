@@ -1,7 +1,7 @@
 # election-map — project constitution
 
 A **public**, no-login, live election-night results map for the 2026 US midterms, served at
-https://election.jamiecahn.com through a Cloudflare tunnel to <HOST> (<HOST_OS>). Nothing in it is
+https://election.jamiecahn.com from a self-hosted Docker container. Nothing in it is
 confidential and nothing in it ever needs a secret.
 
 ## What the app is
@@ -71,7 +71,7 @@ confidential and nothing in it ever needs a secret.
 - React + Vite frontend (`client/`), d3-geo + `us-atlas` (states/counties-albers-10m, pre-projected, FIPS ids).
   No Leaflet.
 - Separate `server/` and `client/` packages (each with its own lockfile), not npm workspaces.
-- One Docker image (multi-stage), docker compose on <HOST>.
+- One Docker image (multi-stage), docker compose on the deploy host.
 
 ## Layout
 - `server/src/index.js` Express + Socket.io + poller wiring. `results.js` builds API responses from the latest
@@ -110,13 +110,15 @@ Reads are cached in memory between polls and sent with `Cache-Control: public, m
 `npm run build` runs `scripts/check-changelog.js` first, so a bad entry fails the build and the deploy.
 Versions go upward from 0.1.0; **1.0.0 is reserved for an agreed 1.0**.
 
-## Deployment (<HOST>, via Gitea Actions)
-- Every push to `main` runs `.gitea/workflows/deploy.yml` (label `ubuntu-latest`, served by the `<RUNNER>`
-  act_runner, same as Overwatch). It fast-forwards the host clone at `<DEPLOY_DIR>` from
-  Gitea's internal address `<GITEA_INTERNAL_URL>` (tailnet MagicDNS names don't resolve from <HOST>/containers),
-  runs `docker compose up -d --build`, then fails the run unless `/api/health` answers 200 with `"ok": true`.
-- The port is published on **<LAN_IP> only** (`ELECTION_MAP_BIND_IP`), never 0.0.0.0; host port
-  `ELECTION_MAP_PORT` (default 3710). The Cloudflare tunnel points at `http://<LAN_IP>:<port>`.
+## Deployment (via Gitea Actions)
+- **No host details in this repo** (IPs, hostnames, paths, internal URLs): the repo is public. They live in the
+  owner's private ops notes and in Gitea Actions variables (`DEPLOY_DIR`, `GITEA_INTERNAL_URL`,
+  `ELECTION_MAP_BIND_IP`), read as `${{ vars.* }}`.
+- Every push to `main` runs `.gitea/workflows/deploy.yml` (label `ubuntu-latest`). It fast-forwards the host clone
+  at `DEPLOY_DIR` from `GITEA_INTERNAL_URL`, runs `docker compose up -d --build`, then fails the run unless
+  `/api/health` answers 200 with `"ok": true`. A missing variable fails the preflight before anything is touched.
+- The port is published on one address only (`ELECTION_MAP_BIND_IP` from the host `.env`, else the variable),
+  never 0.0.0.0; host port `ELECTION_MAP_PORT` (default 3710). Compose's own default is 127.0.0.1.
 - SQLite lives in `./data` under the deploy dir (bind mount). Never delete, reset or chown it. The workflow
   never creates or edits the host `.env`, and checks that it didn't.
 - Commit/push: the owner pushes. Don't push.

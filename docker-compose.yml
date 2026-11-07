@@ -1,8 +1,7 @@
 # election-map — public live election-night results dashboard (UI + API + Socket.io), one container.
 #
-# Deploy dir on <HOST>: <DEPLOY_DIR>, a git clone of this repo. Compose resolves
-# relative paths against that dir, so ./data lands at <DEPLOY_DIR>/data
-# (the SQLite database). Never delete, reset or chown it.
+# Run from a git clone of this repo. Compose resolves relative paths against that dir, so ./data
+# lands next to this file (the SQLite database). Never delete or reset it on a live deployment.
 
 services:
   election-map:
@@ -10,7 +9,7 @@ services:
     build: .
     image: election-map:local
     restart: unless-stopped
-    # Container user. <HOST_OS> <APPDATA> is usually nobody:users -> set PUID=99 PGID=100 in .env
+    # Container user: set PUID / PGID in .env to the owner of ./data so the app can write its database.
     user: "${PUID:-1000}:${PGID:-1000}"
     env_file:
       - path: .env
@@ -19,10 +18,9 @@ services:
       DATA_DIR: /data
       PORT: 3710
     ports:
-      # Bound to <HOST>'s LAN address ONLY, never 0.0.0.0: the Cloudflare tunnel points at
-      # http://<LAN_IP>:<port>, and that is the only way the public should reach the app.
-      # Consequence: 127.0.0.1 on the host does NOT answer; the deploy health probe uses <LAN_IP>.
-      - "${ELECTION_MAP_BIND_IP:-<LAN_IP>}:${ELECTION_MAP_PORT:-3710}:3710"
+      # Bound to ONE host address, never 0.0.0.0. Default: localhost only. Set ELECTION_MAP_BIND_IP in .env
+      # to the address your reverse proxy / tunnel reaches (then 127.0.0.1 on the host may not answer).
+      - "${ELECTION_MAP_BIND_IP:-127.0.0.1}:${ELECTION_MAP_PORT:-3710}:3710"
     volumes:
       - ./data:/data
     healthcheck:
