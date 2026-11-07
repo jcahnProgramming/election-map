@@ -366,7 +366,10 @@ function parseTurnout(data, { state, counties, anyVotes, locate }) {
         level: 'county', countyFips: m.fips, name: m.name,
         registered: posNum(e?.totalVoters) ?? posNum(Number(vr.get(id)?.total)),
         ballotsCast: posNum(e?.ballotsCast),
-        turnoutPct: typeof loc.turnoutPercent === 'number' && anyVotes ? loc.turnoutPercent : null,
+        // Enhanced Voting publishes turnoutPercent as a 0–1 share (Ada, ID: 0.7457529 = 232,003 / 311,099);
+        // the data contract is 0–100 like every other source.
+        turnoutPct: typeof loc.turnoutPercent === 'number' && Number.isFinite(loc.turnoutPercent) && anyVotes
+          ? Math.round(loc.turnoutPercent * 10000) / 100 : null,
         ballotsOutstanding: outstanding ? outVal(outByName.get(normCounty(locName))) : null,
         precinctsReporting: p.rep, precinctsTotal: p.tot,
       };

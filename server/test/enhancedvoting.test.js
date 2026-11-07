@@ -145,6 +145,22 @@ test('GA turnout: registered from voter registration, nothing invented', () => {
   assert.equal(sourceUpdatedAt, '2026-11-03T17:03:41.263Z');
 });
 
+test('county turnoutPercent is a 0-1 share at the source: served as 0-100 like every other source', () => {
+  // Live 2026-11-04: Brunswick, VA turnoutPercent 0.5227451 = 6,010 ballots cast / 11,497 registered (set on a fixture county).
+  const fx = withCounts(load('va'));
+  const loc = fx.jurisdiction.childLocalities.find((l) => /accomack/i.test(l.name?.[0]?.text ?? ''));
+  assert.ok(loc, 'fixture has Accomack');
+  loc.turnoutPercent = 0.5227451;
+  const { turnout } = parseElection(fx, bdMap(fx), { state: 'VA', counties: true, unmatched: () => {} });
+  const row = turnout.find((t) => t.name === 'Accomack');
+  assert.equal(row.turnoutPct, 52.27);
+  // Nothing counted yet: no turnout figure even if the source sends one.
+  const quiet = load('va');
+  quiet.jurisdiction.childLocalities.find((l) => /accomack/i.test(l.name?.[0]?.text ?? '')).turnoutPercent = 0.5;
+  const q = parseElection(quiet, bdMap(quiet), { state: 'VA', counties: true, unmatched: () => {} });
+  assert.equal(q.turnout.find((t) => t.name === 'Accomack')?.turnoutPct ?? null, null);
+});
+
 test('VA: "Member, United States Senate" / "Member, House of Representatives (1st District)" classify', () => {
   const { races } = parse('va');
   assert.equal(byOffice(races, 'senate').length, 1);
