@@ -83,7 +83,8 @@ confidential and nothing in it ever needs a secret.
   `config/elections.json`). `apicache.js` / `ratelimit.js` public-traffic hardening. `photos.js` candidate photos
   (review gate, fairness rule, disk cache under `DATA_DIR/photos`, served at `GET /photos/:id.jpg`).
 - `server/src/adapters/*.js` one file per source: clarity (CO/IA/SC + county sites), enhancedvoting (GA/VA/UT/WA/RI/ID),
-  txivis, casos, vtsos, ncsbe, tallyenr (AR), deenr, nistcdf (OH; generic parser in `_nist-cdf.js`), pccct, fldos.
+  txivis, casos, vtsos, ncsbe, tallyenr (AR), deenr, nistcdf (OH; generic parser in `_nist-cdf.js`), pccct, fldos,
+  akdoe (AK), alsos (AL), hioe (HI), inenr (IN), lasos (LA), mdsbe (MD), resultsajax (OR/NM/NE/SD/ND).
   Files starting with `_` are helpers the registry skips. An adapter's `sourceKey` must be unique per election.
 - `config/sources/<id>.json` what each adapter polls (`enabled:false` parks a target). `config/races-2026.json` which states hold which
   races (only used for states with no source). `config/clarity-county-candidates.json` research output.
@@ -112,10 +113,10 @@ Versions go upward from 0.1.0; **1.0.0 is reserved for an agreed 1.0**.
 
 ## Deployment (via Gitea Actions)
 - **No host details in this repo** (IPs, hostnames, paths, internal URLs): the repo is public. They live in the
-  owner's private ops notes and in Gitea Actions variables (`DEPLOY_DIR`, `GITEA_INTERNAL_URL`,
+  owner's private ops notes and in Gitea Actions variables (`DEPLOY_DIR`, `INTERNAL_GIT_URL`,
   `ELECTION_MAP_BIND_IP`), read as `${{ vars.* }}`.
 - Every push to `main` runs `.gitea/workflows/deploy.yml` (label `ubuntu-latest`). It fast-forwards the host clone
-  at `DEPLOY_DIR` from `GITEA_INTERNAL_URL`, runs `docker compose up -d --build`, then fails the run unless
+  at `DEPLOY_DIR` from `INTERNAL_GIT_URL`, runs `docker compose up -d --build`, then fails the run unless
   `/api/health` answers 200 with `"ok": true`. A missing variable fails the preflight before anything is touched.
 - The port is published on one address only (`ELECTION_MAP_BIND_IP` from the host `.env`, else the variable),
   never 0.0.0.0; host port `ELECTION_MAP_PORT` (default 3710). Compose's own default is 127.0.0.1.

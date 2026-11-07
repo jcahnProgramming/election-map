@@ -114,7 +114,7 @@ traffic; the app trusts `X-Forwarded-For` only from loopback, link-local and pri
 
 `.gitea/workflows/deploy.yml` redeploys on every push to `main` for a Gitea Actions runner that can reach the host's
 Docker daemon. It reads its host-specific settings from repository Actions variables (`DEPLOY_DIR`,
-`GITEA_INTERNAL_URL`, `ELECTION_MAP_BIND_IP`) and fails before touching anything if one is missing.
+`INTERNAL_GIT_URL`, `ELECTION_MAP_BIND_IP`) and fails before touching anything if one is missing.
 
 ## Add a state
 

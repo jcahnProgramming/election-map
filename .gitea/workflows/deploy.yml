@@ -3,7 +3,7 @@
 # Host-specific values are Gitea Actions variables (repo Settings → Actions → Variables), never
 # committed here. The preflight fails, before anything is touched, if one is missing:
 #   DEPLOY_DIR            absolute path of the git clone the host runs from (with .env and data/)
-#   GITEA_INTERNAL_URL    base URL of Gitea as reachable from job containers (no trailing slash)
+#   INTERNAL_GIT_URL      base URL of Gitea as reachable from job containers (no trailing slash)
 #   ELECTION_MAP_BIND_IP  bind / probe address used when the host .env doesn't set ELECTION_MAP_BIND_IP
 #
 # How it reaches the host: the job container can see the host's Docker daemon (the
@@ -39,7 +39,7 @@ on:
 env:
   DEPLOY_DIR: ${{ vars.DEPLOY_DIR }}
   # Gitea's address as seen from job containers (a VPN / public hostname may not resolve there).
-  GITEA_INTERNAL_URL: ${{ vars.GITEA_INTERNAL_URL }}
+  INTERNAL_GIT_URL: ${{ vars.INTERNAL_GIT_URL }}
   DEFAULT_BIND_IP: ${{ vars.ELECTION_MAP_BIND_IP }}
   APP_CONTAINER: election-map
   GIT_IMAGE: alpine/git:latest
@@ -62,7 +62,7 @@ jobs:
           # Host-specific settings come from Gitea Actions variables. Fail before touching anything.
           unset_vars=""
           [ -n "$DEPLOY_DIR" ] || unset_vars="$unset_vars DEPLOY_DIR"
-          [ -n "$GITEA_INTERNAL_URL" ] || unset_vars="$unset_vars GITEA_INTERNAL_URL"
+          [ -n "$INTERNAL_GIT_URL" ] || unset_vars="$unset_vars INTERNAL_GIT_URL"
           [ -n "$DEFAULT_BIND_IP" ] || unset_vars="$unset_vars ELECTION_MAP_BIND_IP"
           if [ -n "$unset_vars" ]; then
             echo "::error::Missing Gitea Actions variable(s):$unset_vars (repo Settings → Actions → Variables). Nothing was deployed."
@@ -130,7 +130,7 @@ jobs:
           docker run --rm \
             --mount "type=bind,source=$DEPLOY_DIR,target=$DEPLOY_DIR" \
             -w "$DEPLOY_DIR" \
-            -e GIT_TOKEN -e REPO_PATH -e PUSHED_SHA -e GITEA_INTERNAL_URL \
+            -e GIT_TOKEN -e REPO_PATH -e PUSHED_SHA -e INTERNAL_GIT_URL \
             --entrypoint sh "$GIT_IMAGE" -c '
               set -eu
               git config --global --add safe.directory "$PWD"
@@ -148,7 +148,7 @@ jobs:
               fi
 
               before=$(git rev-parse HEAD)
-              git -c http.extraHeader="$auth" fetch --no-tags "$GITEA_INTERNAL_URL/$REPO_PATH.git" main
+              git -c http.extraHeader="$auth" fetch --no-tags "$INTERNAL_GIT_URL/$REPO_PATH.git" main
               git merge --ff-only FETCH_HEAD
               # Keep origin/main in step so `git status` on the host stays accurate.
               if git remote get-url origin >/dev/null 2>&1; then
