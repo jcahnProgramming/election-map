@@ -37,3 +37,15 @@ test('photos pass through candidateList only when the server attached them', () 
   assert.deepEqual(photoCredits(rows), ['A: Photo: U.S. Senate · Public domain · Official portrait']);
   assert.equal(photoCredit(null), '');
 });
+
+test('photo credits: author, license linked to its deed, source page; each photo once', async () => {
+  const { licenseUrl, creditList } = await import('../src/avatar.js');
+  assert.equal(licenseUrl('CC BY-SA 4.0'), 'https://creativecommons.org/licenses/by-sa/4.0/');
+  assert.equal(licenseUrl('CC BY 2.0'), 'https://creativecommons.org/licenses/by/2.0/');
+  assert.equal(licenseUrl('CC0 1.0'), 'https://creativecommons.org/publicdomain/zero/1.0/');
+  assert.equal(licenseUrl('Public domain (PD-USGov-Congress)'), null);
+  const p = { url: '/photos/a.jpg', credit: 'Gage Skidmore', license: 'CC BY-SA 2.0', sourcePage: 'https://commons.wikimedia.org/wiki/File:X.jpg' };
+  assert.deepEqual(creditList([{ name: 'Steve Hilton', photo: p }, { name: 'Steve Hilton', photo: p }, { name: 'No Photo' }]), [
+    { name: 'Steve Hilton', credit: 'Gage Skidmore', license: 'CC BY-SA 2.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/', sourcePage: 'https://commons.wikimedia.org/wiki/File:X.jpg' },
+  ]);
+});

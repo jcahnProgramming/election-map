@@ -52,3 +52,28 @@ export function photoCredit(photo) {
 export function photoCredits(candidates) {
   return [...new Set((candidates || []).filter((c) => c?.photo).map((c) => `${c.name}: ${photoCredit(c.photo)}`))];
 }
+
+/** The Creative Commons deed for a CC license string ("CC BY-SA 4.0" → its deed URL); null for public domain / unknown. */
+export function licenseUrl(license) {
+  const s = String(license ?? '').trim().toLowerCase().replace(/[\s_]+/g, ' ');
+  if (/^cc0\b/.test(s)) return 'https://creativecommons.org/publicdomain/zero/1.0/';
+  const m = s.match(/^cc[ -]by([ -]sa)?(?:[ -](\d\.\d))?$/);
+  if (!m) return null;
+  return `https://creativecommons.org/licenses/${m[1] ? 'by-sa' : 'by'}/${m[2] ?? '4.0'}/`;
+}
+
+/**
+ * Every photo shown in a view, once each, for its "Photo credits" list: [{ name, credit, license, licenseUrl, sourcePage }].
+ * CC BY / CC BY-SA require author, license and a link to the source; public-domain photos are listed too.
+ */
+export function creditList(candidates) {
+  const seen = new Set();
+  const out = [];
+  for (const c of candidates || []) {
+    const p = c?.photo;
+    if (!p?.url || seen.has(p.url)) continue;
+    seen.add(p.url);
+    out.push({ name: c.name, credit: p.credit ?? null, license: p.license ?? null, licenseUrl: licenseUrl(p.license), sourcePage: p.sourcePage ?? null });
+  }
+  return out.sort((a, b) => a.name.localeCompare(b.name));
+}

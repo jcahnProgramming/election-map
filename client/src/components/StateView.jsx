@@ -10,6 +10,7 @@ import { fmtMT, coverageCopy, OFFICIAL_LINK_TEXT, staleSourceText } from '../cal
 import AllRaces from './AllRaces.jsx';
 import { SeatRows, PartyTag, RunningMate, DistrictRows } from './EntryTip.jsx';
 import Avatar from './Avatar.jsx';
+import PhotoCredits from './PhotoCredits.jsx';
 
 /** Statewide strip: Dem / Rep / Other / Reporting (or an honest status in place of numbers). */
 export function TotalsStrip({ entry, race, stateName, compact = false }) {
@@ -230,6 +231,7 @@ export default function StateView({ abbr, race, tab = 'overview', data, error, c
       <>
         <SourceStrip entry={sw} official={official} name={contests?.name || name} />
         <AllRaces data={contests} error={contestsError} stateName={contests?.name || name} onOpenMeasure={onOpenMeasure} initialQuery={query} />
+        <PhotoCredits candidates={(contests?.groups || []).flatMap((g) => g.contests.flatMap((c) => c.candidates || []))} />
       </>
     );
   }
@@ -274,6 +276,11 @@ export default function StateView({ abbr, race, tab = 'overview', data, error, c
           onUnpin={() => setPinned(null)}
         />
       )}
+      <PhotoCredits candidates={[
+        ...(sw?.candidates || []),
+        ...(sw?.otherContests || []).flatMap((c) => c.candidates || []),
+        ...(sw?.districts || []).map((d) => d.lead).filter(Boolean),
+      ]} />
     </>
   );
 }

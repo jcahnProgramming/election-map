@@ -3,6 +3,7 @@ import { chamberTotals, hemicycle, closestSeats, seatStatus, partyTag } from '..
 import { fmtReporting, reportingText } from '../format.js';
 import { fmtMargin } from '../shading.js';
 import Avatar from './Avatar.jsx';
+import PhotoCredits from './PhotoCredits.jsx';
 import { RunningMate } from './EntryTip.jsx';
 
 // Seat chart geometry per chamber (from the design): arcs, inner / outer radius, dot radius.
@@ -108,6 +109,7 @@ export default function CongressView({ data, error, onOpenState }) {
           note="All 435 seats are up every two years. Districts in states without live data stay grey until counts arrive." />
       </div>
       <Closest up={data.senate.up} onOpen={onOpenState} />
+      <PhotoCredits candidates={closestSeats(data.senate.up).map((x) => x.lead).filter(Boolean)} />
       <p className="disclaimer">
         Seats not up this year come from the official chamber rosters
         {data.senate.source?.roster_page ? <> (<a href={data.senate.source.roster_page} target="_blank" rel="noopener noreferrer">senate.gov</a>{data.house.source?.url ? <>, <a href={data.house.source.url} target="_blank" rel="noopener noreferrer">clerk.house.gov</a></> : null}, as of {data.asOf})</> : null}.

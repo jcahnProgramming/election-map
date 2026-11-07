@@ -19,7 +19,11 @@ export default function Avatar({ name, party, photo, size = 28, interactive = tr
         {interactive && (
           <span className="av-credit" role="tooltip">
             {credit}
-            {photo.sourcePage ? <span className="av-src">{photo.sourcePage.replace(/^https?:\/\//, '').slice(0, 60)}</span> : null}
+            {photo.sourcePage ? (
+              <a className="av-src" href={photo.sourcePage} target="_blank" rel="noopener noreferrer">
+                Source: {photo.sourcePage.replace(/^https?:\/\//, '').replace(/^commons\.wikimedia\.org\/wiki\//, 'Commons ').slice(0, 60)}
+              </a>
+            ) : null}
           </span>
         )}
       </span>

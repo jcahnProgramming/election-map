@@ -17,7 +17,7 @@ import { logger } from './log.js';
 
 const log = logger('photos');
 
-import { PHOTO_SOURCE_TYPES, MAJOR_SHARE, normName, normDistrict, isWriteIn, isPartyNominee } from './photo-rules.js';
+import { PHOTO_SOURCE_TYPES, MAJOR_SHARE, normName, normDistrict, isWriteIn, isPartyNominee, isPermittedLicense } from './photo-rules.js';
 
 export { PHOTO_SOURCE_TYPES, MAJOR_SHARE, normName, normDistrict, isPartyNominee };
 export const PHOTO_SIZE = 160; // px, square
@@ -55,9 +55,13 @@ export function attachPhotos(candidates, decision) {
   return candidates.map((c) => (decision.has(c.name) ? { ...c, photo: decision.get(c.name) } : c));
 }
 
-/** True when an entry may be served: allowed source, a photo URL, and a human set reviewed: true. */
+/**
+ * True when an entry may be served: allowed source, an https photo URL, a permitted license (CC0 / CC BY / CC BY-SA /
+ * public domain — checked here whatever the review said), and a human set reviewed: true.
+ */
 export const isServable = (e) => !!e && e.reviewed === true && typeof e.photo_url === 'string' && /^https:\/\//.test(e.photo_url)
-  && PHOTO_SOURCE_TYPES.includes(e.source_type);
+  && PHOTO_SOURCE_TYPES.includes(e.source_type)
+  && isPermittedLicense(e.license);
 
 /** What a visitor's browser gets: our own URL plus credit / license / source page. */
 export const publicPhoto = (e) => ({
@@ -131,11 +135,22 @@ export function createPhotos(opts = {}) {
     return sharp(buf).rotate().resize(PHOTO_SIZE, PHOTO_SIZE, { fit: 'cover', position: 'attention' }).jpeg({ quality: 82, mozjpeg: true }).toBuffer();
   });
 
-  /** Fetch + resize + cache one reviewed photo (once; concurrent callers share the work). */
-  function ensure(id) {
+  const sleep = opts.sleep ?? ((ms) => new Promise((r) => setTimeout(r, ms)));
+  // Image hosts (upload.wikimedia.org) answer bursts with 429: fetch one photo at a time with a gap, back off on 429 / 5xx.
+  const GAP_MS = opts.gapMs ?? 1000;
+  const BACKOFF_MS = opts.backoffMs ?? 30_000;
+  const MAX_BACKOFF_MS = 5 * 60_000;
+  const MAX_ATTEMPTS = opts.maxAttempts ?? 4;
+  const retryable = (err) => {
+    const s = Number(err?.status);
+    return !s || s === 429 || s === 408 || s >= 500; // no status = network / timeout
+  };
+
+  /** One fetch + resize + cache attempt: 'ok' | 'retry' (rate-limited / transient) | 'fail' (not servable / permanent). */
+  function attempt(id) {
     const e = byId.get(id);
-    if (!isServable(e)) return Promise.resolve(false);
-    if (isCached(id)) return Promise.resolve(true);
+    if (!isServable(e)) return Promise.resolve('fail');
+    if (isCached(id)) return Promise.resolve('ok');
     if (inflight.has(id)) return inflight.get(id);
     const p = (async () => {
       try {
@@ -144,10 +159,10 @@ export function createPhotos(opts = {}) {
         const tmp = `${file(id)}.tmp`;
         writeFileSync(tmp, out);
         renameSync(tmp, file(id));
-        return true;
+        return 'ok';
       } catch (err) {
         log.warn(`photo ${e.state} ${e.match[0]}: ${err.message}`);
-        return false;
+        return retryable(err) ? 'retry' : 'fail';
       } finally {
         inflight.delete(id);
       }
@@ -156,20 +171,44 @@ export function createPhotos(opts = {}) {
     return p;
   }
 
-  /** Cache every reviewed photo of an election, a couple at a time. Resolves to { cached, failed }. */
-  async function prefetch(ek) {
-    load(ek);
-    const ids = [...byId.keys()].filter((id) => !isCached(id));
-    let cached = 0, failed = 0;
-    const work = [...ids];
-    const worker = async () => {
-      while (work.length) {
-        if (await ensure(work.shift())) cached++; else failed++;
+  /** Fetch + resize + cache one reviewed photo (one attempt; concurrent callers share the work). */
+  const ensure = async (id) => (await attempt(id)) === 'ok';
+
+  /**
+   * Cache every reviewed photo of an election that isn't cached yet: one at a time, GAP_MS apart; on 429 / 5xx wait
+   * (30 s, doubling, max 5 min) and retry that photo, up to MAX_ATTEMPTS. Resolves to { cached, failed }.
+   */
+  const running = new Map(); // ek → the pass in progress (never two at once for one election)
+  function prefetch(ek) {
+    if (running.has(ek)) return running.get(ek);
+    const pass = (async () => {
+      load(ek);
+      const ids = [...byId.keys()].filter((id) => !isCached(id));
+      let cached = 0, failed = 0, backoff = BACKOFF_MS;
+      for (const [i, id] of ids.entries()) {
+        if (i > 0) await sleep(GAP_MS);
+        let r = await attempt(id);
+        for (let n = 1; r === 'retry' && n < MAX_ATTEMPTS; n++) {
+          await sleep(backoff);
+          backoff = Math.min(MAX_BACKOFF_MS, backoff * 2);
+          r = await attempt(id);
+        }
+        if (r === 'ok') { cached++; backoff = BACKOFF_MS; } else failed++;
       }
-    };
-    await Promise.all([worker(), worker()]);
-    if (ids.length) log.info(`photos: ${cached} cached, ${failed} failed`);
-    return { cached, failed };
+      if (ids.length) log.info(`photos: ${cached} cached, ${failed} failed (${ids.length} were missing)`);
+      return { cached, failed };
+    })().finally(() => running.delete(ek));
+    running.set(ek, pass);
+    return pass;
+  }
+
+  /** Startup + every `everyMs`: cache any reviewed photo that is still missing (a failed fetch gets another chance). */
+  function keepCached(ek, everyMs = 15 * 60_000) {
+    const run = () => prefetch(ek).catch((err) => log.warn(`photo prefetch: ${err.message}`));
+    run();
+    const t = setInterval(run, everyMs);
+    t.unref?.();
+    return () => clearInterval(t);
   }
 
   /** Express handler for GET /photos/:id.jpg — reviewed photos only, from our disk cache. */
@@ -181,5 +220,8 @@ export function createPhotos(opts = {}) {
     res.type('image/jpeg').sendFile(file(id));
   }
 
-  return { load, entryFor, photoFor, decide, prefetch, ensure, serve, isCached, reset: () => { cache.clear(); byId.clear(); } };
+  /** Health numbers: reviewed photos we may serve, and how many of them are cached on disk (visible in /api/health). */
+  const stats = () => { const ids = [...byId.keys()]; return { servable: ids.length, cached: ids.filter(isCached).length }; };
+
+  return { load, entryFor, photoFor, decide, prefetch, keepCached, ensure, serve, isCached, stats, reset: () => { cache.clear(); byId.clear(); } };
 }

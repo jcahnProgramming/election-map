@@ -2,6 +2,21 @@
   "_howto": "THE ONE PLACE TO EDIT AT A RELEASE. Add a new object at the TOP of `releases` (version = semver, date = YYYY-MM-DD, title = a few words, sections = { New | Improved | Fixed | Removed: [items] }). The newest entry IS the app version: /api/health and the UI read it. `next` (optional) previews the upcoming release; its version must be greater than the newest release. 1.0.0 is reserved for an agreed 1.0: don't use it until that's decided. `npm run build` (and therefore every deploy) fails if this file is malformed or out of order (scripts/check-changelog.js).",
   "releases": [
     {
+      "version": "0.5.11",
+      "date": "2026-11-07",
+      "title": "Candidate photos",
+      "sections": {
+        "New": [
+          "Candidate photos: a contest shows them once every major candidate has a reviewed, openly licensed photo; all other contests keep initials",
+          "Photo credits: every photo's author, license and source page, in the state view and the Congress view (and on hover or focus of a photo)"
+        ],
+        "Fixed": [
+          "Photos are fetched from their source one at a time, waiting and retrying when the image host asks us to slow down, so approved photos actually appear",
+          "Only photos licensed CC0, CC BY, CC BY-SA or public domain are ever shown; five photos with other licenses were removed"
+        ]
+      }
+    },
+    {
       "version": "0.5.10",
       "date": "2026-11-07",
       "title": "County turnout % fixed (GA, VA, WA, ID)",

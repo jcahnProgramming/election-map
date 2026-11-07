@@ -39,12 +39,19 @@ an explicit media-use offer. If nothing allowed exists, `photo_url` stays null a
 
 ## Serving
 
-- Only entries with an allowed `source_type`, an https `photo_url` and `"reviewed": true` are used. Unreviewed photos are
-  never fetched or served.
-- The server fetches each reviewed photo once at startup (polite User-Agent), resizes it to a 160 px square and caches
-  it under `DATA_DIR/photos/`. Browsers load `/photos/<id>.jpg` from our domain; we never hotlink third-party sites.
+- Only entries with an allowed `source_type`, an https `photo_url`, a **permitted license** and `"reviewed": true` are
+  used. Unreviewed photos are never fetched or served.
+- Permitted licenses: CC0, CC BY, CC BY-SA (any version) or public domain, matched on the whole `license` string
+  (`isPermittedLicense` in `server/src/photo-rules.js`). Anything else ("Copyrighted free use", CC BY-NC / ND, no
+  license) is never served, whatever `reviewed` says; a test also fails if a reviewed entry carries one.
+- The server fetches each reviewed photo once (polite User-Agent), resizes it to a 160 px square with sharp and caches it
+  under `DATA_DIR/photos/` (the data volume, so it survives redeploys). Fetching is one photo at a time, 1 s apart; a
+  429 / 5xx answer backs off (30 s, doubling, max 5 min) and retries; anything still missing is retried every 15 minutes.
+  Browsers load `/photos/<id>.jpg` from our domain; we never hotlink third-party sites.
 - Image files are never committed to the repo: only URLs and attribution.
-- Every avatar with a photo shows its credit and license on hover / focus; map tooltips list them in their footer.
+- Attribution (required by CC BY / CC BY-SA): every avatar with a photo shows author, license and a link to its source
+  page on hover / focus; map tooltips list author + license in their footer; the state view (both tabs) and the
+  Congress view have a "Photo credits" list with author, license (linked to its Creative Commons deed) and source page.
 
 ## Fairness rule
 

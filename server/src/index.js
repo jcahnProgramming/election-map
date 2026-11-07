@@ -46,6 +46,7 @@ api.get('/health', (req, res) => {
     version: config.version,
     // Clients refetch with ?v=<dataVersion> on reconnect / tab focus / safety-net poll (health is never cached).
     dataVersion: latestDataVersion(db),
+    photos: photos.stats(),
     sources: [...health.values()].map((h) => ({
       id: h.id, name: h.name, lastSuccess: h.lastSuccess, lastError: h.lastError, lastErrorAt: h.lastErrorAt,
       targets: h.targets,
@@ -166,8 +167,9 @@ const stop = startPolling({
   },
 });
 
-// Fetch every reviewed photo once (a couple at a time) so contests can show them; failures just mean initials.
-for (const e of loadElections().elections) photos.prefetch(e.key).catch((err) => log.warn(`photo prefetch: ${err.message}`));
+// Fetch every reviewed photo once, politely (one at a time, backing off on 429), and retry any still missing every
+// 15 minutes. Until every major candidate in a contest is cached, that contest shows initials.
+const stopPhotos = loadElections().elections.map((e) => photos.keepCached(e.key));
 
 server.listen(config.port, () => {
   log.info(`election-map ${config.version} on :${config.port} — ${adapters.length} adapter(s): ${adapters.map((a) => `${a.id} (${a.targets().length} targets)`).join(', ')}`);
@@ -175,6 +177,7 @@ server.listen(config.port, () => {
 
 const shutdown = () => {
   stop();
+  for (const s of stopPhotos) s();
   rateLimit.stop();
   io.close();
   server.close(() => {

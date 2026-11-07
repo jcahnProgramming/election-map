@@ -62,7 +62,12 @@ export function contestFairness(entries, approved = (e) => e.reviewed === true &
 
 // ---- Review flags (shown on the review page; they never decide anything) ----
 
-const LICENSE_OK = /^(cc0|cc[ -]?by(?:[ -]sa)?(?:[ -]\d(?:\.\d)?)?|public domain|pd\b|pd-)/i;
+/**
+ * Licenses we may display publicly: CC0, CC BY, CC BY-SA (any version), or public domain. The WHOLE string must match,
+ * so "CC BY-NC 4.0", "CC BY-ND", "Copyrighted free use", "All rights reserved" or an empty license never pass.
+ */
+const PERMITTED_LICENSE = /^(?:cc0(?:[ -]1\.0)?|cc[ -]by(?:[ -]sa)?(?:[ -]\d\.\d)?|public domain(?: \([^()]+\))?|pd-[a-z0-9 -]+)$/i;
+export const isPermittedLicense = (license) => typeof license === 'string' && PERMITTED_LICENSE.test(license.trim().replace(/\s+/g, ' '));
 
 /** Surname used for the Commons file-title check: the top of a ticket, without suffixes or quoted nicknames. */
 export function surnameOf(name) {
@@ -86,7 +91,7 @@ export function commonsFileTitle(url) {
 export function reviewFlags(e, size = null) {
   const flags = [];
   if (!e.license) flags.push('No license recorded');
-  else if (!LICENSE_OK.test(String(e.license).trim())) flags.push(`License not CC0 / CC BY / CC BY-SA / public domain: ${e.license}`);
+  else if (!isPermittedLicense(e.license)) flags.push(`License not CC0 / CC BY / CC BY-SA / public domain: ${e.license}`);
   if (size && (size.width < MIN_PHOTO_PX || size.height < MIN_PHOTO_PX)) flags.push(`Small image: ${size.width}×${size.height}px`);
   const title = commonsFileTitle(e.source_page_url);
   const sur = surnameOf(e.match?.[0]);
